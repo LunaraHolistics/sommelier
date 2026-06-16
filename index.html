@@ -2245,16 +2245,19 @@
           if (filter === "seco" || filter === "doce") {
             mergedBeverages = mergedBeverages.filter(
               (b) =>
-                (b.nivelDoce && b.nivelDoce.toLowerCase().includes(filter)) ||
-                (b.perfilSabor && b.perfilSabor.toLowerCase().includes(filter)),
+                (b.nivelDoce &&
+                  b.nivelDoce.trim().toLowerCase().includes(filter)) ||
+                (b.perfilSabor &&
+                  b.perfilSabor.trim().toLowerCase().includes(filter)),
             );
           } else {
+            // CORREÇÃO: Adicionar .trim() na comparação
             mergedBeverages = mergedBeverages.filter(
-              (b) => b.tipo.toLowerCase() === filter,
+              (b) =>
+                b.tipo.trim().toLowerCase() === filter.trim().toLowerCase(),
             );
           }
         }
-
         const disponiveis = mergedBeverages
           .filter((b) => b.disponivel)
           .sort((a, b) => a.nome.localeCompare(b.nome));
