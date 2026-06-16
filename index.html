@@ -1,1221 +1,2605 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vinho em Mãos - Gerenciamento</title>
     <style>
-        :root {
-            --bg-color: #1a1a1a;
-            --text-color: #f0f0f0;
-            --primary-color: #ffd700;
-            --secondary-color: #333;
-            --border-color: #555;
-            --input-bg: #2a2a2a;
-            --button-hover: #e0b800;
-            --card-bg: #282828;
-            --card-border: #444;
-            --success-color: #2ecc71;
-            --warning-color: #e67e22;
-            --danger-color: #e74c3c;
-        }
+      :root {
+        --bg-color: #1a1a1a;
+        --text-color: #f0f0f0;
+        --primary-color: #ffd700;
+        --secondary-color: #333;
+        --border-color: #555;
+        --input-bg: #2a2a2a;
+        --button-hover: #e0b800;
+        --card-bg: #282828;
+        --card-border: #444;
+        --success-color: #2ecc71;
+        --warning-color: #e67e22;
+        --danger-color: #e74c3c;
+      }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
 
-        .container {
-            background-color: var(--secondary-color);
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            padding: 40px;
-            width: 90%;
-            max-width: 1200px;
-            text-align: center;
-            position: relative;
-        }
+      .container {
+        background-color: var(--secondary-color);
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        padding: 40px;
+        width: 90%;
+        max-width: 1200px;
+        text-align: center;
+        position: relative;
+      }
 
-        h1, h2 { color: var(--primary-color); margin-bottom: 20px; }
+      h1,
+      h2 {
+        color: var(--primary-color);
+        margin-bottom: 20px;
+      }
 
-        /* Login Screen */
-        #login-screen { display: flex; flex-direction: column; align-items: center; }
-        #login-screen input[type="password"] {
-            width: 100%; padding: 15px; margin-bottom: 20px; border: 1px solid var(--border-color);
-            border-radius: 5px; background-color: var(--input-bg); color: var(--text-color);
-            font-size: 1.2em; text-align: center;
-        }
-        #login-screen button {
-            background-color: var(--primary-color); color: var(--bg-color); border: none;
-            padding: 15px 30px; border-radius: 5px; cursor: pointer; font-size: 1.1em; font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-        #login-screen button:hover { background-color: var(--button-hover); }
-        #login-message { color: #ff4444; margin-top: 15px; font-weight: bold; }
-        .footer-restricted-area {
-            position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
-            font-size: 0.8em; color: var(--border-color); cursor: pointer; user-select: none;
-        }
+      /* Login Screen */
+      #login-screen {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      #login-screen input[type="password"] {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        background-color: var(--input-bg);
+        color: var(--text-color);
+        font-size: 1.2em;
+        text-align: center;
+      }
+      #login-screen button {
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+        border: none;
+        padding: 15px 30px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1.1em;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+      }
+      #login-screen button:hover {
+        background-color: var(--button-hover);
+      }
+      #login-message {
+        color: #ff4444;
+        margin-top: 15px;
+        font-weight: bold;
+      }
+      .footer-restricted-area {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.8em;
+        color: var(--border-color);
+        cursor: pointer;
+        user-select: none;
+      }
 
-        /* Manager Login Form */
-        #manager-login-form {
-            display: none; margin-top: 20px; padding: 20px; border: 1px solid var(--primary-color);
-            border-radius: 8px; background-color: var(--input-bg);
-        }
-        #manager-login-form input {
-            width: calc(100% - 22px); padding: 10px; margin-bottom: 15px;
-            border: 1px solid var(--border-color); border-radius: 5px;
-            background-color: var(--secondary-color); color: var(--text-color);
-        }
-        #manager-login-form button {
-            background-color: var(--primary-color); color: var(--bg-color); border: none;
-            padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-        #manager-login-form button:hover { background-color: var(--button-hover); }
-        #manager-login-message { color: #ff4444; margin-top: 10px; font-weight: bold; }
+      /* Manager Login Form */
+      #manager-login-form {
+        display: none;
+        margin-top: 20px;
+        padding: 20px;
+        border: 1px solid var(--primary-color);
+        border-radius: 8px;
+        background-color: var(--input-bg);
+      }
+      #manager-login-form input {
+        width: calc(100% - 22px);
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        background-color: var(--secondary-color);
+        color: var(--text-color);
+      }
+      #manager-login-form button {
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+      }
+      #manager-login-form button:hover {
+        background-color: var(--button-hover);
+      }
+      #manager-login-message {
+        color: #ff4444;
+        margin-top: 10px;
+        font-weight: bold;
+      }
 
-        /* Manager Screen */
-        #manager-screen { display: none; text-align: left; }
-        .manager-header {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color);
-        }
-        .logout-btn {
-            background-color: var(--danger-color); color: white; border: none;
-            padding: 8px 16px; border-radius: 5px; cursor: pointer; font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-        .logout-btn:hover { background-color: #c0392b; }
+      /* Manager Screen */
+      #manager-screen {
+        display: none;
+        text-align: left;
+      }
+      .manager-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .logout-btn {
+        background-color: var(--danger-color);
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+      }
+      .logout-btn:hover {
+        background-color: #c0392b;
+      }
 
-        .tabs { display: flex; margin-bottom: 20px; border-bottom: 2px solid var(--border-color); flex-wrap: wrap; }
-        .tab-button {
-            background-color: var(--input-bg); color: var(--text-color); border: none;
-            padding: 10px 20px; cursor: pointer; font-size: 1em;
-            border-top-left-radius: 8px; border-top-right-radius: 8px;
-            margin-right: 5px; margin-bottom: 5px; transition: background-color 0.3s ease;
-        }
-        .tab-button.active { background-color: var(--primary-color); color: var(--bg-color); }
-        .tab-button:hover:not(.active) { background-color: var(--border-color); }
-        .tab-content { padding: 20px 0; border-top: 1px solid var(--border-color); }
+      .tabs {
+        display: flex;
+        margin-bottom: 20px;
+        border-bottom: 2px solid var(--border-color);
+        flex-wrap: wrap;
+      }
+      .tab-button {
+        background-color: var(--input-bg);
+        color: var(--text-color);
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 1em;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        transition: background-color 0.3s ease;
+      }
+      .tab-button.active {
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+      }
+      .tab-button:hover:not(.active) {
+        background-color: var(--border-color);
+      }
+      .tab-content {
+        padding: 20px 0;
+        border-top: 1px solid var(--border-color);
+      }
 
-        #generate-pin-tab button {
-            background-color: var(--primary-color); color: var(--bg-color); border: none;
-            padding: 20px 40px; border-radius: 8px; cursor: pointer; font-size: 1.5em; font-weight: bold;
-            transition: background-color 0.3s ease; margin-top: 20px;
-        }
-        #generate-pin-tab button:hover { background-color: var(--button-hover); }
-        #generated-pin-display {
-            font-size: 4em; color: var(--primary-color); margin-top: 30px;
-            font-weight: bold; letter-spacing: 5px;
-        }
+      #generate-pin-tab button {
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+        border: none;
+        padding: 20px 40px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1.5em;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        margin-top: 20px;
+      }
+      #generate-pin-tab button:hover {
+        background-color: var(--button-hover);
+      }
+      #generated-pin-display {
+        font-size: 4em;
+        color: var(--primary-color);
+        margin-top: 30px;
+        font-weight: bold;
+        letter-spacing: 5px;
+      }
 
-        /* Estoque Tab */
-        #stock-catalog-tab table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        #stock-catalog-tab th, #stock-catalog-tab td {
-            border: 1px solid var(--border-color); padding: 10px; text-align: left;
-        }
-        #stock-catalog-tab th { background-color: var(--input-bg); color: var(--primary-color); }
-        #stock-catalog-tab tr:nth-child(even) { background-color: var(--input-bg); }
-        #stock-catalog-tab input[type="number"], #stock-catalog-tab input[type="text"] {
-            width: 80px; padding: 5px; background-color: var(--input-bg);
-            border: 1px solid var(--border-color); color: var(--text-color); border-radius: 3px;
-        }
-        #stock-catalog-tab input[type="checkbox"] { transform: scale(1.2); }
-        #stock-catalog-tab .action-buttons button {
-            background-color: var(--primary-color); color: var(--bg-color); border: none;
-            padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold;
-            transition: background-color 0.3s ease; margin-left: 5px;
-        }
-        #stock-catalog-tab .action-buttons button:hover { background-color: var(--button-hover); }
+      /* Estoque Tab */
+      #stock-catalog-tab table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      #stock-catalog-tab th,
+      #stock-catalog-tab td {
+        border: 1px solid var(--border-color);
+        padding: 10px;
+        text-align: left;
+      }
+      #stock-catalog-tab th {
+        background-color: var(--input-bg);
+        color: var(--primary-color);
+      }
+      #stock-catalog-tab tr:nth-child(even) {
+        background-color: var(--input-bg);
+      }
+      #stock-catalog-tab input[type="number"],
+      #stock-catalog-tab input[type="text"] {
+        width: 80px;
+        padding: 5px;
+        background-color: var(--input-bg);
+        border: 1px solid var(--border-color);
+        color: var(--text-color);
+        border-radius: 3px;
+      }
+      #stock-catalog-tab input[type="checkbox"] {
+        transform: scale(1.2);
+      }
+      #stock-catalog-tab .action-buttons button {
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        margin-left: 5px;
+      }
+      #stock-catalog-tab .action-buttons button:hover {
+        background-color: var(--button-hover);
+      }
 
-        #add-beverage-button, .refresh-data-btn {
-            background-color: var(--primary-color); color: var(--bg-color); border: none;
-            padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold;
-            transition: background-color 0.3s ease; margin-bottom: 20px;
-        }
-        #add-beverage-button:hover, .refresh-data-btn:hover { background-color: var(--button-hover); }
-        .refresh-data-btn { background-color: var(--border-color); color: var(--text-color); margin-left: 10px; }
-        .refresh-data-btn:hover { background-color: #777; }
+      #add-beverage-button,
+      .refresh-data-btn {
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        margin-bottom: 20px;
+      }
+      #add-beverage-button:hover,
+      .refresh-data-btn:hover {
+        background-color: var(--button-hover);
+      }
+      .refresh-data-btn {
+        background-color: var(--border-color);
+        color: var(--text-color);
+        margin-left: 10px;
+      }
+      .refresh-data-btn:hover {
+        background-color: #777;
+      }
 
-        /* Compras Tab */
-        #purchasing-tab input[type="text"] {
-            width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px;
-            border: 1px solid var(--border-color); background-color: var(--input-bg);
-            color: var(--text-color); box-sizing: border-box;
-        }
-        #purchasing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
-        .purchasing-card {
-            background-color: var(--card-bg); border: 1px solid var(--card-border);
-            border-radius: 8px; padding: 15px; display: flex; flex-direction: column;
-            justify-content: space-between; text-align: left;
-        }
-        .purchasing-card h3 { color: var(--primary-color); margin-top: 0; margin-bottom: 10px; }
-        .purchasing-card p { margin: 5px 0; font-size: 0.9em; }
-        .purchasing-card .activate-wine-btn {
-            margin-top: 15px; background-color: var(--primary-color); color: var(--bg-color);
-            border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-        .purchasing-card .activate-wine-btn:hover { background-color: var(--button-hover); }
-        .purchasing-card .in-stock-btn {
-            margin-top: 15px; background-color: var(--success-color); color: #fff;
-            border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold;
-        }
-        .purchasing-card .unavailable-stock-btn {
-            margin-top: 15px; background-color: var(--warning-color); color: #fff;
-            border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold;
-        }
+      /* Compras Tab */
+      #purchasing-tab input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        border: 1px solid var(--border-color);
+        background-color: var(--input-bg);
+        color: var(--text-color);
+        box-sizing: border-box;
+      }
+      #purchasing-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+      }
+      .purchasing-card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 8px;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: left;
+      }
+      .purchasing-card h3 {
+        color: var(--primary-color);
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+      .purchasing-card p {
+        margin: 5px 0;
+        font-size: 0.9em;
+      }
+      .purchasing-card .activate-wine-btn {
+        margin-top: 15px;
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+      }
+      .purchasing-card .activate-wine-btn:hover {
+        background-color: var(--button-hover);
+      }
+      .purchasing-card .in-stock-btn {
+        margin-top: 15px;
+        background-color: var(--success-color);
+        color: #fff;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      .purchasing-card .unavailable-stock-btn {
+        margin-top: 15px;
+        background-color: var(--warning-color);
+        color: #fff;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+      }
 
-        /* Cardápio Tab */
-        #cardapio-tab .cardapio-manager {
-            background-color: var(--input-bg); padding: 20px; border-radius: 8px; margin-bottom: 20px;
-        }
-        #cardapio-tab .cardapio-list {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 10px; max-height: 400px; overflow-y: auto; padding: 10px;
-            border: 1px solid var(--border-color); border-radius: 5px; margin-top: 15px;
-        }
-        .dish-item {
-            background-color: var(--card-bg); padding: 10px; border-radius: 5px;
-            display: flex; justify-content: space-between; align-items: center; gap: 5px;
-        }
-        .dish-item .dish-name { flex-grow: 1; text-align: left; word-break: break-word; }
-        .dish-item button {
-            padding: 5px 10px; border-radius: 3px; cursor: pointer; font-size: 0.8em;
-            border: none; white-space: nowrap;
-        }
-        .dish-item .edit-dish-btn { background-color: var(--primary-color); color: var(--bg-color); }
-        .dish-item .edit-dish-btn:hover { background-color: var(--button-hover); }
-        .dish-item .remove-dish-btn { background-color: var(--danger-color); color: white; }
-        .dish-item .remove-dish-btn:hover { background-color: #c0392b; }
-        #add-dish-form { display: flex; gap: 10px; margin-top: 15px; }
-        #add-dish-form input {
-            flex-grow: 1; padding: 10px; border: 1px solid var(--border-color);
-            border-radius: 5px; background-color: var(--input-bg); color: var(--text-color);
-        }
-        #add-dish-form button {
-            background-color: var(--success-color); color: white; border: none;
-            padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold;
-        }
-        #add-dish-form button:hover { background-color: #27ae60; }
+      /* Cardápio Tab */
+      #cardapio-tab .cardapio-manager {
+        background-color: var(--input-bg);
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+      #cardapio-tab .cardapio-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 10px;
+        max-height: 400px;
+        overflow-y: auto;
+        padding: 10px;
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        margin-top: 15px;
+      }
+      .dish-item {
+        background-color: var(--card-bg);
+        padding: 10px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 5px;
+      }
+      .dish-item .dish-name {
+        flex-grow: 1;
+        text-align: left;
+        word-break: break-word;
+      }
+      .dish-item button {
+        padding: 5px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 0.8em;
+        border: none;
+        white-space: nowrap;
+      }
+      .dish-item .edit-dish-btn {
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+      }
+      .dish-item .edit-dish-btn:hover {
+        background-color: var(--button-hover);
+      }
+      .dish-item .remove-dish-btn {
+        background-color: var(--danger-color);
+        color: white;
+      }
+      .dish-item .remove-dish-btn:hover {
+        background-color: #c0392b;
+      }
+      #add-dish-form {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+      }
+      #add-dish-form input {
+        flex-grow: 1;
+        padding: 10px;
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        background-color: var(--input-bg);
+        color: var(--text-color);
+      }
+      #add-dish-form button {
+        background-color: var(--success-color);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      #add-dish-form button:hover {
+        background-color: #27ae60;
+      }
 
-        /* Modal */
-        #beverage-form-modal {
-            display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
-            overflow: auto; background-color: rgba(0,0,0,0.8); justify-content: center; align-items: center;
-        }
-        .modal-content {
-            background-color: var(--secondary-color); margin: auto; padding: 30px;
-            border: 1px solid var(--primary-color); border-radius: 10px; width: 90%;
-            max-width: 600px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); position: relative;
-            max-height: 90vh; overflow-y: auto;
-        }
-        .close-button {
-            color: var(--primary-color); position: absolute; top: 10px; right: 20px;
-            font-size: 28px; font-weight: bold; cursor: pointer;
-        }
-        .close-button:hover { color: var(--button-hover); }
-        .modal-content form div { margin-bottom: 15px; display: flex; flex-direction: column; align-items: flex-start; }
-        .modal-content label { margin-bottom: 5px; color: var(--text-color); font-weight: bold; }
-        .modal-content input[type="text"], .modal-content input[type="number"],
-        .modal-content select, .modal-content textarea {
-            width: calc(100% - 22px); padding: 10px; border: 1px solid var(--border-color);
-            border-radius: 5px; background-color: var(--input-bg); color: var(--text-color); font-size: 1em;
-        }
-        .modal-content textarea { resize: vertical; min-height: 60px; }
-        .modal-content input[type="checkbox"] { margin-top: 5px; }
-        .modal-content button[type="submit"] {
-            background-color: var(--primary-color); color: var(--bg-color); border: none;
-            padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 1.1em; font-weight: bold;
-            transition: background-color 0.3s ease; margin-top: 20px; width: 100%;
-        }
-        .modal-content button[type="submit"]:hover { background-color: var(--button-hover); }
-        .form-checkbox-group { flex-direction: row !important; align-items: center !important; }
-        .form-checkbox-group label { margin-bottom: 0; margin-left: 10px; }
+      /* Modal */
+      #beverage-form-modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+      }
+      .modal-content {
+        background-color: var(--secondary-color);
+        margin: auto;
+        padding: 30px;
+        border: 1px solid var(--primary-color);
+        border-radius: 10px;
+        width: 90%;
+        max-width: 600px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        position: relative;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+      .close-button {
+        color: var(--primary-color);
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .close-button:hover {
+        color: var(--button-hover);
+      }
+      .modal-content form div {
+        margin-bottom: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .modal-content label {
+        margin-bottom: 5px;
+        color: var(--text-color);
+        font-weight: bold;
+      }
+      .modal-content input[type="text"],
+      .modal-content input[type="number"],
+      .modal-content select,
+      .modal-content textarea {
+        width: calc(100% - 22px);
+        padding: 10px;
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        background-color: var(--input-bg);
+        color: var(--text-color);
+        font-size: 1em;
+      }
+      .modal-content textarea {
+        resize: vertical;
+        min-height: 60px;
+      }
+      .modal-content input[type="checkbox"] {
+        margin-top: 5px;
+      }
+      .modal-content button[type="submit"] {
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+        border: none;
+        padding: 12px 25px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1.1em;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        margin-top: 20px;
+        width: 100%;
+      }
+      .modal-content button[type="submit"]:hover {
+        background-color: var(--button-hover);
+      }
+      .form-checkbox-group {
+        flex-direction: row !important;
+        align-items: center !important;
+      }
+      .form-checkbox-group label {
+        margin-bottom: 0;
+        margin-left: 10px;
+      }
 
-        /* Harmonization */
-        .multi-select-dropdown { position: relative; width: calc(100% - 22px); margin-bottom: 15px; }
-        .multi-select-dropdown .selected-items {
-            border: 1px solid var(--border-color); border-radius: 5px; padding: 10px;
-            background-color: var(--input-bg); color: var(--text-color); cursor: pointer;
-            min-height: 40px; display: flex; flex-wrap: wrap; align-items: center; gap: 5px;
-        }
-        .multi-select-dropdown .selected-items.placeholder { color: #888; }
-        .multi-select-dropdown .selected-item-tag {
-            background-color: var(--primary-color); color: var(--bg-color); padding: 3px 8px;
-            border-radius: 3px; font-size: 0.9em; display: flex; align-items: center;
-        }
-        .multi-select-dropdown .selected-item-tag .remove-tag { margin-left: 5px; cursor: pointer; font-weight: bold; }
-        .multi-select-dropdown .dropdown-content {
-            display: none; position: absolute; background-color: var(--input-bg);
-            border: 1px solid var(--border-color); border-radius: 5px; width: 100%;
-            max-height: 200px; overflow-y: auto; z-index: 10; text-align: left;
-        }
-        .multi-select-dropdown .dropdown-content label {
-            display: block; padding: 8px 10px; cursor: pointer;
-            color: var(--text-color); font-weight: normal;
-        }
-        .multi-select-dropdown .dropdown-content label:hover { background-color: var(--secondary-color); }
-        .multi-select-dropdown .dropdown-content input[type="checkbox"] { margin-right: 10px; }
+      /* Harmonization */
+      .multi-select-dropdown {
+        position: relative;
+        width: calc(100% - 22px);
+        margin-bottom: 15px;
+      }
+      .multi-select-dropdown .selected-items {
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        padding: 10px;
+        background-color: var(--input-bg);
+        color: var(--text-color);
+        cursor: pointer;
+        min-height: 40px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 5px;
+      }
+      .multi-select-dropdown .selected-items.placeholder {
+        color: #888;
+      }
+      .multi-select-dropdown .selected-item-tag {
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+        padding: 3px 8px;
+        border-radius: 3px;
+        font-size: 0.9em;
+        display: flex;
+        align-items: center;
+      }
+      .multi-select-dropdown .selected-item-tag .remove-tag {
+        margin-left: 5px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      .multi-select-dropdown .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: var(--input-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        width: 100%;
+        max-height: 200px;
+        overflow-y: auto;
+        z-index: 10;
+        text-align: left;
+      }
+      .multi-select-dropdown .dropdown-content label {
+        display: block;
+        padding: 8px 10px;
+        cursor: pointer;
+        color: var(--text-color);
+        font-weight: normal;
+      }
+      .multi-select-dropdown .dropdown-content label:hover {
+        background-color: var(--secondary-color);
+      }
+      .multi-select-dropdown .dropdown-content input[type="checkbox"] {
+        margin-right: 10px;
+      }
 
-        /* Waiter/Client */
-        #waiter-client-screen { display: none; width: 100%; text-align: left; }
-        #waiter-client-screen .header {
-            display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
-            margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color);
-        }
-        #waiter-client-screen .logo { color: var(--primary-color); font-size: 1.8em; font-weight: bold; margin-right: 20px; }
-        #waiter-client-screen .filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
-        #waiter-client-screen .filter-button {
-            background-color: var(--input-bg); color: var(--text-color); border: 1px solid var(--border-color);
-            padding: 8px 15px; border-radius: 20px; cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        #waiter-client-screen .filter-button.active,
-        #waiter-client-screen .filter-button:hover { background-color: var(--primary-color); color: var(--bg-color); }
-        #beverage-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
-        .beverage-card {
-            background-color: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px;
-            overflow: hidden; cursor: pointer; transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-            position: relative;
-        }
-        .beverage-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); }
-        .beverage-card.unavailable { opacity: 0.7; }
-        .beverage-card-header {
-            display: flex; align-items: center; padding: 15px; padding-top: 30px;
-            border-bottom: 1px solid var(--card-border); position: relative;
-        }
-        .beverage-card-header img {
-            width: 50px; height: 50px; object-fit: cover; border-radius: 4px; margin-right: 15px;
-        }
-        .beverage-card-info { flex-grow: 1; text-align: left; }
-        .beverage-card-info h3 { margin: 0 0 5px 0; color: var(--primary-color); font-size: 1.2em; }
-        .beverage-card-info p { margin: 0; font-size: 0.9em; color: var(--text-color); }
-        .beverage-card-summary { font-style: italic; font-size: 0.95em; margin-top: 5px; color: #ccc; }
-        .beverage-card-details {
-            max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out;
-            padding: 0 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: left;
-        }
-        .beverage-card.expanded .beverage-card-details { max-height: 500px; padding: 15px; }
-        .beverage-card-details p strong { color: var(--primary-color); }
-        .available-tag {
-            position: absolute; top: 5px; right: 5px; background-color: var(--success-color);
-            color: #fff; padding: 3px 8px; border-radius: 5px; font-size: 0.7em; font-weight: bold; z-index: 1;
-        }
-        .unavailable-text {
-            position: absolute; top: 5px; right: 5px; background-color: var(--warning-color);
-            color: #fff; padding: 3px 8px; border-radius: 5px; font-size: 0.7em; font-weight: bold;
-            white-space: nowrap; z-index: 1;
-        }
-        .catalog-only-tag {
-            position: absolute; top: 5px; right: 5px; background-color: #555; color: #ccc;
-            padding: 3px 8px; border-radius: 5px; font-size: 0.7em; font-weight: bold;
-            white-space: nowrap; z-index: 1;
-        }
+      /* Waiter/Client */
+      #waiter-client-screen {
+        display: none;
+        width: 100%;
+        text-align: left;
+      }
+      #waiter-client-screen .header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--border-color);
+      }
+      #waiter-client-screen .logo {
+        color: var(--primary-color);
+        font-size: 1.8em;
+        font-weight: bold;
+        margin-right: 20px;
+      }
+      #waiter-client-screen .filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+      }
+      #waiter-client-screen .filter-button {
+        background-color: var(--input-bg);
+        color: var(--text-color);
+        border: 1px solid var(--border-color);
+        padding: 8px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+      }
+      #waiter-client-screen .filter-button.active,
+      #waiter-client-screen .filter-button:hover {
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+      }
+      #beverage-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+      }
+      .beverage-card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 8px;
+        overflow: hidden;
+        cursor: pointer;
+        transition:
+          transform 0.2s ease-in-out,
+          box-shadow 0.2s ease-in-out;
+        position: relative;
+      }
+      .beverage-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+      .beverage-card.unavailable {
+        opacity: 0.7;
+      }
+      .beverage-card-header {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        padding-top: 30px;
+        border-bottom: 1px solid var(--card-border);
+        position: relative;
+      }
+      .beverage-card-header img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 4px;
+        margin-right: 15px;
+      }
+      .beverage-card-info {
+        flex-grow: 1;
+        text-align: left;
+      }
+      .beverage-card-info h3 {
+        margin: 0 0 5px 0;
+        color: var(--primary-color);
+        font-size: 1.2em;
+      }
+      .beverage-card-info p {
+        margin: 0;
+        font-size: 0.9em;
+        color: var(--text-color);
+      }
+      .beverage-card-summary {
+        font-style: italic;
+        font-size: 0.95em;
+        margin-top: 5px;
+        color: #ccc;
+      }
+      .beverage-card-details {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease-out;
+        padding: 0 15px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        text-align: left;
+      }
+      .beverage-card.expanded .beverage-card-details {
+        max-height: 500px;
+        padding: 15px;
+      }
+      .beverage-card-details p strong {
+        color: var(--primary-color);
+      }
+      .available-tag {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background-color: var(--success-color);
+        color: #fff;
+        padding: 3px 8px;
+        border-radius: 5px;
+        font-size: 0.7em;
+        font-weight: bold;
+        z-index: 1;
+      }
+      .unavailable-text {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background-color: var(--warning-color);
+        color: #fff;
+        padding: 3px 8px;
+        border-radius: 5px;
+        font-size: 0.7em;
+        font-weight: bold;
+        white-space: nowrap;
+        z-index: 1;
+      }
+      .catalog-only-tag {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background-color: #555;
+        color: #ccc;
+        padding: 3px 8px;
+        border-radius: 5px;
+        font-size: 0.7em;
+        font-weight: bold;
+        white-space: nowrap;
+        z-index: 1;
+      }
 
-        /* Doçura */
-        .sweetness-container { display: flex; align-items: center; gap: 4px; margin: 2px 0 5px 0; }
-        .sweetness-label { font-size: 10px; color: #888; margin-right: 4px; }
-        .sweetness-dots { display: flex; gap: 3px; }
-        .dot { width: 8px; height: 8px; border-radius: 50%; background-color: #333; border: 1px solid #555; }
-        .dot.active { background-color: #d4af37; border-color: #d4af37; }
+      /* Doçura */
+      .sweetness-container {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin: 2px 0 5px 0;
+      }
+      .sweetness-label {
+        font-size: 10px;
+        color: #888;
+        margin-right: 4px;
+      }
+      .sweetness-dots {
+        display: flex;
+        gap: 3px;
+      }
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #333;
+        border: 1px solid #555;
+      }
+      .dot.active {
+        background-color: #d4af37;
+        border-color: #d4af37;
+      }
 
-        .harmonization-chips {
-            grid-column: 1 / -1; margin-top: 10px; padding-top: 10px;
-            border-top: 1px solid var(--card-border); text-align: left;
-        }
-        .harmonization-chips span {
-            display: inline-block; background-color: var(--input-bg); color: var(--primary-color);
-            padding: 5px 10px; border-radius: 15px; margin-right: 5px; margin-bottom: 5px; font-size: 0.8em;
-        }
+      .harmonization-chips {
+        grid-column: 1 / -1;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid var(--card-border);
+        text-align: left;
+      }
+      .harmonization-chips span {
+        display: inline-block;
+        background-color: var(--input-bg);
+        color: var(--primary-color);
+        padding: 5px 10px;
+        border-radius: 15px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        font-size: 0.8em;
+      }
 
-        /* Busca Reversa */
-        #dish-search-view { display: none; margin-top: 20px; }
-        #dish-search-view input[type="text"] {
-            width: 100%; padding: 15px; font-size: 1.1em; margin-bottom: 20px; border-radius: 8px;
-            border: 1px solid var(--border-color); background-color: var(--input-bg);
-            color: var(--text-color); box-sizing: border-box;
-        }
-        .dish-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
-        .dish-card {
-            background-color: var(--card-bg); border: 1px solid var(--card-border); padding: 15px;
-            border-radius: 8px; text-align: center; cursor: pointer; transition: all 0.2s ease;
-            font-weight: bold; color: var(--text-color);
-        }
-        .dish-card:hover { background-color: var(--primary-color); color: var(--bg-color); transform: translateY(-3px); }
-        #back-to-wines-btn {
-            background-color: transparent; border: 1px solid var(--primary-color); color: var(--primary-color);
-            padding: 10px 20px; border-radius: 20px; cursor: pointer; margin-bottom: 20px; font-weight: bold;
-        }
-        #back-to-wines-btn:hover { background-color: var(--primary-color); color: var(--bg-color); }
-        #reverse-results-message { color: #ccc; font-style: italic; margin-bottom: 20px; text-align: center; font-size: 1.1em; }
+      /* Busca Reversa */
+      #dish-search-view {
+        display: none;
+        margin-top: 20px;
+      }
+      #dish-search-view input[type="text"] {
+        width: 100%;
+        padding: 15px;
+        font-size: 1.1em;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        background-color: var(--input-bg);
+        color: var(--text-color);
+        box-sizing: border-box;
+      }
+      .dish-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+        margin-bottom: 30px;
+      }
+      .dish-card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--card-border);
+        padding: 15px;
+        border-radius: 8px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-weight: bold;
+        color: var(--text-color);
+      }
+      .dish-card:hover {
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+        transform: translateY(-3px);
+      }
+      #back-to-wines-btn {
+        background-color: transparent;
+        border: 1px solid var(--primary-color);
+        color: var(--primary-color);
+        padding: 10px 20px;
+        border-radius: 20px;
+        cursor: pointer;
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+      #back-to-wines-btn:hover {
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+      }
+      #reverse-results-message {
+        color: #ccc;
+        font-style: italic;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 1.1em;
+      }
 
-        /* Sommelier */
-        #sommelier-manual-button {
-            position: fixed; bottom: 20px; right: 20px; background-color: var(--primary-color);
-            color: var(--bg-color); border: none; border-radius: 50%; width: 60px; height: 60px;
-            font-size: 1.2em; display: flex; justify-content: center; align-items: center; cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); transition: background-color 0.3s ease; z-index: 1000;
-        }
-        #sommelier-manual-button:hover { background-color: var(--button-hover); }
-        #sommelier-manual-content {
-            display: none; position: fixed; bottom: 90px; right: 20px; width: 300px; max-height: 400px;
-            background-color: var(--card-bg); border: 1px solid var(--primary-color); border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); padding: 20px; overflow-y: auto;
-            z-index: 999; text-align: left;
-        }
-        #sommelier-manual-content h3 { color: var(--primary-color); margin-top: 0; }
-        #sommelier-manual-content ul { list-style: none; padding: 0; }
-        #sommelier-manual-content li { margin-bottom: 10px; }
-        #sommelier-manual-content li strong { color: var(--primary-color); }
+      /* Sommelier */
+      #sommelier-manual-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+        border: none;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        font-size: 1.2em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        transition: background-color 0.3s ease;
+        z-index: 1000;
+      }
+      #sommelier-manual-button:hover {
+        background-color: var(--button-hover);
+      }
+      #sommelier-manual-content {
+        display: none;
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        width: 300px;
+        max-height: 400px;
+        background-color: var(--card-bg);
+        border: 1px solid var(--primary-color);
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        padding: 20px;
+        overflow-y: auto;
+        z-index: 999;
+        text-align: left;
+      }
+      #sommelier-manual-content h3 {
+        color: var(--primary-color);
+        margin-top: 0;
+      }
+      #sommelier-manual-content ul {
+        list-style: none;
+        padding: 0;
+      }
+      #sommelier-manual-content li {
+        margin-bottom: 10px;
+      }
+      #sommelier-manual-content li strong {
+        color: var(--primary-color);
+      }
 
-        /* Autocomplete e Upload */
-        .autocomplete-list {
-            position: absolute; top: 100%; left: 0; right: 0; background: var(--card-bg);
-            border: 1px solid var(--primary-color); border-top: none; z-index: 20;
-            max-height: 150px; overflow-y: auto; border-radius: 0 0 5px 5px; display: none;
-        }
-        .autocomplete-item {
-            padding: 10px; cursor: pointer; font-size: 0.9em; border-bottom: 1px solid var(--border-color);
-        }
-        .autocomplete-item:hover { background-color: var(--primary-color); color: var(--bg-color); }
-        .img-upload-group { display: flex; gap: 10px; width: 100%; }
-        .img-upload-group input { flex-grow: 1; margin-bottom: 0; }
-        #btn-upload-img {
-            background: var(--border-color); color: var(--text-color); border: none; padding: 10px;
-            border-radius: 5px; cursor: pointer; font-weight: bold; white-space: nowrap; margin: 0;
-        }
+      /* Autocomplete e Upload */
+      .autocomplete-list {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--card-bg);
+        border: 1px solid var(--primary-color);
+        border-top: none;
+        z-index: 20;
+        max-height: 150px;
+        overflow-y: auto;
+        border-radius: 0 0 5px 5px;
+        display: none;
+      }
+      .autocomplete-item {
+        padding: 10px;
+        cursor: pointer;
+        font-size: 0.9em;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .autocomplete-item:hover {
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+      }
+      .img-upload-group {
+        display: flex;
+        gap: 10px;
+        width: 100%;
+      }
+      .img-upload-group input {
+        flex-grow: 1;
+        margin-bottom: 0;
+      }
+      #btn-upload-img {
+        background: var(--border-color);
+        color: var(--text-color);
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        white-space: nowrap;
+        margin: 0;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <!-- Login Screen -->
-        <div id="login-screen">
-            <h1>Vinho em Mãos</h1>
-            <form id="login-form" style="width:100%">
-                <p>Insira o PIN diário para acessar:</p>
-                <input type="password" id="pin-input" maxlength="4" placeholder="----" autocomplete="off">
-                <button type="button" id="login-button">Entrar</button>
-            </form>
-            <p id="login-message"></p>
-            <div class="footer-restricted-area" id="restricted-area-footer">Área Restrita</div>
-
-            <!-- Manager Login Form -->
-            <div id="manager-login-form">
-                <h2>Login de Gerente</h2>
-                <form id="manager-form">
-                    <input type="password" id="manager-password-input" placeholder="Senha do Gerente" autocomplete="off">
-                    <button type="button" id="manager-login-button">Entrar como Gerente</button>
-                </form>
-                <p id="manager-login-message"></p>
-            </div>
+      <!-- Login Screen -->
+      <div id="login-screen">
+        <h1>Vinho em Mãos</h1>
+        <form id="login-form" style="width: 100%">
+          <p>Insira o PIN diário para acessar:</p>
+          <input
+            type="password"
+            id="pin-input"
+            maxlength="4"
+            placeholder="----"
+            autocomplete="off"
+          />
+          <button type="button" id="login-button">Entrar</button>
+        </form>
+        <p id="login-message"></p>
+        <div class="footer-restricted-area" id="restricted-area-footer">
+          Área Restrita
         </div>
 
-        <!-- Manager Screen -->
-        <div id="manager-screen">
-            <div class="manager-header">
-                <h1>Painel de Gerenciamento</h1>
-                <button class="logout-btn" id="manager-logout">🚪 Sair</button>
-            </div>
+        <!-- Manager Login Form -->
+        <div id="manager-login-form">
+          <h2>Login de Gerente</h2>
+          <form id="manager-form">
+            <input
+              type="password"
+              id="manager-password-input"
+              placeholder="Senha do Gerente"
+              autocomplete="off"
+            />
+            <button type="button" id="manager-login-button">
+              Entrar como Gerente
+            </button>
+          </form>
+          <p id="manager-login-message"></p>
+        </div>
+      </div>
 
-            <div class="tabs">
-                <button class="tab-button active" data-tab="generate-pin-tab">Gerar PIN do Dia</button>
-                <button class="tab-button" data-tab="stock-catalog-tab">Estoque e Catálogo</button>
-                <button class="tab-button" data-tab="purchasing-tab">Compras e Catálogo</button>
-                <button class="tab-button" data-tab="cardapio-tab">📋 Cardápio</button>
-                <button class="refresh-data-btn" id="refresh-manager-data">🔄 Atualizar Dados</button>
-            </div>
+      <!-- Manager Screen -->
+      <div id="manager-screen">
+        <div class="manager-header">
+          <h1>Painel de Gerenciamento</h1>
+          <button class="logout-btn" id="manager-logout">🚪 Sair</button>
+        </div>
 
-            <div id="generate-pin-tab" class="tab-content">
-                <h2>Gerar Novo PIN Diário</h2>
-                <button id="generate-pin-button">Gerar PIN</button>
-                <p id="generated-pin-display">----</p>
-            </div>
+        <div class="tabs">
+          <button class="tab-button active" data-tab="generate-pin-tab">
+            Gerar PIN do Dia
+          </button>
+          <button class="tab-button" data-tab="stock-catalog-tab">
+            Estoque e Catálogo
+          </button>
+          <button class="tab-button" data-tab="purchasing-tab">
+            Compras e Catálogo
+          </button>
+          <button class="tab-button" data-tab="cardapio-tab">
+            📋 Cardápio
+          </button>
+          <button class="refresh-data-btn" id="refresh-manager-data">
+            🔄 Atualizar Dados
+          </button>
+        </div>
 
-            <div id="stock-catalog-tab" class="tab-content" style="display: none;">
-                <h2>Estoque e Catálogo de Bebidas</h2>
-                <button id="add-beverage-button">Adicionar Bebida</button>
-                <table id="beverages-table">
-                    <thead>
-                        <tr>
-                            <th>ID</th><th>Nome</th><th>Tipo</th><th>Disponível?</th>
-                            <th>Estoque</th><th>Preço (R$)</th><th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
+        <div id="generate-pin-tab" class="tab-content">
+          <h2>Gerar Novo PIN Diário</h2>
+          <button id="generate-pin-button">Gerar PIN</button>
+          <p id="generated-pin-display">----</p>
+        </div>
 
-            <div id="purchasing-tab" class="tab-content" style="display: none;">
-                <h2>Compras e Catálogo</h2>
-                <input type="text" id="purchasing-search" placeholder="Buscar no catálogo (ex: Malbec, Tinto...)">
-                <div id="purchasing-grid"></div>
-            </div>
+        <div id="stock-catalog-tab" class="tab-content" style="display: none">
+          <h2>Estoque e Catálogo de Bebidas</h2>
+          <button id="add-beverage-button">Adicionar Bebida</button>
+          <table id="beverages-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Tipo</th>
+                <th>Disponível?</th>
+                <th>Estoque</th>
+                <th>Preço (R$)</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
 
-            <div id="cardapio-tab" class="tab-content" style="display: none;">
-                <h2>Gerenciar Cardápio (Pratos da Casa)</h2>
-                <p style="color:#ccc; margin-bottom:10px;">Adicione, edite ou remova pratos aqui.</p>
-                <div id="add-dish-form">
-                    <input type="text" id="new-dish-input" placeholder="Nome do novo prato...">
-                    <button id="add-dish-btn">➕ Adicionar</button>
+        <div id="purchasing-tab" class="tab-content" style="display: none">
+          <h2>Compras e Catálogo</h2>
+          <input
+            type="text"
+            id="purchasing-search"
+            placeholder="Buscar no catálogo (ex: Malbec, Tinto...)"
+          />
+          <div id="purchasing-grid"></div>
+        </div>
+
+        <div id="cardapio-tab" class="tab-content" style="display: none">
+          <h2>Gerenciar Cardápio (Pratos da Casa)</h2>
+          <p style="color: #ccc; margin-bottom: 10px">
+            Adicione, edite ou remova pratos aqui.
+          </p>
+          <div id="add-dish-form">
+            <input
+              type="text"
+              id="new-dish-input"
+              placeholder="Nome do novo prato..."
+            />
+            <button id="add-dish-btn">➕ Adicionar</button>
+          </div>
+          <div class="cardapio-list" id="cardapio-list"></div>
+        </div>
+      </div>
+
+      <!-- Waiter/Client Screen -->
+      <div id="waiter-client-screen">
+        <div class="header">
+          <div class="logo">Vinho em Mãos</div>
+          <div class="filters">
+            <button class="filter-button active" data-filter="all">
+              Todos
+            </button>
+            <button class="filter-button" data-filter="tinto">Tinto</button>
+            <button class="filter-button" data-filter="branco">Branco</button>
+            <button class="filter-button" data-filter="espumante">
+              Espumante
+            </button>
+            <button class="filter-button" data-filter="prosecco">
+              Prosecco
+            </button>
+            <button class="filter-button" data-filter="champanhe">
+              Champanhe
+            </button>
+            <button class="filter-button" data-filter="cidra">Cidra</button>
+            <button class="filter-button" data-filter="cachaça">Cachaça</button>
+            <button class="filter-button" data-filter="seco">Seco</button>
+            <button class="filter-button" data-filter="doce">Doce</button>
+            <button
+              class="filter-button"
+              id="btn-por-prato"
+              style="
+                background-color: var(--primary-color);
+                color: var(--bg-color);
+              "
+            >
+              🍽️ Por Prato
+            </button>
+            <button
+              class="refresh-data-btn"
+              id="refresh-client-data"
+              style="margin-left: 15px; padding: 8px 15px; font-size: 0.9em"
+            >
+              🔄 Atualizar
+            </button>
+            <button
+              class="logout-btn"
+              id="client-logout"
+              style="margin-left: 10px; padding: 8px 16px"
+            >
+              🚪 Sair
+            </button>
+          </div>
+        </div>
+        <div id="beverage-list"></div>
+
+        <div id="dish-search-view">
+          <button id="back-to-wines-btn">← Voltar para Bebidas</button>
+          <h2 style="margin-top: 0">Escolha um Prato</h2>
+          <input
+            type="text"
+            id="dish-search-input"
+            placeholder="Buscar prato..."
+          />
+          <div class="dish-grid" id="dish-grid-container"></div>
+          <div id="reverse-results-message" style="display: none"></div>
+          <div
+            id="reverse-results-list"
+            class="beverage-list"
+            style="margin-top: 0"
+          ></div>
+        </div>
+
+        <button id="sommelier-manual-button">📚</button>
+        <div id="sommelier-manual-content">
+          <h3>Manual do Sommelier</h3>
+          <ul>
+            <li>
+              <strong>Como Servir:</strong> Vinhos tintos geralmente entre
+              16-18°C, brancos e espumantes mais frios, entre 6-10°C.
+            </li>
+            <li>
+              <strong>Tipos de Taças:</strong> Taças Bordeaux para tintos
+              encorpados, taças menores para brancos, flûtes para espumantes.
+            </li>
+            <li>
+              <strong>Apresentação da Garrafa:</strong> Sempre com o rótulo
+              visível ao cliente, descrevendo brevemente a bebida.
+            </li>
+            <li>
+              <strong>Decantação:</strong> Vinhos tintos mais antigos ou
+              encorpados podem se beneficiar da decantação para aerar e remover
+              sedimentos.
+            </li>
+            <li>
+              <strong>Harmonização Básica:</strong> Vinhos tintos com carnes
+              vermelhas, brancos com peixes e aves, espumantes como aperitivo ou
+              com sobremesas leves.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div id="beverage-form-modal" style="display: none">
+        <div class="modal-content">
+          <span class="close-button">&times;</span>
+          <h2>Adicionar/Editar Bebida</h2>
+          <form id="beverage-form">
+            <div style="position: relative">
+              <label for="beverage-name">Nome:</label>
+              <input
+                type="text"
+                id="beverage-name"
+                name="nome"
+                required
+                autocomplete="off"
+              />
+              <div class="autocomplete-list" id="autocomplete-list"></div>
+            </div>
+            <div>
+              <label for="beverage-id">ID:</label
+              ><input
+                type="number"
+                id="beverage-id"
+                name="id"
+                readonly
+                style="display: none"
+              />
+            </div>
+            <div>
+              <label for="beverage-type">Tipo:</label
+              ><select id="beverage-type" name="tipo" required>
+                <option value="tinto">Tinto</option>
+                <option value="branco">Branco</option>
+                <option value="prosecco">Prosecco</option>
+                <option value="espumante">Espumante</option>
+                <option value="champanhe">Champanhe</option>
+                <option value="cidra">Cidra</option>
+                <option value="cachaça">Cachaça</option>
+              </select>
+            </div>
+            <div>
+              <label for="beverage-origin">Origem:</label
+              ><select id="beverage-origin" name="origem" required>
+                <option value="nacional">Nacional</option>
+                <option value="importado">Importado</option>
+              </select>
+            </div>
+            <div>
+              <label>Imagem:</label>
+              <div class="img-upload-group">
+                <input
+                  type="text"
+                  id="beverage-imageUrl"
+                  name="imagemUrl"
+                  placeholder="URL ou use o botão ao lado"
+                /><input
+                  type="file"
+                  id="image-upload"
+                  accept="image/*"
+                  style="display: none"
+                /><button type="button" id="btn-upload-img">Enviar Foto</button>
+              </div>
+            </div>
+            <div>
+              <label for="beverage-alcohol">Teor Alcoólico:</label
+              ><input type="text" id="beverage-alcohol" name="teorAlcoolico" />
+            </div>
+            <div>
+              <label for="beverage-flavor">Perfil de Sabor:</label
+              ><input type="text" id="beverage-flavor" name="perfilSabor" />
+            </div>
+            <div>
+              <label for="beverage-sweetness">Nível de Doçura:</label
+              ><select id="beverage-sweetness" name="nivelDoce">
+                <option value="Seco">Seco</option>
+                <option value="Meio Seco">Meio Seco</option>
+                <option value="Meio Doce">Meio Doce</option>
+                <option value="Doce">Doce</option>
+              </select>
+            </div>
+            <div>
+              <label>Harmonização (Pratos da Casa):</label>
+              <div class="multi-select-dropdown">
+                <div class="selected-items" id="harmonization-selected-items">
+                  Selecione os pratos
                 </div>
-                <div class="cardapio-list" id="cardapio-list"></div>
+                <div
+                  class="dropdown-content"
+                  id="harmonization-dropdown-content"
+                ></div>
+              </div>
+              <input
+                type="hidden"
+                id="beverage-pratosDaCasa"
+                name="pratosDaCasa"
+              />
             </div>
+            <div>
+              <label for="beverage-audience">Público Alvo:</label
+              ><select id="beverage-audience" name="publicoAlvo" required>
+                <option value="iniciante">Iniciante</option>
+                <option value="intermediario">Intermediário</option>
+                <option value="refinado">Refinado</option>
+              </select>
+            </div>
+            <div>
+              <label for="beverage-summary">Resumo Garçom:</label
+              ><textarea id="beverage-summary" name="resumoGarcom"></textarea>
+            </div>
+            <div>
+              <label for="beverage-glass">Taça Ideal:</label
+              ><input type="text" id="beverage-glass" name="tacaIdeal" />
+            </div>
+            <div>
+              <label for="beverage-presentation">Forma de Apresentação:</label
+              ><input
+                type="text"
+                id="beverage-presentation"
+                name="formaApresentacao"
+              />
+            </div>
+            <div>
+              <label for="beverage-temp-consume">Temp. Consumo:</label
+              ><input
+                type="text"
+                id="beverage-temp-consume"
+                name="tempConsumo"
+              />
+            </div>
+            <div>
+              <label for="beverage-temp-storage">Temp. Conservação:</label
+              ><input
+                type="text"
+                id="beverage-temp-storage"
+                name="tempConservacao"
+              />
+            </div>
+            <div class="form-checkbox-group">
+              <input
+                type="checkbox"
+                id="beverage-available"
+                name="disponivel"
+              /><label for="beverage-available">Disponível?</label>
+            </div>
+            <div>
+              <label for="beverage-stock">Estoque:</label
+              ><input
+                type="number"
+                id="beverage-stock"
+                name="estoque"
+                min="0"
+                required
+              />
+            </div>
+            <div>
+              <label for="beverage-price">Preço (R$):</label
+              ><input
+                type="number"
+                id="beverage-price"
+                name="preco"
+                step="0.01"
+                min="0"
+                required
+              />
+            </div>
+            <button type="submit">Salvar Bebida</button>
+          </form>
         </div>
-
-        <!-- Waiter/Client Screen -->
-        <div id="waiter-client-screen">
-            <div class="header">
-                <div class="logo">Vinho em Mãos</div>
-                <div class="filters">
-                    <button class="filter-button active" data-filter="all">Todos</button>
-                    <button class="filter-button" data-filter="tinto">Tinto</button>
-                    <button class="filter-button" data-filter="branco">Branco</button>
-                    <button class="filter-button" data-filter="espumante">Espumante</button>
-                    <button class="filter-button" data-filter="prosecco">Prosecco</button>
-                    <button class="filter-button" data-filter="champanhe">Champanhe</button>
-                    <button class="filter-button" data-filter="cidra">Cidra</button>
-                    <button class="filter-button" data-filter="cachaça">Cachaça</button>
-                    <button class="filter-button" data-filter="seco">Seco</button>
-                    <button class="filter-button" data-filter="doce">Doce</button>
-                    <button class="filter-button" id="btn-por-prato" style="background-color: var(--primary-color); color: var(--bg-color);">🍽️ Por Prato</button>
-                    <button class="refresh-data-btn" id="refresh-client-data" style="margin-left: 15px; padding: 8px 15px; font-size: 0.9em;">🔄 Atualizar</button>
-                    <button class="logout-btn" id="client-logout" style="margin-left: 10px; padding: 8px 16px;">🚪 Sair</button>
-                </div>
-            </div>
-            <div id="beverage-list"></div>
-
-            <div id="dish-search-view">
-                <button id="back-to-wines-btn">← Voltar para Bebidas</button>
-                <h2 style="margin-top:0;">Escolha um Prato</h2>
-                <input type="text" id="dish-search-input" placeholder="Buscar prato...">
-                <div class="dish-grid" id="dish-grid-container"></div>
-                <div id="reverse-results-message" style="display:none;"></div>
-                <div id="reverse-results-list" class="beverage-list" style="margin-top:0;"></div>
-            </div>
-
-            <button id="sommelier-manual-button">📚</button>
-            <div id="sommelier-manual-content">
-                <h3>Manual do Sommelier</h3>
-                <ul>
-                    <li><strong>Como Servir:</strong> Vinhos tintos geralmente entre 16-18°C, brancos e espumantes mais frios, entre 6-10°C.</li>
-                    <li><strong>Tipos de Taças:</strong> Taças Bordeaux para tintos encorpados, taças menores para brancos, flûtes para espumantes.</li>
-                    <li><strong>Apresentação da Garrafa:</strong> Sempre com o rótulo visível ao cliente, descrevendo brevemente a bebida.</li>
-                    <li><strong>Decantação:</strong> Vinhos tintos mais antigos ou encorpados podem se beneficiar da decantação para aerar e remover sedimentos.</li>
-                    <li><strong>Harmonização Básica:</strong> Vinhos tintos com carnes vermelhas, brancos com peixes e aves, espumantes como aperitivo ou com sobremesas leves.</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Modal -->
-        <div id="beverage-form-modal" style="display: none;">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Adicionar/Editar Bebida</h2>
-                <form id="beverage-form">
-                    <div style="position: relative;">
-                        <label for="beverage-name">Nome:</label>
-                        <input type="text" id="beverage-name" name="nome" required autocomplete="off">
-                        <div class="autocomplete-list" id="autocomplete-list"></div>
-                    </div>
-                    <div><label for="beverage-id">ID:</label><input type="number" id="beverage-id" name="id" readonly style="display:none;"></div>
-                    <div><label for="beverage-type">Tipo:</label><select id="beverage-type" name="tipo" required><option value="tinto">Tinto</option><option value="branco">Branco</option><option value="prosecco">Prosecco</option><option value="espumante">Espumante</option><option value="champanhe">Champanhe</option><option value="cidra">Cidra</option><option value="cachaça">Cachaça</option></select></div>
-                    <div><label for="beverage-origin">Origem:</label><select id="beverage-origin" name="origem" required><option value="nacional">Nacional</option><option value="importado">Importado</option></select></div>
-                    <div><label>Imagem:</label><div class="img-upload-group"><input type="text" id="beverage-imageUrl" name="imagemUrl" placeholder="URL ou use o botão ao lado"><input type="file" id="image-upload" accept="image/*" style="display:none"><button type="button" id="btn-upload-img">Enviar Foto</button></div></div>
-                    <div><label for="beverage-alcohol">Teor Alcoólico:</label><input type="text" id="beverage-alcohol" name="teorAlcoolico"></div>
-                    <div><label for="beverage-flavor">Perfil de Sabor:</label><input type="text" id="beverage-flavor" name="perfilSabor"></div>
-                    <div><label for="beverage-sweetness">Nível de Doçura:</label><select id="beverage-sweetness" name="nivelDoce"><option value="Seco">Seco</option><option value="Meio Seco">Meio Seco</option><option value="Meio Doce">Meio Doce</option><option value="Doce">Doce</option></select></div>
-                    <div><label>Harmonização (Pratos da Casa):</label><div class="multi-select-dropdown"><div class="selected-items" id="harmonization-selected-items">Selecione os pratos</div><div class="dropdown-content" id="harmonization-dropdown-content"></div></div><input type="hidden" id="beverage-pratosDaCasa" name="pratosDaCasa"></div>
-                    <div><label for="beverage-audience">Público Alvo:</label><select id="beverage-audience" name="publicoAlvo" required><option value="iniciante">Iniciante</option><option value="intermediario">Intermediário</option><option value="refinado">Refinado</option></select></div>
-                    <div><label for="beverage-summary">Resumo Garçom:</label><textarea id="beverage-summary" name="resumoGarcom"></textarea></div>
-                    <div><label for="beverage-glass">Taça Ideal:</label><input type="text" id="beverage-glass" name="tacaIdeal"></div>
-                    <div><label for="beverage-presentation">Forma de Apresentação:</label><input type="text" id="beverage-presentation" name="formaApresentacao"></div>
-                    <div><label for="beverage-temp-consume">Temp. Consumo:</label><input type="text" id="beverage-temp-consume" name="tempConsumo"></div>
-                    <div><label for="beverage-temp-storage">Temp. Conservação:</label><input type="text" id="beverage-temp-storage" name="tempConservacao"></div>
-                    <div class="form-checkbox-group"><input type="checkbox" id="beverage-available" name="disponivel"><label for="beverage-available">Disponível?</label></div>
-                    <div><label for="beverage-stock">Estoque:</label><input type="number" id="beverage-stock" name="estoque" min="0" required></div>
-                    <div><label for="beverage-price">Preço (R$):</label><input type="number" id="beverage-price" name="preco" step="0.01" min="0" required></div>
-                    <button type="submit">Salvar Bebida</button>
-                </form>
-            </div>
-        </div>
+      </div>
     </div>
 
     <script>
-        const API_BASE_URL = 'http://localhost:3000/api';
-        const MANAGER_PASSWORD = 'admin123';
-        let syncChannel;
+      const API_BASE_URL = `${window.location.protocol}//${window.location.hostname}:3000/api`;
+      const MANAGER_PASSWORD =
+        localStorage.getItem("managerPassword") || "admin123";
+      let syncChannel;
 
-        // Elements
-        const loginScreen = document.getElementById('login-screen');
-        const pinInput = document.getElementById('pin-input');
-        const loginButton = document.getElementById('login-button');
-        const loginMessage = document.getElementById('login-message');
-        const restrictedAreaFooter = document.getElementById('restricted-area-footer');
-        const managerLoginForm = document.getElementById('manager-login-form');
-        const managerPasswordInput = document.getElementById('manager-password-input');
-        const managerLoginButton = document.getElementById('manager-login-button');
-        const managerLoginMessage = document.getElementById('manager-login-message');
-        const managerScreen = document.getElementById('manager-screen');
-        const generatePinButton = document.getElementById('generate-pin-button');
-        const generatedPinDisplay = document.getElementById('generated-pin-display');
-        const addBeverageButton = document.getElementById('add-beverage-button');
-        const beveragesTableBody = document.querySelector('#beverages-table tbody');
-        const beverageFormModal = document.getElementById('beverage-form-modal');
-        const beverageForm = document.getElementById('beverage-form');
-        const closeModalButton = document.querySelector('.close-button');
-        const beverageNameInput = document.getElementById('beverage-name');
-        const autocompleteList = document.getElementById('autocomplete-list');
-        const waiterClientScreen = document.getElementById('waiter-client-screen');
-        const filterButtons = document.querySelectorAll('.filter-button:not(#btn-por-prato)');
-        const beverageList = document.getElementById('beverage-list');
-        const sommelierManualButton = document.getElementById('sommelier-manual-button');
-        const sommelierManualContent = document.getElementById('sommelier-manual-content');
-        const harmonizationSelectedItems = document.getElementById('harmonization-selected-items');
-        const harmonizationDropdownContent = document.getElementById('harmonization-dropdown-content');
-        const beveragePratosDaCasaInput = document.getElementById('beverage-pratosDaCasa');
-        const btnPorPrato = document.getElementById('btn-por-prato');
-        const dishSearchView = document.getElementById('dish-search-view');
-        const dishSearchInput = document.getElementById('dish-search-input');
-        const dishGridContainer = document.getElementById('dish-grid-container');
-        const reverseResultsMessage = document.getElementById('reverse-results-message');
-        const reverseResultsList = document.getElementById('reverse-results-list');
-        const backToWinesBtn = document.getElementById('back-to-wines-btn');
-        const purchasingSearch = document.getElementById('purchasing-search');
-        const purchasingGrid = document.getElementById('purchasing-grid');
-        const refreshManagerDataBtn = document.getElementById('refresh-manager-data');
-        const refreshClientDataBtn = document.getElementById('refresh-client-data');
-        const cardapioList = document.getElementById('cardapio-list');
-        const newDishInput = document.getElementById('new-dish-input');
-        const addDishBtn = document.getElementById('add-dish-btn');
-        const managerLogoutBtn = document.getElementById('manager-logout');
-        const clientLogoutBtn = document.getElementById('client-logout');
+      // Elements
+      const loginScreen = document.getElementById("login-screen");
+      const pinInput = document.getElementById("pin-input");
+      const loginButton = document.getElementById("login-button");
+      const loginMessage = document.getElementById("login-message");
+      const restrictedAreaFooter = document.getElementById(
+        "restricted-area-footer",
+      );
+      const managerLoginForm = document.getElementById("manager-login-form");
+      const managerPasswordInput = document.getElementById(
+        "manager-password-input",
+      );
+      const managerLoginButton = document.getElementById(
+        "manager-login-button",
+      );
+      const managerLoginMessage = document.getElementById(
+        "manager-login-message",
+      );
+      const managerScreen = document.getElementById("manager-screen");
+      const generatePinButton = document.getElementById("generate-pin-button");
+      const generatedPinDisplay = document.getElementById(
+        "generated-pin-display",
+      );
+      const addBeverageButton = document.getElementById("add-beverage-button");
+      const beveragesTableBody = document.querySelector(
+        "#beverages-table tbody",
+      );
+      const beverageFormModal = document.getElementById("beverage-form-modal");
+      const beverageForm = document.getElementById("beverage-form");
+      const closeModalButton = document.querySelector(".close-button");
+      const beverageNameInput = document.getElementById("beverage-name");
+      const autocompleteList = document.getElementById("autocomplete-list");
+      const waiterClientScreen = document.getElementById(
+        "waiter-client-screen",
+      );
+      const filterButtons = document.querySelectorAll(
+        ".filter-button:not(#btn-por-prato)",
+      );
+      const beverageList = document.getElementById("beverage-list");
+      const sommelierManualButton = document.getElementById(
+        "sommelier-manual-button",
+      );
+      const sommelierManualContent = document.getElementById(
+        "sommelier-manual-content",
+      );
+      const harmonizationSelectedItems = document.getElementById(
+        "harmonization-selected-items",
+      );
+      const harmonizationDropdownContent = document.getElementById(
+        "harmonization-dropdown-content",
+      );
+      const beveragePratosDaCasaInput = document.getElementById(
+        "beverage-pratosDaCasa",
+      );
+      const btnPorPrato = document.getElementById("btn-por-prato");
+      const dishSearchView = document.getElementById("dish-search-view");
+      const dishSearchInput = document.getElementById("dish-search-input");
+      const dishGridContainer = document.getElementById("dish-grid-container");
+      const reverseResultsMessage = document.getElementById(
+        "reverse-results-message",
+      );
+      const reverseResultsList = document.getElementById(
+        "reverse-results-list",
+      );
+      const backToWinesBtn = document.getElementById("back-to-wines-btn");
+      const purchasingSearch = document.getElementById("purchasing-search");
+      const purchasingGrid = document.getElementById("purchasing-grid");
+      const refreshManagerDataBtn = document.getElementById(
+        "refresh-manager-data",
+      );
+      const refreshClientDataBtn = document.getElementById(
+        "refresh-client-data",
+      );
+      const cardapioList = document.getElementById("cardapio-list");
+      const newDishInput = document.getElementById("new-dish-input");
+      const addDishBtn = document.getElementById("add-dish-btn");
+      const managerLogoutBtn = document.getElementById("manager-logout");
+      const clientLogoutBtn = document.getElementById("client-logout");
 
-        let restrictedAreaClickCount = 0;
-        let allBeverages = [];
-        let allPratosDaCasa = [];
-        let clientAutoRefreshInterval = null;
+      let restrictedAreaClickCount = 0;
+      let allBeverages = [];
+      let allPratosDaCasa = [];
+      let clientAutoRefreshInterval = null;
 
-        // ==========================================
-        // CORREÇÃO CRÍTICA: PLACEHOLDER_IMG seguro (Base64)
-        // ==========================================
-        const PLACEHOLDER_IMG = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj48cmVjdCB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIGZpbGw9IiMyODI4MjgiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZDcwMCIgZm9udC1zaXplPSIxMCI+8J+YtzwvdGV4dD48L3N2Zz4=';
-        // ==========================================
+      // ==========================================
+      // CORREÇÃO CRÍTICA: PLACEHOLDER_IMG seguro (Base64)
+      // ==========================================
+      const PLACEHOLDER_IMG =
+        "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj48cmVjdCB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIGZpbGw9IiMyODI4MjgiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZDcwMCIgZm9udC1zaXplPSIxMCI+8J+YtzwvdGV4dD48L3N2Zz4=";
+      // ==========================================
 
-        // ==========================================
-        // CORREÇÃO: Função para escapar strings para JavaScript/HTML
-        // ==========================================
-        function sanitizeForJS(str) {
-            if (typeof str !== 'string') return str;
-            return str
-                .replace(/\\/g, '\\\\')
-                .replace(/'/g, "\\'")
-                .replace(/"/g, '\\"')
-                .replace(/\n/g, '\\n')
-                .replace(/\r/g, '\\r')
-                .replace(/\t/g, '\\t');
+      // ==========================================
+      // CORREÇÃO: Função para escapar strings para JavaScript/HTML
+      // ==========================================
+      function sanitizeForJS(str) {
+        if (typeof str !== "string") return str;
+        return str
+          .replace(/\\/g, "\\\\")
+          .replace(/'/g, "\\'")
+          .replace(/"/g, '\\"')
+          .replace(/\n/g, "\\n")
+          .replace(/\r/g, "\\r")
+          .replace(/\t/g, "\\t");
+      }
+      // ==========================================
+
+      // ==========================================
+      // CORREÇÃO: Normalização de chaves JSON com espaços
+      // ==========================================
+      function cleanObjectKeys(obj) {
+        if (!obj || typeof obj !== "object") return obj;
+        const cleaned = {};
+        for (const [key, value] of Object.entries(obj)) {
+          const cleanKey = key.trim();
+          if (typeof value === "string") {
+            cleaned[cleanKey] = value.trim();
+          } else if (Array.isArray(value)) {
+            cleaned[cleanKey] = value.map((v) =>
+              typeof v === "string" ? v.trim() : v,
+            );
+          } else {
+            cleaned[cleanKey] = value;
+          }
         }
-        // ==========================================
+        return cleaned;
+      }
 
-        // ==========================================
-        // CORREÇÃO: Normalização de chaves JSON com espaços
-        // ==========================================
-        function cleanObjectKeys(obj) {
-            if (!obj || typeof obj !== 'object') return obj;
-            const cleaned = {};
-            for (const [key, value] of Object.entries(obj)) {
-                const cleanKey = key.trim();
-                if (typeof value === 'string') {
-                    cleaned[cleanKey] = value.trim();
-                } else if (Array.isArray(value)) {
-                    cleaned[cleanKey] = value.map(v => typeof v === 'string' ? v.trim() : v);
-                } else {
-                    cleaned[cleanKey] = value;
-                }
-            }
-            return cleaned;
-        }
+      function cleanArrayObjects(arr) {
+        if (!Array.isArray(arr)) return arr;
+        return arr.map((item) => cleanObjectKeys(item));
+      }
+      // ==========================================
 
-        function cleanArrayObjects(arr) {
-            if (!Array.isArray(arr)) return arr;
-            return arr.map(item => cleanObjectKeys(item));
-        }
-        // ==========================================
+      let catalogoConhecido = [
+        {
+          nome: "Malbec",
+          tipo: "tinto",
+          teorAlcoolico: "13.5%",
+          perfilSabor: "Frutado e encorpado",
+          nivelDoce: "Seco",
+          publicoAlvo: "intermediario",
+          tacaIdeal: "Taça Bordeaux",
+          formaApresentacao: "Garrafa 750ml",
+          tempConsumo: "16-18°C",
+          tempConservacao: "14°C",
+          pratosDaCasa: [
+            "Choripán da Roça",
+            "BomBom de Costela (até 3 pessoas)",
+          ],
+        },
+        {
+          nome: "Cachaça artesanal",
+          tipo: "cachaça",
+          teorAlcoolico: "40%",
+          perfilSabor: "Amadeirado e suave",
+          nivelDoce: "Seco",
+          publicoAlvo: "refinado",
+          tacaIdeal: "Cálice pequeno",
+          formaApresentacao: "Dose ou Garrafa",
+          tempConsumo: "Temperatura ambiente",
+          tempConservacao: "Local fresco",
+          pratosDaCasa: ["Queijo Coalho Frito", "Mandioca Frita"],
+        },
+      ];
 
-        let catalogoConhecido = [
-            { nome: "Malbec", tipo: "tinto", teorAlcoolico: "13.5%", perfilSabor: "Frutado e encorpado", nivelDoce: "Seco", publicoAlvo: "intermediario", tacaIdeal: "Taça Bordeaux", formaApresentacao: "Garrafa 750ml", tempConsumo: "16-18°C", tempConservacao: "14°C", pratosDaCasa: ["Choripán da Roça", "BomBom de Costela (até 3 pessoas)"] },
-            { nome: "Cachaça artesanal", tipo: "cachaça", teorAlcoolico: "40%", perfilSabor: "Amadeirado e suave", nivelDoce: "Seco", publicoAlvo: "refinado", tacaIdeal: "Cálice pequeno", formaApresentacao: "Dose ou Garrafa", tempConsumo: "Temperatura ambiente", tempConservacao: "Local fresco", pratosDaCasa: ["Queijo Coalho Frito", "Mandioca Frita"] }
-        ];
-
-        async function loadCatalogoExterno() {
-            try {
-                const response = await fetch('catalogo.json');
-                if (response.ok) {
-                    let dadosExternos = await response.json();
-                    // Normaliza chaves e valores
-                    dadosExternos = cleanArrayObjects(dadosExternos);
-                    const nomesExistentes = new Set(catalogoConhecido.map(c => c.nome.toLowerCase()));
-                    dadosExternos.forEach(item => {
-                        if (!nomesExistentes.has(item.nome.toLowerCase())) catalogoConhecido.push(item);
-                    });
-                }
-            } catch (error) { 
-                console.log("Usando catálogo interno padrão. Erro:", error.message); 
-            }
-        }
-
-        const pratosDoCardapioLocal = [
-            "Macarrão à Bolonhesa", "Kids: Isca de Frango Empanado", "Kids: Filé Mignon",
-            "Tirinhas de Frango", "Queijo Coalho Frito", "Mandioca Frita", "Bolinho de Costela (8un)",
-            "Camarão Empanado", "Iscas de Tilápia", "Coraçãozinho da Fazenda", "Mini Pastel de Costela (6un)",
-            "Bolinho de Cupim", "Lollypop da Fazenda (10un)", "Choripán da Roça", "Linguiça Suína Acebolada",
-            "Pancetta de Rolo", "Batata Frita", "Batata Frita com Requeijão e Bacon",
-            "Abóbora Recheada (serve 3)", "Arroz Caldoso de Fraldinha (2 pessoas)", "Arroz Carreteiro (2 pessoas)",
-            "Bobó de Camarão (até 2 pessoas)", "BomBom de Costela (até 3 pessoas)",
-            "Filé Mignon Catupiry (2 pessoas)", "Filé Mignon Gorgonzola (2 pessoas)",
-            "Galinhada da Fazenda (500g)", "Moqueca de Peixe da Fazenda (até 2 pessoas)",
-            "Parmegiana de Filé Mignon (2 pessoas)", "Tilápia ao Molho da Casa (serve 2)",
-            "Panquecas Caramelizadas", "Petit Gâteau com Sorvete", "Salada de Frutas com Creme",
-            "Arroz Biro Biro", "Molho Chimichurri", "Cumbuca de Feijão", "Farofa de Banana",
-            "Escabeche de Berinjela", "Farofa de Carne Seca", "Farofa de Rúcula", "Guacamole",
-            "Molho Abacaxi com Pimenta", "Molho de Pimenta", "Molho Goiabada com Pimenta",
-            "Tomate Recheado com Catupiry", "Vinagrete de Manga"
-        ];
-
-        const regrasAutoCadastro = [
-            { palavras: ['moscatel', 'porto', 'licor', 'ice', 'ponche'], doce: 'Doce', pratos: ["Petit Gâteau com Sorvete", "Panquecas Caramelizadas", "Salada de Frutas com Creme"] },
-            { palavras: ['prosecco'], doce: 'Meio Doce', pratos: ["Tirinhas de Frango", "Camarão Empanado", "Iscas de Tilápia", "Abóbora Recheada (serve 3)"] },
-            { palavras: ['champanhe', 'champagne'], doce: 'Seco', pratos: ["Camarão Empanado", "Queijo Coalho Frito", "Abóbora Recheada (serve 3)", "Linguiça Suína Acebolada"] },
-            { palavras: ['chardonnay', 'sauvignon', 'riesling', 'branco'], doce: 'Seco', pratos: ["Bobó de Camarão (até 2 pessoas)", "Moqueca de Peixe da Fazenda (até 2 pessoas)", "Tilápia ao Molho da Casa (serve 2)", "Iscas de Tilápia"] },
-            { palavras: ['pinot', 'merlot', 'rosé', 'rose'], doce: 'Seco', pratos: ["Macarrão à Bolonhesa", "Linguiça Suína Acebolada", "Tirinhas de Frango", "Coraçãozinho da Fazenda"] },
-            { palavras: ['malbec', 'cabernet', 'syrah', 'tannat', 'carménère'], doce: 'Seco', pratos: ["Choripán da Roça", "BomBom de Costela (até 3 pessoas)", "Coraçãozinho da Fazenda", "Filé Mignon Gorgonzola (2 pessoas)", "Parmegiana de Filé Mignon (2 pessoas)", "Pancetta de Rolo"] },
-            { palavras: ['cachaça', 'whisk', 'bourbon', 'conhaque'], doce: 'Seco', pratos: ["Queijo Coalho Frito", "Mandioca Frita", "Bolinho de Costela (8un)", "Linguiça Suína Acebolada", "Coraçãozinho da Fazenda"] },
-        ];
-
-        // ==========================================
-        // SISTEMA DE SINCRONIZAÇÃO
-        // ==========================================
-        function initSync() {
-            if ('BroadcastChannel' in window) {
-                syncChannel = new BroadcastChannel('vinho_em_maos_sync');
-                syncChannel.onmessage = (e) => { if (e.data.type === 'data_updated') syncAllViews(); };
-            }
-            window.addEventListener('storage', (e) => {
-                if (e.key === 'vinhoSyncTrigger') syncAllViews();
+      async function loadCatalogoExterno() {
+        try {
+          const response = await fetch("catalogo.json");
+          if (response.ok) {
+            let dadosExternos = await response.json();
+            // Normaliza chaves e valores
+            dadosExternos = cleanArrayObjects(dadosExternos);
+            const nomesExistentes = new Set(
+              catalogoConhecido.map((c) => c.nome.toLowerCase()),
+            );
+            dadosExternos.forEach((item) => {
+              if (!nomesExistentes.has(item.nome.toLowerCase()))
+                catalogoConhecido.push(item);
             });
+          }
+        } catch (error) {
+          console.log("Usando catálogo interno padrão. Erro:", error.message);
         }
+      }
 
-        function triggerSync() {
-            localStorage.setItem('vinhoSyncTrigger', Date.now().toString());
-            if (syncChannel) syncChannel.postMessage({ type: 'data_updated', time: Date.now() });
-        }
+      const pratosDoCardapioLocal = [
+        "Macarrão à Bolonhesa",
+        "Kids: Isca de Frango Empanado",
+        "Kids: Filé Mignon",
+        "Tirinhas de Frango",
+        "Queijo Coalho Frito",
+        "Mandioca Frita",
+        "Bolinho de Costela (8un)",
+        "Camarão Empanado",
+        "Iscas de Tilápia",
+        "Coraçãozinho da Fazenda",
+        "Mini Pastel de Costela (6un)",
+        "Bolinho de Cupim",
+        "Lollypop da Fazenda (10un)",
+        "Choripán da Roça",
+        "Linguiça Suína Acebolada",
+        "Pancetta de Rolo",
+        "Batata Frita",
+        "Batata Frita com Requeijão e Bacon",
+        "Abóbora Recheada (serve 3)",
+        "Arroz Caldoso de Fraldinha (2 pessoas)",
+        "Arroz Carreteiro (2 pessoas)",
+        "Bobó de Camarão (até 2 pessoas)",
+        "BomBom de Costela (até 3 pessoas)",
+        "Filé Mignon Catupiry (2 pessoas)",
+        "Filé Mignon Gorgonzola (2 pessoas)",
+        "Galinhada da Fazenda (500g)",
+        "Moqueca de Peixe da Fazenda (até 2 pessoas)",
+        "Parmegiana de Filé Mignon (2 pessoas)",
+        "Tilápia ao Molho da Casa (serve 2)",
+        "Panquecas Caramelizadas",
+        "Petit Gâteau com Sorvete",
+        "Salada de Frutas com Creme",
+        "Arroz Biro Biro",
+        "Molho Chimichurri",
+        "Cumbuca de Feijão",
+        "Farofa de Banana",
+        "Escabeche de Berinjela",
+        "Farofa de Carne Seca",
+        "Farofa de Rúcula",
+        "Guacamole",
+        "Molho Abacaxi com Pimenta",
+        "Molho de Pimenta",
+        "Molho Goiabada com Pimenta",
+        "Tomate Recheado com Catupiry",
+        "Vinagrete de Manga",
+      ];
 
-        function syncAllViews() {
-            loadBeveragesForClient();
-            if (document.getElementById('manager-screen').style.display === 'block') {
-                loadBeveragesForManager();
-                if (document.getElementById('purchasing-tab').style.display !== 'none') renderPurchasingGrid();
-                if (document.getElementById('cardapio-tab').style.display !== 'none') loadCardapioManager();
-            }
-        }
-        // ==========================================
+      const regrasAutoCadastro = [
+        {
+          palavras: ["moscatel", "porto", "licor", "ice", "ponche"],
+          doce: "Doce",
+          pratos: [
+            "Petit Gâteau com Sorvete",
+            "Panquecas Caramelizadas",
+            "Salada de Frutas com Creme",
+          ],
+        },
+        {
+          palavras: ["prosecco"],
+          doce: "Meio Doce",
+          pratos: [
+            "Tirinhas de Frango",
+            "Camarão Empanado",
+            "Iscas de Tilápia",
+            "Abóbora Recheada (serve 3)",
+          ],
+        },
+        {
+          palavras: ["champanhe", "champagne"],
+          doce: "Seco",
+          pratos: [
+            "Camarão Empanado",
+            "Queijo Coalho Frito",
+            "Abóbora Recheada (serve 3)",
+            "Linguiça Suína Acebolada",
+          ],
+        },
+        {
+          palavras: ["chardonnay", "sauvignon", "riesling", "branco"],
+          doce: "Seco",
+          pratos: [
+            "Bobó de Camarão (até 2 pessoas)",
+            "Moqueca de Peixe da Fazenda (até 2 pessoas)",
+            "Tilápia ao Molho da Casa (serve 2)",
+            "Iscas de Tilápia",
+          ],
+        },
+        {
+          palavras: ["pinot", "merlot", "rosé", "rose"],
+          doce: "Seco",
+          pratos: [
+            "Macarrão à Bolonhesa",
+            "Linguiça Suína Acebolada",
+            "Tirinhas de Frango",
+            "Coraçãozinho da Fazenda",
+          ],
+        },
+        {
+          palavras: ["malbec", "cabernet", "syrah", "tannat", "carménère"],
+          doce: "Seco",
+          pratos: [
+            "Choripán da Roça",
+            "BomBom de Costela (até 3 pessoas)",
+            "Coraçãozinho da Fazenda",
+            "Filé Mignon Gorgonzola (2 pessoas)",
+            "Parmegiana de Filé Mignon (2 pessoas)",
+            "Pancetta de Rolo",
+          ],
+        },
+        {
+          palavras: ["cachaça", "whisk", "bourbon", "conhaque"],
+          doce: "Seco",
+          pratos: [
+            "Queijo Coalho Frito",
+            "Mandioca Frita",
+            "Bolinho de Costela (8un)",
+            "Linguiça Suína Acebolada",
+            "Coraçãozinho da Fazenda",
+          ],
+        },
+      ];
 
-        // ==========================================
-        // LOGOUT
-        // ==========================================
-        function doLogout() {
-            clearSession();
-            if (clientAutoRefreshInterval) clearInterval(clientAutoRefreshInterval);
-            showScreen('login-screen');
-            pinInput.value = ''; loginMessage.textContent = '';
-            managerPasswordInput.value = ''; managerLoginMessage.textContent = '';
-            managerLoginForm.style.display = 'none';
-            restrictedAreaClickCount = 0;
+      // ==========================================
+      // SISTEMA DE SINCRONIZAÇÃO
+      // ==========================================
+      function initSync() {
+        if ("BroadcastChannel" in window) {
+          syncChannel = new BroadcastChannel("vinho_em_maos_sync");
+          syncChannel.onmessage = (e) => {
+            if (e.data.type === "data_updated") syncAllViews();
+          };
         }
-        function clearSession() {
-            localStorage.removeItem('vinhoEmMaosSession');
-            sessionStorage.removeItem('managerLoggedIn');
-            sessionStorage.removeItem('loggedIn');
-        }
-        managerLogoutBtn.addEventListener('click', doLogout);
-        clientLogoutBtn.addEventListener('click', doLogout);
-        // ==========================================
-
-        // ==========================================
-        // CORREÇÃO: fetchData com tratamento robusto de erro
-        // ==========================================
-        async function fetchData(url, method = 'GET', data = null) {
-            const options = { method, headers: { 'Content-Type': 'application/json' } };
-            if (data) options.body = JSON.stringify(data);
-            try {
-                const response = await fetch(url, options);
-                const text = await response.text();
-                // Tenta parsear JSON com tratamento de erro
-                let json;
-                try {
-                    json = JSON.parse(text);
-                } catch (parseError) {
-                    console.error('Erro ao parsear JSON:', parseError.message);
-                    console.error('Resposta raw:', text.substring(0, 200));
-                    return { error: true, message: 'Resposta inválida do servidor' };
-                }
-                if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
-                return json;
-            } catch (error) {
-                console.error('Erro ao buscar dados:', error.message);
-                return { error: true, message: error.message || 'Erro de comunicação com o servidor.' };
-            }
-        }
-        // ==========================================
-
-        function renderDoce(nivel) {
-            const niveis = ['Seco', 'Meio Seco', 'Meio Doce', 'Doce'];
-            let index = niveis.indexOf(nivel); if (index === -1) index = 0;
-            let dots = '';
-            for (let i = 0; i < 4; i++) dots += `<span class="dot ${i <= index ? 'active' : ''}"></span>`;
-            return `<div class="sweetness-container"><span class="sweetness-label">Paladar:</span><div class="sweetness-dots">${dots}</div><span style="font-size:10px; color:#ccc; margin-left:5px;">${sanitizeForJS(nivel)}</span></div>`;
-        }
-
-        function showScreen(screenId) {
-            document.querySelectorAll('#login-screen, #manager-screen, #waiter-client-screen').forEach(s => s.style.display = 'none');
-            document.getElementById(screenId).style.display = 'block';
-        }
-        function showTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
-            document.getElementById(tabId).style.display = 'block';
-            document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
-            document.querySelector(`.tab-button[data-tab="${tabId}"]`).classList.add('active');
-        }
-
-        // ==========================================
-        // SESSÃO
-        // ==========================================
-        function checkSession() {
-            const session = localStorage.getItem('vinhoEmMaosSession');
-            if (session) {
-                const parsed = JSON.parse(session);
-                return parsed.date === new Date().toDateString();
-            }
-            return false;
-        }
-        function setSession(isManager = false) {
-            localStorage.setItem('vinhoEmMaosSession', JSON.stringify({ date: new Date().toDateString(), isManager }));
-            if (isManager) sessionStorage.setItem('managerLoggedIn', 'true');
-        }
-        if (checkSession()) {
-            const session = JSON.parse(localStorage.getItem('vinhoEmMaosSession'));
-            if (session.isManager) { showScreen('manager-screen'); loadBeveragesForManager(); showTab('generate-pin-tab'); }
-            else { showScreen('waiter-client-screen'); loadBeveragesForClient(); startClientAutoRefresh(); }
-        }
-        // ==========================================
-
-        async function handleLogin() {
-            const pin = pinInput.value;
-            if (pin.length !== 4) { loginMessage.textContent = 'O PIN deve ter 4 dígitos.'; return; }
-            const result = await fetchData(`${API_BASE_URL}/pin/validar`, 'POST', { pin });
-            if (result.valid) { setSession(false); loginMessage.textContent = ''; showScreen('waiter-client-screen'); loadBeveragesForClient(); startClientAutoRefresh(); }
-            else { loginMessage.textContent = result.message || 'Acesso Negado.'; }
-        }
-
-        restrictedAreaFooter.addEventListener('click', () => { restrictedAreaClickCount++; if (restrictedAreaClickCount >= 5) { managerLoginForm.style.display = 'block'; restrictedAreaClickCount = 0; } });
-        managerLoginButton.addEventListener('click', () => {
-            if (managerPasswordInput.value === MANAGER_PASSWORD) { setSession(true); managerLoginMessage.textContent = ''; showScreen('manager-screen'); loadBeveragesForManager(); showTab('generate-pin-tab'); }
-            else { managerLoginMessage.textContent = 'Senha Incorreta.'; }
+        window.addEventListener("storage", (e) => {
+          if (e.key === "vinhoSyncTrigger") syncAllViews();
         });
+      }
 
-        document.querySelectorAll('.tabs .tab-button').forEach(button => {
-            button.addEventListener('click', () => {
-                showTab(button.dataset.tab);
-                if (button.dataset.tab === 'stock-catalog-tab') loadBeveragesForManager();
-                if (button.dataset.tab === 'purchasing-tab') loadCatalogoExterno().then(() => renderPurchasingGrid());
-                if (button.dataset.tab === 'cardapio-tab') loadCardapioManager();
+      function triggerSync() {
+        localStorage.setItem("vinhoSyncTrigger", Date.now().toString());
+        if (syncChannel)
+          syncChannel.postMessage({ type: "data_updated", time: Date.now() });
+      }
+
+      function syncAllViews() {
+        loadBeveragesForClient();
+        if (
+          document.getElementById("manager-screen").style.display === "block"
+        ) {
+          loadBeveragesForManager();
+          if (
+            document.getElementById("purchasing-tab").style.display !== "none"
+          )
+            renderPurchasingGrid();
+          if (document.getElementById("cardapio-tab").style.display !== "none")
+            loadCardapioManager();
+        }
+      }
+      // ==========================================
+
+      // ==========================================
+      // LOGOUT
+      // ==========================================
+      function doLogout() {
+        clearSession();
+        if (clientAutoRefreshInterval) clearInterval(clientAutoRefreshInterval);
+        showScreen("login-screen");
+        pinInput.value = "";
+        loginMessage.textContent = "";
+        managerPasswordInput.value = "";
+        managerLoginMessage.textContent = "";
+        managerLoginForm.style.display = "none";
+        restrictedAreaClickCount = 0;
+      }
+      function clearSession() {
+        localStorage.removeItem("vinhoEmMaosSession");
+        sessionStorage.removeItem("managerLoggedIn");
+        sessionStorage.removeItem("loggedIn");
+      }
+      managerLogoutBtn.addEventListener("click", doLogout);
+      clientLogoutBtn.addEventListener("click", doLogout);
+      // ==========================================
+
+      // ==========================================
+      // CORREÇÃO: fetchData com tratamento robusto de erro
+      // ==========================================
+      async function fetchData(url, method = "GET", data = null) {
+        const options = {
+          method,
+          headers: { "Content-Type": "application/json" },
+        };
+        if (data) options.body = JSON.stringify(data);
+        try {
+          const response = await fetch(url, options);
+          const text = await response.text();
+          // Tenta parsear JSON com tratamento de erro
+          let json;
+          try {
+            json = JSON.parse(text);
+          } catch (parseError) {
+            console.error("Erro ao parsear JSON:", parseError.message);
+            console.error("Resposta raw:", text.substring(0, 200));
+            return { error: true, message: "Resposta inválida do servidor" };
+          }
+          if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
+          return json;
+        } catch (error) {
+          console.error("Erro ao buscar dados:", error.message);
+          return {
+            error: true,
+            message: error.message || "Erro de comunicação com o servidor.",
+          };
+        }
+      }
+      // ==========================================
+
+      function renderDoce(nivel) {
+        const niveis = ["Seco", "Meio Seco", "Meio Doce", "Doce"];
+        let index = niveis.indexOf(nivel);
+        if (index === -1) index = 0;
+        let dots = "";
+        for (let i = 0; i < 4; i++)
+          dots += `<span class="dot ${i <= index ? "active" : ""}"></span>`;
+        return `<div class="sweetness-container"><span class="sweetness-label">Paladar:</span><div class="sweetness-dots">${dots}</div><span style="font-size:10px; color:#ccc; margin-left:5px;">${sanitizeForJS(nivel)}</span></div>`;
+      }
+
+      function showScreen(screenId) {
+        document
+          .querySelectorAll(
+            "#login-screen, #manager-screen, #waiter-client-screen",
+          )
+          .forEach((s) => (s.style.display = "none"));
+        document.getElementById(screenId).style.display = "block";
+      }
+      function showTab(tabId) {
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((t) => (t.style.display = "none"));
+        document.getElementById(tabId).style.display = "block";
+        document
+          .querySelectorAll(".tab-button")
+          .forEach((b) => b.classList.remove("active"));
+        document
+          .querySelector(`.tab-button[data-tab="${tabId}"]`)
+          .classList.add("active");
+      }
+
+      // ==========================================
+      // SESSÃO
+      // ==========================================
+      function checkSession() {
+        const session = localStorage.getItem("vinhoEmMaosSession");
+        if (session) {
+          const parsed = JSON.parse(session);
+          return parsed.date === new Date().toDateString();
+        }
+        return false;
+      }
+      function setSession(isManager = false) {
+        localStorage.setItem(
+          "vinhoEmMaosSession",
+          JSON.stringify({ date: new Date().toDateString(), isManager }),
+        );
+        if (isManager) sessionStorage.setItem("managerLoggedIn", "true");
+      }
+      if (checkSession()) {
+        const session = JSON.parse(localStorage.getItem("vinhoEmMaosSession"));
+        if (session.isManager) {
+          showScreen("manager-screen");
+          loadBeveragesForManager();
+          showTab("generate-pin-tab");
+        } else {
+          showScreen("waiter-client-screen");
+          loadBeveragesForClient();
+          startClientAutoRefresh();
+        }
+      }
+      // ==========================================
+
+      async function handleLogin() {
+        const pin = pinInput.value;
+        if (pin.length !== 4) {
+          loginMessage.textContent = "O PIN deve ter 4 dígitos.";
+          return;
+        }
+        const result = await fetchData(`${API_BASE_URL}/pin/validar`, "POST", {
+          pin,
+        });
+        if (result.valid) {
+          setSession(false);
+          loginMessage.textContent = "";
+          showScreen("waiter-client-screen");
+          loadBeveragesForClient();
+          startClientAutoRefresh();
+        } else {
+          loginMessage.textContent = result.message || "Acesso Negado.";
+        }
+      }
+
+      restrictedAreaFooter.addEventListener("click", () => {
+        restrictedAreaClickCount++;
+
+        console.log(`Área Restrita: ${restrictedAreaClickCount}/5`);
+
+        if (restrictedAreaClickCount >= 5) {
+          managerLoginForm.style.display = "block";
+          managerPasswordInput.focus();
+
+          console.log("Login gerencial liberado");
+
+          restrictedAreaClickCount = 0;
+        }
+      });
+
+      document.querySelectorAll(".tabs .tab-button").forEach((button) => {
+        button.addEventListener("click", () => {
+          showTab(button.dataset.tab);
+          if (button.dataset.tab === "stock-catalog-tab")
+            loadBeveragesForManager();
+          if (button.dataset.tab === "purchasing-tab")
+            loadCatalogoExterno().then(() => renderPurchasingGrid());
+          if (button.dataset.tab === "cardapio-tab") loadCardapioManager();
+        });
+      });
+
+      refreshManagerDataBtn.addEventListener("click", () => {
+        loadBeveragesForManager();
+        if (document.getElementById("purchasing-tab").style.display !== "none")
+          renderPurchasingGrid();
+        if (document.getElementById("cardapio-tab").style.display !== "none")
+          loadCardapioManager();
+        triggerSync();
+      });
+      refreshClientDataBtn.addEventListener("click", () => {
+        loadBeveragesForClient();
+        triggerSync();
+      });
+
+      generatePinButton.addEventListener("click", async () => {
+        const result = await fetchData(`${API_BASE_URL}/pin/gerar`, "POST");
+        if (result && !result.error) {
+          generatedPinDisplay.textContent = result.pin;
+          alert(
+            `Novo PIN gerado: ${result.pin}. Válido até: ${result.validoAte}`,
+          );
+        } else {
+          alert("Erro ao gerar PIN.");
+        }
+      });
+
+      async function loadBeveragesForManager() {
+        const bebidasDB = await fetchData(`${API_BASE_URL}/bebidas`);
+        beveragesTableBody.innerHTML = "";
+        if (bebidasDB && !bebidasDB.error) {
+          const cleanBebidas = cleanArrayObjects(bebidasDB);
+          const disponiveis = cleanBebidas
+            .filter((b) => b.disponivel)
+            .sort((a, b) => a.nome.localeCompare(b.nome));
+          const indisponiveis = cleanBebidas
+            .filter((b) => !b.disponivel)
+            .sort((a, b) => a.nome.localeCompare(b.nome));
+          const sortedBebidas = [...disponiveis, ...indisponiveis];
+
+          sortedBebidas.forEach((b) => {
+            const row = beveragesTableBody.insertRow();
+            row.dataset.id = b.id;
+            row.innerHTML = `<td>${b.id}</td><td>${sanitizeForJS(b.nome)}</td><td>${sanitizeForJS(b.tipo)}</td><td><input type="checkbox" class="beverage-available" ${b.disponivel ? "checked" : ""}></td><td><input type="number" class="beverage-stock" value="${b.estoque}" min="0"></td><td><input type="number" class="beverage-price" value="${b.preco ? b.preco.toFixed(2) : "0.00"}" step="0.01" min="0"></td><td class="action-buttons"><button class="edit-beverage-button">Editar</button><button class="save-beverage-button">Salvar</button></td>`;
+          });
+        }
+      }
+
+      async function loadPratosDaCasa() {
+        try {
+          const response = await fetch(`${API_BASE_URL}/cardapio`);
+          if (response.ok) {
+            let pratos = await response.json();
+            allPratosDaCasa = Array.isArray(pratos)
+              ? pratos.map((p) => (typeof p === "string" ? p.trim() : p))
+              : [...pratosDoCardapioLocal];
+          } else {
+            allPratosDaCasa = [...pratosDoCardapioLocal];
+          }
+        } catch (error) {
+          allPratosDaCasa = [...pratosDoCardapioLocal];
+        }
+        harmonizationDropdownContent.innerHTML = "";
+        allPratosDaCasa.forEach((prato) => {
+          const safePrato = sanitizeForJS(prato);
+          const idSafe = prato
+            .replace(/\s/g, "-")
+            .replace(/[^a-zA-Z0-9\-]/g, "");
+          harmonizationDropdownContent.innerHTML += `<label for="prato-${idSafe}"><input type="checkbox" id="prato-${idSafe}" value="${safePrato}"> ${safePrato}</label>`;
+        });
+      }
+
+      function updateHarmonizationSelectedItems(selectedPratos) {
+        harmonizationSelectedItems.innerHTML = "";
+        if (selectedPratos.length === 0) {
+          harmonizationSelectedItems.textContent = "Selecione os pratos";
+          harmonizationSelectedItems.classList.add("placeholder");
+        } else {
+          harmonizationSelectedItems.classList.remove("placeholder");
+          selectedPratos.forEach((p) => {
+            const safeP = sanitizeForJS(p);
+            const tag = document.createElement("span");
+            tag.classList.add("selected-item-tag");
+            tag.innerHTML = `${safeP} <span class="remove-tag" data-value="${safeP}">&times;</span>`;
+            harmonizationSelectedItems.appendChild(tag);
+          });
+        }
+        beveragePratosDaCasaInput.value = JSON.stringify(selectedPratos);
+      }
+
+      harmonizationSelectedItems.addEventListener("click", (e) => {
+        if (e.target.classList.contains("remove-tag")) {
+          const val = e.target.dataset.value;
+          const cb = harmonizationDropdownContent.querySelector(
+            `input[value="${val}"]`,
+          );
+          if (cb) cb.checked = false;
+          updateHarmonizationSelectedItems(
+            JSON.parse(beveragePratosDaCasaInput.value || "[]").filter(
+              (p) => p !== val,
+            ),
+          );
+        } else {
+          harmonizationDropdownContent.style.display =
+            harmonizationDropdownContent.style.display === "block"
+              ? "none"
+              : "block";
+        }
+      });
+      harmonizationDropdownContent.addEventListener("change", (e) => {
+        if (e.target.type === "checkbox")
+          updateHarmonizationSelectedItems(
+            Array.from(
+              harmonizationDropdownContent.querySelectorAll(
+                'input[type="checkbox"]:checked',
+              ),
+            ).map((cb) => cb.value),
+          );
+      });
+      document.addEventListener("click", (e) => {
+        if (
+          !e.target.closest(".multi-select-dropdown") &&
+          harmonizationDropdownContent.style.display === "block"
+        )
+          harmonizationDropdownContent.style.display = "none";
+      });
+
+      addBeverageButton.addEventListener("click", () => {
+        beverageForm.reset();
+        document.getElementById("beverage-id").value = "";
+        updateHarmonizationSelectedItems([]);
+        beverageFormModal.style.display = "flex";
+        loadPratosDaCasa();
+        loadCatalogoExterno();
+      });
+      closeModalButton.addEventListener(
+        "click",
+        () => (beverageFormModal.style.display = "none"),
+      );
+      window.addEventListener("click", (e) => {
+        if (e.target == beverageFormModal)
+          beverageFormModal.style.display = "none";
+      });
+
+      beveragesTableBody.addEventListener("click", (e) => {
+        if (e.target.classList.contains("edit-beverage-button"))
+          editBeverage(e.target.closest("tr").dataset.id);
+        else if (e.target.classList.contains("save-beverage-button")) {
+          const r = e.target.closest("tr");
+          updateBeverageQuick(r.dataset.id, {
+            disponivel: r.querySelector(".beverage-available").checked,
+            estoque: parseInt(r.querySelector(".beverage-stock").value),
+            preco: parseFloat(r.querySelector(".beverage-price").value),
+          });
+        }
+      });
+
+      async function editBeverage(id) {
+        const beverages = await fetchData(`${API_BASE_URL}/bebidas`);
+        const b = beverages.find((x) => x.id == id);
+        if (b) {
+          const cleanB = cleanObjectKeys(b);
+          for (const key in cleanB) {
+            const inp = document.getElementById(
+              `beverage-${key.toLowerCase()}`,
+            );
+            if (inp) {
+              if (inp.type === "checkbox") inp.checked = cleanB[key];
+              else inp.value = cleanB[key];
+            }
+          }
+          document.getElementById("beverage-sweetness").value =
+            cleanB.nivelDoce || "Seco";
+          await loadPratosDaCasa();
+          const sel = cleanB.pratosDaCasa || [];
+          updateHarmonizationSelectedItems(sel);
+          sel.forEach((p) => {
+            const cb = harmonizationDropdownContent.querySelector(
+              `input[value="${p}"]`,
+            );
+            if (cb) cb.checked = true;
+          });
+          beverageFormModal.style.display = "flex";
+        }
+      }
+
+      beverageNameInput.addEventListener("input", () => {
+        const nomeDigitado = beverageNameInput.value.toLowerCase().trim();
+        let regraEncontrada = false;
+        for (const regra of regrasAutoCadastro) {
+          if (
+            regra.palavras.some((palavra) => nomeDigitado.includes(palavra))
+          ) {
+            document.getElementById("beverage-sweetness").value = regra.doce;
+            harmonizationDropdownContent
+              .querySelectorAll('input[type="checkbox"]')
+              .forEach((cb) => (cb.checked = false));
+            regra.pratos.forEach((pratoSugerido) => {
+              const cb = harmonizationDropdownContent.querySelector(
+                `input[value="${pratoSugerido}"]`,
+              );
+              if (cb) cb.checked = true;
             });
+            updateHarmonizationSelectedItems(regra.pratos);
+            regraEncontrada = true;
+            break;
+          }
+        }
+      });
+
+      // ==========================================
+      // SALVAR BEBIDA (com sanitização)
+      // ==========================================
+      beverageForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const fd = new FormData(beverageForm),
+          data = {};
+        for (const [k, v] of fd.entries()) {
+          if (k === "disponivel") data[k] = true;
+          else if (k === "estoque" || k === "id") data[k] = parseInt(v);
+          else if (k === "preco") data[k] = parseFloat(v);
+          else if (k === "pratosDaCasa") data[k] = JSON.parse(v);
+          else data[k.trim()] = typeof v === "string" ? v.trim() : v;
+        }
+        if (!fd.has("disponivel")) data.disponivel = false;
+
+        const bId = document.getElementById("beverage-id").value;
+        let res;
+        if (bId) {
+          res = await fetchData(`${API_BASE_URL}/bebidas/${bId}`, "PUT", data);
+        } else {
+          const all = await fetchData(`${API_BASE_URL}/bebidas`);
+          data.id =
+            all && !all.error && all.length > 0
+              ? Math.max(...all.map((b) => b.id)) + 1
+              : 1;
+          data.disponivel = true;
+          res = await fetchData(
+            `${API_BASE_URL}/bebidas/${data.id}`,
+            "PUT",
+            data,
+          );
+        }
+        if (res && !res.error) {
+          alert("Salvo com sucesso!");
+          beverageFormModal.style.display = "none";
+          loadBeveragesForManager();
+          loadBeveragesForClient();
+          renderPurchasingGrid(purchasingSearch.value);
+          triggerSync();
+        } else {
+          alert("Erro ao salvar: " + (res.message || "Desconhecido"));
+        }
+      });
+
+      async function updateBeverageQuick(id, data) {
+        const res = await fetchData(
+          `${API_BASE_URL}/bebidas/${id}`,
+          "PUT",
+          data,
+        );
+        if (res && !res.error) {
+          alert("Atualizado!");
+          loadBeveragesForManager();
+          loadBeveragesForClient();
+          renderPurchasingGrid();
+          triggerSync();
+        } else {
+          alert("Erro.");
+        }
+      }
+
+      async function loadBeveragesForClient(filter = "all") {
+        const bebidasDB = await fetchData(`${API_BASE_URL}/bebidas`);
+        await loadCatalogoExterno();
+
+        let mergedBeverages = catalogoConhecido.map((itemCatalogo) => {
+          const itemDB =
+            bebidasDB && !bebidasDB.error
+              ? cleanArrayObjects(bebidasDB).find(
+                  (b) =>
+                    b.nome.toLowerCase() === itemCatalogo.nome.toLowerCase(),
+                )
+              : null;
+          if (itemDB) {
+            return {
+              ...itemCatalogo,
+              id: itemDB.id,
+              disponivel: itemDB.disponivel,
+              estoque: itemDB.estoque,
+              preco: itemDB.preco,
+            };
+          } else {
+            return {
+              ...itemCatalogo,
+              id: null,
+              disponivel: false,
+              estoque: 0,
+              preco: 0,
+            };
+          }
         });
 
-        refreshManagerDataBtn.addEventListener('click', () => { loadBeveragesForManager(); if (document.getElementById('purchasing-tab').style.display !== 'none') renderPurchasingGrid(); if (document.getElementById('cardapio-tab').style.display !== 'none') loadCardapioManager(); triggerSync(); });
-        refreshClientDataBtn.addEventListener('click', () => { loadBeveragesForClient(); triggerSync(); });
-
-        generatePinButton.addEventListener('click', async () => {
-            const result = await fetchData(`${API_BASE_URL}/pin/gerar`, 'POST');
-            if (result && !result.error) { generatedPinDisplay.textContent = result.pin; alert(`Novo PIN gerado: ${result.pin}. Válido até: ${result.validoAte}`); }
-            else { alert('Erro ao gerar PIN.'); }
-        });
-
-        async function loadBeveragesForManager() {
-            const bebidasDB = await fetchData(`${API_BASE_URL}/bebidas`);
-            beveragesTableBody.innerHTML = '';
-            if (bebidasDB && !bebidasDB.error) {
-                const cleanBebidas = cleanArrayObjects(bebidasDB);
-                const disponiveis = cleanBebidas.filter(b => b.disponivel).sort((a, b) => a.nome.localeCompare(b.nome));
-                const indisponiveis = cleanBebidas.filter(b => !b.disponivel).sort((a, b) => a.nome.localeCompare(b.nome));
-                const sortedBebidas = [...disponiveis, ...indisponiveis];
-                
-                sortedBebidas.forEach(b => {
-                    const row = beveragesTableBody.insertRow(); row.dataset.id = b.id;
-                    row.innerHTML = `<td>${b.id}</td><td>${sanitizeForJS(b.nome)}</td><td>${sanitizeForJS(b.tipo)}</td><td><input type="checkbox" class="beverage-available" ${b.disponivel ? 'checked' : ''}></td><td><input type="number" class="beverage-stock" value="${b.estoque}" min="0"></td><td><input type="number" class="beverage-price" value="${b.preco ? b.preco.toFixed(2) : '0.00'}" step="0.01" min="0"></td><td class="action-buttons"><button class="edit-beverage-button">Editar</button><button class="save-beverage-button">Salvar</button></td>`;
-                });
-            }
+        if (filter !== "all") {
+          if (filter === "seco" || filter === "doce") {
+            mergedBeverages = mergedBeverages.filter(
+              (b) =>
+                (b.nivelDoce && b.nivelDoce.toLowerCase().includes(filter)) ||
+                (b.perfilSabor && b.perfilSabor.toLowerCase().includes(filter)),
+            );
+          } else {
+            mergedBeverages = mergedBeverages.filter(
+              (b) => b.tipo.toLowerCase() === filter,
+            );
+          }
         }
 
-        async function loadPratosDaCasa() {
-            try {
-                const response = await fetch(`${API_BASE_URL}/cardapio`);
-                if (response.ok) { 
-                    let pratos = await response.json();
-                    allPratosDaCasa = Array.isArray(pratos) ? pratos.map(p => typeof p === 'string' ? p.trim() : p) : [...pratosDoCardapioLocal];
-                } else { allPratosDaCasa = [...pratosDoCardapioLocal]; }
-            } catch (error) { allPratosDaCasa = [...pratosDoCardapioLocal]; }
-            harmonizationDropdownContent.innerHTML = '';
-            allPratosDaCasa.forEach(prato => {
-                const safePrato = sanitizeForJS(prato);
-                const idSafe = prato.replace(/\s/g, '-').replace(/[^a-zA-Z0-9\-]/g, '');
-                harmonizationDropdownContent.innerHTML += `<label for="prato-${idSafe}"><input type="checkbox" id="prato-${idSafe}" value="${safePrato}"> ${safePrato}</label>`;
-            });
-        }
+        const disponiveis = mergedBeverages
+          .filter((b) => b.disponivel)
+          .sort((a, b) => a.nome.localeCompare(b.nome));
+        const indisponiveis = mergedBeverages
+          .filter((b) => !b.disponivel)
+          .sort((a, b) => a.nome.localeCompare(b.nome));
+        allBeverages = [...disponiveis, ...indisponiveis];
 
-        function updateHarmonizationSelectedItems(selectedPratos) {
-            harmonizationSelectedItems.innerHTML = '';
-            if (selectedPratos.length === 0) { harmonizationSelectedItems.textContent = 'Selecione os pratos'; harmonizationSelectedItems.classList.add('placeholder'); }
-            else {
-                harmonizationSelectedItems.classList.remove('placeholder');
-                selectedPratos.forEach(p => {
-                    const safeP = sanitizeForJS(p);
-                    const tag = document.createElement('span'); tag.classList.add('selected-item-tag');
-                    tag.innerHTML = `${safeP} <span class="remove-tag" data-value="${safeP}">&times;</span>`;
-                    harmonizationSelectedItems.appendChild(tag);
-                });
-            }
-            beveragePratosDaCasaInput.value = JSON.stringify(selectedPratos);
-        }
+        renderBeverageCards(filter);
+      }
 
-        harmonizationSelectedItems.addEventListener('click', (e) => {
-            if (e.target.classList.contains('remove-tag')) {
-                const val = e.target.dataset.value; const cb = harmonizationDropdownContent.querySelector(`input[value="${val}"]`);
-                if (cb) cb.checked = false;
-                updateHarmonizationSelectedItems(JSON.parse(beveragePratosDaCasaInput.value || '[]').filter(p => p !== val));
-            } else { harmonizationDropdownContent.style.display = harmonizationDropdownContent.style.display === 'block' ? 'none' : 'block'; }
+      function renderBeverageCards(filter, targetList = beverageList) {
+        targetList.innerHTML = "";
+        allBeverages.forEach((b) => {
+          const card = document.createElement("div");
+          card.className = `beverage-card ${!b.disponivel ? "unavailable" : ""}`;
+          const chips =
+            b.pratosDaCasa && b.pratosDaCasa.length > 0
+              ? `<div class="harmonization-chips"><strong>Sugestão do Chef:</strong> ${b.pratosDaCasa.map((p) => `<span>${sanitizeForJS(p)}</span>`).join("")}</div>`
+              : "";
+          let statusTag =
+            b.id === null
+              ? '<span class="catalog-only-tag">Apenas Catálogo</span>'
+              : b.disponivel
+                ? '<span class="available-tag">Em Estoque</span>'
+                : '<span class="unavailable-text">Sugestão de Compra</span>';
+          const imgUrl =
+            b.imagemUrl && b.imagemUrl.trim()
+              ? b.imagemUrl.trim()
+              : PLACEHOLDER_IMG;
+          const safeNome = sanitizeForJS(b.nome);
+          const safeTipo = sanitizeForJS(b.tipo);
+          const safeOrigem = sanitizeForJS(b.origem || "N/A");
+          const safeResumo = sanitizeForJS(
+            b.resumoGarcom || b.perfilSabor || "",
+          );
+          const safePreco = b.preco ? b.preco.toFixed(2) : "0.00";
+
+          card.innerHTML = `<div class="beverage-card-header">${statusTag}<img src="${imgUrl}" alt="${safeNome}" onerror="this.src='${PLACEHOLDER_IMG}'"><div class="beverage-card-info"><h3>${safeNome}</h3>${renderDoce(b.nivelDoce || "Seco")}<p>${safeTipo} - ${safeOrigem}</p><p class="beverage-card-summary">"${safeResumo}"</p><p style="color: var(--primary-color); font-weight: bold; margin-top: 5px;">R$ ${safePreco}</p></div></div><div class="beverage-card-details"><p><strong>Teor Alcoólico:</strong> ${sanitizeForJS(b.teorAlcoolico || "N/A")}</p><p><strong>Público Alvo:</strong> ${sanitizeForJS(b.publicoAlvo || "N/A")}</p><p><strong>Taça Ideal:</strong> ${sanitizeForJS(b.tacaIdeal || "N/A")}</p><p><strong>Apresentação:</strong> ${sanitizeForJS(b.formaApresentacao || "N/A")}</p><p><strong>Temp. Consumo:</strong> ${sanitizeForJS(b.tempConsumo || "N/A")}</p><p><strong>Temp. Conservação:</strong> ${sanitizeForJS(b.tempConservacao || "N/A")}</p>${chips}</div>`;
+          card.addEventListener("click", () => {
+            const isExp = card.classList.contains("expanded");
+            document
+              .querySelectorAll(".beverage-card.expanded")
+              .forEach((c) => c.classList.remove("expanded"));
+            if (!isExp) card.classList.add("expanded");
+          });
+          targetList.appendChild(card);
         });
-        harmonizationDropdownContent.addEventListener('change', (e) => { if (e.target.type === 'checkbox') updateHarmonizationSelectedItems(Array.from(harmonizationDropdownContent.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value)); });
-        document.addEventListener('click', (e) => { if (!e.target.closest('.multi-select-dropdown') && harmonizationDropdownContent.style.display === 'block') harmonizationDropdownContent.style.display = 'none'; });
+      }
 
-        addBeverageButton.addEventListener('click', () => { beverageForm.reset(); document.getElementById('beverage-id').value = ''; updateHarmonizationSelectedItems([]); beverageFormModal.style.display = 'flex'; loadPratosDaCasa(); loadCatalogoExterno(); });
-        closeModalButton.addEventListener('click', () => beverageFormModal.style.display = 'none');
-        window.addEventListener('click', (e) => { if (e.target == beverageFormModal) beverageFormModal.style.display = 'none'; });
-
-        beveragesTableBody.addEventListener('click', (e) => {
-            if (e.target.classList.contains('edit-beverage-button')) editBeverage(e.target.closest('tr').dataset.id);
-            else if (e.target.classList.contains('save-beverage-button')) {
-                const r = e.target.closest('tr');
-                updateBeverageQuick(r.dataset.id, {
-                    disponivel: r.querySelector('.beverage-available').checked,
-                    estoque: parseInt(r.querySelector('.beverage-stock').value),
-                    preco: parseFloat(r.querySelector('.beverage-price').value)
-                });
-            }
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          filterButtons.forEach((b) => b.classList.remove("active"));
+          button.classList.add("active");
+          renderBeverageCards(button.dataset.filter);
         });
+      });
 
-        async function editBeverage(id) {
-            const beverages = await fetchData(`${API_BASE_URL}/bebidas`);
-            const b = beverages.find(x => x.id == id);
-            if (b) {
-                const cleanB = cleanObjectKeys(b);
-                for (const key in cleanB) {
-                    const inp = document.getElementById(`beverage-${key.toLowerCase()}`);
-                    if (inp) { if (inp.type === 'checkbox') inp.checked = cleanB[key]; else inp.value = cleanB[key]; }
-                }
-                document.getElementById('beverage-sweetness').value = cleanB.nivelDoce || 'Seco';
-                await loadPratosDaCasa(); const sel = cleanB.pratosDaCasa || []; updateHarmonizationSelectedItems(sel);
-                sel.forEach(p => { const cb = harmonizationDropdownContent.querySelector(`input[value="${p}"]`); if (cb) cb.checked = true; });
-                beverageFormModal.style.display = 'flex';
-            }
-        }
+      async function renderPurchasingGrid(filterText = "") {
+        purchasingGrid.innerHTML = "";
+        const bebidasDB = await fetchData(`${API_BASE_URL}/bebidas`);
+        const dbList =
+          bebidasDB && !bebidasDB.error ? cleanArrayObjects(bebidasDB) : [];
+        const filtered = catalogoConhecido.filter(
+          (c) =>
+            c.nome.toLowerCase().includes(filterText.toLowerCase()) ||
+            c.tipo.toLowerCase().includes(filterText.toLowerCase()),
+        );
+        filtered.sort((a, b) => a.nome.localeCompare(b.nome));
 
-        beverageNameInput.addEventListener('input', () => {
-            const nomeDigitado = beverageNameInput.value.toLowerCase().trim();
-            let regraEncontrada = false;
-            for (const regra of regrasAutoCadastro) {
-                if (regra.palavras.some(palavra => nomeDigitado.includes(palavra))) {
-                    document.getElementById('beverage-sweetness').value = regra.doce;
-                    harmonizationDropdownContent.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
-                    regra.pratos.forEach(pratoSugerido => { const cb = harmonizationDropdownContent.querySelector(`input[value="${pratoSugerido}"]`); if (cb) cb.checked = true; });
-                    updateHarmonizationSelectedItems(regra.pratos); regraEncontrada = true; break;
-                }
-            }
-        });
-
-        // ==========================================
-        // SALVAR BEBIDA (com sanitização)
-        // ==========================================
-        beverageForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const fd = new FormData(beverageForm), data = {};
-            for (const [k, v] of fd.entries()) {
-                if (k === 'disponivel') data[k] = true;
-                else if (k === 'estoque' || k === 'id') data[k] = parseInt(v);
-                else if (k === 'preco') data[k] = parseFloat(v);
-                else if (k === 'pratosDaCasa') data[k] = JSON.parse(v);
-                else data[k.trim()] = typeof v === 'string' ? v.trim() : v;
-            }
-            if (!fd.has('disponivel')) data.disponivel = false;
-
-            const bId = document.getElementById('beverage-id').value;
-            let res;
-            if (bId) {
-                res = await fetchData(`${API_BASE_URL}/bebidas/${bId}`, 'PUT', data);
+        filtered.forEach((item) => {
+          const existingInDb = dbList.find(
+            (b) => b.nome.toLowerCase() === item.nome.toLowerCase(),
+          );
+          const card = document.createElement("div");
+          card.className = "purchasing-card";
+          let buttonHtml = "";
+          if (existingInDb) {
+            if (existingInDb.disponivel) {
+              buttonHtml = `<button class="in-stock-btn" data-nome="${sanitizeForJS(item.nome)}">✅ Já no Estoque (Reabastecer)</button>`;
             } else {
-                const all = await fetchData(`${API_BASE_URL}/bebidas`);
-                data.id = all && !all.error && all.length > 0 ? Math.max(...all.map(b => b.id)) + 1 : 1;
-                data.disponivel = true;
-                res = await fetchData(`${API_BASE_URL}/bebidas/${data.id}`, 'PUT', data);
+              buttonHtml = `<button class="unavailable-stock-btn" data-nome="${sanitizeForJS(item.nome)}">⚠️ No Estoque (Reativar)</button>`;
             }
-            if (res && !res.error) {
-                alert('Salvo com sucesso!'); beverageFormModal.style.display = 'none';
-                loadBeveragesForManager(); loadBeveragesForClient(); renderPurchasingGrid(purchasingSearch.value);
-                triggerSync();
-            } else { alert('Erro ao salvar: ' + (res.message || 'Desconhecido')); }
+          } else {
+            buttonHtml = `<button class="activate-wine-btn" data-nome="${sanitizeForJS(item.nome)}">➕ Ativar no Restaurante</button>`;
+          }
+          card.innerHTML = `<div><h3>${sanitizeForJS(item.nome)}</h3><p><strong>Tipo:</strong> ${sanitizeForJS(item.tipo)}</p><p><strong>Teor:</strong> ${sanitizeForJS(item.teorAlcoolico || "N/A")}</p></div>${buttonHtml}`;
+          purchasingGrid.appendChild(card);
         });
+      }
 
-        async function updateBeverageQuick(id, data) {
-            const res = await fetchData(`${API_BASE_URL}/bebidas/${id}`, 'PUT', data);
-            if (res && !res.error) { alert('Atualizado!'); loadBeveragesForManager(); loadBeveragesForClient(); renderPurchasingGrid(); triggerSync(); }
-            else { alert('Erro.'); }
+      purchasingSearch.addEventListener("input", (e) =>
+        renderPurchasingGrid(e.target.value),
+      );
+      purchasingGrid.addEventListener("click", async (e) => {
+        if (
+          e.target.classList.contains("activate-wine-btn") ||
+          e.target.classList.contains("in-stock-btn") ||
+          e.target.classList.contains("unavailable-stock-btn")
+        ) {
+          const nomeVinho = e.target.dataset.nome;
+          const itemCatalogo = catalogoConhecido.find(
+            (c) => c.nome.toLowerCase() === nomeVinho.toLowerCase(),
+          );
+          if (!itemCatalogo) return;
+          const dbBebidas = await fetchData(`${API_BASE_URL}/bebidas`);
+          const existingItem =
+            dbBebidas && !dbBebidas.error
+              ? cleanArrayObjects(dbBebidas).find(
+                  (b) => b.nome.toLowerCase() === nomeVinho.toLowerCase(),
+                )
+              : null;
+          preencherTudo(itemCatalogo);
+          if (existingItem) {
+            document.getElementById("beverage-id").value = existingItem.id;
+            document.getElementById("beverage-stock").value =
+              existingItem.estoque || "";
+            document.getElementById("beverage-price").value =
+              existingItem.preco || "";
+            document.getElementById("beverage-available").checked = true;
+          } else {
+            document.getElementById("beverage-id").value = "";
+            document.getElementById("beverage-stock").value = "";
+            document.getElementById("beverage-price").value = "";
+            document.getElementById("beverage-available").checked = true;
+          }
+          beverageFormModal.style.display = "flex";
         }
+      });
 
-        async function loadBeveragesForClient(filter = 'all') {
-            const bebidasDB = await fetchData(`${API_BASE_URL}/bebidas`);
-            await loadCatalogoExterno();
-            
-            let mergedBeverages = catalogoConhecido.map(itemCatalogo => {
-                const itemDB = bebidasDB && !bebidasDB.error
-                    ? cleanArrayObjects(bebidasDB).find(b => b.nome.toLowerCase() === itemCatalogo.nome.toLowerCase())
-                    : null;
-                if (itemDB) {
-                    return { ...itemCatalogo, id: itemDB.id, disponivel: itemDB.disponivel, estoque: itemDB.estoque, preco: itemDB.preco };
-                } else {
-                    return { ...itemCatalogo, id: null, disponivel: false, estoque: 0, preco: 0 };
+      function searchWinesForDish(pratoNome) {
+        dishGridContainer.style.display = "none";
+        reverseResultsMessage.style.display = "block";
+        reverseResultsMessage.innerHTML = `Sugestões para: <strong style="color:var(--primary-color)">${sanitizeForJS(pratoNome)}</strong>`;
+        const sugestoes = allBeverages.filter(
+          (b) => b.pratosDaCasa && b.pratosDaCasa.includes(pratoNome),
+        );
+        if (sugestoes.length === 0) {
+          reverseResultsList.innerHTML =
+            '<p style="color:#888; text-align:center; margin-top:20px;">Nenhuma sugestão encontrada para este prato.</p>';
+        } else {
+          reverseResultsList.innerHTML = "";
+          sugestoes.forEach((item) => {
+            let statusTag = item.disponivel
+              ? '<span class="available-tag">Em Estoque</span>'
+              : '<span class="unavailable-text">Sugestão de Compra</span>';
+            const card = document.createElement("div");
+            card.className = "beverage-card";
+            const imgUrl =
+              item.imagemUrl && item.imagemUrl.trim()
+                ? item.imagemUrl.trim()
+                : PLACEHOLDER_IMG;
+            card.innerHTML = `<div class="beverage-card-header">${statusTag}<img src="${imgUrl}" alt="${sanitizeForJS(item.nome)}" onerror="this.src='${PLACEHOLDER_IMG}'"><div class="beverage-card-info"><h3>${sanitizeForJS(item.nome)}</h3>${renderDoce(item.nivelDoce || "Seco")}<p>${sanitizeForJS(item.tipo)}</p><p class="beverage-card-summary">"${sanitizeForJS(item.resumoGarcom || item.perfilSabor || "")}"</p></div></div><div class="beverage-card-details"><p><strong>Teor Alcoólico:</strong> ${sanitizeForJS(item.teorAlcoolico || "N/A")}</p><p><strong>Público Alvo:</strong> ${sanitizeForJS(item.publicoAlvo || "N/A")}</p><p><strong>Taça Ideal:</strong> ${sanitizeForJS(item.tacaIdeal || "N/A")}</p><p><strong>Apresentação:</strong> ${sanitizeForJS(item.formaApresentacao || "N/A")}</p><p><strong>Temp. Consumo:</strong> ${sanitizeForJS(item.tempConsumo || "N/A")}</p><p><strong>Temp. Conservação:</strong> ${sanitizeForJS(item.tempConservacao || "N/A")}</p></div>`;
+            card.addEventListener("click", () => {
+              const isExp = card.classList.contains("expanded");
+              document
+                .querySelectorAll(
+                  "#reverse-results-list .beverage-card.expanded",
+                )
+                .forEach((c) => c.classList.remove("expanded"));
+              if (!isExp) card.classList.add("expanded");
+            });
+            reverseResultsList.appendChild(card);
+          });
+        }
+      }
+
+      btnPorPrato.addEventListener("click", () => {
+        document.querySelector(
+          "#waiter-client-screen .header .filters",
+        ).style.display = "none";
+        beverageList.style.display = "none";
+        dishSearchView.style.display = "block";
+        dishGridContainer.style.display = "grid";
+        dishSearchInput.value = "";
+        renderDishGrid();
+      });
+      backToWinesBtn.addEventListener("click", () => {
+        dishSearchView.style.display = "none";
+        document.querySelector(
+          "#waiter-client-screen .header .filters",
+        ).style.display = "flex";
+        beverageList.style.display = "grid";
+      });
+      dishSearchInput.addEventListener("input", (e) => {
+        dishGridContainer.style.display = "grid";
+        renderDishGrid(e.target.value);
+      });
+
+      sommelierManualButton.addEventListener("click", () => {
+        sommelierManualContent.style.display =
+          sommelierManualContent.style.display === "block" ? "none" : "block";
+      });
+      document.addEventListener("click", (e) => {
+        if (
+          !e.target.closest("#sommelier-manual-button") &&
+          !e.target.closest("#sommelier-manual-content") &&
+          sommelierManualContent.style.display === "block"
+        )
+          sommelierManualContent.style.display = "none";
+      });
+
+      beverageNameInput.addEventListener("input", () => {
+        const val = beverageNameInput.value.toLowerCase().trim();
+        autocompleteList.innerHTML = "";
+        autocompleteList.style.display = "none";
+        if (val.length < 2) return;
+        const matches = catalogoConhecido.filter((c) =>
+          c.nome.toLowerCase().includes(val),
+        );
+        if (matches.length > 0) {
+          matches.forEach((m) => {
+            const div = document.createElement("div");
+            div.className = "autocomplete-item";
+            div.textContent = m.nome;
+            div.addEventListener("click", () => preencherTudo(m));
+            autocompleteList.appendChild(div);
+          });
+          autocompleteList.style.display = "block";
+        }
+      });
+      document.addEventListener("click", (e) => {
+        if (
+          !e.target.closest(".autocomplete-list") &&
+          !e.target.closest("#beverage-name")
+        )
+          autocompleteList.style.display = "none";
+      });
+
+      function preencherTudo(item) {
+        autocompleteList.style.display = "none";
+        beverageNameInput.value = item.nome;
+        document.getElementById("beverage-type").value = item.tipo || "tinto";
+        document.getElementById("beverage-alcohol").value =
+          item.teorAlcoolico || "";
+        document.getElementById("beverage-flavor").value =
+          item.perfilSabor || "";
+        document.getElementById("beverage-sweetness").value =
+          item.nivelDoce || "Seco";
+        document.getElementById("beverage-audience").value =
+          item.publicoAlvo || "iniciante";
+        document.getElementById("beverage-summary").value =
+          item.resumoGarcom || "";
+        document.getElementById("beverage-glass").value = item.tacaIdeal || "";
+        document.getElementById("beverage-presentation").value =
+          item.formaApresentacao || "";
+        document.getElementById("beverage-temp-consume").value =
+          item.tempConsumo || "";
+        document.getElementById("beverage-temp-storage").value =
+          item.tempConservacao || "";
+        harmonizationDropdownContent
+          .querySelectorAll('input[type="checkbox"]')
+          .forEach((cb) => (cb.checked = false));
+        if (item.pratosDaCasa) {
+          item.pratosDaCasa.forEach((ps) => {
+            const cb = harmonizationDropdownContent.querySelector(
+              `input[value="${ps}"]`,
+            );
+            if (cb) cb.checked = true;
+          });
+          updateHarmonizationSelectedItems(item.pratosDaCasa);
+        }
+      }
+
+      document
+        .getElementById("btn-upload-img")
+        .addEventListener("click", () =>
+          document.getElementById("image-upload").click(),
+        );
+      document
+        .getElementById("image-upload")
+        .addEventListener("change", function (e) {
+          const file = e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = function (event) {
+            const img = new Image();
+            img.onload = function () {
+              const canvas = document.createElement("canvas");
+              const MAX_WIDTH = 200;
+              let width = img.width,
+                height = img.height;
+              if (width > height) {
+                if (width > MAX_WIDTH) {
+                  height *= MAX_WIDTH / width;
+                  width = MAX_WIDTH;
                 }
-            });
-
-            if (filter !== 'all') {
-                if (filter === 'seco' || filter === 'doce') {
-                    mergedBeverages = mergedBeverages.filter(b => (b.nivelDoce && b.nivelDoce.toLowerCase().includes(filter)) || (b.perfilSabor && b.perfilSabor.toLowerCase().includes(filter)));
-                } else { mergedBeverages = mergedBeverages.filter(b => b.tipo.toLowerCase() === filter); }
-            }
-
-            const disponiveis = mergedBeverages.filter(b => b.disponivel).sort((a, b) => a.nome.localeCompare(b.nome));
-            const indisponiveis = mergedBeverages.filter(b => !b.disponivel).sort((a, b) => a.nome.localeCompare(b.nome));
-            allBeverages = [...disponiveis, ...indisponiveis];
-            
-            renderBeverageCards(filter);
-        }
-
-        function renderBeverageCards(filter, targetList = beverageList) {
-            targetList.innerHTML = '';
-            allBeverages.forEach(b => {
-                const card = document.createElement('div');
-                card.className = `beverage-card ${!b.disponivel ? 'unavailable' : ''}`;
-                const chips = (b.pratosDaCasa && b.pratosDaCasa.length > 0) ? `<div class="harmonization-chips"><strong>Sugestão do Chef:</strong> ${b.pratosDaCasa.map(p => `<span>${sanitizeForJS(p)}</span>`).join('')}</div>` : '';
-                let statusTag = b.id === null ? '<span class="catalog-only-tag">Apenas Catálogo</span>' : (b.disponivel ? '<span class="available-tag">Em Estoque</span>' : '<span class="unavailable-text">Sugestão de Compra</span>');
-                const imgUrl = b.imagemUrl && b.imagemUrl.trim() ? b.imagemUrl.trim() : PLACEHOLDER_IMG;
-                const safeNome = sanitizeForJS(b.nome);
-                const safeTipo = sanitizeForJS(b.tipo);
-                const safeOrigem = sanitizeForJS(b.origem || 'N/A');
-                const safeResumo = sanitizeForJS(b.resumoGarcom || b.perfilSabor || '');
-                const safePreco = b.preco ? b.preco.toFixed(2) : '0.00';
-                
-                card.innerHTML = `<div class="beverage-card-header">${statusTag}<img src="${imgUrl}" alt="${safeNome}" onerror="this.src='${PLACEHOLDER_IMG}'"><div class="beverage-card-info"><h3>${safeNome}</h3>${renderDoce(b.nivelDoce || 'Seco')}<p>${safeTipo} - ${safeOrigem}</p><p class="beverage-card-summary">"${safeResumo}"</p><p style="color: var(--primary-color); font-weight: bold; margin-top: 5px;">R$ ${safePreco}</p></div></div><div class="beverage-card-details"><p><strong>Teor Alcoólico:</strong> ${sanitizeForJS(b.teorAlcoolico || 'N/A')}</p><p><strong>Público Alvo:</strong> ${sanitizeForJS(b.publicoAlvo || 'N/A')}</p><p><strong>Taça Ideal:</strong> ${sanitizeForJS(b.tacaIdeal || 'N/A')}</p><p><strong>Apresentação:</strong> ${sanitizeForJS(b.formaApresentacao || 'N/A')}</p><p><strong>Temp. Consumo:</strong> ${sanitizeForJS(b.tempConsumo || 'N/A')}</p><p><strong>Temp. Conservação:</strong> ${sanitizeForJS(b.tempConservacao || 'N/A')}</p>${chips}</div>`;
-                card.addEventListener('click', () => { const isExp = card.classList.contains('expanded'); document.querySelectorAll('.beverage-card.expanded').forEach(c => c.classList.remove('expanded')); if (!isExp) card.classList.add('expanded'); });
-                targetList.appendChild(card);
-            });
-        }
-
-        filterButtons.forEach(button => { button.addEventListener('click', () => { filterButtons.forEach(b => b.classList.remove('active')); button.classList.add('active'); renderBeverageCards(button.dataset.filter); }); });
-
-        async function renderPurchasingGrid(filterText = '') {
-            purchasingGrid.innerHTML = '';
-            const bebidasDB = await fetchData(`${API_BASE_URL}/bebidas`);
-            const dbList = (bebidasDB && !bebidasDB.error) ? cleanArrayObjects(bebidasDB) : [];
-            const filtered = catalogoConhecido.filter(c => c.nome.toLowerCase().includes(filterText.toLowerCase()) || c.tipo.toLowerCase().includes(filterText.toLowerCase()));
-            filtered.sort((a, b) => a.nome.localeCompare(b.nome));
-            
-            filtered.forEach(item => {
-                const existingInDb = dbList.find(b => b.nome.toLowerCase() === item.nome.toLowerCase());
-                const card = document.createElement('div'); card.className = 'purchasing-card';
-                let buttonHtml = '';
-                if (existingInDb) {
-                    if (existingInDb.disponivel) { buttonHtml = `<button class="in-stock-btn" data-nome="${sanitizeForJS(item.nome)}">✅ Já no Estoque (Reabastecer)</button>`; }
-                    else { buttonHtml = `<button class="unavailable-stock-btn" data-nome="${sanitizeForJS(item.nome)}">⚠️ No Estoque (Reativar)</button>`; }
-                } else { buttonHtml = `<button class="activate-wine-btn" data-nome="${sanitizeForJS(item.nome)}">➕ Ativar no Restaurante</button>`; }
-                card.innerHTML = `<div><h3>${sanitizeForJS(item.nome)}</h3><p><strong>Tipo:</strong> ${sanitizeForJS(item.tipo)}</p><p><strong>Teor:</strong> ${sanitizeForJS(item.teorAlcoolico || 'N/A')}</p></div>${buttonHtml}`;
-                purchasingGrid.appendChild(card);
-            });
-        }
-
-        purchasingSearch.addEventListener('input', (e) => renderPurchasingGrid(e.target.value));
-        purchasingGrid.addEventListener('click', async (e) => {
-            if (e.target.classList.contains('activate-wine-btn') || e.target.classList.contains('in-stock-btn') || e.target.classList.contains('unavailable-stock-btn')) {
-                const nomeVinho = e.target.dataset.nome;
-                const itemCatalogo = catalogoConhecido.find(c => c.nome.toLowerCase() === nomeVinho.toLowerCase());
-                if (!itemCatalogo) return;
-                const dbBebidas = await fetchData(`${API_BASE_URL}/bebidas`);
-                const existingItem = dbBebidas && !dbBebidas.error ? cleanArrayObjects(dbBebidas).find(b => b.nome.toLowerCase() === nomeVinho.toLowerCase()) : null;
-                preencherTudo(itemCatalogo);
-                if (existingItem) {
-                    document.getElementById('beverage-id').value = existingItem.id;
-                    document.getElementById('beverage-stock').value = existingItem.estoque || '';
-                    document.getElementById('beverage-price').value = existingItem.preco || '';
-                    document.getElementById('beverage-available').checked = true;
-                } else {
-                    document.getElementById('beverage-id').value = '';
-                    document.getElementById('beverage-stock').value = '';
-                    document.getElementById('beverage-price').value = '';
-                    document.getElementById('beverage-available').checked = true;
+              } else {
+                if (height > MAX_WIDTH) {
+                  width *= MAX_WIDTH / height;
+                  height = MAX_WIDTH;
                 }
-                beverageFormModal.style.display = 'flex';
-            }
+              }
+              canvas.width = width;
+              canvas.height = height;
+              canvas.getContext("2d").drawImage(img, 0, 0, width, height);
+              document.getElementById("beverage-imageUrl").value =
+                canvas.toDataURL("image/jpeg", 0.5);
+            };
+            img.src = event.target.result;
+          };
+          reader.readAsDataURL(file);
         });
 
-        function searchWinesForDish(pratoNome) {
-            dishGridContainer.style.display = 'none'; reverseResultsMessage.style.display = 'block';
-            reverseResultsMessage.innerHTML = `Sugestões para: <strong style="color:var(--primary-color)">${sanitizeForJS(pratoNome)}</strong>`;
-            const sugestoes = allBeverages.filter(b => b.pratosDaCasa && b.pratosDaCasa.includes(pratoNome));
-            if (sugestoes.length === 0) { reverseResultsList.innerHTML = '<p style="color:#888; text-align:center; margin-top:20px;">Nenhuma sugestão encontrada para este prato.</p>'; }
-            else {
-                reverseResultsList.innerHTML = '';
-                sugestoes.forEach(item => {
-                    let statusTag = item.disponivel ? '<span class="available-tag">Em Estoque</span>' : '<span class="unavailable-text">Sugestão de Compra</span>';
-                    const card = document.createElement('div'); card.className = 'beverage-card';
-                    const imgUrl = item.imagemUrl && item.imagemUrl.trim() ? item.imagemUrl.trim() : PLACEHOLDER_IMG;
-                    card.innerHTML = `<div class="beverage-card-header">${statusTag}<img src="${imgUrl}" alt="${sanitizeForJS(item.nome)}" onerror="this.src='${PLACEHOLDER_IMG}'"><div class="beverage-card-info"><h3>${sanitizeForJS(item.nome)}</h3>${renderDoce(item.nivelDoce || 'Seco')}<p>${sanitizeForJS(item.tipo)}</p><p class="beverage-card-summary">"${sanitizeForJS(item.resumoGarcom || item.perfilSabor || '')}"</p></div></div><div class="beverage-card-details"><p><strong>Teor Alcoólico:</strong> ${sanitizeForJS(item.teorAlcoolico || 'N/A')}</p><p><strong>Público Alvo:</strong> ${sanitizeForJS(item.publicoAlvo || 'N/A')}</p><p><strong>Taça Ideal:</strong> ${sanitizeForJS(item.tacaIdeal || 'N/A')}</p><p><strong>Apresentação:</strong> ${sanitizeForJS(item.formaApresentacao || 'N/A')}</p><p><strong>Temp. Consumo:</strong> ${sanitizeForJS(item.tempConsumo || 'N/A')}</p><p><strong>Temp. Conservação:</strong> ${sanitizeForJS(item.tempConservacao || 'N/A')}</p></div>`;
-                    card.addEventListener('click', () => { const isExp = card.classList.contains('expanded'); document.querySelectorAll('#reverse-results-list .beverage-card.expanded').forEach(c => c.classList.remove('expanded')); if (!isExp) card.classList.add('expanded'); });
-                    reverseResultsList.appendChild(card);
-                });
-            }
+      loginButton.addEventListener("click", handleLogin);
+      pinInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") handleLogin();
+      });
+
+      function renderDishGrid(filterText = "") {
+        dishGridContainer.innerHTML = "";
+        reverseResultsMessage.style.display = "none";
+        reverseResultsList.innerHTML = "";
+        if (!allPratosDaCasa || allPratosDaCasa.length === 0)
+          allPratosDaCasa = [...pratosDoCardapioLocal];
+        const filteredDishes = allPratosDaCasa.filter((p) =>
+          p.toLowerCase().includes(filterText.toLowerCase()),
+        );
+        if (filteredDishes.length === 0) {
+          dishGridContainer.innerHTML =
+            '<p style="grid-column: 1/-1; color:#888;">Nenhum prato encontrado.</p>';
+          return;
         }
-
-        btnPorPrato.addEventListener('click', () => { document.querySelector('#waiter-client-screen .header .filters').style.display = 'none'; beverageList.style.display = 'none'; dishSearchView.style.display = 'block'; dishGridContainer.style.display = 'grid'; dishSearchInput.value = ''; renderDishGrid(); });
-        backToWinesBtn.addEventListener('click', () => { dishSearchView.style.display = 'none'; document.querySelector('#waiter-client-screen .header .filters').style.display = 'flex'; beverageList.style.display = 'grid'; });
-        dishSearchInput.addEventListener('input', (e) => { dishGridContainer.style.display = 'grid'; renderDishGrid(e.target.value); });
-
-        sommelierManualButton.addEventListener('click', () => { sommelierManualContent.style.display = sommelierManualContent.style.display === 'block' ? 'none' : 'block'; });
-        document.addEventListener('click', (e) => { if (!e.target.closest('#sommelier-manual-button') && !e.target.closest('#sommelier-manual-content') && sommelierManualContent.style.display === 'block') sommelierManualContent.style.display = 'none'; });
-
-        beverageNameInput.addEventListener('input', () => {
-            const val = beverageNameInput.value.toLowerCase().trim();
-            autocompleteList.innerHTML = ''; autocompleteList.style.display = 'none';
-            if (val.length < 2) return;
-            const matches = catalogoConhecido.filter(c => c.nome.toLowerCase().includes(val));
-            if (matches.length > 0) {
-                matches.forEach(m => { const div = document.createElement('div'); div.className = 'autocomplete-item'; div.textContent = m.nome; div.addEventListener('click', () => preencherTudo(m)); autocompleteList.appendChild(div); });
-                autocompleteList.style.display = 'block';
-            }
+        filteredDishes.forEach((prato) => {
+          const div = document.createElement("div");
+          div.className = "dish-card";
+          div.textContent = prato;
+          div.addEventListener("click", () => searchWinesForDish(prato));
+          dishGridContainer.appendChild(div);
         });
-        document.addEventListener('click', (e) => { if (!e.target.closest('.autocomplete-list') && !e.target.closest('#beverage-name')) autocompleteList.style.display = 'none'; });
+      }
 
-        function preencherTudo(item) {
-            autocompleteList.style.display = 'none'; beverageNameInput.value = item.nome;
-            document.getElementById('beverage-type').value = item.tipo || 'tinto'; document.getElementById('beverage-alcohol').value = item.teorAlcoolico || '';
-            document.getElementById('beverage-flavor').value = item.perfilSabor || ''; document.getElementById('beverage-sweetness').value = item.nivelDoce || 'Seco';
-            document.getElementById('beverage-audience').value = item.publicoAlvo || 'iniciante'; document.getElementById('beverage-summary').value = item.resumoGarcom || '';
-            document.getElementById('beverage-glass').value = item.tacaIdeal || ''; document.getElementById('beverage-presentation').value = item.formaApresentacao || '';
-            document.getElementById('beverage-temp-consume').value = item.tempConsumo || ''; document.getElementById('beverage-temp-storage').value = item.tempConservacao || '';
-            harmonizationDropdownContent.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
-            if(item.pratosDaCasa) { item.pratosDaCasa.forEach(ps => { const cb = harmonizationDropdownContent.querySelector(`input[value="${ps}"]`); if(cb) cb.checked = true; }); updateHarmonizationSelectedItems(item.pratosDaCasa); }
+      async function loadCardapioManager() {
+        try {
+          const response = await fetch(`${API_BASE_URL}/cardapio`);
+          if (response.ok) {
+            let pratos = await response.json();
+            allPratosDaCasa = Array.isArray(pratos)
+              ? pratos.map((p) => (typeof p === "string" ? p.trim() : p))
+              : [...pratosDoCardapioLocal];
+          } else {
+            allPratosDaCasa = [...pratosDoCardapioLocal];
+          }
+        } catch (e) {
+          allPratosDaCasa = [...pratosDoCardapioLocal];
         }
-
-        document.getElementById('btn-upload-img').addEventListener('click', () => document.getElementById('image-upload').click());
-        document.getElementById('image-upload').addEventListener('change', function(e) {
-            const file = e.target.files[0]; if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const img = new Image();
-                img.onload = function() {
-                    const canvas = document.createElement('canvas'); const MAX_WIDTH = 200; let width = img.width, height = img.height;
-                    if (width > height) { if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; } }
-                    else { if (height > MAX_WIDTH) { width *= MAX_WIDTH / height; height = MAX_WIDTH; } }
-                    canvas.width = width; canvas.height = height; canvas.getContext('2d').drawImage(img, 0, 0, width, height);
-                    document.getElementById('beverage-imageUrl').value = canvas.toDataURL('image/jpeg', 0.5);
-                }; img.src = event.target.result;
-            }; reader.readAsDataURL(file);
+        cardapioList.innerHTML = "";
+        allPratosDaCasa.forEach((prato, index) => {
+          const safePrato = sanitizeForJS(prato);
+          const item = document.createElement("div");
+          item.className = "dish-item";
+          item.innerHTML = `<span class="dish-name">${safePrato}</span><button class="edit-dish-btn" data-index="${index}">✏️</button><button class="remove-dish-btn" data-prato="${safePrato}">🗑️</button>`;
+          cardapioList.appendChild(item);
         });
-
-        loginButton.addEventListener('click', handleLogin);
-        pinInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') handleLogin(); });
-
-        function renderDishGrid(filterText = '') {
-            dishGridContainer.innerHTML = ''; reverseResultsMessage.style.display = 'none'; reverseResultsList.innerHTML = '';
-            if (!allPratosDaCasa || allPratosDaCasa.length === 0) allPratosDaCasa = [...pratosDoCardapioLocal];
-            const filteredDishes = allPratosDaCasa.filter(p => p.toLowerCase().includes(filterText.toLowerCase()));
-            if(filteredDishes.length === 0) { dishGridContainer.innerHTML = '<p style="grid-column: 1/-1; color:#888;">Nenhum prato encontrado.</p>'; return; }
-            filteredDishes.forEach(prato => { 
-                const div = document.createElement('div'); 
-                div.className = 'dish-card'; 
-                div.textContent = prato; 
-                div.addEventListener('click', () => searchWinesForDish(prato)); 
-                dishGridContainer.appendChild(div); 
-            });
+      }
+      cardapioList.addEventListener("click", async (e) => {
+        if (e.target.classList.contains("remove-dish-btn")) {
+          const prato = e.target.dataset.prato;
+          if (confirm(`Remover "${prato}" do cardápio?`)) {
+            allPratosDaCasa = allPratosDaCasa.filter((p) => p !== prato);
+            await saveCardapioToAPI();
+            triggerSync();
+          }
         }
-
-        async function loadCardapioManager() {
-            try {
-                const response = await fetch(`${API_BASE_URL}/cardapio`);
-                if (response.ok) { 
-                    let pratos = await response.json();
-                    allPratosDaCasa = Array.isArray(pratos) ? pratos.map(p => typeof p === 'string' ? p.trim() : p) : [...pratosDoCardapioLocal];
-                } else { allPratosDaCasa = [...pratosDoCardapioLocal]; }
-            } catch (e) { allPratosDaCasa = [...pratosDoCardapioLocal]; }
-            cardapioList.innerHTML = '';
-            allPratosDaCasa.forEach((prato, index) => {
-                const safePrato = sanitizeForJS(prato);
-                const item = document.createElement('div'); item.className = 'dish-item';
-                item.innerHTML = `<span class="dish-name">${safePrato}</span><button class="edit-dish-btn" data-index="${index}">✏️</button><button class="remove-dish-btn" data-prato="${safePrato}">🗑️</button>`;
-                cardapioList.appendChild(item);
-            });
+        if (e.target.classList.contains("edit-dish-btn")) {
+          const index = parseInt(e.target.dataset.index);
+          const pratoAtual = allPratosDaCasa[index];
+          const novoNome = prompt("Editar nome do prato:", pratoAtual);
+          if (novoNome && novoNome.trim() && novoNome.trim() !== pratoAtual) {
+            allPratosDaCasa[index] = novoNome.trim();
+            await saveCardapioToAPI();
+            triggerSync();
+          }
         }
-        cardapioList.addEventListener('click', async (e) => {
-            if (e.target.classList.contains('remove-dish-btn')) {
-                const prato = e.target.dataset.prato;
-                if (confirm(`Remover "${prato}" do cardápio?`)) {
-                    allPratosDaCasa = allPratosDaCasa.filter(p => p !== prato);
-                    await saveCardapioToAPI(); triggerSync();
-                }
-            }
-            if (e.target.classList.contains('edit-dish-btn')) {
-                const index = parseInt(e.target.dataset.index); const pratoAtual = allPratosDaCasa[index];
-                const novoNome = prompt('Editar nome do prato:', pratoAtual);
-                if (novoNome && novoNome.trim() && novoNome.trim() !== pratoAtual) {
-                    allPratosDaCasa[index] = novoNome.trim(); await saveCardapioToAPI(); triggerSync();
-                }
-            }
-        });
-        addDishBtn.addEventListener('click', async () => {
-            const novoPrato = newDishInput.value.trim();
-            if (novoPrato && !allPratosDaCasa.some(p => p.toLowerCase() === novoPrato.toLowerCase())) {
-                allPratosDaCasa.push(novoPrato); newDishInput.value = ''; await saveCardapioToAPI(); triggerSync(); alert(`Prato "${novoPrato}" adicionado!`);
-            } else if (allPratosDaCasa.some(p => p.toLowerCase() === novoPrato.toLowerCase())) { alert('Este prato já existe no cardápio.'); }
-        });
-        async function saveCardapioToAPI() {
-            try {
-                const res = await fetch(`${API_BASE_URL}/cardapio`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(allPratosDaCasa) });
-                if (!res.ok) throw new Error('Falha na API');
-            } catch (e) { console.warn('Não foi possível salvar no backend. Atualize cardapio.json manualmente.'); localStorage.setItem('cardapioLocal', JSON.stringify(allPratosDaCasa)); }
-            loadCardapioManager(); loadPratosDaCasa();
+      });
+      addDishBtn.addEventListener("click", async () => {
+        const novoPrato = newDishInput.value.trim();
+        if (
+          novoPrato &&
+          !allPratosDaCasa.some(
+            (p) => p.toLowerCase() === novoPrato.toLowerCase(),
+          )
+        ) {
+          allPratosDaCasa.push(novoPrato);
+          newDishInput.value = "";
+          await saveCardapioToAPI();
+          triggerSync();
+          alert(`Prato "${novoPrato}" adicionado!`);
+        } else if (
+          allPratosDaCasa.some(
+            (p) => p.toLowerCase() === novoPrato.toLowerCase(),
+          )
+        ) {
+          alert("Este prato já existe no cardápio.");
         }
-
-        function startClientAutoRefresh() {
-            if (clientAutoRefreshInterval) clearInterval(clientAutoRefreshInterval);
-            clientAutoRefreshInterval = setInterval(() => { if (document.getElementById('waiter-client-screen').style.display === 'block') loadBeveragesForClient(); }, 60000);
+      });
+      async function saveCardapioToAPI() {
+        try {
+          const res = await fetch(`${API_BASE_URL}/cardapio`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(allPratosDaCasa),
+          });
+          if (!res.ok) throw new Error("Falha na API");
+        } catch (e) {
+          console.warn(
+            "Não foi possível salvar no backend. Atualize cardapio.json manualmente.",
+          );
+          localStorage.setItem(
+            "cardapioLocal",
+            JSON.stringify(allPratosDaCasa),
+          );
         }
+        loadCardapioManager();
+        loadPratosDaCasa();
+      }
 
-        initSync();
+      function startClientAutoRefresh() {
+        if (clientAutoRefreshInterval) clearInterval(clientAutoRefreshInterval);
+        clientAutoRefreshInterval = setInterval(() => {
+          if (
+            document.getElementById("waiter-client-screen").style.display ===
+            "block"
+          )
+            loadBeveragesForClient();
+        }, 60000);
+      }
+
+      initSync();
     </script>
-</body>
+  </body>
 </html>
