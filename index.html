@@ -49,7 +49,6 @@
         margin-bottom: 20px;
       }
 
-      /* Login Screen */
       #login-screen {
         display: flex;
         flex-direction: column;
@@ -96,7 +95,6 @@
         user-select: none;
       }
 
-      /* Manager Login Form */
       #manager-login-form {
         display: none;
         margin-top: 20px;
@@ -133,7 +131,6 @@
         font-weight: bold;
       }
 
-      /* Manager Screen */
       #manager-screen {
         display: none;
         text-align: left;
@@ -214,7 +211,6 @@
         letter-spacing: 5px;
       }
 
-      /* Estoque Tab */
       #stock-catalog-tab table {
         width: 100%;
         border-collapse: collapse;
@@ -285,7 +281,6 @@
         background-color: #777;
       }
 
-      /* Compras Tab */
       #purchasing-tab input[type="text"] {
         width: 100%;
         padding: 10px;
@@ -355,7 +350,6 @@
         font-weight: bold;
       }
 
-      /* Cardápio Tab */
       #cardapio-tab .cardapio-manager {
         background-color: var(--input-bg);
         padding: 20px;
@@ -435,7 +429,6 @@
         background-color: #27ae60;
       }
 
-      /* Modal */
       #beverage-form-modal {
         display: none;
         position: fixed;
@@ -529,7 +522,6 @@
         margin-left: 10px;
       }
 
-      /* Harmonization */
       .multi-select-dropdown {
         position: relative;
         width: calc(100% - 22px);
@@ -591,7 +583,6 @@
         margin-right: 10px;
       }
 
-      /* Waiter/Client */
       #waiter-client-screen {
         display: none;
         width: 100%;
@@ -749,7 +740,6 @@
         z-index: 1;
       }
 
-      /* Doçura */
       .sweetness-container {
         display: flex;
         align-items: center;
@@ -795,7 +785,6 @@
         font-size: 0.8em;
       }
 
-      /* Busca Reversa */
       #dish-search-view {
         display: none;
         margin-top: 20px;
@@ -855,7 +844,6 @@
         font-size: 1.1em;
       }
 
-      /* Sommelier */
       #sommelier-manual-button {
         position: fixed;
         bottom: 20px;
@@ -909,7 +897,6 @@
         color: var(--primary-color);
       }
 
-      /* Autocomplete e Upload */
       .autocomplete-list {
         position: absolute;
         top: 100%;
@@ -958,7 +945,6 @@
   </head>
   <body>
     <div class="container">
-      <!-- Login Screen -->
       <div id="login-screen">
         <h1>Vinho em Mãos</h1>
         <form id="login-form" style="width: 100%">
@@ -977,7 +963,6 @@
           Área Restrita
         </div>
 
-        <!-- Manager Login Form -->
         <div id="manager-login-form">
           <h2>Login de Gerente</h2>
           <form id="manager-form">
@@ -995,7 +980,6 @@
         </div>
       </div>
 
-      <!-- Manager Screen -->
       <div id="manager-screen">
         <div class="manager-header">
           <h1>Painel de Gerenciamento</h1>
@@ -1072,7 +1056,6 @@
         </div>
       </div>
 
-      <!-- Waiter/Client Screen -->
       <div id="waiter-client-screen">
         <div class="header">
           <div class="logo">Vinho em Mãos</div>
@@ -1170,7 +1153,6 @@
         </div>
       </div>
 
-      <!-- Modal -->
       <div id="beverage-form-modal" style="display: none">
         <div class="modal-content">
           <span class="close-button">&times;</span>
@@ -1341,84 +1323,53 @@
     </div>
 
     <script>
-      const API_BASE_URL = `${window.location.protocol}//${window.location.hostname}:3000/api`;
-      const MANAGER_PASSWORD =
-        localStorage.getItem("managerPassword") || "admin123";
+      // ==========================================
+      // CORREÇÃO CRÍTICA: API_BASE_URL dinâmica
+      // ==========================================
+      const API_BASE_URL = window.location.origin + '/api';
+      const MANAGER_PASSWORD = "admin123";
       let syncChannel;
 
-      // Elements
+      console.log('🚀 API_BASE_URL:', API_BASE_URL);
+
       const loginScreen = document.getElementById("login-screen");
       const pinInput = document.getElementById("pin-input");
       const loginButton = document.getElementById("login-button");
       const loginMessage = document.getElementById("login-message");
-      const restrictedAreaFooter = document.getElementById(
-        "restricted-area-footer",
-      );
+      const restrictedAreaFooter = document.getElementById("restricted-area-footer");
       const managerLoginForm = document.getElementById("manager-login-form");
-      const managerPasswordInput = document.getElementById(
-        "manager-password-input",
-      );
-      const managerLoginButton = document.getElementById(
-        "manager-login-button",
-      );
-      const managerLoginMessage = document.getElementById(
-        "manager-login-message",
-      );
+      const managerPasswordInput = document.getElementById("manager-password-input");
+      const managerLoginButton = document.getElementById("manager-login-button");
+      const managerLoginMessage = document.getElementById("manager-login-message");
       const managerScreen = document.getElementById("manager-screen");
       const generatePinButton = document.getElementById("generate-pin-button");
-      const generatedPinDisplay = document.getElementById(
-        "generated-pin-display",
-      );
+      const generatedPinDisplay = document.getElementById("generated-pin-display");
       const addBeverageButton = document.getElementById("add-beverage-button");
-      const beveragesTableBody = document.querySelector(
-        "#beverages-table tbody",
-      );
+      const beveragesTableBody = document.querySelector("#beverages-table tbody");
       const beverageFormModal = document.getElementById("beverage-form-modal");
       const beverageForm = document.getElementById("beverage-form");
       const closeModalButton = document.querySelector(".close-button");
       const beverageNameInput = document.getElementById("beverage-name");
       const autocompleteList = document.getElementById("autocomplete-list");
-      const waiterClientScreen = document.getElementById(
-        "waiter-client-screen",
-      );
-      const filterButtons = document.querySelectorAll(
-        ".filter-button:not(#btn-por-prato)",
-      );
+      const waiterClientScreen = document.getElementById("waiter-client-screen");
+      const filterButtons = document.querySelectorAll(".filter-button:not(#btn-por-prato)");
       const beverageList = document.getElementById("beverage-list");
-      const sommelierManualButton = document.getElementById(
-        "sommelier-manual-button",
-      );
-      const sommelierManualContent = document.getElementById(
-        "sommelier-manual-content",
-      );
-      const harmonizationSelectedItems = document.getElementById(
-        "harmonization-selected-items",
-      );
-      const harmonizationDropdownContent = document.getElementById(
-        "harmonization-dropdown-content",
-      );
-      const beveragePratosDaCasaInput = document.getElementById(
-        "beverage-pratosDaCasa",
-      );
+      const sommelierManualButton = document.getElementById("sommelier-manual-button");
+      const sommelierManualContent = document.getElementById("sommelier-manual-content");
+      const harmonizationSelectedItems = document.getElementById("harmonization-selected-items");
+      const harmonizationDropdownContent = document.getElementById("harmonization-dropdown-content");
+      const beveragePratosDaCasaInput = document.getElementById("beverage-pratosDaCasa");
       const btnPorPrato = document.getElementById("btn-por-prato");
       const dishSearchView = document.getElementById("dish-search-view");
       const dishSearchInput = document.getElementById("dish-search-input");
       const dishGridContainer = document.getElementById("dish-grid-container");
-      const reverseResultsMessage = document.getElementById(
-        "reverse-results-message",
-      );
-      const reverseResultsList = document.getElementById(
-        "reverse-results-list",
-      );
+      const reverseResultsMessage = document.getElementById("reverse-results-message");
+      const reverseResultsList = document.getElementById("reverse-results-list");
       const backToWinesBtn = document.getElementById("back-to-wines-btn");
       const purchasingSearch = document.getElementById("purchasing-search");
       const purchasingGrid = document.getElementById("purchasing-grid");
-      const refreshManagerDataBtn = document.getElementById(
-        "refresh-manager-data",
-      );
-      const refreshClientDataBtn = document.getElementById(
-        "refresh-client-data",
-      );
+      const refreshManagerDataBtn = document.getElementById("refresh-manager-data");
+      const refreshClientDataBtn = document.getElementById("refresh-client-data");
       const cardapioList = document.getElementById("cardapio-list");
       const newDishInput = document.getElementById("new-dish-input");
       const addDishBtn = document.getElementById("add-dish-btn");
@@ -1430,16 +1381,8 @@
       let allPratosDaCasa = [];
       let clientAutoRefreshInterval = null;
 
-      // ==========================================
-      // CORREÇÃO CRÍTICA: PLACEHOLDER_IMG seguro (Base64)
-      // ==========================================
-      const PLACEHOLDER_IMG =
-        "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj48cmVjdCB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIGZpbGw9IiMyODI4MjgiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZDcwMCIgZm9udC1zaXplPSIxMCI+8J+YtzwvdGV4dD48L3N2Zz4=";
-      // ==========================================
+      const PLACEHOLDER_IMG = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj48cmVjdCB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIGZpbGw9IiMyODI4MjgiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZDcwMCIgZm9udC1zaXplPSIxMCI+8J+YtzwvdGV4dD48L3N2Zz4=";
 
-      // ==========================================
-      // CORREÇÃO: Função para escapar strings para JavaScript/HTML
-      // ==========================================
       function sanitizeForJS(str) {
         if (typeof str !== "string") return str;
         return str
@@ -1450,11 +1393,7 @@
           .replace(/\r/g, "\\r")
           .replace(/\t/g, "\\t");
       }
-      // ==========================================
 
-      // ==========================================
-      // CORREÇÃO: Normalização de chaves JSON com espaços
-      // ==========================================
       function cleanObjectKeys(obj) {
         if (!obj || typeof obj !== "object") return obj;
         const cleaned = {};
@@ -1477,7 +1416,6 @@
         if (!Array.isArray(arr)) return arr;
         return arr.map((item) => cleanObjectKeys(item));
       }
-      // ==========================================
 
       let catalogoConhecido = [
         {
@@ -1491,10 +1429,7 @@
           formaApresentacao: "Garrafa 750ml",
           tempConsumo: "16-18°C",
           tempConservacao: "14°C",
-          pratosDaCasa: [
-            "Choripán da Roça",
-            "BomBom de Costela (até 3 pessoas)",
-          ],
+          pratosDaCasa: ["Choripán da Roça", "BomBom de Costela (até 3 pessoas)"],
         },
         {
           nome: "Cachaça artesanal",
@@ -1516,7 +1451,6 @@
           const response = await fetch("catalogo.json");
           if (response.ok) {
             let dadosExternos = await response.json();
-            // Normaliza chaves e valores
             dadosExternos = cleanArrayObjects(dadosExternos);
             const nomesExistentes = new Set(
               catalogoConhecido.map((c) => c.nome.toLowerCase()),
@@ -1525,6 +1459,7 @@
               if (!nomesExistentes.has(item.nome.toLowerCase()))
                 catalogoConhecido.push(item);
             });
+            console.log('✅ Catálogo carregado:', catalogoConhecido.length, 'vinhos');
           }
         } catch (error) {
           console.log("Usando catálogo interno padrão. Erro:", error.message);
@@ -1583,80 +1518,40 @@
         {
           palavras: ["moscatel", "porto", "licor", "ice", "ponche"],
           doce: "Doce",
-          pratos: [
-            "Petit Gâteau com Sorvete",
-            "Panquecas Caramelizadas",
-            "Salada de Frutas com Creme",
-          ],
+          pratos: ["Petit Gâteau com Sorvete", "Panquecas Caramelizadas", "Salada de Frutas com Creme"],
         },
         {
           palavras: ["prosecco"],
           doce: "Meio Doce",
-          pratos: [
-            "Tirinhas de Frango",
-            "Camarão Empanado",
-            "Iscas de Tilápia",
-            "Abóbora Recheada (serve 3)",
-          ],
+          pratos: ["Tirinhas de Frango", "Camarão Empanado", "Iscas de Tilápia", "Abóbora Recheada (serve 3)"],
         },
         {
           palavras: ["champanhe", "champagne"],
           doce: "Seco",
-          pratos: [
-            "Camarão Empanado",
-            "Queijo Coalho Frito",
-            "Abóbora Recheada (serve 3)",
-            "Linguiça Suína Acebolada",
-          ],
+          pratos: ["Camarão Empanado", "Queijo Coalho Frito", "Abóbora Recheada (serve 3)", "Linguiça Suína Acebolada"],
         },
         {
           palavras: ["chardonnay", "sauvignon", "riesling", "branco"],
           doce: "Seco",
-          pratos: [
-            "Bobó de Camarão (até 2 pessoas)",
-            "Moqueca de Peixe da Fazenda (até 2 pessoas)",
-            "Tilápia ao Molho da Casa (serve 2)",
-            "Iscas de Tilápia",
-          ],
+          pratos: ["Bobó de Camarão (até 2 pessoas)", "Moqueca de Peixe da Fazenda (até 2 pessoas)", "Tilápia ao Molho da Casa (serve 2)", "Iscas de Tilápia"],
         },
         {
           palavras: ["pinot", "merlot", "rosé", "rose"],
           doce: "Seco",
-          pratos: [
-            "Macarrão à Bolonhesa",
-            "Linguiça Suína Acebolada",
-            "Tirinhas de Frango",
-            "Coraçãozinho da Fazenda",
-          ],
+          pratos: ["Macarrão à Bolonhesa", "Linguiça Suína Acebolada", "Tirinhas de Frango", "Coraçãozinho da Fazenda"],
         },
         {
           palavras: ["malbec", "cabernet", "syrah", "tannat", "carménère"],
           doce: "Seco",
-          pratos: [
-            "Choripán da Roça",
-            "BomBom de Costela (até 3 pessoas)",
-            "Coraçãozinho da Fazenda",
-            "Filé Mignon Gorgonzola (2 pessoas)",
-            "Parmegiana de Filé Mignon (2 pessoas)",
-            "Pancetta de Rolo",
-          ],
+          pratos: ["Choripán da Roça", "BomBom de Costela (até 3 pessoas)", "Coraçãozinho da Fazenda", "Filé Mignon Gorgonzola (2 pessoas)", "Parmegiana de Filé Mignon (2 pessoas)", "Pancetta de Rolo"],
         },
         {
           palavras: ["cachaça", "whisk", "bourbon", "conhaque"],
           doce: "Seco",
-          pratos: [
-            "Queijo Coalho Frito",
-            "Mandioca Frita",
-            "Bolinho de Costela (8un)",
-            "Linguiça Suína Acebolada",
-            "Coraçãozinho da Fazenda",
-          ],
+          pratos: ["Queijo Coalho Frito", "Mandioca Frita", "Bolinho de Costela (8un)", "Linguiça Suína Acebolada", "Coraçãozinho da Fazenda"],
         },
       ];
 
-      // ==========================================
-      // SISTEMA DE SINCRONIZAÇÃO
-      // ==========================================
       function initSync() {
         if ("BroadcastChannel" in window) {
           syncChannel = new BroadcastChannel("vinho_em_maos_sync");
@@ -1677,23 +1572,15 @@
 
       function syncAllViews() {
         loadBeveragesForClient();
-        if (
-          document.getElementById("manager-screen").style.display === "block"
-        ) {
+        if (document.getElementById("manager-screen").style.display === "block") {
           loadBeveragesForManager();
-          if (
-            document.getElementById("purchasing-tab").style.display !== "none"
-          )
+          if (document.getElementById("purchasing-tab").style.display !== "none")
             renderPurchasingGrid();
           if (document.getElementById("cardapio-tab").style.display !== "none")
             loadCardapioManager();
         }
       }
-      // ==========================================
 
-      // ==========================================
-      // LOGOUT
-      // ==========================================
       function doLogout() {
         clearSession();
         if (clientAutoRefreshInterval) clearInterval(clientAutoRefreshInterval);
@@ -1705,18 +1592,16 @@
         managerLoginForm.style.display = "none";
         restrictedAreaClickCount = 0;
       }
+
       function clearSession() {
         localStorage.removeItem("vinhoEmMaosSession");
         sessionStorage.removeItem("managerLoggedIn");
         sessionStorage.removeItem("loggedIn");
       }
+
       managerLogoutBtn.addEventListener("click", doLogout);
       clientLogoutBtn.addEventListener("click", doLogout);
-      // ==========================================
 
-      // ==========================================
-      // CORREÇÃO: fetchData com tratamento robusto de erro
-      // ==========================================
       async function fetchData(url, method = "GET", data = null) {
         const options = {
           method,
@@ -1726,7 +1611,6 @@
         try {
           const response = await fetch(url, options);
           const text = await response.text();
-          // Tenta parsear JSON com tratamento de erro
           let json;
           try {
             json = JSON.parse(text);
@@ -1745,7 +1629,6 @@
           };
         }
       }
-      // ==========================================
 
       function renderDoce(nivel) {
         const niveis = ["Seco", "Meio Seco", "Meio Doce", "Doce"];
@@ -1759,28 +1642,18 @@
 
       function showScreen(screenId) {
         document
-          .querySelectorAll(
-            "#login-screen, #manager-screen, #waiter-client-screen",
-          )
+          .querySelectorAll("#login-screen, #manager-screen, #waiter-client-screen")
           .forEach((s) => (s.style.display = "none"));
         document.getElementById(screenId).style.display = "block";
       }
+
       function showTab(tabId) {
-        document
-          .querySelectorAll(".tab-content")
-          .forEach((t) => (t.style.display = "none"));
+        document.querySelectorAll(".tab-content").forEach((t) => (t.style.display = "none"));
         document.getElementById(tabId).style.display = "block";
-        document
-          .querySelectorAll(".tab-button")
-          .forEach((b) => b.classList.remove("active"));
-        document
-          .querySelector(`.tab-button[data-tab="${tabId}"]`)
-          .classList.add("active");
+        document.querySelectorAll(".tab-button").forEach((b) => b.classList.remove("active"));
+        document.querySelector(`.tab-button[data-tab="${tabId}"]`).classList.add("active");
       }
 
-      // ==========================================
-      // SESSÃO
-      // ==========================================
       function checkSession() {
         const session = localStorage.getItem("vinhoEmMaosSession");
         if (session) {
@@ -1789,6 +1662,7 @@
         }
         return false;
       }
+
       function setSession(isManager = false) {
         localStorage.setItem(
           "vinhoEmMaosSession",
@@ -1796,6 +1670,7 @@
         );
         if (isManager) sessionStorage.setItem("managerLoggedIn", "true");
       }
+
       if (checkSession()) {
         const session = JSON.parse(localStorage.getItem("vinhoEmMaosSession"));
         if (session.isManager) {
@@ -1808,7 +1683,6 @@
           startClientAutoRefresh();
         }
       }
-      // ==========================================
 
       async function handleLogin() {
         const pin = pinInput.value;
@@ -1816,9 +1690,7 @@
           loginMessage.textContent = "O PIN deve ter 4 dígitos.";
           return;
         }
-        const result = await fetchData(`${API_BASE_URL}/pin/validar`, "POST", {
-          pin,
-        });
+        const result = await fetchData(`${API_BASE_URL}/pin/validar`, "POST", { pin });
         if (result.valid) {
           setSession(false);
           loginMessage.textContent = "";
@@ -1832,16 +1704,34 @@
 
       restrictedAreaFooter.addEventListener("click", () => {
         restrictedAreaClickCount++;
-
         console.log(`Área Restrita: ${restrictedAreaClickCount}/5`);
-
         if (restrictedAreaClickCount >= 5) {
           managerLoginForm.style.display = "block";
           managerPasswordInput.focus();
-
-          console.log("Login gerencial liberado");
-
+          console.log("✅ Login gerencial liberado");
           restrictedAreaClickCount = 0;
+        }
+      });
+
+      // ==========================================
+      // CORREÇÃO CRÍTICA: Event listener do botão de login do gerente
+      // ==========================================
+      managerLoginButton.addEventListener("click", () => {
+        console.log('🔐 Tentativa de login gerente');
+        console.log('Senha digitada:', managerPasswordInput.value);
+        console.log('Senha esperada:', MANAGER_PASSWORD);
+        
+        if (managerPasswordInput.value === MANAGER_PASSWORD) {
+          console.log('✅ Senha correta! Entrando...');
+          setSession(true);
+          managerLoginMessage.textContent = "";
+          managerLoginForm.style.display = "none";
+          showScreen("manager-screen");
+          loadBeveragesForManager();
+          showTab("generate-pin-tab");
+        } else {
+          console.log('❌ Senha incorreta!');
+          managerLoginMessage.textContent = "Senha Incorreta.";
         }
       });
 
@@ -1864,25 +1754,28 @@
           loadCardapioManager();
         triggerSync();
       });
+
       refreshClientDataBtn.addEventListener("click", () => {
         loadBeveragesForClient();
         triggerSync();
       });
 
       generatePinButton.addEventListener("click", async () => {
+        console.log('🎲 Gerando PIN...');
         const result = await fetchData(`${API_BASE_URL}/pin/gerar`, "POST");
+        console.log('Resposta:', result);
         if (result && !result.error) {
           generatedPinDisplay.textContent = result.pin;
-          alert(
-            `Novo PIN gerado: ${result.pin}. Válido até: ${result.validoAte}`,
-          );
+          alert(`Novo PIN gerado: ${result.pin}. Válido até: ${result.validoAte}`);
         } else {
-          alert("Erro ao gerar PIN.");
+          alert("Erro ao gerar PIN. Verifique se o servidor está rodando.");
         }
       });
 
       async function loadBeveragesForManager() {
+        console.log('📦 Carregando bebidas para gerente...');
         const bebidasDB = await fetchData(`${API_BASE_URL}/bebidas`);
+        console.log('Bebidas recebidas:', bebidasDB);
         beveragesTableBody.innerHTML = "";
         if (bebidasDB && !bebidasDB.error) {
           const cleanBebidas = cleanArrayObjects(bebidasDB);
@@ -1899,6 +1792,9 @@
             row.dataset.id = b.id;
             row.innerHTML = `<td>${b.id}</td><td>${sanitizeForJS(b.nome)}</td><td>${sanitizeForJS(b.tipo)}</td><td><input type="checkbox" class="beverage-available" ${b.disponivel ? "checked" : ""}></td><td><input type="number" class="beverage-stock" value="${b.estoque}" min="0"></td><td><input type="number" class="beverage-price" value="${b.preco ? b.preco.toFixed(2) : "0.00"}" step="0.01" min="0"></td><td class="action-buttons"><button class="edit-beverage-button">Editar</button><button class="save-beverage-button">Salvar</button></td>`;
           });
+          console.log('✅', sortedBebidas.length, 'bebidas carregadas');
+        } else {
+          console.error('❌ Erro ao carregar bebidas:', bebidasDB);
         }
       }
 
@@ -1919,9 +1815,7 @@
         harmonizationDropdownContent.innerHTML = "";
         allPratosDaCasa.forEach((prato) => {
           const safePrato = sanitizeForJS(prato);
-          const idSafe = prato
-            .replace(/\s/g, "-")
-            .replace(/[^a-zA-Z0-9\-]/g, "");
+          const idSafe = prato.replace(/\s/g, "-").replace(/[^a-zA-Z0-9\-]/g, "");
           harmonizationDropdownContent.innerHTML += `<label for="prato-${idSafe}"><input type="checkbox" id="prato-${idSafe}" value="${safePrato}"> ${safePrato}</label>`;
         });
       }
@@ -1947,32 +1841,26 @@
       harmonizationSelectedItems.addEventListener("click", (e) => {
         if (e.target.classList.contains("remove-tag")) {
           const val = e.target.dataset.value;
-          const cb = harmonizationDropdownContent.querySelector(
-            `input[value="${val}"]`,
-          );
+          const cb = harmonizationDropdownContent.querySelector(`input[value="${val}"]`);
           if (cb) cb.checked = false;
           updateHarmonizationSelectedItems(
-            JSON.parse(beveragePratosDaCasaInput.value || "[]").filter(
-              (p) => p !== val,
-            ),
+            JSON.parse(beveragePratosDaCasaInput.value || "[]").filter((p) => p !== val),
           );
         } else {
           harmonizationDropdownContent.style.display =
-            harmonizationDropdownContent.style.display === "block"
-              ? "none"
-              : "block";
+            harmonizationDropdownContent.style.display === "block" ? "none" : "block";
         }
       });
+
       harmonizationDropdownContent.addEventListener("change", (e) => {
         if (e.target.type === "checkbox")
           updateHarmonizationSelectedItems(
             Array.from(
-              harmonizationDropdownContent.querySelectorAll(
-                'input[type="checkbox"]:checked',
-              ),
+              harmonizationDropdownContent.querySelectorAll('input[type="checkbox"]:checked'),
             ).map((cb) => cb.value),
           );
       });
+
       document.addEventListener("click", (e) => {
         if (
           !e.target.closest(".multi-select-dropdown") &&
@@ -1989,13 +1877,11 @@
         loadPratosDaCasa();
         loadCatalogoExterno();
       });
-      closeModalButton.addEventListener(
-        "click",
-        () => (beverageFormModal.style.display = "none"),
-      );
+
+      closeModalButton.addEventListener("click", () => (beverageFormModal.style.display = "none"));
+
       window.addEventListener("click", (e) => {
-        if (e.target == beverageFormModal)
-          beverageFormModal.style.display = "none";
+        if (e.target == beverageFormModal) beverageFormModal.style.display = "none";
       });
 
       beveragesTableBody.addEventListener("click", (e) => {
@@ -2017,23 +1903,18 @@
         if (b) {
           const cleanB = cleanObjectKeys(b);
           for (const key in cleanB) {
-            const inp = document.getElementById(
-              `beverage-${key.toLowerCase()}`,
-            );
+            const inp = document.getElementById(`beverage-${key.toLowerCase()}`);
             if (inp) {
               if (inp.type === "checkbox") inp.checked = cleanB[key];
               else inp.value = cleanB[key];
             }
           }
-          document.getElementById("beverage-sweetness").value =
-            cleanB.nivelDoce || "Seco";
+          document.getElementById("beverage-sweetness").value = cleanB.nivelDoce || "Seco";
           await loadPratosDaCasa();
           const sel = cleanB.pratosDaCasa || [];
           updateHarmonizationSelectedItems(sel);
           sel.forEach((p) => {
-            const cb = harmonizationDropdownContent.querySelector(
-              `input[value="${p}"]`,
-            );
+            const cb = harmonizationDropdownContent.querySelector(`input[value="${p}"]`);
             if (cb) cb.checked = true;
           });
           beverageFormModal.style.display = "flex";
@@ -2044,17 +1925,13 @@
         const nomeDigitado = beverageNameInput.value.toLowerCase().trim();
         let regraEncontrada = false;
         for (const regra of regrasAutoCadastro) {
-          if (
-            regra.palavras.some((palavra) => nomeDigitado.includes(palavra))
-          ) {
+          if (regra.palavras.some((palavra) => nomeDigitado.includes(palavra))) {
             document.getElementById("beverage-sweetness").value = regra.doce;
             harmonizationDropdownContent
               .querySelectorAll('input[type="checkbox"]')
               .forEach((cb) => (cb.checked = false));
             regra.pratos.forEach((pratoSugerido) => {
-              const cb = harmonizationDropdownContent.querySelector(
-                `input[value="${pratoSugerido}"]`,
-              );
+              const cb = harmonizationDropdownContent.querySelector(`input[value="${pratoSugerido}"]`);
               if (cb) cb.checked = true;
             });
             updateHarmonizationSelectedItems(regra.pratos);
@@ -2064,9 +1941,6 @@
         }
       });
 
-      // ==========================================
-      // SALVAR BEBIDA (com sanitização)
-      // ==========================================
       beverageForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         const fd = new FormData(beverageForm),
@@ -2086,16 +1960,9 @@
           res = await fetchData(`${API_BASE_URL}/bebidas/${bId}`, "PUT", data);
         } else {
           const all = await fetchData(`${API_BASE_URL}/bebidas`);
-          data.id =
-            all && !all.error && all.length > 0
-              ? Math.max(...all.map((b) => b.id)) + 1
-              : 1;
+          data.id = all && !all.error && all.length > 0 ? Math.max(...all.map((b) => b.id)) + 1 : 1;
           data.disponivel = true;
-          res = await fetchData(
-            `${API_BASE_URL}/bebidas/${data.id}`,
-            "PUT",
-            data,
-          );
+          res = await fetchData(`${API_BASE_URL}/bebidas/${data.id}`, "PUT", data);
         }
         if (res && !res.error) {
           alert("Salvo com sucesso!");
@@ -2110,11 +1977,7 @@
       });
 
       async function updateBeverageQuick(id, data) {
-        const res = await fetchData(
-          `${API_BASE_URL}/bebidas/${id}`,
-          "PUT",
-          data,
-        );
+        const res = await fetchData(`${API_BASE_URL}/bebidas/${id}`, "PUT", data);
         if (res && !res.error) {
           alert("Atualizado!");
           loadBeveragesForManager();
@@ -2134,8 +1997,7 @@
           const itemDB =
             bebidasDB && !bebidasDB.error
               ? cleanArrayObjects(bebidasDB).find(
-                  (b) =>
-                    b.nome.toLowerCase() === itemCatalogo.nome.toLowerCase(),
+                  (b) => b.nome.toLowerCase() === itemCatalogo.nome.toLowerCase(),
                 )
               : null;
           if (itemDB) {
@@ -2197,24 +2059,17 @@
               : b.disponivel
                 ? '<span class="available-tag">Em Estoque</span>'
                 : '<span class="unavailable-text">Sugestão de Compra</span>';
-          const imgUrl =
-            b.imagemUrl && b.imagemUrl.trim()
-              ? b.imagemUrl.trim()
-              : PLACEHOLDER_IMG;
+          const imgUrl = b.imagemUrl && b.imagemUrl.trim() ? b.imagemUrl.trim() : PLACEHOLDER_IMG;
           const safeNome = sanitizeForJS(b.nome);
           const safeTipo = sanitizeForJS(b.tipo);
           const safeOrigem = sanitizeForJS(b.origem || "N/A");
-          const safeResumo = sanitizeForJS(
-            b.resumoGarcom || b.perfilSabor || "",
-          );
+          const safeResumo = sanitizeForJS(b.resumoGarcom || b.perfilSabor || "");
           const safePreco = b.preco ? b.preco.toFixed(2) : "0.00";
 
           card.innerHTML = `<div class="beverage-card-header">${statusTag}<img src="${imgUrl}" alt="${safeNome}" onerror="this.src='${PLACEHOLDER_IMG}'"><div class="beverage-card-info"><h3>${safeNome}</h3>${renderDoce(b.nivelDoce || "Seco")}<p>${safeTipo} - ${safeOrigem}</p><p class="beverage-card-summary">"${safeResumo}"</p><p style="color: var(--primary-color); font-weight: bold; margin-top: 5px;">R$ ${safePreco}</p></div></div><div class="beverage-card-details"><p><strong>Teor Alcoólico:</strong> ${sanitizeForJS(b.teorAlcoolico || "N/A")}</p><p><strong>Público Alvo:</strong> ${sanitizeForJS(b.publicoAlvo || "N/A")}</p><p><strong>Taça Ideal:</strong> ${sanitizeForJS(b.tacaIdeal || "N/A")}</p><p><strong>Apresentação:</strong> ${sanitizeForJS(b.formaApresentacao || "N/A")}</p><p><strong>Temp. Consumo:</strong> ${sanitizeForJS(b.tempConsumo || "N/A")}</p><p><strong>Temp. Conservação:</strong> ${sanitizeForJS(b.tempConservacao || "N/A")}</p>${chips}</div>`;
           card.addEventListener("click", () => {
             const isExp = card.classList.contains("expanded");
-            document
-              .querySelectorAll(".beverage-card.expanded")
-              .forEach((c) => c.classList.remove("expanded"));
+            document.querySelectorAll(".beverage-card.expanded").forEach((c) => c.classList.remove("expanded"));
             if (!isExp) card.classList.add("expanded");
           });
           targetList.appendChild(card);
@@ -2232,8 +2087,7 @@
       async function renderPurchasingGrid(filterText = "") {
         purchasingGrid.innerHTML = "";
         const bebidasDB = await fetchData(`${API_BASE_URL}/bebidas`);
-        const dbList =
-          bebidasDB && !bebidasDB.error ? cleanArrayObjects(bebidasDB) : [];
+        const dbList = bebidasDB && !bebidasDB.error ? cleanArrayObjects(bebidasDB) : [];
         const filtered = catalogoConhecido.filter(
           (c) =>
             c.nome.toLowerCase().includes(filterText.toLowerCase()) ||
@@ -2262,9 +2116,8 @@
         });
       }
 
-      purchasingSearch.addEventListener("input", (e) =>
-        renderPurchasingGrid(e.target.value),
-      );
+      purchasingSearch.addEventListener("input", (e) => renderPurchasingGrid(e.target.value));
+
       purchasingGrid.addEventListener("click", async (e) => {
         if (
           e.target.classList.contains("activate-wine-btn") ||
@@ -2286,10 +2139,8 @@
           preencherTudo(itemCatalogo);
           if (existingItem) {
             document.getElementById("beverage-id").value = existingItem.id;
-            document.getElementById("beverage-stock").value =
-              existingItem.estoque || "";
-            document.getElementById("beverage-price").value =
-              existingItem.preco || "";
+            document.getElementById("beverage-stock").value = existingItem.estoque || "";
+            document.getElementById("beverage-price").value = existingItem.preco || "";
             document.getElementById("beverage-available").checked = true;
           } else {
             document.getElementById("beverage-id").value = "";
@@ -2319,18 +2170,11 @@
               : '<span class="unavailable-text">Sugestão de Compra</span>';
             const card = document.createElement("div");
             card.className = "beverage-card";
-            const imgUrl =
-              item.imagemUrl && item.imagemUrl.trim()
-                ? item.imagemUrl.trim()
-                : PLACEHOLDER_IMG;
+            const imgUrl = item.imagemUrl && item.imagemUrl.trim() ? item.imagemUrl.trim() : PLACEHOLDER_IMG;
             card.innerHTML = `<div class="beverage-card-header">${statusTag}<img src="${imgUrl}" alt="${sanitizeForJS(item.nome)}" onerror="this.src='${PLACEHOLDER_IMG}'"><div class="beverage-card-info"><h3>${sanitizeForJS(item.nome)}</h3>${renderDoce(item.nivelDoce || "Seco")}<p>${sanitizeForJS(item.tipo)}</p><p class="beverage-card-summary">"${sanitizeForJS(item.resumoGarcom || item.perfilSabor || "")}"</p></div></div><div class="beverage-card-details"><p><strong>Teor Alcoólico:</strong> ${sanitizeForJS(item.teorAlcoolico || "N/A")}</p><p><strong>Público Alvo:</strong> ${sanitizeForJS(item.publicoAlvo || "N/A")}</p><p><strong>Taça Ideal:</strong> ${sanitizeForJS(item.tacaIdeal || "N/A")}</p><p><strong>Apresentação:</strong> ${sanitizeForJS(item.formaApresentacao || "N/A")}</p><p><strong>Temp. Consumo:</strong> ${sanitizeForJS(item.tempConsumo || "N/A")}</p><p><strong>Temp. Conservação:</strong> ${sanitizeForJS(item.tempConservacao || "N/A")}</p></div>`;
             card.addEventListener("click", () => {
               const isExp = card.classList.contains("expanded");
-              document
-                .querySelectorAll(
-                  "#reverse-results-list .beverage-card.expanded",
-                )
-                .forEach((c) => c.classList.remove("expanded"));
+              document.querySelectorAll("#reverse-results-list .beverage-card.expanded").forEach((c) => c.classList.remove("expanded"));
               if (!isExp) card.classList.add("expanded");
             });
             reverseResultsList.appendChild(card);
@@ -2339,22 +2183,20 @@
       }
 
       btnPorPrato.addEventListener("click", () => {
-        document.querySelector(
-          "#waiter-client-screen .header .filters",
-        ).style.display = "none";
+        document.querySelector("#waiter-client-screen .header .filters").style.display = "none";
         beverageList.style.display = "none";
         dishSearchView.style.display = "block";
         dishGridContainer.style.display = "grid";
         dishSearchInput.value = "";
         renderDishGrid();
       });
+
       backToWinesBtn.addEventListener("click", () => {
         dishSearchView.style.display = "none";
-        document.querySelector(
-          "#waiter-client-screen .header .filters",
-        ).style.display = "flex";
+        document.querySelector("#waiter-client-screen .header .filters").style.display = "flex";
         beverageList.style.display = "grid";
       });
+
       dishSearchInput.addEventListener("input", (e) => {
         dishGridContainer.style.display = "grid";
         renderDishGrid(e.target.value);
@@ -2364,6 +2206,7 @@
         sommelierManualContent.style.display =
           sommelierManualContent.style.display === "block" ? "none" : "block";
       });
+
       document.addEventListener("click", (e) => {
         if (
           !e.target.closest("#sommelier-manual-button") &&
@@ -2378,9 +2221,7 @@
         autocompleteList.innerHTML = "";
         autocompleteList.style.display = "none";
         if (val.length < 2) return;
-        const matches = catalogoConhecido.filter((c) =>
-          c.nome.toLowerCase().includes(val),
-        );
+        const matches = catalogoConhecido.filter((c) => c.nome.toLowerCase().includes(val));
         if (matches.length > 0) {
           matches.forEach((m) => {
             const div = document.createElement("div");
@@ -2392,11 +2233,9 @@
           autocompleteList.style.display = "block";
         }
       });
+
       document.addEventListener("click", (e) => {
-        if (
-          !e.target.closest(".autocomplete-list") &&
-          !e.target.closest("#beverage-name")
-        )
+        if (!e.target.closest(".autocomplete-list") && !e.target.closest("#beverage-name"))
           autocompleteList.style.display = "none";
       });
 
@@ -2404,78 +2243,63 @@
         autocompleteList.style.display = "none";
         beverageNameInput.value = item.nome;
         document.getElementById("beverage-type").value = item.tipo || "tinto";
-        document.getElementById("beverage-alcohol").value =
-          item.teorAlcoolico || "";
-        document.getElementById("beverage-flavor").value =
-          item.perfilSabor || "";
-        document.getElementById("beverage-sweetness").value =
-          item.nivelDoce || "Seco";
-        document.getElementById("beverage-audience").value =
-          item.publicoAlvo || "iniciante";
-        document.getElementById("beverage-summary").value =
-          item.resumoGarcom || "";
+        document.getElementById("beverage-alcohol").value = item.teorAlcoolico || "";
+        document.getElementById("beverage-flavor").value = item.perfilSabor || "";
+        document.getElementById("beverage-sweetness").value = item.nivelDoce || "Seco";
+        document.getElementById("beverage-audience").value = item.publicoAlvo || "iniciante";
+        document.getElementById("beverage-summary").value = item.resumoGarcom || "";
         document.getElementById("beverage-glass").value = item.tacaIdeal || "";
-        document.getElementById("beverage-presentation").value =
-          item.formaApresentacao || "";
-        document.getElementById("beverage-temp-consume").value =
-          item.tempConsumo || "";
-        document.getElementById("beverage-temp-storage").value =
-          item.tempConservacao || "";
-        harmonizationDropdownContent
-          .querySelectorAll('input[type="checkbox"]')
-          .forEach((cb) => (cb.checked = false));
+        document.getElementById("beverage-presentation").value = item.formaApresentacao || "";
+        document.getElementById("beverage-temp-consume").value = item.tempConsumo || "";
+        document.getElementById("beverage-temp-storage").value = item.tempConservacao || "";
+        harmonizationDropdownContent.querySelectorAll('input[type="checkbox"]').forEach((cb) => (cb.checked = false));
         if (item.pratosDaCasa) {
           item.pratosDaCasa.forEach((ps) => {
-            const cb = harmonizationDropdownContent.querySelector(
-              `input[value="${ps}"]`,
-            );
+            const cb = harmonizationDropdownContent.querySelector(`input[value="${ps}"]`);
             if (cb) cb.checked = true;
           });
           updateHarmonizationSelectedItems(item.pratosDaCasa);
         }
       }
 
-      document
-        .getElementById("btn-upload-img")
-        .addEventListener("click", () =>
-          document.getElementById("image-upload").click(),
-        );
-      document
-        .getElementById("image-upload")
-        .addEventListener("change", function (e) {
-          const file = e.target.files[0];
-          if (!file) return;
-          const reader = new FileReader();
-          reader.onload = function (event) {
-            const img = new Image();
-            img.onload = function () {
-              const canvas = document.createElement("canvas");
-              const MAX_WIDTH = 200;
-              let width = img.width,
-                height = img.height;
-              if (width > height) {
-                if (width > MAX_WIDTH) {
-                  height *= MAX_WIDTH / width;
-                  width = MAX_WIDTH;
-                }
-              } else {
-                if (height > MAX_WIDTH) {
-                  width *= MAX_WIDTH / height;
-                  height = MAX_WIDTH;
-                }
+      document.getElementById("btn-upload-img").addEventListener("click", () =>
+        document.getElementById("image-upload").click(),
+      );
+
+      document.getElementById("image-upload").addEventListener("change", function (e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          const img = new Image();
+          img.onload = function () {
+            const canvas = document.createElement("canvas");
+            const MAX_WIDTH = 200;
+            let width = img.width,
+              height = img.height;
+            if (width > height) {
+              if (width > MAX_WIDTH) {
+                height *= MAX_WIDTH / width;
+                width = MAX_WIDTH;
               }
-              canvas.width = width;
-              canvas.height = height;
-              canvas.getContext("2d").drawImage(img, 0, 0, width, height);
-              document.getElementById("beverage-imageUrl").value =
-                canvas.toDataURL("image/jpeg", 0.5);
-            };
-            img.src = event.target.result;
+            } else {
+              if (height > MAX_WIDTH) {
+                width *= MAX_WIDTH / height;
+                height = MAX_WIDTH;
+              }
+            }
+            canvas.width = width;
+            canvas.height = height;
+            canvas.getContext("2d").drawImage(img, 0, 0, width, height);
+            document.getElementById("beverage-imageUrl").value = canvas.toDataURL("image/jpeg", 0.5);
           };
-          reader.readAsDataURL(file);
-        });
+          img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
 
       loginButton.addEventListener("click", handleLogin);
+
       pinInput.addEventListener("keypress", (e) => {
         if (e.key === "Enter") handleLogin();
       });
@@ -2526,6 +2350,7 @@
           cardapioList.appendChild(item);
         });
       }
+
       cardapioList.addEventListener("click", async (e) => {
         if (e.target.classList.contains("remove-dish-btn")) {
           const prato = e.target.dataset.prato;
@@ -2546,27 +2371,20 @@
           }
         }
       });
+
       addDishBtn.addEventListener("click", async () => {
         const novoPrato = newDishInput.value.trim();
-        if (
-          novoPrato &&
-          !allPratosDaCasa.some(
-            (p) => p.toLowerCase() === novoPrato.toLowerCase(),
-          )
-        ) {
+        if (novoPrato && !allPratosDaCasa.some((p) => p.toLowerCase() === novoPrato.toLowerCase())) {
           allPratosDaCasa.push(novoPrato);
           newDishInput.value = "";
           await saveCardapioToAPI();
           triggerSync();
           alert(`Prato "${novoPrato}" adicionado!`);
-        } else if (
-          allPratosDaCasa.some(
-            (p) => p.toLowerCase() === novoPrato.toLowerCase(),
-          )
-        ) {
+        } else if (allPratosDaCasa.some((p) => p.toLowerCase() === novoPrato.toLowerCase())) {
           alert("Este prato já existe no cardápio.");
         }
       });
+
       async function saveCardapioToAPI() {
         try {
           const res = await fetch(`${API_BASE_URL}/cardapio`, {
@@ -2576,13 +2394,8 @@
           });
           if (!res.ok) throw new Error("Falha na API");
         } catch (e) {
-          console.warn(
-            "Não foi possível salvar no backend. Atualize cardapio.json manualmente.",
-          );
-          localStorage.setItem(
-            "cardapioLocal",
-            JSON.stringify(allPratosDaCasa),
-          );
+          console.warn("Não foi possível salvar no backend. Atualize cardapio.json manualmente.");
+          localStorage.setItem("cardapioLocal", JSON.stringify(allPratosDaCasa));
         }
         loadCardapioManager();
         loadPratosDaCasa();
@@ -2591,10 +2404,7 @@
       function startClientAutoRefresh() {
         if (clientAutoRefreshInterval) clearInterval(clientAutoRefreshInterval);
         clientAutoRefreshInterval = setInterval(() => {
-          if (
-            document.getElementById("waiter-client-screen").style.display ===
-            "block"
-          )
+          if (document.getElementById("waiter-client-screen").style.display === "block")
             loadBeveragesForClient();
         }, 60000);
       }
