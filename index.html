@@ -3,6 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#ffd700" />
+    <meta name="description" content="Sistema de gestão de cartas de vinhos" />
+
+    <!-- iOS Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Vinho em Mãos" />
+    <link rel="apple-touch-icon" href="/icon-180.png" />
+
+    <!-- Android/Chrome -->
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
     <title>Vinho em Mãos - Gerenciamento</title>
     <style>
       :root {
@@ -1326,50 +1343,84 @@
       // ==========================================
       // CORREÇÃO CRÍTICA: API_BASE_URL dinâmica
       // ==========================================
-      const API_BASE_URL = window.location.origin + '/api';
+      const API_BASE_URL = window.location.origin + "/api";
       const MANAGER_PASSWORD = "admin123";
       let syncChannel;
 
-      console.log('🚀 API_BASE_URL:', API_BASE_URL);
+      console.log("🚀 API_BASE_URL:", API_BASE_URL);
 
       const loginScreen = document.getElementById("login-screen");
       const pinInput = document.getElementById("pin-input");
       const loginButton = document.getElementById("login-button");
       const loginMessage = document.getElementById("login-message");
-      const restrictedAreaFooter = document.getElementById("restricted-area-footer");
+      const restrictedAreaFooter = document.getElementById(
+        "restricted-area-footer",
+      );
       const managerLoginForm = document.getElementById("manager-login-form");
-      const managerPasswordInput = document.getElementById("manager-password-input");
-      const managerLoginButton = document.getElementById("manager-login-button");
-      const managerLoginMessage = document.getElementById("manager-login-message");
+      const managerPasswordInput = document.getElementById(
+        "manager-password-input",
+      );
+      const managerLoginButton = document.getElementById(
+        "manager-login-button",
+      );
+      const managerLoginMessage = document.getElementById(
+        "manager-login-message",
+      );
       const managerScreen = document.getElementById("manager-screen");
       const generatePinButton = document.getElementById("generate-pin-button");
-      const generatedPinDisplay = document.getElementById("generated-pin-display");
+      const generatedPinDisplay = document.getElementById(
+        "generated-pin-display",
+      );
       const addBeverageButton = document.getElementById("add-beverage-button");
-      const beveragesTableBody = document.querySelector("#beverages-table tbody");
+      const beveragesTableBody = document.querySelector(
+        "#beverages-table tbody",
+      );
       const beverageFormModal = document.getElementById("beverage-form-modal");
       const beverageForm = document.getElementById("beverage-form");
       const closeModalButton = document.querySelector(".close-button");
       const beverageNameInput = document.getElementById("beverage-name");
       const autocompleteList = document.getElementById("autocomplete-list");
-      const waiterClientScreen = document.getElementById("waiter-client-screen");
-      const filterButtons = document.querySelectorAll(".filter-button:not(#btn-por-prato)");
+      const waiterClientScreen = document.getElementById(
+        "waiter-client-screen",
+      );
+      const filterButtons = document.querySelectorAll(
+        ".filter-button:not(#btn-por-prato)",
+      );
       const beverageList = document.getElementById("beverage-list");
-      const sommelierManualButton = document.getElementById("sommelier-manual-button");
-      const sommelierManualContent = document.getElementById("sommelier-manual-content");
-      const harmonizationSelectedItems = document.getElementById("harmonization-selected-items");
-      const harmonizationDropdownContent = document.getElementById("harmonization-dropdown-content");
-      const beveragePratosDaCasaInput = document.getElementById("beverage-pratosDaCasa");
+      const sommelierManualButton = document.getElementById(
+        "sommelier-manual-button",
+      );
+      const sommelierManualContent = document.getElementById(
+        "sommelier-manual-content",
+      );
+      const harmonizationSelectedItems = document.getElementById(
+        "harmonization-selected-items",
+      );
+      const harmonizationDropdownContent = document.getElementById(
+        "harmonization-dropdown-content",
+      );
+      const beveragePratosDaCasaInput = document.getElementById(
+        "beverage-pratosDaCasa",
+      );
       const btnPorPrato = document.getElementById("btn-por-prato");
       const dishSearchView = document.getElementById("dish-search-view");
       const dishSearchInput = document.getElementById("dish-search-input");
       const dishGridContainer = document.getElementById("dish-grid-container");
-      const reverseResultsMessage = document.getElementById("reverse-results-message");
-      const reverseResultsList = document.getElementById("reverse-results-list");
+      const reverseResultsMessage = document.getElementById(
+        "reverse-results-message",
+      );
+      const reverseResultsList = document.getElementById(
+        "reverse-results-list",
+      );
       const backToWinesBtn = document.getElementById("back-to-wines-btn");
       const purchasingSearch = document.getElementById("purchasing-search");
       const purchasingGrid = document.getElementById("purchasing-grid");
-      const refreshManagerDataBtn = document.getElementById("refresh-manager-data");
-      const refreshClientDataBtn = document.getElementById("refresh-client-data");
+      const refreshManagerDataBtn = document.getElementById(
+        "refresh-manager-data",
+      );
+      const refreshClientDataBtn = document.getElementById(
+        "refresh-client-data",
+      );
       const cardapioList = document.getElementById("cardapio-list");
       const newDishInput = document.getElementById("new-dish-input");
       const addDishBtn = document.getElementById("add-dish-btn");
@@ -1381,7 +1432,8 @@
       let allPratosDaCasa = [];
       let clientAutoRefreshInterval = null;
 
-      const PLACEHOLDER_IMG = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj48cmVjdCB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIGZpbGw9IiMyODI4MjgiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZDcwMCIgZm9udC1zaXplPSIxMCI+8J+YtzwvdGV4dD48L3N2Zz4=";
+      const PLACEHOLDER_IMG =
+        "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj48cmVjdCB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIGZpbGw9IiMyODI4MjgiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZDcwMCIgZm9udC1zaXplPSIxMCI+8J+YtzwvdGV4dD48L3N2Zz4=";
 
       function sanitizeForJS(str) {
         if (typeof str !== "string") return str;
@@ -1429,7 +1481,10 @@
           formaApresentacao: "Garrafa 750ml",
           tempConsumo: "16-18°C",
           tempConservacao: "14°C",
-          pratosDaCasa: ["Choripán da Roça", "BomBom de Costela (até 3 pessoas)"],
+          pratosDaCasa: [
+            "Choripán da Roça",
+            "BomBom de Costela (até 3 pessoas)",
+          ],
         },
         {
           nome: "Cachaça artesanal",
@@ -1459,7 +1514,11 @@
               if (!nomesExistentes.has(item.nome.toLowerCase()))
                 catalogoConhecido.push(item);
             });
-            console.log('✅ Catálogo carregado:', catalogoConhecido.length, 'vinhos');
+            console.log(
+              "✅ Catálogo carregado:",
+              catalogoConhecido.length,
+              "vinhos",
+            );
           }
         } catch (error) {
           console.log("Usando catálogo interno padrão. Erro:", error.message);
@@ -1518,39 +1577,151 @@
         {
           palavras: ["moscatel", "porto", "licor", "ice", "ponche"],
           doce: "Doce",
-          pratos: ["Petit Gâteau com Sorvete", "Panquecas Caramelizadas", "Salada de Frutas com Creme"],
+          pratos: [
+            "Petit Gâteau com Sorvete",
+            "Panquecas Caramelizadas",
+            "Salada de Frutas com Creme",
+          ],
         },
         {
           palavras: ["prosecco"],
           doce: "Meio Doce",
-          pratos: ["Tirinhas de Frango", "Camarão Empanado", "Iscas de Tilápia", "Abóbora Recheada (serve 3)"],
+          pratos: [
+            "Tirinhas de Frango",
+            "Camarão Empanado",
+            "Iscas de Tilápia",
+            "Abóbora Recheada (serve 3)",
+          ],
         },
         {
           palavras: ["champanhe", "champagne"],
           doce: "Seco",
-          pratos: ["Camarão Empanado", "Queijo Coalho Frito", "Abóbora Recheada (serve 3)", "Linguiça Suína Acebolada"],
+          pratos: [
+            "Camarão Empanado",
+            "Queijo Coalho Frito",
+            "Abóbora Recheada (serve 3)",
+            "Linguiça Suína Acebolada",
+          ],
         },
         {
           palavras: ["chardonnay", "sauvignon", "riesling", "branco"],
           doce: "Seco",
-          pratos: ["Bobó de Camarão (até 2 pessoas)", "Moqueca de Peixe da Fazenda (até 2 pessoas)", "Tilápia ao Molho da Casa (serve 2)", "Iscas de Tilápia"],
+          pratos: [
+            "Bobó de Camarão (até 2 pessoas)",
+            "Moqueca de Peixe da Fazenda (até 2 pessoas)",
+            "Tilápia ao Molho da Casa (serve 2)",
+            "Iscas de Tilápia",
+          ],
         },
         {
           palavras: ["pinot", "merlot", "rosé", "rose"],
           doce: "Seco",
-          pratos: ["Macarrão à Bolonhesa", "Linguiça Suína Acebolada", "Tirinhas de Frango", "Coraçãozinho da Fazenda"],
+          pratos: [
+            "Macarrão à Bolonhesa",
+            "Linguiça Suína Acebolada",
+            "Tirinhas de Frango",
+            "Coraçãozinho da Fazenda",
+          ],
         },
         {
           palavras: ["malbec", "cabernet", "syrah", "tannat", "carménère"],
           doce: "Seco",
-          pratos: ["Choripán da Roça", "BomBom de Costela (até 3 pessoas)", "Coraçãozinho da Fazenda", "Filé Mignon Gorgonzola (2 pessoas)", "Parmegiana de Filé Mignon (2 pessoas)", "Pancetta de Rolo"],
+          pratos: [
+            "Choripán da Roça",
+            "BomBom de Costela (até 3 pessoas)",
+            "Coraçãozinho da Fazenda",
+            "Filé Mignon Gorgonzola (2 pessoas)",
+            "Parmegiana de Filé Mignon (2 pessoas)",
+            "Pancetta de Rolo",
+          ],
         },
         {
           palavras: ["cachaça", "whisk", "bourbon", "conhaque"],
           doce: "Seco",
-          pratos: ["Queijo Coalho Frito", "Mandioca Frita", "Bolinho de Costela (8un)", "Linguiça Suína Acebolada", "Coraçãozinho da Fazenda"],
+          pratos: [
+            "Queijo Coalho Frito",
+            "Mandioca Frita",
+            "Bolinho de Costela (8un)",
+            "Linguiça Suína Acebolada",
+            "Coraçãozinho da Fazenda",
+          ],
         },
       ];
+
+      // ==========================================
+      // REGISTRO DO SERVICE WORKER (PWA)
+      // ==========================================
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/sw.js")
+            .then((registration) => {
+              console.log("✅ Service Worker registrado:", registration.scope);
+            })
+            .catch((error) => {
+              console.log("❌ Falha ao registrar Service Worker:", error);
+            });
+        });
+      }
+
+      // ==========================================
+      // PROMPT DE INSTALAÇÃO PWA
+      // ==========================================
+      let deferredPrompt;
+      const installBanner = document.createElement("div");
+      installBanner.style.cssText = `
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffd700;
+  color: #1a1a1a;
+  padding: 15px 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  z-index: 9999;
+  font-weight: bold;
+  text-align: center;
+  max-width: 90%;
+`;
+      installBanner.innerHTML = `
+  📱 Instalar "Vinho em Mãos" na tela inicial?<br>
+  <button id="install-yes" style="background:#1a1a1a;color:#ffd700;border:none;padding:8px 20px;border-radius:5px;margin-top:10px;margin-right:10px;cursor:pointer;font-weight:bold;">Instalar</button>
+  <button id="install-no" style="background:transparent;color:#1a1a1a;border:1px solid #1a1a1a;padding:8px 20px;border-radius:5px;margin-top:10px;cursor:pointer;font-weight:bold;">Depois</button>
+`;
+      document.body.appendChild(installBanner);
+
+      window.addEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+
+        // Não mostrar se já foi instalado
+        if (window.matchMedia("(display-mode: standalone)").matches) return;
+
+        installBanner.style.display = "block";
+      });
+
+      document.addEventListener("click", async (e) => {
+        if (e.target.id === "install-yes" && deferredPrompt) {
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          console.log(
+            `Usuário ${outcome === "accepted" ? "aceitou" : "recusou"} a instalação`,
+          );
+          deferredPrompt = null;
+          installBanner.style.display = "none";
+        }
+        if (e.target.id === "install-no") {
+          installBanner.style.display = "none";
+        }
+      });
+
+      window.addEventListener("appinstalled", () => {
+        console.log("✅ PWA instalado com sucesso!");
+        installBanner.style.display = "none";
+        deferredPrompt = null;
+      });
 
       function initSync() {
         if ("BroadcastChannel" in window) {
@@ -1572,9 +1743,13 @@
 
       function syncAllViews() {
         loadBeveragesForClient();
-        if (document.getElementById("manager-screen").style.display === "block") {
+        if (
+          document.getElementById("manager-screen").style.display === "block"
+        ) {
           loadBeveragesForManager();
-          if (document.getElementById("purchasing-tab").style.display !== "none")
+          if (
+            document.getElementById("purchasing-tab").style.display !== "none"
+          )
             renderPurchasingGrid();
           if (document.getElementById("cardapio-tab").style.display !== "none")
             loadCardapioManager();
@@ -1642,16 +1817,24 @@
 
       function showScreen(screenId) {
         document
-          .querySelectorAll("#login-screen, #manager-screen, #waiter-client-screen")
+          .querySelectorAll(
+            "#login-screen, #manager-screen, #waiter-client-screen",
+          )
           .forEach((s) => (s.style.display = "none"));
         document.getElementById(screenId).style.display = "block";
       }
 
       function showTab(tabId) {
-        document.querySelectorAll(".tab-content").forEach((t) => (t.style.display = "none"));
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((t) => (t.style.display = "none"));
         document.getElementById(tabId).style.display = "block";
-        document.querySelectorAll(".tab-button").forEach((b) => b.classList.remove("active"));
-        document.querySelector(`.tab-button[data-tab="${tabId}"]`).classList.add("active");
+        document
+          .querySelectorAll(".tab-button")
+          .forEach((b) => b.classList.remove("active"));
+        document
+          .querySelector(`.tab-button[data-tab="${tabId}"]`)
+          .classList.add("active");
       }
 
       function checkSession() {
@@ -1690,7 +1873,9 @@
           loginMessage.textContent = "O PIN deve ter 4 dígitos.";
           return;
         }
-        const result = await fetchData(`${API_BASE_URL}/pin/validar`, "POST", { pin });
+        const result = await fetchData(`${API_BASE_URL}/pin/validar`, "POST", {
+          pin,
+        });
         if (result.valid) {
           setSession(false);
           loginMessage.textContent = "";
@@ -1717,12 +1902,12 @@
       // CORREÇÃO CRÍTICA: Event listener do botão de login do gerente
       // ==========================================
       managerLoginButton.addEventListener("click", () => {
-        console.log('🔐 Tentativa de login gerente');
-        console.log('Senha digitada:', managerPasswordInput.value);
-        console.log('Senha esperada:', MANAGER_PASSWORD);
-        
+        console.log("🔐 Tentativa de login gerente");
+        console.log("Senha digitada:", managerPasswordInput.value);
+        console.log("Senha esperada:", MANAGER_PASSWORD);
+
         if (managerPasswordInput.value === MANAGER_PASSWORD) {
-          console.log('✅ Senha correta! Entrando...');
+          console.log("✅ Senha correta! Entrando...");
           setSession(true);
           managerLoginMessage.textContent = "";
           managerLoginForm.style.display = "none";
@@ -1730,7 +1915,7 @@
           loadBeveragesForManager();
           showTab("generate-pin-tab");
         } else {
-          console.log('❌ Senha incorreta!');
+          console.log("❌ Senha incorreta!");
           managerLoginMessage.textContent = "Senha Incorreta.";
         }
       });
@@ -1761,21 +1946,23 @@
       });
 
       generatePinButton.addEventListener("click", async () => {
-        console.log('🎲 Gerando PIN...');
+        console.log("🎲 Gerando PIN...");
         const result = await fetchData(`${API_BASE_URL}/pin/gerar`, "POST");
-        console.log('Resposta:', result);
+        console.log("Resposta:", result);
         if (result && !result.error) {
           generatedPinDisplay.textContent = result.pin;
-          alert(`Novo PIN gerado: ${result.pin}. Válido até: ${result.validoAte}`);
+          alert(
+            `Novo PIN gerado: ${result.pin}. Válido até: ${result.validoAte}`,
+          );
         } else {
           alert("Erro ao gerar PIN. Verifique se o servidor está rodando.");
         }
       });
 
       async function loadBeveragesForManager() {
-        console.log('📦 Carregando bebidas para gerente...');
+        console.log("📦 Carregando bebidas para gerente...");
         const bebidasDB = await fetchData(`${API_BASE_URL}/bebidas`);
-        console.log('Bebidas recebidas:', bebidasDB);
+        console.log("Bebidas recebidas:", bebidasDB);
         beveragesTableBody.innerHTML = "";
         if (bebidasDB && !bebidasDB.error) {
           const cleanBebidas = cleanArrayObjects(bebidasDB);
@@ -1792,9 +1979,9 @@
             row.dataset.id = b.id;
             row.innerHTML = `<td>${b.id}</td><td>${sanitizeForJS(b.nome)}</td><td>${sanitizeForJS(b.tipo)}</td><td><input type="checkbox" class="beverage-available" ${b.disponivel ? "checked" : ""}></td><td><input type="number" class="beverage-stock" value="${b.estoque}" min="0"></td><td><input type="number" class="beverage-price" value="${b.preco ? b.preco.toFixed(2) : "0.00"}" step="0.01" min="0"></td><td class="action-buttons"><button class="edit-beverage-button">Editar</button><button class="save-beverage-button">Salvar</button></td>`;
           });
-          console.log('✅', sortedBebidas.length, 'bebidas carregadas');
+          console.log("✅", sortedBebidas.length, "bebidas carregadas");
         } else {
-          console.error('❌ Erro ao carregar bebidas:', bebidasDB);
+          console.error("❌ Erro ao carregar bebidas:", bebidasDB);
         }
       }
 
@@ -1815,7 +2002,9 @@
         harmonizationDropdownContent.innerHTML = "";
         allPratosDaCasa.forEach((prato) => {
           const safePrato = sanitizeForJS(prato);
-          const idSafe = prato.replace(/\s/g, "-").replace(/[^a-zA-Z0-9\-]/g, "");
+          const idSafe = prato
+            .replace(/\s/g, "-")
+            .replace(/[^a-zA-Z0-9\-]/g, "");
           harmonizationDropdownContent.innerHTML += `<label for="prato-${idSafe}"><input type="checkbox" id="prato-${idSafe}" value="${safePrato}"> ${safePrato}</label>`;
         });
       }
@@ -1841,14 +2030,20 @@
       harmonizationSelectedItems.addEventListener("click", (e) => {
         if (e.target.classList.contains("remove-tag")) {
           const val = e.target.dataset.value;
-          const cb = harmonizationDropdownContent.querySelector(`input[value="${val}"]`);
+          const cb = harmonizationDropdownContent.querySelector(
+            `input[value="${val}"]`,
+          );
           if (cb) cb.checked = false;
           updateHarmonizationSelectedItems(
-            JSON.parse(beveragePratosDaCasaInput.value || "[]").filter((p) => p !== val),
+            JSON.parse(beveragePratosDaCasaInput.value || "[]").filter(
+              (p) => p !== val,
+            ),
           );
         } else {
           harmonizationDropdownContent.style.display =
-            harmonizationDropdownContent.style.display === "block" ? "none" : "block";
+            harmonizationDropdownContent.style.display === "block"
+              ? "none"
+              : "block";
         }
       });
 
@@ -1856,7 +2051,9 @@
         if (e.target.type === "checkbox")
           updateHarmonizationSelectedItems(
             Array.from(
-              harmonizationDropdownContent.querySelectorAll('input[type="checkbox"]:checked'),
+              harmonizationDropdownContent.querySelectorAll(
+                'input[type="checkbox"]:checked',
+              ),
             ).map((cb) => cb.value),
           );
       });
@@ -1878,10 +2075,14 @@
         loadCatalogoExterno();
       });
 
-      closeModalButton.addEventListener("click", () => (beverageFormModal.style.display = "none"));
+      closeModalButton.addEventListener(
+        "click",
+        () => (beverageFormModal.style.display = "none"),
+      );
 
       window.addEventListener("click", (e) => {
-        if (e.target == beverageFormModal) beverageFormModal.style.display = "none";
+        if (e.target == beverageFormModal)
+          beverageFormModal.style.display = "none";
       });
 
       beveragesTableBody.addEventListener("click", (e) => {
@@ -1903,18 +2104,23 @@
         if (b) {
           const cleanB = cleanObjectKeys(b);
           for (const key in cleanB) {
-            const inp = document.getElementById(`beverage-${key.toLowerCase()}`);
+            const inp = document.getElementById(
+              `beverage-${key.toLowerCase()}`,
+            );
             if (inp) {
               if (inp.type === "checkbox") inp.checked = cleanB[key];
               else inp.value = cleanB[key];
             }
           }
-          document.getElementById("beverage-sweetness").value = cleanB.nivelDoce || "Seco";
+          document.getElementById("beverage-sweetness").value =
+            cleanB.nivelDoce || "Seco";
           await loadPratosDaCasa();
           const sel = cleanB.pratosDaCasa || [];
           updateHarmonizationSelectedItems(sel);
           sel.forEach((p) => {
-            const cb = harmonizationDropdownContent.querySelector(`input[value="${p}"]`);
+            const cb = harmonizationDropdownContent.querySelector(
+              `input[value="${p}"]`,
+            );
             if (cb) cb.checked = true;
           });
           beverageFormModal.style.display = "flex";
@@ -1925,13 +2131,17 @@
         const nomeDigitado = beverageNameInput.value.toLowerCase().trim();
         let regraEncontrada = false;
         for (const regra of regrasAutoCadastro) {
-          if (regra.palavras.some((palavra) => nomeDigitado.includes(palavra))) {
+          if (
+            regra.palavras.some((palavra) => nomeDigitado.includes(palavra))
+          ) {
             document.getElementById("beverage-sweetness").value = regra.doce;
             harmonizationDropdownContent
               .querySelectorAll('input[type="checkbox"]')
               .forEach((cb) => (cb.checked = false));
             regra.pratos.forEach((pratoSugerido) => {
-              const cb = harmonizationDropdownContent.querySelector(`input[value="${pratoSugerido}"]`);
+              const cb = harmonizationDropdownContent.querySelector(
+                `input[value="${pratoSugerido}"]`,
+              );
               if (cb) cb.checked = true;
             });
             updateHarmonizationSelectedItems(regra.pratos);
@@ -1960,9 +2170,16 @@
           res = await fetchData(`${API_BASE_URL}/bebidas/${bId}`, "PUT", data);
         } else {
           const all = await fetchData(`${API_BASE_URL}/bebidas`);
-          data.id = all && !all.error && all.length > 0 ? Math.max(...all.map((b) => b.id)) + 1 : 1;
+          data.id =
+            all && !all.error && all.length > 0
+              ? Math.max(...all.map((b) => b.id)) + 1
+              : 1;
           data.disponivel = true;
-          res = await fetchData(`${API_BASE_URL}/bebidas/${data.id}`, "PUT", data);
+          res = await fetchData(
+            `${API_BASE_URL}/bebidas/${data.id}`,
+            "PUT",
+            data,
+          );
         }
         if (res && !res.error) {
           alert("Salvo com sucesso!");
@@ -1977,7 +2194,11 @@
       });
 
       async function updateBeverageQuick(id, data) {
-        const res = await fetchData(`${API_BASE_URL}/bebidas/${id}`, "PUT", data);
+        const res = await fetchData(
+          `${API_BASE_URL}/bebidas/${id}`,
+          "PUT",
+          data,
+        );
         if (res && !res.error) {
           alert("Atualizado!");
           loadBeveragesForManager();
@@ -1997,7 +2218,8 @@
           const itemDB =
             bebidasDB && !bebidasDB.error
               ? cleanArrayObjects(bebidasDB).find(
-                  (b) => b.nome.toLowerCase() === itemCatalogo.nome.toLowerCase(),
+                  (b) =>
+                    b.nome.toLowerCase() === itemCatalogo.nome.toLowerCase(),
                 )
               : null;
           if (itemDB) {
@@ -2059,17 +2281,24 @@
               : b.disponivel
                 ? '<span class="available-tag">Em Estoque</span>'
                 : '<span class="unavailable-text">Sugestão de Compra</span>';
-          const imgUrl = b.imagemUrl && b.imagemUrl.trim() ? b.imagemUrl.trim() : PLACEHOLDER_IMG;
+          const imgUrl =
+            b.imagemUrl && b.imagemUrl.trim()
+              ? b.imagemUrl.trim()
+              : PLACEHOLDER_IMG;
           const safeNome = sanitizeForJS(b.nome);
           const safeTipo = sanitizeForJS(b.tipo);
           const safeOrigem = sanitizeForJS(b.origem || "N/A");
-          const safeResumo = sanitizeForJS(b.resumoGarcom || b.perfilSabor || "");
+          const safeResumo = sanitizeForJS(
+            b.resumoGarcom || b.perfilSabor || "",
+          );
           const safePreco = b.preco ? b.preco.toFixed(2) : "0.00";
 
           card.innerHTML = `<div class="beverage-card-header">${statusTag}<img src="${imgUrl}" alt="${safeNome}" onerror="this.src='${PLACEHOLDER_IMG}'"><div class="beverage-card-info"><h3>${safeNome}</h3>${renderDoce(b.nivelDoce || "Seco")}<p>${safeTipo} - ${safeOrigem}</p><p class="beverage-card-summary">"${safeResumo}"</p><p style="color: var(--primary-color); font-weight: bold; margin-top: 5px;">R$ ${safePreco}</p></div></div><div class="beverage-card-details"><p><strong>Teor Alcoólico:</strong> ${sanitizeForJS(b.teorAlcoolico || "N/A")}</p><p><strong>Público Alvo:</strong> ${sanitizeForJS(b.publicoAlvo || "N/A")}</p><p><strong>Taça Ideal:</strong> ${sanitizeForJS(b.tacaIdeal || "N/A")}</p><p><strong>Apresentação:</strong> ${sanitizeForJS(b.formaApresentacao || "N/A")}</p><p><strong>Temp. Consumo:</strong> ${sanitizeForJS(b.tempConsumo || "N/A")}</p><p><strong>Temp. Conservação:</strong> ${sanitizeForJS(b.tempConservacao || "N/A")}</p>${chips}</div>`;
           card.addEventListener("click", () => {
             const isExp = card.classList.contains("expanded");
-            document.querySelectorAll(".beverage-card.expanded").forEach((c) => c.classList.remove("expanded"));
+            document
+              .querySelectorAll(".beverage-card.expanded")
+              .forEach((c) => c.classList.remove("expanded"));
             if (!isExp) card.classList.add("expanded");
           });
           targetList.appendChild(card);
@@ -2087,7 +2316,8 @@
       async function renderPurchasingGrid(filterText = "") {
         purchasingGrid.innerHTML = "";
         const bebidasDB = await fetchData(`${API_BASE_URL}/bebidas`);
-        const dbList = bebidasDB && !bebidasDB.error ? cleanArrayObjects(bebidasDB) : [];
+        const dbList =
+          bebidasDB && !bebidasDB.error ? cleanArrayObjects(bebidasDB) : [];
         const filtered = catalogoConhecido.filter(
           (c) =>
             c.nome.toLowerCase().includes(filterText.toLowerCase()) ||
@@ -2116,7 +2346,9 @@
         });
       }
 
-      purchasingSearch.addEventListener("input", (e) => renderPurchasingGrid(e.target.value));
+      purchasingSearch.addEventListener("input", (e) =>
+        renderPurchasingGrid(e.target.value),
+      );
 
       purchasingGrid.addEventListener("click", async (e) => {
         if (
@@ -2139,8 +2371,10 @@
           preencherTudo(itemCatalogo);
           if (existingItem) {
             document.getElementById("beverage-id").value = existingItem.id;
-            document.getElementById("beverage-stock").value = existingItem.estoque || "";
-            document.getElementById("beverage-price").value = existingItem.preco || "";
+            document.getElementById("beverage-stock").value =
+              existingItem.estoque || "";
+            document.getElementById("beverage-price").value =
+              existingItem.preco || "";
             document.getElementById("beverage-available").checked = true;
           } else {
             document.getElementById("beverage-id").value = "";
@@ -2170,11 +2404,18 @@
               : '<span class="unavailable-text">Sugestão de Compra</span>';
             const card = document.createElement("div");
             card.className = "beverage-card";
-            const imgUrl = item.imagemUrl && item.imagemUrl.trim() ? item.imagemUrl.trim() : PLACEHOLDER_IMG;
+            const imgUrl =
+              item.imagemUrl && item.imagemUrl.trim()
+                ? item.imagemUrl.trim()
+                : PLACEHOLDER_IMG;
             card.innerHTML = `<div class="beverage-card-header">${statusTag}<img src="${imgUrl}" alt="${sanitizeForJS(item.nome)}" onerror="this.src='${PLACEHOLDER_IMG}'"><div class="beverage-card-info"><h3>${sanitizeForJS(item.nome)}</h3>${renderDoce(item.nivelDoce || "Seco")}<p>${sanitizeForJS(item.tipo)}</p><p class="beverage-card-summary">"${sanitizeForJS(item.resumoGarcom || item.perfilSabor || "")}"</p></div></div><div class="beverage-card-details"><p><strong>Teor Alcoólico:</strong> ${sanitizeForJS(item.teorAlcoolico || "N/A")}</p><p><strong>Público Alvo:</strong> ${sanitizeForJS(item.publicoAlvo || "N/A")}</p><p><strong>Taça Ideal:</strong> ${sanitizeForJS(item.tacaIdeal || "N/A")}</p><p><strong>Apresentação:</strong> ${sanitizeForJS(item.formaApresentacao || "N/A")}</p><p><strong>Temp. Consumo:</strong> ${sanitizeForJS(item.tempConsumo || "N/A")}</p><p><strong>Temp. Conservação:</strong> ${sanitizeForJS(item.tempConservacao || "N/A")}</p></div>`;
             card.addEventListener("click", () => {
               const isExp = card.classList.contains("expanded");
-              document.querySelectorAll("#reverse-results-list .beverage-card.expanded").forEach((c) => c.classList.remove("expanded"));
+              document
+                .querySelectorAll(
+                  "#reverse-results-list .beverage-card.expanded",
+                )
+                .forEach((c) => c.classList.remove("expanded"));
               if (!isExp) card.classList.add("expanded");
             });
             reverseResultsList.appendChild(card);
@@ -2183,7 +2424,9 @@
       }
 
       btnPorPrato.addEventListener("click", () => {
-        document.querySelector("#waiter-client-screen .header .filters").style.display = "none";
+        document.querySelector(
+          "#waiter-client-screen .header .filters",
+        ).style.display = "none";
         beverageList.style.display = "none";
         dishSearchView.style.display = "block";
         dishGridContainer.style.display = "grid";
@@ -2193,7 +2436,9 @@
 
       backToWinesBtn.addEventListener("click", () => {
         dishSearchView.style.display = "none";
-        document.querySelector("#waiter-client-screen .header .filters").style.display = "flex";
+        document.querySelector(
+          "#waiter-client-screen .header .filters",
+        ).style.display = "flex";
         beverageList.style.display = "grid";
       });
 
@@ -2221,7 +2466,9 @@
         autocompleteList.innerHTML = "";
         autocompleteList.style.display = "none";
         if (val.length < 2) return;
-        const matches = catalogoConhecido.filter((c) => c.nome.toLowerCase().includes(val));
+        const matches = catalogoConhecido.filter((c) =>
+          c.nome.toLowerCase().includes(val),
+        );
         if (matches.length > 0) {
           matches.forEach((m) => {
             const div = document.createElement("div");
@@ -2235,7 +2482,10 @@
       });
 
       document.addEventListener("click", (e) => {
-        if (!e.target.closest(".autocomplete-list") && !e.target.closest("#beverage-name"))
+        if (
+          !e.target.closest(".autocomplete-list") &&
+          !e.target.closest("#beverage-name")
+        )
           autocompleteList.style.display = "none";
       });
 
@@ -2243,60 +2493,77 @@
         autocompleteList.style.display = "none";
         beverageNameInput.value = item.nome;
         document.getElementById("beverage-type").value = item.tipo || "tinto";
-        document.getElementById("beverage-alcohol").value = item.teorAlcoolico || "";
-        document.getElementById("beverage-flavor").value = item.perfilSabor || "";
-        document.getElementById("beverage-sweetness").value = item.nivelDoce || "Seco";
-        document.getElementById("beverage-audience").value = item.publicoAlvo || "iniciante";
-        document.getElementById("beverage-summary").value = item.resumoGarcom || "";
+        document.getElementById("beverage-alcohol").value =
+          item.teorAlcoolico || "";
+        document.getElementById("beverage-flavor").value =
+          item.perfilSabor || "";
+        document.getElementById("beverage-sweetness").value =
+          item.nivelDoce || "Seco";
+        document.getElementById("beverage-audience").value =
+          item.publicoAlvo || "iniciante";
+        document.getElementById("beverage-summary").value =
+          item.resumoGarcom || "";
         document.getElementById("beverage-glass").value = item.tacaIdeal || "";
-        document.getElementById("beverage-presentation").value = item.formaApresentacao || "";
-        document.getElementById("beverage-temp-consume").value = item.tempConsumo || "";
-        document.getElementById("beverage-temp-storage").value = item.tempConservacao || "";
-        harmonizationDropdownContent.querySelectorAll('input[type="checkbox"]').forEach((cb) => (cb.checked = false));
+        document.getElementById("beverage-presentation").value =
+          item.formaApresentacao || "";
+        document.getElementById("beverage-temp-consume").value =
+          item.tempConsumo || "";
+        document.getElementById("beverage-temp-storage").value =
+          item.tempConservacao || "";
+        harmonizationDropdownContent
+          .querySelectorAll('input[type="checkbox"]')
+          .forEach((cb) => (cb.checked = false));
         if (item.pratosDaCasa) {
           item.pratosDaCasa.forEach((ps) => {
-            const cb = harmonizationDropdownContent.querySelector(`input[value="${ps}"]`);
+            const cb = harmonizationDropdownContent.querySelector(
+              `input[value="${ps}"]`,
+            );
             if (cb) cb.checked = true;
           });
           updateHarmonizationSelectedItems(item.pratosDaCasa);
         }
       }
 
-      document.getElementById("btn-upload-img").addEventListener("click", () =>
-        document.getElementById("image-upload").click(),
-      );
+      document
+        .getElementById("btn-upload-img")
+        .addEventListener("click", () =>
+          document.getElementById("image-upload").click(),
+        );
 
-      document.getElementById("image-upload").addEventListener("change", function (e) {
-        const file = e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = function (event) {
-          const img = new Image();
-          img.onload = function () {
-            const canvas = document.createElement("canvas");
-            const MAX_WIDTH = 200;
-            let width = img.width,
-              height = img.height;
-            if (width > height) {
-              if (width > MAX_WIDTH) {
-                height *= MAX_WIDTH / width;
-                width = MAX_WIDTH;
+      document
+        .getElementById("image-upload")
+        .addEventListener("change", function (e) {
+          const file = e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = function (event) {
+            const img = new Image();
+            img.onload = function () {
+              const canvas = document.createElement("canvas");
+              const MAX_WIDTH = 200;
+              let width = img.width,
+                height = img.height;
+              if (width > height) {
+                if (width > MAX_WIDTH) {
+                  height *= MAX_WIDTH / width;
+                  width = MAX_WIDTH;
+                }
+              } else {
+                if (height > MAX_WIDTH) {
+                  width *= MAX_WIDTH / height;
+                  height = MAX_WIDTH;
+                }
               }
-            } else {
-              if (height > MAX_WIDTH) {
-                width *= MAX_WIDTH / height;
-                height = MAX_WIDTH;
-              }
-            }
-            canvas.width = width;
-            canvas.height = height;
-            canvas.getContext("2d").drawImage(img, 0, 0, width, height);
-            document.getElementById("beverage-imageUrl").value = canvas.toDataURL("image/jpeg", 0.5);
+              canvas.width = width;
+              canvas.height = height;
+              canvas.getContext("2d").drawImage(img, 0, 0, width, height);
+              document.getElementById("beverage-imageUrl").value =
+                canvas.toDataURL("image/jpeg", 0.5);
+            };
+            img.src = event.target.result;
           };
-          img.src = event.target.result;
-        };
-        reader.readAsDataURL(file);
-      });
+          reader.readAsDataURL(file);
+        });
 
       loginButton.addEventListener("click", handleLogin);
 
@@ -2374,13 +2641,22 @@
 
       addDishBtn.addEventListener("click", async () => {
         const novoPrato = newDishInput.value.trim();
-        if (novoPrato && !allPratosDaCasa.some((p) => p.toLowerCase() === novoPrato.toLowerCase())) {
+        if (
+          novoPrato &&
+          !allPratosDaCasa.some(
+            (p) => p.toLowerCase() === novoPrato.toLowerCase(),
+          )
+        ) {
           allPratosDaCasa.push(novoPrato);
           newDishInput.value = "";
           await saveCardapioToAPI();
           triggerSync();
           alert(`Prato "${novoPrato}" adicionado!`);
-        } else if (allPratosDaCasa.some((p) => p.toLowerCase() === novoPrato.toLowerCase())) {
+        } else if (
+          allPratosDaCasa.some(
+            (p) => p.toLowerCase() === novoPrato.toLowerCase(),
+          )
+        ) {
           alert("Este prato já existe no cardápio.");
         }
       });
@@ -2394,8 +2670,13 @@
           });
           if (!res.ok) throw new Error("Falha na API");
         } catch (e) {
-          console.warn("Não foi possível salvar no backend. Atualize cardapio.json manualmente.");
-          localStorage.setItem("cardapioLocal", JSON.stringify(allPratosDaCasa));
+          console.warn(
+            "Não foi possível salvar no backend. Atualize cardapio.json manualmente.",
+          );
+          localStorage.setItem(
+            "cardapioLocal",
+            JSON.stringify(allPratosDaCasa),
+          );
         }
         loadCardapioManager();
         loadPratosDaCasa();
@@ -2404,7 +2685,10 @@
       function startClientAutoRefresh() {
         if (clientAutoRefreshInterval) clearInterval(clientAutoRefreshInterval);
         clientAutoRefreshInterval = setInterval(() => {
-          if (document.getElementById("waiter-client-screen").style.display === "block")
+          if (
+            document.getElementById("waiter-client-screen").style.display ===
+            "block"
+          )
             loadBeveragesForClient();
         }, 60000);
       }
