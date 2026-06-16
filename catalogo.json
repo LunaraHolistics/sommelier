@@ -11,7 +11,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "16-18°C",
     "tempConservacao": "14°C",
-    "pratosDaCasa": ["BomBom de Costela (até 3 pessoas)", "Bolinho de Cupim"],
+    "pratosDaCasa": [
+      "BomBom de Costela (até 3 pessoas)",
+      "Bolinho de Cupim"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Malbec"
   },
   {
@@ -44,7 +47,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "14-16°C",
     "tempConservacao": "12°C",
-    "pratosDaCasa": ["Iscas de Tilápia", "Tilápia ao Molho da Casa (serve 2)"],
+    "pratosDaCasa": [
+      "Iscas de Tilápia",
+      "Tilápia ao Molho da Casa (serve 2)"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Pinot%20Noir"
   },
   {
@@ -59,7 +65,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "16-18°C",
     "tempConservacao": "14°C",
-    "pratosDaCasa": ["Galinhada da Fazenda (500g)", "Queijo Coalho Frito"],
+    "pratosDaCasa": [
+      "Galinhada da Fazenda (500g)",
+      "Queijo Coalho Frito"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Merlot"
   },
   {
@@ -74,7 +83,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "18°C",
     "tempConservacao": "14°C",
-    "pratosDaCasa": ["Choripán da Roça", "Linguiça Suína Acebolada"],
+    "pratosDaCasa": [
+      "Choripán da Roça",
+      "Linguiça Suína Acebolada"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Syrah"
   },
   {
@@ -107,7 +119,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "16-18°C",
     "tempConservacao": "14°C",
-    "pratosDaCasa": ["Linguiça Suína Acebolada", "Farofa de Banana"],
+    "pratosDaCasa": [
+      "Linguiça Suína Acebolada",
+      "Farofa de Banana"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Carm%C3%A9n%C3%A8re"
   },
   {
@@ -122,7 +137,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "16-18°C",
     "tempConservacao": "14°C",
-    "pratosDaCasa": ["Coraçõeszinhos da Fazenda", "Farofa de Carne Seca"],
+    "pratosDaCasa": [
+      "Coraçõeszinhos da Fazenda",
+      "Farofa de Carne Seca"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Touriga%20Nacional"
   },
   {
@@ -155,7 +173,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "16-18°C",
     "tempConservacao": "14°C",
-    "pratosDaCasa": ["Macarrão à Bolonhesa", "Tomate Recheado com Catupiry"],
+    "pratosDaCasa": [
+      "Macarrão à Bolonhesa",
+      "Tomate Recheado com Catupiry"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Sangiovese"
   },
   {
@@ -170,7 +191,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "14-16°C",
     "tempConservacao": "12°C",
-    "pratosDaCasa": ["Macarrão à Bolonhesa", "Molho Chimichurri"],
+    "pratosDaCasa": [
+      "Macarrão à Bolonhesa",
+      "Molho Chimichurri"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Barbera"
   },
   {
@@ -185,7 +209,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "18°C",
     "tempConservacao": "14°C",
-    "pratosDaCasa": ["BomBom de Costela (até 3 pessoas)", "Bolinho de Cupim"],
+    "pratosDaCasa": [
+      "BomBom de Costela (até 3 pessoas)",
+      "Bolinho de Cupim"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Tannat"
   },
   {
@@ -200,7 +227,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "16-18°C",
     "tempConservacao": "14°C",
-    "pratosDaCasa": ["Queijo Coalho Frito", "Guacamole"],
+    "pratosDaCasa": [
+      "Queijo Coalho Frito",
+      "Guacamole"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Cabernet%20Franc"
   },
   {
@@ -215,7 +245,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "16-18°C",
     "tempConservacao": "14°C",
-    "pratosDaCasa": ["Arroz Biro Biro", "Mandioca Frita"],
+    "pratosDaCasa": [
+      "Arroz Biro Biro",
+      "Mandioca Frita"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Montepulciano"
   },
   {
@@ -230,7 +263,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "16-18°C",
     "tempConservacao": "14°C",
-    "pratosDaCasa": ["Choripán da Roça", "Lollypop da Fazenda (10un)"],
+    "pratosDaCasa": [
+      "Choripán da Roça",
+      "Lollypop da Fazenda (10un)"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Pinotage"
   },
   {
@@ -263,7 +299,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "16-18°C",
     "tempConservacao": "14°C",
-    "pratosDaCasa": ["Tirinhas de Frango", "Bolinho de Cupim"],
+    "pratosDaCasa": [
+      "Tirinhas de Frango",
+      "Bolinho de Cupim"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Grenache"
   },
   {
@@ -278,7 +317,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "16-18°C",
     "tempConservacao": "14°C",
-    "pratosDaCasa": ["Cumbuca de Feijão", "Farofa de Carne Seca"],
+    "pratosDaCasa": [
+      "Cumbuca de Feijão",
+      "Farofa de Carne Seca"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Bordeaux%20Blend"
   },
   {
@@ -311,7 +353,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "16-18°C",
     "tempConservacao": "14°C",
-    "pratosDaCasa": ["Filé Mignon Gorgonzola (2 pessoas)", "Farofa de Banana"],
+    "pratosDaCasa": [
+      "Filé Mignon Gorgonzola (2 pessoas)",
+      "Farofa de Banana"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Alentejo%20Tinto"
   },
   {
@@ -344,7 +389,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "18°C",
     "tempConservacao": "14°C",
-    "pratosDaCasa": ["Pancetta de Rolo", "BomBom de Costela (até 3 pessoas)"],
+    "pratosDaCasa": [
+      "Pancetta de Rolo",
+      "BomBom de Costela (até 3 pessoas)"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Syrah%20Australiano"
   },
   {
@@ -377,7 +425,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "10-12°C",
     "tempConservacao": "8°C",
-    "pratosDaCasa": ["Camarão Empanado", "Bobó de Camarão (até 2 pessoas)"],
+    "pratosDaCasa": [
+      "Camarão Empanado",
+      "Bobó de Camarão (até 2 pessoas)"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Chardonnay"
   },
   {
@@ -392,7 +443,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "8-10°C",
     "tempConservacao": "8°C",
-    "pratosDaCasa": ["Molho de Abacaxi com Pimenta", "Guacamole"],
+    "pratosDaCasa": [
+      "Molho de Abacaxi com Pimenta",
+      "Guacamole"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Riesling"
   },
   {
@@ -407,7 +461,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "10-12°C",
     "tempConservacao": "10°C",
-    "pratosDaCasa": ["Panquecas Caramelizadas", "Petit Gâteau com Sorvete"],
+    "pratosDaCasa": [
+      "Panquecas Caramelizadas",
+      "Petit Gâteau com Sorvete"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Moscatel%20de%20Set%C3%BAbal"
   },
   {
@@ -422,7 +479,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "8-10°C",
     "tempConservacao": "8°C",
-    "pratosDaCasa": ["Iscas de Tilápia", "Tilápia ao Molho da Casa (serve 2)"],
+    "pratosDaCasa": [
+      "Iscas de Tilápia",
+      "Tilápia ao Molho da Casa (serve 2)"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Pinot%20Grigio"
   },
   {
@@ -437,7 +497,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "8-10°C",
     "tempConservacao": "8°C",
-    "pratosDaCasa": ["Queijo Coalho Frito", "Guacamole"],
+    "pratosDaCasa": [
+      "Queijo Coalho Frito",
+      "Guacamole"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Chenin%20Blanc"
   },
   {
@@ -470,7 +533,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "8-10°C",
     "tempConservacao": "8°C",
-    "pratosDaCasa": ["Guacamole", "Molho de Goiabada com Pimenta"],
+    "pratosDaCasa": [
+      "Guacamole",
+      "Molho de Goiabada com Pimenta"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Gewurztraminer"
   },
   {
@@ -485,7 +551,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "8-10°C",
     "tempConservacao": "8°C",
-    "pratosDaCasa": ["Tomate Recheado com Catupiry", "Guacamole"],
+    "pratosDaCasa": [
+      "Tomate Recheado com Catupiry",
+      "Guacamole"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Pinot%20Blanc"
   },
   {
@@ -500,7 +569,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "10-12°C",
     "tempConservacao": "8°C",
-    "pratosDaCasa": ["Abóbora Recheada (serve 3)", "Cumbuca de Feijão"],
+    "pratosDaCasa": [
+      "Abóbora Recheada (serve 3)",
+      "Cumbuca de Feijão"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Viognier"
   },
   {
@@ -515,7 +587,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "10-12°C",
     "tempConservacao": "8°C",
-    "pratosDaCasa": ["Camarão Empanado", "Panquecas Caramelizadas"],
+    "pratosDaCasa": [
+      "Camarão Empanado",
+      "Panquecas Caramelizadas"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Chardonnay%20Reserva"
   },
   {
@@ -530,7 +605,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "8-10°C",
     "tempConservacao": "8°C",
-    "pratosDaCasa": ["Petit Gâteau com Sorvete", "Panquecas Caramelizadas"],
+    "pratosDaCasa": [
+      "Petit Gâteau com Sorvete",
+      "Panquecas Caramelizadas"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Riesling%20Late%20Harvest"
   },
   {
@@ -545,7 +623,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "6-8°C",
     "tempConservacao": "5°C",
-    "pratosDaCasa": ["Batata Frita", "Queijo Coalho Frito"],
+    "pratosDaCasa": [
+      "Batata Frita",
+      "Queijo Coalho Frito"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Espumante%20Extra%20Brut"
   },
   {
@@ -560,7 +641,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "6-8°C",
     "tempConservacao": "5°C",
-    "pratosDaCasa": ["Batata Frita", "Queijo Coalho Frito"],
+    "pratosDaCasa": [
+      "Batata Frita",
+      "Queijo Coalho Frito"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Espumante%20Ros%C3%A9"
   },
   {
@@ -575,7 +659,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "6-8°C",
     "tempConservacao": "5°C",
-    "pratosDaCasa": ["Panquecas Caramelizadas", "Salada de Frutas com Creme"],
+    "pratosDaCasa": [
+      "Panquecas Caramelizadas",
+      "Salada de Frutas com Creme"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Espumante%20Demi-Sec"
   },
   {
@@ -608,7 +695,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "6-8°C",
     "tempConservacao": "5°C",
-    "pratosDaCasa": ["Bobó de Camarão (até 2 pessoas)", "Camarão Empanado"],
+    "pratosDaCasa": [
+      "Bobó de Camarão (até 2 pessoas)",
+      "Camarão Empanado"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Espumante%20Reserva"
   },
   {
@@ -623,7 +713,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "6-8°C",
     "tempConservacao": "5°C",
-    "pratosDaCasa": ["Petit Gâteau com Sorvete", "Panquecas Caramelizadas"],
+    "pratosDaCasa": [
+      "Petit Gâteau com Sorvete",
+      "Panquecas Caramelizadas"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Espumante%20Sweet"
   },
   {
@@ -638,7 +731,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "6-8°C",
     "tempConservacao": "5°C",
-    "pratosDaCasa": ["Queijo Coalho Frito", "Salada de Frutas com Creme"],
+    "pratosDaCasa": [
+      "Queijo Coalho Frito",
+      "Salada de Frutas com Creme"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Champanhe%20Brut"
   },
   {
@@ -653,7 +749,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "6-8°C",
     "tempConservacao": "5°C",
-    "pratosDaCasa": ["Panquecas Caramelizadas", "Petit Gâteau com Sorvete"],
+    "pratosDaCasa": [
+      "Panquecas Caramelizadas",
+      "Petit Gâteau com Sorvete"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Champanhe%20Ros%C3%A9"
   },
   {
@@ -668,7 +767,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "6-8°C",
     "tempConservacao": "5°C",
-    "pratosDaCasa": ["Panquecas Caramelizadas", "Salada de Frutas com Creme"],
+    "pratosDaCasa": [
+      "Panquecas Caramelizadas",
+      "Salada de Frutas com Creme"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Champanhe%20Demi-Sec"
   },
   {
@@ -683,7 +785,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "6-8°C",
     "tempConservacao": "5°C",
-    "pratosDaCasa": ["Queijo Coalho Frito", "Cumbuca de Feijão"],
+    "pratosDaCasa": [
+      "Queijo Coalho Frito",
+      "Cumbuca de Feijão"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Champanhe%20Vintage"
   },
   {
@@ -716,7 +821,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "6-8°C",
     "tempConservacao": "5°C",
-    "pratosDaCasa": ["Tirinhas de Frango", "Batata Frita"],
+    "pratosDaCasa": [
+      "Tirinhas de Frango",
+      "Batata Frita"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Prosecco"
   },
   {
@@ -731,7 +839,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "6-8°C",
     "tempConservacao": "5°C",
-    "pratosDaCasa": ["Tirinhas de Frango", "Queijo Coalho Frito"],
+    "pratosDaCasa": [
+      "Tirinhas de Frango",
+      "Queijo Coalho Frito"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Prosecco%20Ros%C3%A9"
   },
   {
@@ -764,7 +875,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "6-8°C",
     "tempConservacao": "5°C",
-    "pratosDaCasa": ["Guacamole", "Tirinhas de Frango"],
+    "pratosDaCasa": [
+      "Guacamole",
+      "Tirinhas de Frango"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Prosecco%20Brut"
   },
   {
@@ -779,7 +893,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "6-8°C",
     "tempConservacao": "5°C",
-    "pratosDaCasa": ["Panquecas Caramelizadas", "Petit Gâteau com Sorvete"],
+    "pratosDaCasa": [
+      "Panquecas Caramelizadas",
+      "Petit Gâteau com Sorvete"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Prosecco%20Demi-Sec"
   },
   {
@@ -794,7 +911,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "4-6°C",
     "tempConservacao": "4°C",
-    "pratosDaCasa": ["Batata Frita", "Molho de Pimenta"],
+    "pratosDaCasa": [
+      "Batata Frita",
+      "Molho de Pimenta"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Cidra%20Cereser"
   },
   {
@@ -827,7 +947,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "6-8°C",
     "tempConservacao": "4°C",
-    "pratosDaCasa": ["Salada de Frutas com Creme", "Guacamole"],
+    "pratosDaCasa": [
+      "Salada de Frutas com Creme",
+      "Guacamole"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Cidra%20Artesanal"
   },
   {
@@ -842,7 +965,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "4-6°C",
     "tempConservacao": "4°C",
-    "pratosDaCasa": ["Panquecas Caramelizadas", "Salada de Frutas com Creme"],
+    "pratosDaCasa": [
+      "Panquecas Caramelizadas",
+      "Salada de Frutas com Creme"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Cidra%20de%20Pera"
   },
   {
@@ -857,7 +983,10 @@
     "formaApresentacao": "Dose",
     "tempConsumo": "18°C",
     "tempConservacao": "15°C",
-    "pratosDaCasa": ["Queijo Coalho Frito", "Molho de Goiabada com Pimenta"],
+    "pratosDaCasa": [
+      "Queijo Coalho Frito",
+      "Molho de Goiabada com Pimenta"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Cacha%C3%A7a%20Ouro"
   },
   {
@@ -872,7 +1001,10 @@
     "formaApresentacao": "Dose",
     "tempConsumo": "18°C",
     "tempConservacao": "15°C",
-    "pratosDaCasa": ["Guacamole", "Molho de Pimenta"],
+    "pratosDaCasa": [
+      "Guacamole",
+      "Molho de Pimenta"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Cacha%C3%A7a%20Prata"
   },
   {
@@ -923,7 +1055,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "6-8°C",
     "tempConservacao": "5°C",
-    "pratosDaCasa": ["Batata Frita", "Mini Pastel de Costela (6un)"],
+    "pratosDaCasa": [
+      "Batata Frita",
+      "Mini Pastel de Costela (6un)"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Espumante%20Brut%20Ros%C3%A9"
   },
   {
@@ -938,7 +1073,10 @@
     "formaApresentacao": "Garrafa 750ml",
     "tempConsumo": "6-8°C",
     "tempConservacao": "5°C",
-    "pratosDaCasa": ["Tirinhas de Frango", "Mini Pastel de Costela (6un)"],
+    "pratosDaCasa": [
+      "Tirinhas de Frango",
+      "Mini Pastel de Costela (6un)"
+    ],
     "imagemUrl": "https://placehold.co/200x200/282828/ffd700?text=Prosecco%20Brut%20Ros%C3%A9"
   }
 ]

@@ -22,7 +22,10 @@
       "disponivel": true,
       "estoque": 1,
       "preco": 190,
-      "pratosDaCasa": ["Choripán da Roça", "BomBom de Costela (até 3 pessoas)"]
+      "pratosDaCasa": [
+        "Choripán da Roça",
+        "BomBom de Costela (até 3 pessoas)"
+      ]
     },
     {
       "id": 2,
@@ -42,7 +45,10 @@
       "disponivel": true,
       "estoque": 2,
       "preco": 79.9,
-      "pratosDaCasa": ["Queijo Coalho Frito", "Molho de Goiabada com Pimenta"]
+      "pratosDaCasa": [
+        "Queijo Coalho Frito",
+        "Molho de Goiabada com Pimenta"
+      ]
     }
   ]
 }
