@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "descricao": "Estrutura hierárquica de categorias e subcategorias do cardápio Na Fazenda",
+    "versao": "3.0",
+    "ultimaAtualizacao": "2026-06-18"
+  },
+  "categorias": [
+    {
+      "id": "CAT001",
+      "nome": "Entradas",
+      "descricao": "Pratos de entrada para iniciar a refeição",
+      "subcategorias": [
+        {"id": "SUB001", "nome": "Frango", "pratosIds": ["PRATO001"]},
+        {"id": "SUB002", "nome": "Queijos", "pratosIds": ["PRATO002"]},
+        {"id": "SUB003", "nome": "Tubérculos", "pratosIds": ["PRATO003", "PRATO014", "PRATO015"]},
+        {"id": "SUB004", "nome": "Costela", "pratosIds": ["PRATO004", "PRATO008"]},
+        {"id": "SUB005", "nome": "Camarão", "pratosIds": ["PRATO005"]},
+        {"id": "SUB006", "nome": "Tilápia", "pratosIds": ["PRATO006"]},
+        {"id": "SUB007", "nome": "Carnes Bovinas", "pratosIds": ["PRATO007", "PRATO010"]},
+        {"id": "SUB008", "nome": "Cupim", "pratosIds": ["PRATO009"]},
+        {"id": "SUB009", "nome": "Linguiça", "pratosIds": ["PRATO011", "PRATO012"]},
+        {"id": "SUB010", "nome": "Suínos", "pratosIds": ["PRATO013"]},
+        {"id": "SUB011", "nome": "Degustação", "pratosIds": ["PRATO016"]}
+      ]
+    },
+    {
+      "id": "CAT002",
+      "nome": "Prato Principal",
+      "descricao": "Pratos principais da refeição",
+      "subcategorias": [
+        {"id": "SUB012", "nome": "Vegetariano", "pratosIds": ["PRATO017"]},
+        {"id": "SUB013", "nome": "Fraldinha", "pratosIds": ["PRATO018"]},
+        {"id": "SUB014", "nome": "Arroz Especial", "pratosIds": ["PRATO019", "PRATO020"]},
+        {"id": "SUB015", "nome": "Camarão", "pratosIds": ["PRATO021", "PRATO023"]},
+        {"id": "SUB016", "nome": "Costela", "pratosIds": ["PRATO024"]},
+        {"id": "SUB017", "nome": "Feijoada", "pratosIds": ["PRATO025", "PRATO026"]},
+        {"id": "SUB018", "nome": "Filé Mignon", "pratosIds": ["PRATO027", "PRATO028", "PRATO033"]},
+        {"id": "SUB019", "nome": "Frango", "pratosIds": ["PRATO030"]},
+        {"id": "SUB020", "nome": "Frutos do Mar", "pratosIds": ["PRATO031"]},
+        {"id": "SUB021", "nome": "Peixes", "pratosIds": ["PRATO032", "PRATO037", "PRATO038"]},
+        {"id": "SUB022", "nome": "Picanha", "pratosIds": ["PRATO036"]}
+      ]
+    },
+    {
+      "id": "CAT003",
+      "nome": "Especialidade da Casa",
+      "descricao": "Pratos exclusivos e especiais do Na Fazenda",
+      "subcategorias": [
+        {"id": "SUB023", "nome": "Costela", "pratosIds": ["PRATO022"]},
+        {"id": "SUB024", "nome": "Feijoada", "pratosIds": ["PRATO026"]},
+        {"id": "SUB025", "nome": "Filé Mignon", "pratosIds": ["PRATO029"]}
+      ]
+    },
+    {
+      "id": "CAT004",
+      "nome": "Massas",
+      "descricao": "Massas italianas e especiais",
+      "subcategorias": [
+        {"id": "SUB026", "nome": "Massa Italiana", "pratosIds": ["PRATO034", "PRATO035"]}
+      ]
+    },
+    {
+      "id": "CAT005",
+      "nome": "Vegetariano",
+      "descricao": "Pratos vegetarianos",
+      "subcategorias": [
+        {"id": "SUB027", "nome": "Vegetariano", "pratosIds": ["PRATO039"]}
+      ]
+    },
+    {
+      "id": "CAT006",
+      "nome": "Sobremesas",
+      "descricao": "Sobremesas doces",
+      "subcategorias": [
+        {"id": "SUB028", "nome": "Sobremesa", "pratosIds": ["PRATO040", "PRATO041", "PRATO042"]}
+      ]
+    },
+    {
+      "id": "CAT007",
+      "nome": "Acompanhamentos",
+      "descricao": "Acompanhamentos para os pratos principais",
+      "subcategorias": [
+        {"id": "SUB029", "nome": "Arroz Especial", "pratosIds": ["PRATO043"]},
+        {"id": "SUB030", "nome": "Feijão", "pratosIds": ["PRATO044"]},
+        {"id": "SUB031", "nome": "Farofa", "pratosIds": ["PRATO045", "PRATO046", "PRATO047"]},
+        {"id": "SUB032", "nome": "Vegetariano", "pratosIds": ["PRATO048", "PRATO049", "PRATO050", "PRATO051"]}
+      ]
+    },
+    {
+      "id": "CAT008",
+      "nome": "Molhos",
+      "descricao": "Molhos e condimentos",
+      "subcategorias": [
+        {"id": "SUB033", "nome": "Molho", "pratosIds": ["PRATO052", "PRATO053", "PRATO054", "PRATO055"]}
+      ]
+    }
+  ]
+}

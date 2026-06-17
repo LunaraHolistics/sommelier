@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "descricao": "Sistema de tags para classificação e busca de pratos no cardápio Na Fazenda",
+    "versao": "3.0",
+    "ultimaAtualizacao": "2026-06-18"
+  },
+  "tags": {
+    "porIngredientePrincipal": {
+      "frango": ["PRATO001", "PRATO007", "PRATO030"],
+      "queijo": ["PRATO002", "PRATO023", "PRATO027", "PRATO050"],
+      "mandioca": ["PRATO003", "PRATO017", "PRATO024"],
+      "costela": ["PRATO004", "PRATO008", "PRATO022", "PRATO024", "PRATO035"],
+      "camarão": ["PRATO005", "PRATO021", "PRATO023"],
+      "tilápia": ["PRATO006", "PRATO037", "PRATO038"],
+      "coração": ["PRATO007"],
+      "cupim": ["PRATO009"],
+      "linguiça": ["PRATO011", "PRATO012"],
+      "pancetta": ["PRATO013"],
+      "batata": ["PRATO014", "PRATO015"],
+      "abóbora": ["PRATO017", "PRATO023"],
+      "fraldinha": ["PRATO018", "PRATO035"],
+      "arroz": ["PRATO018", "PRATO019", "PRATO020", "PRATO030", "PRATO043"],
+      "carne_seca": ["PRATO017", "PRATO019", "PRATO020", "PRATO046"],
+      "feijão": ["PRATO025", "PRATO026", "PRATO044"],
+      "filé_mignon": ["PRATO027", "PRATO028", "PRATO029", "PRATO033"],
+      "picanha": ["PRATO036"],
+      "peixe": ["PRATO032", "PRATO037", "PRATO038"],
+      "chocolate": ["PRATO041"],
+      "frutas": ["PRATO042"],
+      "banana": ["PRATO045"],
+      "berinjela": ["PRATO048"],
+      "abacate": ["PRATO049"],
+      "tomate": ["PRATO050"],
+      "manga": ["PRATO051"],
+      "abacaxi": ["PRATO053"],
+      "goiabada": ["PRATO055"]
+    },
+    "porTipoPreparo": {
+      "frito": ["PRATO001", "PRATO002", "PRATO003", "PRATO004", "PRATO005", "PRATO006", "PRATO008", "PRATO009", "PRATO014", "PRATO015"],
+      "grelhado": ["PRATO007", "PRATO010", "PRATO011", "PRATO012", "PRATO013", "PRATO029", "PRATO036", "PRATO037", "PRATO038"],
+      "cozido": ["PRATO018", "PRATO020", "PRATO021", "PRATO025", "PRATO026", "PRATO030", "PRATO031", "PRATO032"],
+      "assado": ["PRATO017", "PRATO023", "PRATO033"],
+      "empanado": ["PRATO001", "PRATO005", "PRATO006", "PRATO022", "PRATO033"],
+      "gratinado": ["PRATO017", "PRATO024", "PRATO033"]
+    },
+    "porCaracteristica": {
+      "crocante": ["PRATO001", "PRATO002", "PRATO003", "PRATO005", "PRATO014", "PRATO045", "PRATO047"],
+      "cremoso": ["PRATO015", "PRATO021", "PRATO023", "PRATO027", "PRATO028", "PRATO031", "PRATO032", "PRATO044", "PRATO050"],
+      "intenso": ["PRATO028", "PRATO054"],
+      "leve": ["PRATO038", "PRATO039", "PRATO042", "PRATO047"],
+      "doce": ["PRATO040", "PRATO041", "PRATO042", "PRATO045", "PRATO053", "PRATO055"],
+      "picante": ["PRATO053", "PRATO054", "PRATO055"],
+      "agridoce": ["PRATO053", "PRATO055"],
+      "cítrico": ["PRATO038", "PRATO049", "PRATO051"]
+    },
+    "porOrigem": {
+      "brasileiro": ["PRATO003", "PRATO008", "PRATO011", "PRATO018", "PRATO019", "PRATO020", "PRATO025", "PRATO026", "PRATO030", "PRATO031", "PRATO032", "PRATO044", "PRATO055"],
+      "argentino": ["PRATO011", "PRATO052"],
+      "italiano": ["PRATO013", "PRATO033", "PRATO034", "PRATO035"],
+      "gaúcho": ["PRATO019", "PRATO020"],
+      "mineiro": ["PRATO030"],
+      "baiano": ["PRATO021", "PRATO031", "PRATO032"],
+      "mexicano": ["PRATO049"],
+      "roça": ["PRATO007", "PRATO011", "PRATO030", "PRATO039", "PRATO046"]
+    },
+    "porOcasião": {
+      "compartilhar": ["PRATO002", "PRATO003", "PRATO004", "PRATO005", "PRATO006", "PRATO007", "PRATO008", "PRATO009", "PRATO010", "PRATO012", "PRATO013", "PRATO014", "PRATO015", "PRATO016", "PRATO017", "PRATO018", "PRATO020", "PRATO021", "PRATO022", "PRATO023", "PRATO024", "PRATO026", "PRATO027", "PRATO028", "PRATO030", "PRATO031", "PRATO032", "PRATO033", "PRATO036", "PRATO037", "PRATO043", "PRATO044", "PRATO045", "PRATO046", "PRATO047", "PRATO048", "PRATO049", "PRATO050", "PRATO051", "PRATO052", "PRATO053", "PRATO054", "PRATO055"],
+      "individual": ["PRATO001", "PRATO011", "PRATO019", "PRATO025", "PRATO034", "PRATO035", "PRATO038", "PRATO039", "PRATO040", "PRATO041", "PRATO042"],
+      "especialidade": ["PRATO010", "PRATO016", "PRATO022", "PRATO026", "PRATO029", "PRATO031"],
+      "conforto": ["PRATO018", "PRATO024", "PRATO025", "PRATO026", "PRATO030"],
+      "gourmet": ["PRATO023", "PRATO029", "PRATO031"],
+      "experiência": ["PRATO016", "PRATO022"]
+    },
+    "porNivelHarmonização": {
+      "baixo": ["PRATO003", "PRATO014", "PRATO045", "PRATO047", "PRATO051"],
+      "medio": ["PRATO001", "PRATO002", "PRATO006", "PRATO015", "PRATO039", "PRATO043", "PRATO044", "PRATO048", "PRATO049", "PRATO050", "PRATO052", "PRATO053", "PRATO054", "PRATO055"],
+      "alto": ["PRATO004", "PRATO005", "PRATO007", "PRATO008", "PRATO009", "PRATO010", "PRATO011", "PRATO012", "PRATO013", "PRATO017", "PRATO018", "PRATO019", "PRATO020", "PRATO024", "PRATO025", "PRATO030", "PRATO032", "PRATO034", "PRATO035", "PRATO037", "PRATO038", "PRATO040"],
+      "premium": ["PRATO016", "PRATO021", "PRATO022", "PRATO023", "PRATO026", "PRATO027", "PRATO028", "PRATO029", "PRATO031", "PRATO033", "PRATO036", "PRATO041", "PRATO042"]
+    },
+    "porCategoriaBebida": {
+      "tinto": ["PRATO004", "PRATO007", "PRATO008", "PRATO009", "PRATO010", "PRATO011", "PRATO012", "PRATO013", "PRATO018", "PRATO019", "PRATO020", "PRATO022", "PRATO024", "PRATO025", "PRATO026", "PRATO027", "PRATO028", "PRATO029", "PRATO033", "PRATO035", "PRATO036", "PRATO043", "PRATO044", "PRATO046", "PRATO052"],
+      "branco": ["PRATO001", "PRATO003", "PRATO005", "PRATO006", "PRATO017", "PRATO021", "PRATO023", "PRATO030", "PRATO031", "PRATO032", "PRATO034", "PRATO037", "PRATO038", "PRATO039", "PRATO043", "PRATO045", "PRATO047", "PRATO048", "PRATO049", "PRATO050", "PRATO051"],
+      "espumante": ["PRATO002", "PRATO003", "PRATO005", "PRATO012", "PRATO014", "PRATO016", "PRATO017", "PRATO021", "PRATO031", "PRATO032", "PRATO034", "PRATO037", "PRATO038", "PRATO039", "PRATO040", "PRATO041", "PRATO042", "PRATO045", "PRATO047", "PRATO048", "PRATO049", "PRATO050", "PRATO051", "PRATO053", "PRATO054", "PRATO055"],
+      "rose": ["PRATO001", "PRATO006", "PRATO039"],
+      "sobremesa": ["PRATO040", "PRATO041", "PRATO042", "PRATO045", "PRATO053", "PRATO054", "PRATO055"]
+    }
+  }
+}
