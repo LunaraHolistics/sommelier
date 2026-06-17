@@ -17,7 +17,7 @@
     "express",
     "api"
   ],
-  "author": "ClBIffe",
+  "author": "ClBiffe",
   "license": "ISC",
   "dependencies": {
     "compression": "^1.8.1",
