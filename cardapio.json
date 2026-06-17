@@ -35,7 +35,17 @@
       "Molho de Pimenta",
       "Molho Chimichurri"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Frango"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO002",
@@ -71,7 +81,17 @@
       "Molho de Pimenta",
       "Vinagrete de Manga"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Laticínio"
+    ],
+    "tecnicasPreparo": [
+      "Frito"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO003",
@@ -108,7 +128,17 @@
       "Molho Chimichurri",
       "Molho de Pimenta"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Frito"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO004",
@@ -145,7 +175,17 @@
       "Molho Chimichurri",
       "Molho de Pimenta"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Carne Bovina"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO005",
@@ -182,7 +222,17 @@
       "Molho de Pimenta",
       "Vinagrete de Manga"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Frutos do Mar"
+    ],
+    "tecnicasPreparo": [
+      "Empanado"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO006",
@@ -219,7 +269,17 @@
       "Molho de Pimenta",
       "Vinagrete de Manga"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Peixe"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO007",
@@ -257,7 +317,17 @@
       "Farofa de Carne Seca",
       "Vinagrete de Manga"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO008",
@@ -294,7 +364,17 @@
       "Molho de Pimenta",
       "Vinagrete de Manga"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Carne Bovina"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO009",
@@ -331,7 +411,17 @@
       "Molho Chimichurri",
       "Molho de Pimenta"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Carne Bovina"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO010",
@@ -368,7 +458,17 @@
       "Molho Chimichurri",
       "Farofa de Carne Seca"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO011",
@@ -407,7 +507,17 @@
       "Vinagrete de Manga",
       "Molho de Pimenta"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO012",
@@ -445,7 +555,17 @@
       "Molho de Pimenta",
       "Vinagrete de Manga"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Suína"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO013",
@@ -482,7 +602,17 @@
       "Molho Chimichurri",
       "Escabeche de Berinjela"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO014",
@@ -519,7 +649,17 @@
       "Molho de Pimenta",
       "Ketchup"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Frito"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO015",
@@ -556,7 +696,17 @@
     "acompanha": [
       "Molho de Pimenta"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Suína"
+    ],
+    "tecnicasPreparo": [
+      "Frito"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO016",
@@ -596,7 +746,17 @@
       "Molho de Pimenta",
       "Vinagrete de Manga"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO017",
@@ -634,7 +794,17 @@
       "Arroz Biro Biro",
       "Farofa de Banana"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO018",
@@ -671,7 +841,17 @@
       "Farofa de Carne Seca",
       "Vinagrete de Manga"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO019",
@@ -708,7 +888,17 @@
       "Farofa de Carne Seca",
       "Cumbuca de Feijão"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO020",
@@ -745,7 +935,17 @@
       "Farofa de Carne Seca",
       "Cumbuca de Feijão"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO021",
@@ -784,7 +984,17 @@
       "Arroz Branco",
       "Farofa de Banana"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Frutos do Mar"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO022",
@@ -822,7 +1032,17 @@
       "Farofa de Carne Seca",
       "Vinagrete de Manga"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Carne Bovina"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO023",
@@ -860,7 +1080,18 @@
       "Arroz Branco",
       "Farofa de Banana"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Frutos do Mar",
+      "Laticínio"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO024",
@@ -898,7 +1129,17 @@
       "Farofa de Carne Seca",
       "Vinagrete de Manga"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Carne Bovina"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO025",
@@ -937,7 +1178,17 @@
       "Couve",
       "Laranja"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO026",
@@ -976,7 +1227,17 @@
       "Couve",
       "Laranja"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO027",
@@ -1014,7 +1275,17 @@
       "Batata Frita",
       "Farofa de Banana"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Carne Bovina"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO028",
@@ -1052,7 +1323,17 @@
       "Batata Frita",
       "Farofa de Banana"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Carne Bovina"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO029",
@@ -1089,7 +1370,17 @@
       "Batata Frita",
       "Farofa de Banana"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Carne Bovina"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO030",
@@ -1127,7 +1418,17 @@
       "Farofa de Banana",
       "Cumbuca de Feijão"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO031",
@@ -1166,7 +1467,17 @@
       "Farofa de Banana",
       "Pirão"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO032",
@@ -1205,7 +1516,17 @@
       "Farofa de Banana",
       "Pirão"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Peixe"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO033",
@@ -1244,7 +1565,17 @@
       "Batata Frita",
       "Espaguete"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Carne Bovina"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO034",
@@ -1281,7 +1612,17 @@
     "acompanha": [
       "Escabeche de Berinjela"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO035",
@@ -1318,7 +1659,17 @@
     "acompanha": [
       "Queijo Parmesão Ralado"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO036",
@@ -1355,7 +1706,17 @@
       "Vinagrete de Manga",
       "Molho Chimichurri"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Carne Bovina"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO037",
@@ -1393,7 +1754,17 @@
       "Farofa de Banana",
       "Legumes Grelhados"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Peixe"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO038",
@@ -1431,7 +1802,17 @@
       "Arroz Branco",
       "Legumes Grelhados"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Peixe"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO039",
@@ -1468,7 +1849,17 @@
       "Arroz Branco",
       "Escabeche de Berinjela"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO040",
@@ -1505,7 +1896,17 @@
       "Sorvete de Creme",
       "Calda de Caramelo"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO041",
@@ -1544,7 +1945,17 @@
       "Sorvete de Creme",
       "Calda de Chocolate"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO042",
@@ -1582,7 +1993,17 @@
       "Granola",
       "Mel"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO043",
@@ -1617,7 +2038,17 @@
       "Trapiche Vineyards Malbec"
     ],
     "acompanha": [],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO044",
@@ -1654,7 +2085,17 @@
       "Torresmo",
       "Couve Refogada"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO045",
@@ -1688,7 +2129,17 @@
       "Casa Valduga 130 Chardonnay"
     ],
     "acompanha": [],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO046",
@@ -1722,7 +2173,17 @@
       "Montes Alpha Cabernet Sauvignon"
     ],
     "acompanha": [],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Carne Bovina"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO047",
@@ -1756,7 +2217,17 @@
       "Miolo Terroir Chardonnay"
     ],
     "acompanha": [],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO048",
@@ -1791,7 +2262,17 @@
       "Casa Valduga Arte Brut"
     ],
     "acompanha": [],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO049",
@@ -1830,7 +2311,17 @@
       "Chips de Milho",
       "Totopos"
     ],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO050",
@@ -1864,7 +2355,17 @@
       "Tignanello"
     ],
     "acompanha": [],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO051",
@@ -1900,7 +2401,17 @@
       "Chandon Brut"
     ],
     "acompanha": [],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO052",
@@ -1936,7 +2447,17 @@
       "Bodega Garzón Single Vineyard Tannat"
     ],
     "acompanha": [],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Umami",
+      "Especiarias"
+    ]
   },
   {
     "id": "PRATO053",
@@ -1971,7 +2492,16 @@
       "Miolo Moscatel"
     ],
     "acompanha": [],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Picante"
+    ]
   },
   {
     "id": "PRATO054",
@@ -2005,7 +2535,16 @@
       "Domaine Zind-Humboldt Riesling"
     ],
     "acompanha": [],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Picante"
+    ]
   },
   {
     "id": "PRATO055",
@@ -2039,6 +2578,15 @@
       "Taylor's Ruby Port"
     ],
     "acompanha": [],
-    "status": "ativo"
+    "status": "ativo",
+    "proteinas": [
+      "Vegetal"
+    ],
+    "tecnicasPreparo": [
+      "Preparo da Casa"
+    ],
+    "saboresDominantes": [
+      "Picante"
+    ]
   }
 ]
