@@ -3,11 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- PWA Meta Tags -->
+    <title>Vinho em Mãos - Gerenciamento</title>
+    <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#ffd700" />
     <meta name="description" content="Sistema de gestão de cartas de vinhos" />
-
-    <!-- iOS Meta Tags -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta
       name="apple-mobile-web-app-status-bar-style"
@@ -15,12 +14,8 @@
     />
     <meta name="apple-mobile-web-app-title" content="Vinho em Mãos" />
     <link rel="apple-touch-icon" href="/icon-180.png" />
-
-    <!-- Android/Chrome -->
-    <link rel="manifest" href="/manifest.json" />
     <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
     <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
-    <title>Vinho em Mãos - Gerenciamento</title>
     <style>
       :root {
         --bg-color: #1a1a1a;
@@ -35,6 +30,10 @@
         --success-color: #2ecc71;
         --warning-color: #e67e22;
         --danger-color: #e74c3c;
+      }
+
+      * {
+        box-sizing: border-box;
       }
 
       body {
@@ -367,12 +366,6 @@
         font-weight: bold;
       }
 
-      #cardapio-tab .cardapio-manager {
-        background-color: var(--input-bg);
-        padding: 20px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-      }
       #cardapio-tab .cardapio-list {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -600,6 +593,7 @@
         margin-right: 10px;
       }
 
+      /* === NOVO: ESTILOS DA TELA DO GARÇOM V2.0 === */
       #waiter-client-screen {
         display: none;
         width: 100%;
@@ -613,18 +607,41 @@
         margin-bottom: 20px;
         padding-bottom: 10px;
         border-bottom: 1px solid var(--border-color);
+        gap: 10px;
       }
       #waiter-client-screen .logo {
         color: var(--primary-color);
         font-size: 1.8em;
         font-weight: bold;
-        margin-right: 20px;
+        margin-right: 10px;
+        flex-shrink: 0;
       }
+
+      /* Busca por nome */
+      .search-bar {
+        width: 100%;
+        max-width: 400px;
+        padding: 10px 15px;
+        border-radius: 25px;
+        border: 1px solid var(--border-color);
+        background-color: var(--input-bg);
+        color: var(--text-color);
+        font-size: 1em;
+        outline: none;
+        transition: border-color 0.3s ease;
+      }
+      .search-bar:focus {
+        border-color: var(--primary-color);
+      }
+
+      /* Filtros */
       #waiter-client-screen .filters {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
+        gap: 8px;
         align-items: center;
+        flex: 1;
+        justify-content: flex-start;
       }
       #waiter-client-screen .filter-button {
         background-color: var(--input-bg);
@@ -636,36 +653,92 @@
         transition:
           background-color 0.3s ease,
           color 0.3s ease;
+        font-size: 0.9em;
+        white-space: nowrap;
       }
       #waiter-client-screen .filter-button.active,
       #waiter-client-screen .filter-button:hover {
         background-color: var(--primary-color);
         color: var(--bg-color);
       }
+
+      /* Filtro de origem */
+      .origin-filter {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        background-color: var(--input-bg);
+        padding: 5px 10px;
+        border-radius: 20px;
+        border: 1px solid var(--border-color);
+      }
+      .origin-filter select {
+        background-color: var(--input-bg);
+        color: var(--text-color);
+        border: 1px solid var(--border-color);
+        border-radius: 15px;
+        padding: 5px 10px;
+        font-size: 0.9em;
+        cursor: pointer;
+        outline: none;
+      }
+      .origin-filter select:focus {
+        border-color: var(--primary-color);
+      }
+
+      /* Toggle Sommelier */
+      .sommelier-toggle {
+        font-size: 1.5em;
+        cursor: pointer;
+        user-select: none;
+        transition: transform 0.3s ease;
+        display: inline-block;
+        padding: 5px;
+      }
+      .sommelier-toggle:hover {
+        transform: scale(1.2);
+      }
+      .sommelier-toggle.expert-mode {
+        animation: pulse 0.5s ease;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.3);
+        }
+      }
+
+      /* Cards de bebidas */
       #beverage-list {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 20px;
         margin-top: 20px;
       }
       .beverage-card {
         background-color: var(--card-bg);
         border: 1px solid var(--card-border);
-        border-radius: 8px;
+        border-radius: 10px;
         overflow: hidden;
         cursor: pointer;
         transition:
           transform 0.2s ease-in-out,
-          box-shadow 0.2s ease-in-out;
+          box-shadow 0.2s ease-in-out,
+          max-height 0.5s ease;
         position: relative;
       }
       .beverage-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
       }
       .beverage-card.unavailable {
         opacity: 0.7;
       }
+
+      /* Modo Cliente (padrão) */
       .beverage-card-header {
         display: flex;
         align-items: center;
@@ -675,11 +748,12 @@
         position: relative;
       }
       .beverage-card-header img {
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
         object-fit: cover;
-        border-radius: 4px;
+        border-radius: 8px;
         margin-right: 15px;
+        background-color: var(--input-bg);
       }
       .beverage-card-info {
         flex-grow: 1;
@@ -688,56 +762,48 @@
       .beverage-card-info h3 {
         margin: 0 0 5px 0;
         color: var(--primary-color);
-        font-size: 1.2em;
+        font-size: 1.1em;
       }
-      .beverage-card-info p {
-        margin: 0;
-        font-size: 0.9em;
-        color: var(--text-color);
+      .beverage-card-info .subtitle {
+        font-size: 0.85em;
+        color: #aaa;
+        margin-bottom: 5px;
+      }
+      .beverage-card-info .price {
+        color: var(--primary-color);
+        font-weight: bold;
+        font-size: 1.1em;
+        margin-top: 5px;
       }
       .beverage-card-summary {
         font-style: italic;
-        font-size: 0.95em;
-        margin-top: 5px;
+        font-size: 0.9em;
+        margin-top: 8px;
         color: #ccc;
+        line-height: 1.4;
       }
-      .beverage-card-details {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.5s ease-out;
-        padding: 0 15px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-        text-align: left;
-      }
-      .beverage-card.expanded .beverage-card-details {
-        max-height: 500px;
-        padding: 15px;
-      }
-      .beverage-card-details p strong {
-        color: var(--primary-color);
-      }
+
+      /* Tags de status */
       .available-tag {
         position: absolute;
-        top: 5px;
-        right: 5px;
+        top: 8px;
+        right: 8px;
         background-color: var(--success-color);
         color: #fff;
-        padding: 3px 8px;
-        border-radius: 5px;
+        padding: 4px 10px;
+        border-radius: 12px;
         font-size: 0.7em;
         font-weight: bold;
         z-index: 1;
       }
       .unavailable-text {
         position: absolute;
-        top: 5px;
-        right: 5px;
+        top: 8px;
+        right: 8px;
         background-color: var(--warning-color);
         color: #fff;
-        padding: 3px 8px;
-        border-radius: 5px;
+        padding: 4px 10px;
+        border-radius: 12px;
         font-size: 0.7em;
         font-weight: bold;
         white-space: nowrap;
@@ -745,23 +811,24 @@
       }
       .catalog-only-tag {
         position: absolute;
-        top: 5px;
-        right: 5px;
-        background-color: #555;
+        top: 8px;
+        right: 8px;
+        background-color: #666;
         color: #ccc;
-        padding: 3px 8px;
-        border-radius: 5px;
+        padding: 4px 10px;
+        border-radius: 12px;
         font-size: 0.7em;
         font-weight: bold;
         white-space: nowrap;
         z-index: 1;
       }
 
+      /* Indicador de doçura */
       .sweetness-container {
         display: flex;
         align-items: center;
         gap: 4px;
-        margin: 2px 0 5px 0;
+        margin: 5px 0;
       }
       .sweetness-label {
         font-size: 10px;
@@ -784,24 +851,145 @@
         border-color: #d4af37;
       }
 
-      .harmonization-chips {
-        grid-column: 1 / -1;
-        margin-top: 10px;
-        padding-top: 10px;
-        border-top: 1px solid var(--card-border);
+      /* === MODO SOMMELIER (Expandido) === */
+      .sommelier-details {
+        max-height: 0;
+        overflow: hidden;
+        transition:
+          max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+          padding 0.3s ease;
+        padding: 0 15px;
         text-align: left;
       }
-      .harmonization-chips span {
-        display: inline-block;
-        background-color: var(--input-bg);
+      .beverage-card.expert-mode .sommelier-details {
+        max-height: 2000px;
+        padding: 15px;
+      }
+      .sommelier-section {
+        margin-bottom: 15px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .sommelier-section:last-child {
+        border-bottom: none;
+      }
+      .sommelier-section h4 {
         color: var(--primary-color);
-        padding: 5px 10px;
-        border-radius: 15px;
-        margin-right: 5px;
-        margin-bottom: 5px;
-        font-size: 0.8em;
+        margin: 0 0 8px 0;
+        font-size: 0.95em;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .sommelier-section p,
+      .sommelier-section li {
+        margin: 5px 0;
+        font-size: 0.9em;
+        color: #ddd;
+        line-height: 1.5;
+      }
+      .sommelier-section ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .sommelier-section li {
+        padding-left: 15px;
+        position: relative;
+      }
+      .sommelier-section li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: var(--primary-color);
       }
 
+      /* Chips de harmonização */
+      .harmonization-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 8px;
+      }
+      .harmonization-chips .chip {
+        background-color: var(--input-bg);
+        color: var(--primary-color);
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 0.8em;
+        border: 1px solid var(--border-color);
+      }
+      .harmonization-chips .chip.secondary {
+        background-color: transparent;
+        color: #aaa;
+        border-color: #555;
+      }
+
+      /* Ficha técnica */
+      .tech-specs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        font-size: 0.85em;
+      }
+      .tech-specs .spec-item {
+        display: flex;
+        flex-direction: column;
+      }
+      .tech-specs .spec-label {
+        color: #888;
+        font-size: 0.8em;
+      }
+      .tech-specs .spec-value {
+        color: #ddd;
+      }
+
+      /* Perguntas frequentes */
+      .faq-item {
+        margin-bottom: 8px;
+      }
+      .faq-question {
+        color: var(--primary-color);
+        font-weight: bold;
+        font-size: 0.85em;
+        margin-bottom: 3px;
+      }
+      .faq-answer {
+        color: #bbb;
+        font-size: 0.85em;
+        line-height: 1.4;
+      }
+
+      /* Frase de venda em destaque */
+      .sales-phrase {
+        background-color: rgba(255, 215, 0, 0.1);
+        border-left: 3px solid var(--primary-color);
+        padding: 10px 12px;
+        margin: 10px 0;
+        border-radius: 0 8px 8px 0;
+        font-style: italic;
+        color: #eee;
+        font-size: 0.95em;
+        line-height: 1.5;
+      }
+
+      /* Aromas como chips */
+      .aroma-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-top: 5px;
+      }
+      .aroma-chip {
+        background-color: rgba(255, 215, 0, 0.15);
+        color: var(--primary-color);
+        padding: 3px 8px;
+        border-radius: 10px;
+        font-size: 0.75em;
+        border: 1px solid rgba(255, 215, 0, 0.3);
+      }
+
+      /* Busca Reversa (Por Prato) */
       #dish-search-view {
         display: none;
         margin-top: 20px;
@@ -861,6 +1049,7 @@
         font-size: 1.1em;
       }
 
+      /* Manual do Sommelier (botão flutuante) */
       #sommelier-manual-button {
         position: fixed;
         bottom: 20px;
@@ -914,6 +1103,7 @@
         color: var(--primary-color);
       }
 
+      /* Autocomplete e Upload */
       .autocomplete-list {
         position: absolute;
         top: 100%;
@@ -958,10 +1148,36 @@
         white-space: nowrap;
         margin: 0;
       }
+
+      /* Responsividade */
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+          width: 95%;
+        }
+        #waiter-client-screen .header {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        #waiter-client-screen .logo {
+          margin-right: 0;
+          margin-bottom: 10px;
+        }
+        .search-bar {
+          max-width: 100%;
+        }
+        #beverage-list {
+          grid-template-columns: 1fr;
+        }
+        .tech-specs {
+          grid-template-columns: 1fr;
+        }
+      }
     </style>
   </head>
   <body>
     <div class="container">
+      <!-- Login Screen -->
       <div id="login-screen">
         <h1>Vinho em Mãos</h1>
         <form id="login-form" style="width: 100%">
@@ -980,6 +1196,7 @@
           Área Restrita
         </div>
 
+        <!-- Manager Login Form -->
         <div id="manager-login-form">
           <h2>Login de Gerente</h2>
           <form id="manager-form">
@@ -997,6 +1214,7 @@
         </div>
       </div>
 
+      <!-- Manager Screen -->
       <div id="manager-screen">
         <div class="manager-header">
           <h1>Painel de Gerenciamento</h1>
@@ -1073,9 +1291,16 @@
         </div>
       </div>
 
+      <!-- Waiter/Client Screen -->
       <div id="waiter-client-screen">
         <div class="header">
           <div class="logo">Vinho em Mãos</div>
+          <input
+            type="text"
+            class="search-bar"
+            id="search-bar"
+            placeholder="🔍 Buscar por nome..."
+          />
           <div class="filters">
             <button class="filter-button active" data-filter="all">
               Todos
@@ -1095,6 +1320,23 @@
             <button class="filter-button" data-filter="cachaça">Cachaça</button>
             <button class="filter-button" data-filter="seco">Seco</button>
             <button class="filter-button" data-filter="doce">Doce</button>
+
+            <!-- Filtro de Origem -->
+            <div class="origin-filter">
+              <select id="origin-filter">
+                <option value="all">Origem</option>
+                <option value="nacional">🇧🇷 Nacional</option>
+                <option value="importado">🌐 Importado</option>
+              </select>
+            </div>
+
+            <!-- Filtro de País (dinâmico) -->
+            <div class="origin-filter">
+              <select id="country-filter" style="display: none">
+                <option value="all">Todos os países</option>
+              </select>
+            </div>
+
             <button
               class="filter-button"
               id="btn-por-prato"
@@ -1108,21 +1350,23 @@
             <button
               class="refresh-data-btn"
               id="refresh-client-data"
-              style="margin-left: 15px; padding: 8px 15px; font-size: 0.9em"
+              style="margin-left: 5px; padding: 8px 15px; font-size: 0.9em"
             >
               🔄 Atualizar
             </button>
             <button
               class="logout-btn"
               id="client-logout"
-              style="margin-left: 10px; padding: 8px 16px"
+              style="margin-left: 5px; padding: 8px 16px"
             >
               🚪 Sair
             </button>
           </div>
         </div>
+
         <div id="beverage-list"></div>
 
+        <!-- Tela de Busca Reversa -->
         <div id="dish-search-view">
           <button id="back-to-wines-btn">← Voltar para Bebidas</button>
           <h2 style="margin-top: 0">Escolha um Prato</h2>
@@ -1140,6 +1384,7 @@
           ></div>
         </div>
 
+        <!-- Botão flutuante do Manual -->
         <button id="sommelier-manual-button">📚</button>
         <div id="sommelier-manual-content">
           <h3>Manual do Sommelier</h3>
@@ -1170,6 +1415,7 @@
         </div>
       </div>
 
+      <!-- Modal Adicionar/Editar Bebida -->
       <div id="beverage-form-modal" style="display: none">
         <div class="modal-content">
           <span class="close-button">&times;</span>
@@ -1197,8 +1443,8 @@
               />
             </div>
             <div>
-              <label for="beverage-type">Tipo:</label
-              ><select id="beverage-type" name="tipo" required>
+              <label for="beverage-type">Tipo:</label>
+              <select id="beverage-type" name="tipo" required>
                 <option value="tinto">Tinto</option>
                 <option value="branco">Branco</option>
                 <option value="prosecco">Prosecco</option>
@@ -1209,8 +1455,8 @@
               </select>
             </div>
             <div>
-              <label for="beverage-origin">Origem:</label
-              ><select id="beverage-origin" name="origem" required>
+              <label for="beverage-origin">Origem:</label>
+              <select id="beverage-origin" name="origem" required>
                 <option value="nacional">Nacional</option>
                 <option value="importado">Importado</option>
               </select>
@@ -1223,12 +1469,14 @@
                   id="beverage-imageUrl"
                   name="imagemUrl"
                   placeholder="URL ou use o botão ao lado"
-                /><input
+                />
+                <input
                   type="file"
                   id="image-upload"
                   accept="image/*"
                   style="display: none"
-                /><button type="button" id="btn-upload-img">Enviar Foto</button>
+                />
+                <button type="button" id="btn-upload-img">Enviar Foto</button>
               </div>
             </div>
             <div>
@@ -1240,8 +1488,8 @@
               ><input type="text" id="beverage-flavor" name="perfilSabor" />
             </div>
             <div>
-              <label for="beverage-sweetness">Nível de Doçura:</label
-              ><select id="beverage-sweetness" name="nivelDoce">
+              <label for="beverage-sweetness">Nível de Doçura:</label>
+              <select id="beverage-sweetness" name="nivelDoce">
                 <option value="Seco">Seco</option>
                 <option value="Meio Seco">Meio Seco</option>
                 <option value="Meio Doce">Meio Doce</option>
@@ -1266,8 +1514,8 @@
               />
             </div>
             <div>
-              <label for="beverage-audience">Público Alvo:</label
-              ><select id="beverage-audience" name="publicoAlvo" required>
+              <label for="beverage-audience">Público Alvo:</label>
+              <select id="beverage-audience" name="publicoAlvo" required>
                 <option value="iniciante">Iniciante</option>
                 <option value="intermediario">Intermediário</option>
                 <option value="refinado">Refinado</option>
@@ -1341,7 +1589,7 @@
 
     <script>
       // ==========================================
-      // CORREÇÃO CRÍTICA: API_BASE_URL dinâmica
+      // CONFIGURAÇÃO E ESTADO
       // ==========================================
       const API_BASE_URL = window.location.origin + "/api";
       const MANAGER_PASSWORD = "admin123";
@@ -1349,6 +1597,7 @@
 
       console.log("🚀 API_BASE_URL:", API_BASE_URL);
 
+      // Elements
       const loginScreen = document.getElementById("login-screen");
       const pinInput = document.getElementById("pin-input");
       const loginButton = document.getElementById("login-button");
@@ -1426,15 +1675,28 @@
       const addDishBtn = document.getElementById("add-dish-btn");
       const managerLogoutBtn = document.getElementById("manager-logout");
       const clientLogoutBtn = document.getElementById("client-logout");
+      const searchBar = document.getElementById("search-bar");
+      const originFilter = document.getElementById("origin-filter");
+      const countryFilter = document.getElementById("country-filter");
 
       let restrictedAreaClickCount = 0;
       let allBeverages = [];
       let allPratosDaCasa = [];
       let clientAutoRefreshInterval = null;
+      let currentFilter = "all";
+      let currentOrigin = "all";
+      let currentCountry = "all";
+      let currentSearch = "";
+      let isExpertMode = false;
+      let sommelierToggleCount = 0;
+      let sommelierToggleTimeout = null;
 
       const PLACEHOLDER_IMG =
         "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj48cmVjdCB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIGZpbGw9IiMyODI4MjgiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZDcwMCIgZm9udC1zaXplPSIxMCI+8J+YtzwvdGV4dD48L3N2Zz4=";
 
+      // ==========================================
+      // FUNÇÕES UTILITÁRIAS
+      // ==========================================
       function sanitizeForJS(str) {
         if (typeof str !== "string") return str;
         return str
@@ -1451,15 +1713,12 @@
         const cleaned = {};
         for (const [key, value] of Object.entries(obj)) {
           const cleanKey = key.trim();
-          if (typeof value === "string") {
-            cleaned[cleanKey] = value.trim();
-          } else if (Array.isArray(value)) {
+          if (typeof value === "string") cleaned[cleanKey] = value.trim();
+          else if (Array.isArray(value))
             cleaned[cleanKey] = value.map((v) =>
               typeof v === "string" ? v.trim() : v,
             );
-          } else {
-            cleaned[cleanKey] = value;
-          }
+          else cleaned[cleanKey] = value;
         }
         return cleaned;
       }
@@ -1469,6 +1728,9 @@
         return arr.map((item) => cleanObjectKeys(item));
       }
 
+      // ==========================================
+      // CATÁLOGO E CARDÁPIO
+      // ==========================================
       let catalogoConhecido = [
         {
           nome: "Malbec",
@@ -1649,80 +1911,8 @@
       ];
 
       // ==========================================
-      // REGISTRO DO SERVICE WORKER (PWA)
+      // SINCRONIZAÇÃO
       // ==========================================
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
-          navigator.serviceWorker
-            .register("/sw.js")
-            .then((registration) => {
-              console.log("✅ Service Worker registrado:", registration.scope);
-            })
-            .catch((error) => {
-              console.log("❌ Falha ao registrar Service Worker:", error);
-            });
-        });
-      }
-
-      // ==========================================
-      // PROMPT DE INSTALAÇÃO PWA
-      // ==========================================
-      let deferredPrompt;
-      const installBanner = document.createElement("div");
-      installBanner.style.cssText = `
-  display: none;
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #ffd700;
-  color: #1a1a1a;
-  padding: 15px 25px;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-  z-index: 9999;
-  font-weight: bold;
-  text-align: center;
-  max-width: 90%;
-`;
-      installBanner.innerHTML = `
-  📱 Instalar "Vinho em Mãos" na tela inicial?<br>
-  <button id="install-yes" style="background:#1a1a1a;color:#ffd700;border:none;padding:8px 20px;border-radius:5px;margin-top:10px;margin-right:10px;cursor:pointer;font-weight:bold;">Instalar</button>
-  <button id="install-no" style="background:transparent;color:#1a1a1a;border:1px solid #1a1a1a;padding:8px 20px;border-radius:5px;margin-top:10px;cursor:pointer;font-weight:bold;">Depois</button>
-`;
-      document.body.appendChild(installBanner);
-
-      window.addEventListener("beforeinstallprompt", (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-
-        // Não mostrar se já foi instalado
-        if (window.matchMedia("(display-mode: standalone)").matches) return;
-
-        installBanner.style.display = "block";
-      });
-
-      document.addEventListener("click", async (e) => {
-        if (e.target.id === "install-yes" && deferredPrompt) {
-          deferredPrompt.prompt();
-          const { outcome } = await deferredPrompt.userChoice;
-          console.log(
-            `Usuário ${outcome === "accepted" ? "aceitou" : "recusou"} a instalação`,
-          );
-          deferredPrompt = null;
-          installBanner.style.display = "none";
-        }
-        if (e.target.id === "install-no") {
-          installBanner.style.display = "none";
-        }
-      });
-
-      window.addEventListener("appinstalled", () => {
-        console.log("✅ PWA instalado com sucesso!");
-        installBanner.style.display = "none";
-        deferredPrompt = null;
-      });
-
       function initSync() {
         if ("BroadcastChannel" in window) {
           syncChannel = new BroadcastChannel("vinho_em_maos_sync");
@@ -1756,6 +1946,9 @@
         }
       }
 
+      // ==========================================
+      // SESSÃO E LOGOUT
+      // ==========================================
       function doLogout() {
         clearSession();
         if (clientAutoRefreshInterval) clearInterval(clientAutoRefreshInterval);
@@ -1766,6 +1959,8 @@
         managerLoginMessage.textContent = "";
         managerLoginForm.style.display = "none";
         restrictedAreaClickCount = 0;
+        isExpertMode = false;
+        sommelierToggleCount = 0;
       }
 
       function clearSession() {
@@ -1791,7 +1986,6 @@
             json = JSON.parse(text);
           } catch (parseError) {
             console.error("Erro ao parsear JSON:", parseError.message);
-            console.error("Resposta raw:", text.substring(0, 200));
             return { error: true, message: "Resposta inválida do servidor" };
           }
           if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
@@ -1898,9 +2092,6 @@
         }
       });
 
-      // ==========================================
-      // CORREÇÃO CRÍTICA: Event listener do botão de login do gerente
-      // ==========================================
       managerLoginButton.addEventListener("click", () => {
         console.log("🔐 Tentativa de login gerente");
         console.log("Senha digitada:", managerPasswordInput.value);
@@ -2210,16 +2401,21 @@
         }
       }
 
-      async function loadBeveragesForClient(filter = "all") {
+      // ==========================================
+      // CARREGAMENTO DE BEBIDAS PARA CLIENTE
+      // ==========================================
+      async function loadBeveragesForClient() {
         const bebidasDB = await fetchData(`${API_BASE_URL}/bebidas`);
         await loadCatalogoExterno();
 
+        // Merge catalogo + db
         let mergedBeverages = catalogoConhecido.map((itemCatalogo) => {
           const itemDB =
             bebidasDB && !bebidasDB.error
               ? cleanArrayObjects(bebidasDB).find(
                   (b) =>
-                    b.nome.toLowerCase() === itemCatalogo.nome.toLowerCase(),
+                    b.nome.trim().toLowerCase() ===
+                    itemCatalogo.nome.trim().toLowerCase(),
                 )
               : null;
           if (itemDB) {
@@ -2241,23 +2437,52 @@
           }
         });
 
-        if (filter !== "all") {
-          if (filter === "seco" || filter === "doce") {
+        // Aplicar filtros
+        if (currentFilter !== "all") {
+          if (currentFilter === "seco" || currentFilter === "doce") {
             mergedBeverages = mergedBeverages.filter(
               (b) =>
                 (b.nivelDoce &&
-                  b.nivelDoce.trim().toLowerCase().includes(filter)) ||
+                  b.nivelDoce.trim().toLowerCase().includes(currentFilter)) ||
                 (b.perfilSabor &&
-                  b.perfilSabor.trim().toLowerCase().includes(filter)),
+                  b.perfilSabor.trim().toLowerCase().includes(currentFilter)),
             );
           } else {
-            // CORREÇÃO: Adicionar .trim() na comparação
             mergedBeverages = mergedBeverages.filter(
               (b) =>
-                b.tipo.trim().toLowerCase() === filter.trim().toLowerCase(),
+                b.tipo.trim().toLowerCase() ===
+                currentFilter.trim().toLowerCase(),
             );
           }
         }
+
+        // Filtro de origem
+        if (currentOrigin !== "all") {
+          mergedBeverages = mergedBeverages.filter((b) => {
+            const pais = (b.pais || "").toLowerCase();
+            if (currentOrigin === "nacional") return pais === "brasil";
+            if (currentOrigin === "importado") return pais !== "brasil";
+            return true;
+          });
+        }
+
+        // Filtro de país
+        if (currentCountry !== "all") {
+          mergedBeverages = mergedBeverages.filter(
+            (b) =>
+              (b.pais || "").toLowerCase() === currentCountry.toLowerCase(),
+          );
+        }
+
+        // Busca por nome
+        if (currentSearch.trim()) {
+          const search = currentSearch.toLowerCase().trim();
+          mergedBeverages = mergedBeverages.filter((b) =>
+            b.nome.toLowerCase().includes(search),
+          );
+        }
+
+        // Ordenação alfabética garantida, disponíveis primeiro
         const disponiveis = mergedBeverages
           .filter((b) => b.disponivel)
           .sort((a, b) => a.nome.localeCompare(b.nome));
@@ -2266,437 +2491,452 @@
           .sort((a, b) => a.nome.localeCompare(b.nome));
         allBeverages = [...disponiveis, ...indisponiveis];
 
-        renderBeverageCards(filter);
+        // Atualizar filtro de países dinâmico
+        updateCountryFilter();
+
+        renderBeverageCards();
       }
 
-      function renderBeverageCards(filter, targetList = beverageList) {
-        targetList.innerHTML = "";
+      // Atualizar filtro de países dinâmico
+      function updateCountryFilter() {
+        const countries = new Set();
+        catalogoConhecido.forEach((b) => {
+          if (b.pais && b.pais.trim()) countries.add(b.pais.trim());
+        });
+
+        const sortedCountries = Array.from(countries).sort((a, b) =>
+          a.localeCompare(b),
+        );
+        countryFilter.innerHTML =
+          '<option value="all">Todos os países</option>';
+        sortedCountries.forEach((country) => {
+          countryFilter.innerHTML += `<option value="${country}">${country}</option>`;
+        });
+
+        // Mostrar/esconder filtro de país baseado na origem
+        if (currentOrigin === "importado") {
+          countryFilter.style.display = "inline-block";
+        } else {
+          countryFilter.style.display = "none";
+          currentCountry = "all";
+        }
+      }
+
+      // ==========================================
+      // RENDERIZAÇÃO DOS CARDS
+      // ==========================================
+      function renderBeverageCards() {
+        beverageList.innerHTML = "";
+
         allBeverages.forEach((b) => {
           const card = document.createElement("div");
           card.className = `beverage-card ${!b.disponivel ? "unavailable" : ""}`;
-          const chips =
-            b.pratosDaCasa && b.pratosDaCasa.length > 0
-              ? `<div class="harmonization-chips"><strong>Sugestão do Chef:</strong> ${b.pratosDaCasa.map((p) => `<span>${sanitizeForJS(p)}</span>`).join("")}</div>`
-              : "";
-          let statusTag =
-            b.id === null
-              ? '<span class="catalog-only-tag">Apenas Catálogo</span>'
-              : b.disponivel
-                ? '<span class="available-tag">Em Estoque</span>'
-                : '<span class="unavailable-text">Sugestão de Compra</span>';
+          if (isExpertMode) card.classList.add("expert-mode");
+
           const imgUrl =
             b.imagemUrl && b.imagemUrl.trim()
               ? b.imagemUrl.trim()
               : PLACEHOLDER_IMG;
           const safeNome = sanitizeForJS(b.nome);
           const safeTipo = sanitizeForJS(b.tipo);
-          const safeOrigem = sanitizeForJS(b.origem || "N/A");
+          const safePais = sanitizeForJS(b.pais || "");
+          const safeSubtipo = sanitizeForJS(b.subtipo || "");
           const safeResumo = sanitizeForJS(
             b.resumoGarcom || b.perfilSabor || "",
           );
-          const safePreco = b.preco ? b.preco.toFixed(2) : "0.00";
+          const safePreco = b.preco ? `R$ ${b.preco.toFixed(2)}` : "";
 
-          card.innerHTML = `<div class="beverage-card-header">${statusTag}<img src="${imgUrl}" alt="${safeNome}" onerror="this.src='${PLACEHOLDER_IMG}'"><div class="beverage-card-info"><h3>${safeNome}</h3>${renderDoce(b.nivelDoce || "Seco")}<p>${safeTipo} - ${safeOrigem}</p><p class="beverage-card-summary">"${safeResumo}"</p><p style="color: var(--primary-color); font-weight: bold; margin-top: 5px;">R$ ${safePreco}</p></div></div><div class="beverage-card-details"><p><strong>Teor Alcoólico:</strong> ${sanitizeForJS(b.teorAlcoolico || "N/A")}</p><p><strong>Público Alvo:</strong> ${sanitizeForJS(b.publicoAlvo || "N/A")}</p><p><strong>Taça Ideal:</strong> ${sanitizeForJS(b.tacaIdeal || "N/A")}</p><p><strong>Apresentação:</strong> ${sanitizeForJS(b.formaApresentacao || "N/A")}</p><p><strong>Temp. Consumo:</strong> ${sanitizeForJS(b.tempConsumo || "N/A")}</p><p><strong>Temp. Conservação:</strong> ${sanitizeForJS(b.tempConservacao || "N/A")}</p>${chips}</div>`;
-          card.addEventListener("click", () => {
-            const isExp = card.classList.contains("expanded");
-            document
-              .querySelectorAll(".beverage-card.expanded")
-              .forEach((c) => c.classList.remove("expanded"));
-            if (!isExp) card.classList.add("expanded");
-          });
-          targetList.appendChild(card);
+          let statusTag =
+            b.id === null
+              ? '<span class="catalog-only-tag">Apenas Catálogo</span>'
+              : b.disponivel
+                ? '<span class="available-tag">Em Estoque</span>'
+                : '<span class="unavailable-text">Sugestão</span>';
+
+          // Conteúdo básico (Modo Cliente)
+          card.innerHTML = `
+                    <div class="beverage-card-header">
+                        ${statusTag}
+                        <img src="${imgUrl}" alt="${safeNome}" onerror="this.src='${PLACEHOLDER_IMG}'">
+                        <div class="beverage-card-info">
+                            <h3>${safeNome}</h3>
+                            <div class="subtitle">${safeTipo}${safeSubtipo ? " • " + safeSubtipo : ""}${safePais ? " • " + safePais : ""}</div>
+                            ${renderDoce(b.nivelDoce || "Seco")}
+                            <p class="beverage-card-summary">"${safeResumo}"</p>
+                            <p class="price">${safePreco}</p>
+                        </div>
+                    </div>
+                    <div class="sommelier-details">
+                        ${renderSommelierDetails(b)}
+                    </div>
+                `;
+
+          beverageList.appendChild(card);
         });
       }
 
-      filterButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          filterButtons.forEach((b) => b.classList.remove("active"));
-          button.classList.add("active");
-          renderBeverageCards(button.dataset.filter);
-        });
-      });
+      function renderSommelierDetails(b) {
+        if (!b) return "";
 
-      async function renderPurchasingGrid(filterText = "") {
-        purchasingGrid.innerHTML = "";
-        const bebidasDB = await fetchData(`${API_BASE_URL}/bebidas`);
-        const dbList =
-          bebidasDB && !bebidasDB.error ? cleanArrayObjects(bebidasDB) : [];
-        const filtered = catalogoConhecido.filter(
-          (c) =>
-            c.nome.toLowerCase().includes(filterText.toLowerCase()) ||
-            c.tipo.toLowerCase().includes(filterText.toLowerCase()),
+        const safeNome = sanitizeForJS(b.nome);
+        const safeTipo = sanitizeForJS(b.tipo || "");
+        const safePais = sanitizeForJS(b.pais || "");
+        const safeRegiao = sanitizeForJS(b.regiao || "");
+        const safeVinicola = sanitizeForJS(b.vinicola || "");
+        const safeUva = Array.isArray(b.uva)
+          ? b.uva.map(sanitizeForJS).join(", ")
+          : sanitizeForJS(b.uva || "");
+        const safeSafra = sanitizeForJS(b.safra || "");
+        const safeTeor = sanitizeForJS(b.teorAlcoolico || "");
+        const safeCorpo = sanitizeForJS(b.corpo || "");
+        const safeAcidez = sanitizeForJS(b.acidez || "");
+        const safeTaninos = sanitizeForJS(b.taninos || "");
+        const safeAmadurecimento = sanitizeForJS(b.amadurecimento || "");
+        const safeTempServico = sanitizeForJS(b.temperaturaServico || "");
+        const safeTempArmazenamento = sanitizeForJS(
+          b.temperaturaArmazenamento || "",
         );
-        filtered.sort((a, b) => a.nome.localeCompare(b.nome));
+        const safeFraseVenda = sanitizeForJS(b.fraseVenda || "");
+        const safeNivelConhecimento = sanitizeForJS(
+          b.nivelConhecimentoGarcom || "",
+        );
 
-        filtered.forEach((item) => {
-          const existingInDb = dbList.find(
-            (b) => b.nome.toLowerCase() === item.nome.toLowerCase(),
-          );
-          const card = document.createElement("div");
-          card.className = "purchasing-card";
-          let buttonHtml = "";
-          if (existingInDb) {
-            if (existingInDb.disponivel) {
-              buttonHtml = `<button class="in-stock-btn" data-nome="${sanitizeForJS(item.nome)}">✅ Já no Estoque (Reabastecer)</button>`;
-            } else {
-              buttonHtml = `<button class="unavailable-stock-btn" data-nome="${sanitizeForJS(item.nome)}">⚠️ No Estoque (Reativar)</button>`;
-            }
-          } else {
-            buttonHtml = `<button class="activate-wine-btn" data-nome="${sanitizeForJS(item.nome)}">➕ Ativar no Restaurante</button>`;
-          }
-          card.innerHTML = `<div><h3>${sanitizeForJS(item.nome)}</h3><p><strong>Tipo:</strong> ${sanitizeForJS(item.tipo)}</p><p><strong>Teor:</strong> ${sanitizeForJS(item.teorAlcoolico || "N/A")}</p></div>${buttonHtml}`;
-          purchasingGrid.appendChild(card);
-        });
+        const safeHarmonizacaoPrincipal = (b.harmonizacaoPrincipal || [])
+          .map(sanitizeForJS)
+          .join(", ");
+        const safeHarmonizacaoSecundaria = (b.harmonizacaoSecundaria || [])
+          .map(sanitizeForJS)
+          .join(", ");
+        const safeResumoGarcom = sanitizeForJS(b.resumoGarcom || "");
+
+        return `
+                <div class="modal-sommelier-content">
+                    <div class="sommelier-section">
+                        <h3>🎯 Pitch de Venda</h3>
+                        <p class="highlight-text">${safeFraseVenda}</p>
+                        <p class="small-text">Resumo: ${safeResumoGarcom}</p>
+                    </div>
+                    
+                    <div class="sommelier-section">
+                        <h3>🍇 Ficha Técnica</h3>
+                        <div class="technical-grid">
+                            <p><strong>Vinicola:</strong> ${safeVinicola}</p>
+                            <p><strong>Região:</strong> ${safeRegiao}, ${safePais}</p>
+                            <p><strong>Uva(s):</strong> ${safeUva}</p>
+                            <p><strong>Safra:</strong> ${safeSafra}</p>
+                            <p><strong>Teor:</strong> ${safeTeor}</p>
+                            <p><strong>Corpo:</strong> ${safeCorpo}</p>
+                            <p><strong>Acidez:</strong> ${safeAcidez}</p>
+                            <p><strong>Taninos:</strong> ${safeTaninos}</p>
+                            <p><strong>Amadurecimento:</strong> ${safeAmadurecimento}</p>
+                            <p><strong>Serviço:</strong> ${safeTempServico}</p>
+                            <p><strong>Conservação:</strong> ${safeTempArmazenamento}</p>
+                        </div>
+                    </div>
+
+                    <div class="sommelier-section">
+                        <h3>🍽️ Harmonização</h3>
+                        <p><strong>Principal:</strong> ${safeHarmonizacaoPrincipal}</p>
+                        <p><strong>Secundária:</strong> ${safeHarmonizacaoSecundaria}</p>
+                    </div>
+
+                    <div class="sommelier-section">
+                        <h3>🎓 Nível Garçom</h3>
+                        <p class="badge ${safeNivelConhecimento.toLowerCase()}">${safeNivelConhecimento}</p>
+                    </div>
+                </div>
+            `;
       }
 
-      purchasingSearch.addEventListener("input", (e) =>
-        renderPurchasingGrid(e.target.value),
-      );
+      // --- RENDERIZAÇÃO DO CLIENTE ---
 
-      purchasingGrid.addEventListener("click", async (e) => {
-        if (
-          e.target.classList.contains("activate-wine-btn") ||
-          e.target.classList.contains("in-stock-btn") ||
-          e.target.classList.contains("unavailable-stock-btn")
-        ) {
-          const nomeVinho = e.target.dataset.nome;
-          const itemCatalogo = catalogoConhecido.find(
-            (c) => c.nome.toLowerCase() === nomeVinho.toLowerCase(),
-          );
-          if (!itemCatalogo) return;
-          const dbBebidas = await fetchData(`${API_BASE_URL}/bebidas`);
-          const existingItem =
-            dbBebidas && !dbBebidas.error
-              ? cleanArrayObjects(dbBebidas).find(
-                  (b) => b.nome.toLowerCase() === nomeVinho.toLowerCase(),
-                )
-              : null;
-          preencherTudo(itemCatalogo);
-          if (existingItem) {
-            document.getElementById("beverage-id").value = existingItem.id;
-            document.getElementById("beverage-stock").value =
-              existingItem.estoque || "";
-            document.getElementById("beverage-price").value =
-              existingItem.preco || "";
-            document.getElementById("beverage-available").checked = true;
-          } else {
-            document.getElementById("beverage-id").value = "";
-            document.getElementById("beverage-stock").value = "";
-            document.getElementById("beverage-price").value = "";
-            document.getElementById("beverage-available").checked = true;
-          }
-          beverageFormModal.style.display = "flex";
-        }
-      });
-
-      function searchWinesForDish(pratoNome) {
-        dishGridContainer.style.display = "none";
-        reverseResultsMessage.style.display = "block";
-        reverseResultsMessage.innerHTML = `Sugestões para: <strong style="color:var(--primary-color)">${sanitizeForJS(pratoNome)}</strong>`;
-        const sugestoes = allBeverages.filter(
-          (b) => b.pratosDaCasa && b.pratosDaCasa.includes(pratoNome),
-        );
-        if (sugestoes.length === 0) {
-          reverseResultsList.innerHTML =
-            '<p style="color:#888; text-align:center; margin-top:20px;">Nenhuma sugestão encontrada para este prato.</p>';
-        } else {
-          reverseResultsList.innerHTML = "";
-          sugestoes.forEach((item) => {
-            let statusTag = item.disponivel
-              ? '<span class="available-tag">Em Estoque</span>'
-              : '<span class="unavailable-text">Sugestão de Compra</span>';
-            const card = document.createElement("div");
-            card.className = "beverage-card";
-            const imgUrl =
-              item.imagemUrl && item.imagemUrl.trim()
-                ? item.imagemUrl.trim()
-                : PLACEHOLDER_IMG;
-            card.innerHTML = `<div class="beverage-card-header">${statusTag}<img src="${imgUrl}" alt="${sanitizeForJS(item.nome)}" onerror="this.src='${PLACEHOLDER_IMG}'"><div class="beverage-card-info"><h3>${sanitizeForJS(item.nome)}</h3>${renderDoce(item.nivelDoce || "Seco")}<p>${sanitizeForJS(item.tipo)}</p><p class="beverage-card-summary">"${sanitizeForJS(item.resumoGarcom || item.perfilSabor || "")}"</p></div></div><div class="beverage-card-details"><p><strong>Teor Alcoólico:</strong> ${sanitizeForJS(item.teorAlcoolico || "N/A")}</p><p><strong>Público Alvo:</strong> ${sanitizeForJS(item.publicoAlvo || "N/A")}</p><p><strong>Taça Ideal:</strong> ${sanitizeForJS(item.tacaIdeal || "N/A")}</p><p><strong>Apresentação:</strong> ${sanitizeForJS(item.formaApresentacao || "N/A")}</p><p><strong>Temp. Consumo:</strong> ${sanitizeForJS(item.tempConsumo || "N/A")}</p><p><strong>Temp. Conservação:</strong> ${sanitizeForJS(item.tempConservacao || "N/A")}</p></div>`;
-            card.addEventListener("click", () => {
-              const isExp = card.classList.contains("expanded");
-              document
-                .querySelectorAll(
-                  "#reverse-results-list .beverage-card.expanded",
-                )
-                .forEach((c) => c.classList.remove("expanded"));
-              if (!isExp) card.classList.add("expanded");
-            });
-            reverseResultsList.appendChild(card);
-          });
-        }
-      }
-
-      btnPorPrato.addEventListener("click", () => {
-        document.querySelector(
-          "#waiter-client-screen .header .filters",
-        ).style.display = "none";
-        beverageList.style.display = "none";
-        dishSearchView.style.display = "block";
-        dishGridContainer.style.display = "grid";
-        dishSearchInput.value = "";
-        renderDishGrid();
-      });
-
-      backToWinesBtn.addEventListener("click", () => {
-        dishSearchView.style.display = "none";
-        document.querySelector(
-          "#waiter-client-screen .header .filters",
-        ).style.display = "flex";
-        beverageList.style.display = "grid";
-      });
-
-      dishSearchInput.addEventListener("input", (e) => {
-        dishGridContainer.style.display = "grid";
-        renderDishGrid(e.target.value);
-      });
-
-      sommelierManualButton.addEventListener("click", () => {
-        sommelierManualContent.style.display =
-          sommelierManualContent.style.display === "block" ? "none" : "block";
-      });
-
-      document.addEventListener("click", (e) => {
-        if (
-          !e.target.closest("#sommelier-manual-button") &&
-          !e.target.closest("#sommelier-manual-content") &&
-          sommelierManualContent.style.display === "block"
-        )
-          sommelierManualContent.style.display = "none";
-      });
-
-      beverageNameInput.addEventListener("input", () => {
-        const val = beverageNameInput.value.toLowerCase().trim();
-        autocompleteList.innerHTML = "";
-        autocompleteList.style.display = "none";
-        if (val.length < 2) return;
-        const matches = catalogoConhecido.filter((c) =>
-          c.nome.toLowerCase().includes(val),
-        );
-        if (matches.length > 0) {
-          matches.forEach((m) => {
-            const div = document.createElement("div");
-            div.className = "autocomplete-item";
-            div.textContent = m.nome;
-            div.addEventListener("click", () => preencherTudo(m));
-            autocompleteList.appendChild(div);
-          });
-          autocompleteList.style.display = "block";
-        }
-      });
-
-      document.addEventListener("click", (e) => {
-        if (
-          !e.target.closest(".autocomplete-list") &&
-          !e.target.closest("#beverage-name")
-        )
-          autocompleteList.style.display = "none";
-      });
-
-      function preencherTudo(item) {
-        autocompleteList.style.display = "none";
-        beverageNameInput.value = item.nome;
-        document.getElementById("beverage-type").value = item.tipo || "tinto";
-        document.getElementById("beverage-alcohol").value =
-          item.teorAlcoolico || "";
-        document.getElementById("beverage-flavor").value =
-          item.perfilSabor || "";
-        document.getElementById("beverage-sweetness").value =
-          item.nivelDoce || "Seco";
-        document.getElementById("beverage-audience").value =
-          item.publicoAlvo || "iniciante";
-        document.getElementById("beverage-summary").value =
-          item.resumoGarcom || "";
-        document.getElementById("beverage-glass").value = item.tacaIdeal || "";
-        document.getElementById("beverage-presentation").value =
-          item.formaApresentacao || "";
-        document.getElementById("beverage-temp-consume").value =
-          item.tempConsumo || "";
-        document.getElementById("beverage-temp-storage").value =
-          item.tempConservacao || "";
-        harmonizationDropdownContent
-          .querySelectorAll('input[type="checkbox"]')
-          .forEach((cb) => (cb.checked = false));
-        if (item.pratosDaCasa) {
-          item.pratosDaCasa.forEach((ps) => {
-            const cb = harmonizationDropdownContent.querySelector(
-              `input[value="${ps}"]`,
-            );
-            if (cb) cb.checked = true;
-          });
-          updateHarmonizationSelectedItems(item.pratosDaCasa);
-        }
-      }
-
-      document
-        .getElementById("btn-upload-img")
-        .addEventListener("click", () =>
-          document.getElementById("image-upload").click(),
-        );
-
-      document
-        .getElementById("image-upload")
-        .addEventListener("change", function (e) {
-          const file = e.target.files[0];
-          if (!file) return;
-          const reader = new FileReader();
-          reader.onload = function (event) {
-            const img = new Image();
-            img.onload = function () {
-              const canvas = document.createElement("canvas");
-              const MAX_WIDTH = 200;
-              let width = img.width,
-                height = img.height;
-              if (width > height) {
-                if (width > MAX_WIDTH) {
-                  height *= MAX_WIDTH / width;
-                  width = MAX_WIDTH;
-                }
-              } else {
-                if (height > MAX_WIDTH) {
-                  width *= MAX_WIDTH / height;
-                  height = MAX_WIDTH;
-                }
-              }
-              canvas.width = width;
-              canvas.height = height;
-              canvas.getContext("2d").drawImage(img, 0, 0, width, height);
-              document.getElementById("beverage-imageUrl").value =
-                canvas.toDataURL("image/jpeg", 0.5);
-            };
-            img.src = event.target.result;
-          };
-          reader.readAsDataURL(file);
+      function renderClientCard(b) {
+        const safeNome = sanitizeForJS(b.nome);
+        const safeTipo = sanitizeForJS(b.tipo || "");
+        const safePais = sanitizeForJS(b.pais || "");
+        const safePreco = (b.preco || 0).toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
         });
+        const safeEstoque = b.estoque || 0;
+        const safeAtivo = b.ativo || false;
 
-      loginButton.addEventListener("click", handleLogin);
+        return `
+                <div class="card beverage-card" data-id="${b.id}">
+                    <div class="card-header">
+                        <span class="card-type">${safeTipo}</span>
+                        <span class="card-origin">${safePais}</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>${safeNome}</h3>
+                        <p class="card-price">${safePreco}</p>
+                        <p class="card-stock">Estoque: ${safeEstoque}</p>
+                        <p class="card-status ${safeAtivo ? "active" : "inactive"}">${safeAtivo ? "Disponível" : "Indisponível"}</p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn-sommelier" onclick="showSommelierModal(${b.id})">
+                            👨‍🍳 Modo Sommelier
+                        </button>
+                    </div>
+                </div>
+            `;
+      }
 
-      pinInput.addEventListener("keypress", (e) => {
-        if (e.key === "Enter") handleLogin();
-      });
+      function renderClientCards(list) {
+        const container = document.getElementById("beverage-list");
+        if (!container) return;
 
-      function renderDishGrid(filterText = "") {
-        dishGridContainer.innerHTML = "";
-        reverseResultsMessage.style.display = "none";
-        reverseResultsList.innerHTML = "";
-        if (!allPratosDaCasa || allPratosDaCasa.length === 0)
-          allPratosDaCasa = [...pratosDoCardapioLocal];
-        const filteredDishes = allPratosDaCasa.filter((p) =>
-          p.toLowerCase().includes(filterText.toLowerCase()),
-        );
-        if (filteredDishes.length === 0) {
-          dishGridContainer.innerHTML =
-            '<p style="grid-column: 1/-1; color:#888;">Nenhum prato encontrado.</p>';
+        if (!list || list.length === 0) {
+          container.innerHTML =
+            '<p class="empty-message">Nenhuma bebida encontrada.</p>';
           return;
         }
-        filteredDishes.forEach((prato) => {
-          const div = document.createElement("div");
-          div.className = "dish-card";
-          div.textContent = prato;
-          div.addEventListener("click", () => searchWinesForDish(prato));
-          dishGridContainer.appendChild(div);
-        });
+
+        container.innerHTML = list.map((b) => renderClientCard(b)).join("");
       }
 
-      async function loadCardapioManager() {
-        try {
-          const response = await fetch(`${API_BASE_URL}/cardapio`);
-          if (response.ok) {
-            let pratos = await response.json();
-            allPratosDaCasa = Array.isArray(pratos)
-              ? pratos.map((p) => (typeof p === "string" ? p.trim() : p))
-              : [...pratosDoCardapioLocal];
-          } else {
-            allPratosDaCasa = [...pratosDoCardapioLocal];
-          }
-        } catch (e) {
-          allPratosDaCasa = [...pratosDoCardapioLocal];
-        }
-        cardapioList.innerHTML = "";
-        allPratosDaCasa.forEach((prato, index) => {
-          const safePrato = sanitizeForJS(prato);
-          const item = document.createElement("div");
-          item.className = "dish-item";
-          item.innerHTML = `<span class="dish-name">${safePrato}</span><button class="edit-dish-btn" data-index="${index}">✏️</button><button class="remove-dish-btn" data-prato="${safePrato}">🗑️</button>`;
-          cardapioList.appendChild(item);
-        });
+      // --- MODAL SOMMELIER ---
+
+      function showSommelierModal(id) {
+        const drink = catalogo.find((d) => d.id === id);
+        if (!drink) return;
+
+        const modal = document.getElementById("sommelier-modal");
+        const content = document.getElementById("sommelier-modal-content");
+        const title = document.getElementById("sommelier-modal-title");
+
+        if (!modal || !content || !title) return;
+
+        title.textContent = drink.nome;
+        content.innerHTML = renderSommelierDetails(drink);
+
+        modal.style.display = "flex";
       }
 
-      cardapioList.addEventListener("click", async (e) => {
-        if (e.target.classList.contains("remove-dish-btn")) {
-          const prato = e.target.dataset.prato;
-          if (confirm(`Remover "${prato}" do cardápio?`)) {
-            allPratosDaCasa = allPratosDaCasa.filter((p) => p !== prato);
-            await saveCardapioToAPI();
-            triggerSync();
-          }
-        }
-        if (e.target.classList.contains("edit-dish-btn")) {
-          const index = parseInt(e.target.dataset.index);
-          const pratoAtual = allPratosDaCasa[index];
-          const novoNome = prompt("Editar nome do prato:", pratoAtual);
-          if (novoNome && novoNome.trim() && novoNome.trim() !== pratoAtual) {
-            allPratosDaCasa[index] = novoNome.trim();
-            await saveCardapioToAPI();
-            triggerSync();
-          }
-        }
-      });
+      function closeSommelierModal() {
+        const modal = document.getElementById("sommelier-modal");
+        if (modal) modal.style.display = "none";
+      }
 
-      addDishBtn.addEventListener("click", async () => {
-        const novoPrato = newDishInput.value.trim();
-        if (
-          novoPrato &&
-          !allPratosDaCasa.some(
-            (p) => p.toLowerCase() === novoPrato.toLowerCase(),
-          )
-        ) {
-          allPratosDaCasa.push(novoPrato);
-          newDishInput.value = "";
-          await saveCardapioToAPI();
-          triggerSync();
-          alert(`Prato "${novoPrato}" adicionado!`);
-        } else if (
-          allPratosDaCasa.some(
-            (p) => p.toLowerCase() === novoPrato.toLowerCase(),
-          )
-        ) {
-          alert("Este prato já existe no cardápio.");
-        }
-      });
+      // --- GERENCIAMENTO (GERENTE) ---
 
-      async function saveCardapioToAPI() {
+      function renderManagerStock() {
+        const container = document.getElementById("manager-stock-list");
+        if (!container) return;
+
+        // Filtra bebidas ativas para o estoque
+        const displayList = catalogo.filter((b) => b.ativo);
+
+        if (displayList.length === 0) {
+          container.innerHTML =
+            '<p class="empty-message">Nenhum item no estoque.</p>';
+          return;
+        }
+
+        container.innerHTML = displayList
+          .map(
+            (b) => `
+                <div class="manager-item">
+                    <div class="item-info">
+                        <h3>${sanitizeForJS(b.nome)}</h3>
+                        <p>${sanitizeForJS(b.tipo)} - ${sanitizeForJS(b.pais)}</p>
+                        <p>Preço: ${(b.preco || 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
+                        <p>Estoque: ${b.estoque || 0}</p>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn-edit" onclick="editDrink(${b.id})">Editar</button>
+                        <button class="btn-delete" onclick="deleteDrink(${b.id})">Excluir</button>
+                    </div>
+                </div>
+            `,
+          )
+          .join("");
+      }
+
+      function renderManagerCatalog() {
+        const container = document.getElementById("manager-catalog-list");
+        if (!container) return;
+
+        // Mostra todo o catálogo para o gerente gerenciar
+        const displayList = catalogo;
+
+        if (displayList.length === 0) {
+          container.innerHTML = '<p class="empty-message">Catálogo vazio.</p>';
+          return;
+        }
+
+        container.innerHTML = displayList
+          .map(
+            (b) => `
+                <div class="manager-item ${b.ativo ? "active" : ""}">
+                    <div class="item-info">
+                        <h3>${sanitizeForJS(b.nome)}</h3>
+                        <p>${sanitizeForJS(b.tipo)} - ${sanitizeForJS(b.pais)}</p>
+                        <p>Preço: ${(b.preco || 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
+                        <p>Status: ${b.ativo ? "Ativo" : "Inativo"}</p>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn-toggle" onclick="toggleDrink(${b.id})">${b.ativo ? "Desativar" : "Ativar"}</button>
+                    </div>
+                </div>
+            `,
+          )
+          .join("");
+      }
+
+      function renderMenuManager() {
+        const container = document.getElementById("manager-menu-list");
+        if (!container) return;
+
+        // Filtra itens de menu (categoria 'menu' ou similar)
+        const displayList = catalogo.filter((b) => b.categoria === "menu");
+
+        if (displayList.length === 0) {
+          container.innerHTML =
+            '<p class="empty-message">Nenhum item no cardápio.</p>';
+          return;
+        }
+
+        container.innerHTML = displayList
+          .map(
+            (b) => `
+                <div class="manager-item">
+                    <div class="item-info">
+                        <h3>${sanitizeForJS(b.nome)}</h3>
+                        <p>${sanitizeForJS(b.tipo)}</p>
+                        <p>Preço: ${(b.preco || 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn-edit" onclick="editDrink(${b.id})">Editar</button>
+                        <button class="btn-delete" onclick="deleteDrink(${b.id})">Excluir</button>
+                    </div>
+                </div>
+            `,
+          )
+          .join("");
+      }
+
+      // --- ACTIONS ---
+
+      function editDrink(id) {
+        const drink = catalogo.find((d) => d.id === id);
+        if (!drink) return;
+
+        // Populate form fields
+        document.getElementById("edit-id").value = drink.id;
+        document.getElementById("edit-nome").value = drink.nome;
+        document.getElementById("edit-tipo").value = drink.tipo;
+        document.getElementById("edit-pais").value = drink.pais;
+        document.getElementById("edit-preco").value = drink.preco;
+        document.getElementById("edit-estoque").value = drink.estoque;
+
+        // Show modal
+        const modal = document.getElementById("edit-modal");
+        if (modal) modal.style.display = "flex";
+      }
+
+      async function saveDrink() {
+        const id = document.getElementById("edit-id").value;
+        const nome = document.getElementById("edit-nome").value;
+        const tipo = document.getElementById("edit-tipo").value;
+        const pais = document.getElementById("edit-pais").value;
+        const preco = parseFloat(document.getElementById("edit-preco").value);
+        const estoque = parseInt(document.getElementById("edit-estoque").value);
+
+        const updatedDrink = { id, nome, tipo, pais, preco, estoque };
+
         try {
-          const res = await fetch(`${API_BASE_URL}/cardapio`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(allPratosDaCasa),
+          await fetchData(`bebidas/${id}`, "PUT", updatedDrink);
+          alert("Bebida atualizada com sucesso!");
+          closeEditModal();
+          initApp();
+        } catch (error) {
+          alert("Erro ao atualizar bebida.");
+        }
+      }
+
+      async function deleteDrink(id) {
+        if (!confirm("Tem certeza que deseja excluir esta bebida?")) return;
+
+        try {
+          await fetchData(`bebidas/${id}`, "DELETE");
+          alert("Bebida excluída com sucesso!");
+          initApp();
+        } catch (error) {
+          alert("Erro ao excluir bebida.");
+        }
+      }
+
+      async function toggleDrink(id) {
+        const drink = catalogo.find((d) => d.id === id);
+        if (!drink) return;
+
+        const newStatus = !drink.ativo;
+        try {
+          await fetchData(`bebidas/${id}/status`, "PATCH", {
+            ativo: newStatus,
           });
-          if (!res.ok) throw new Error("Falha na API");
-        } catch (e) {
-          console.warn(
-            "Não foi possível salvar no backend. Atualize cardapio.json manualmente.",
-          );
-          localStorage.setItem(
-            "cardapioLocal",
-            JSON.stringify(allPratosDaCasa),
-          );
+          alert(`Bebida ${newStatus ? "ativada" : "desativada"} com sucesso!`);
+          initApp();
+        } catch (error) {
+          alert("Erro ao alterar status.");
         }
-        loadCardapioManager();
-        loadPratosDaCasa();
       }
 
-      function startClientAutoRefresh() {
-        if (clientAutoRefreshInterval) clearInterval(clientAutoRefreshInterval);
-        clientAutoRefreshInterval = setInterval(() => {
-          if (
-            document.getElementById("waiter-client-screen").style.display ===
-            "block"
-          )
-            loadBeveragesForClient();
-        }, 60000);
+      // --- MODAL CONTROLS ---
+
+      function closeEditModal() {
+        const modal = document.getElementById("edit-modal");
+        if (modal) modal.style.display = "none";
       }
 
-      initSync();
+      // --- INITIALIZATION ---
+
+      async function initApp() {
+        try {
+          await loadCatalogo();
+
+          // Render Client View
+          renderClientCards(catalogo);
+
+          // Render Manager Views (if tabs exist)
+          renderManagerStock();
+          renderManagerCatalog();
+          renderMenuManager();
+
+          // Event Listeners
+          setupEventListeners();
+        } catch (error) {
+          console.error("Erro ao inicializar app:", error);
+        }
+      }
+
+      function setupEventListeners() {
+        // Close modals on outside click
+        window.addEventListener("click", (e) => {
+          if (e.target.classList.contains("modal")) {
+            e.target.style.display = "none";
+          }
+        });
+
+        // Tab switching logic
+        const tabs = document.querySelectorAll(".tab-btn");
+        tabs.forEach((tab) => {
+          tab.addEventListener("click", () => {
+            document
+              .querySelectorAll(".tab-content")
+              .forEach((c) => (c.style.display = "none"));
+            tabs.forEach((t) => t.classList.remove("active"));
+
+            tab.classList.add("active");
+            const target = document.getElementById(tab.dataset.target);
+            if (target) target.style.display = "block";
+          });
+        });
+      }
+
+      // Start
+      document.addEventListener("DOMContentLoaded", initApp);
     </script>
   </body>
 </html>

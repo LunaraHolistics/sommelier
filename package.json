@@ -1,6 +1,7 @@
 {
-  "name": "vinho-em-maos",
+  "name": "Sommelier na Fazenda",
   "version": "1.0.0",
+  "description": "Sistema de gerenciamento de vinhos e harmonização para o Sommelier na Fazenda",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -9,6 +10,15 @@
   "engines": {
     "node": ">=18.0.0"
   },
+  "keywords": [
+    "vinho",
+    "harmonização",
+    "cardápio",
+    "express",
+    "api"
+  ],
+  "author": "ClBIffe",
+  "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
     "lowdb": "^1.0.0",
