@@ -6,12 +6,35 @@
     "subcategoria": "Frango",
     "serve": "Compartilhável",
     "descricao": "Tiras crocantes de peito de frango empanadas e douradas, servidas com molho especial da casa.",
-    "ingredientesPrincipais": ["peito de frango", "farinha de trigo", "ovos", "temperos da casa"],
-    "tags": ["frango", "empanado", "crocante", "entrada", "individual", "clássico"],
+    "ingredientesPrincipais": [
+      "peito de frango",
+      "farinha de trigo",
+      "ovos",
+      "temperos da casa"
+    ],
+    "tags": [
+      "frango",
+      "empanado",
+      "crocante",
+      "entrada",
+      "individual",
+      "clássico"
+    ],
     "nivelHarmonizacao": "medio",
-    "melhoresCategorias": ["Chardonnay Brasileiro", "Prosecco Italiano", "Pinot Noir Argentino"],
-    "melhoresRotulos": ["Miolo Terroir Chardonnay", "Mionetto Prosecco Brut", "Cloudy Bay Pinot Noir"],
-    "acompanha": ["Molho de Pimenta", "Molho Chimichurri"],
+    "melhoresCategorias": [
+      "Chardonnay Brasileiro",
+      "Prosecco Italiano",
+      "Pinot Noir Argentino"
+    ],
+    "melhoresRotulos": [
+      "Miolo Terroir Chardonnay",
+      "Mionetto Prosecco Brut",
+      "Cloudy Bay Pinot Noir"
+    ],
+    "acompanha": [
+      "Molho de Pimenta",
+      "Molho Chimichurri"
+    ],
     "status": "ativo"
   },
   {
@@ -21,12 +44,33 @@
     "subcategoria": "Queijos",
     "serve": "Compartilhável",
     "descricao": "Cubos dourados de queijo coalho fritos até ficarem crocantes por fora e macios por dentro.",
-    "ingredientesPrincipais": ["queijo coalho", "óleo"],
-    "tags": ["queijo", "coalho", "frito", "crocante", "nordestino", "compartilhar"],
+    "ingredientesPrincipais": [
+      "queijo coalho",
+      "óleo"
+    ],
+    "tags": [
+      "queijo",
+      "coalho",
+      "frito",
+      "crocante",
+      "nordestino",
+      "compartilhar"
+    ],
     "nivelHarmonizacao": "medio",
-    "melhoresCategorias": ["Espumante Brut", "Torrontés Argentino", "Sauvignon Blanc Neozelandês"],
-    "melhoresRotulos": ["Chandon Brut", "Casa Valduga Arte Brut", "Cloudy Bay Sauvignon Blanc"],
-    "acompanha": ["Molho de Pimenta", "Vinagrete de Manga"],
+    "melhoresCategorias": [
+      "Espumante Brut",
+      "Torrontés Argentino",
+      "Sauvignon Blanc Neozelandês"
+    ],
+    "melhoresRotulos": [
+      "Chandon Brut",
+      "Casa Valduga Arte Brut",
+      "Cloudy Bay Sauvignon Blanc"
+    ],
+    "acompanha": [
+      "Molho de Pimenta",
+      "Vinagrete de Manga"
+    ],
     "status": "ativo"
   },
   {
@@ -36,12 +80,34 @@
     "subcategoria": "Tubérculos",
     "serve": "Compartilhável",
     "descricao": "Palitos de mandioca selecionada, fritos até atingirem o ponto perfeito de crocância.",
-    "ingredientesPrincipais": ["mandioca", "óleo", "sal"],
-    "tags": ["mandioca", "frito", "crocante", "raiz", "brasileiro", "compartilhar"],
+    "ingredientesPrincipais": [
+      "mandioca",
+      "óleo",
+      "sal"
+    ],
+    "tags": [
+      "mandioca",
+      "frito",
+      "crocante",
+      "raiz",
+      "brasileiro",
+      "compartilhar"
+    ],
     "nivelHarmonizacao": "baixo",
-    "melhoresCategorias": ["Chardonnay Barricado", "Espumante Brut", "Torrontés Argentino"],
-    "melhoresRotulos": ["Miolo Terroir Chardonnay", "Casa Valduga Arte Brut", "Salton Brut"],
-    "acompanha": ["Molho Chimichurri", "Molho de Pimenta"],
+    "melhoresCategorias": [
+      "Chardonnay Barricado",
+      "Espumante Brut",
+      "Torrontés Argentino"
+    ],
+    "melhoresRotulos": [
+      "Miolo Terroir Chardonnay",
+      "Casa Valduga Arte Brut",
+      "Salton Brut"
+    ],
+    "acompanha": [
+      "Molho Chimichurri",
+      "Molho de Pimenta"
+    ],
     "status": "ativo"
   },
   {
@@ -51,12 +117,34 @@
     "subcategoria": "Costela",
     "serve": "Compartilhável",
     "descricao": "Oito bolinhos artesanais recheados com costela desfiada temperada, empanados e fritos.",
-    "ingredientesPrincipais": ["costela bovina", "massa de bolinho", "temperos da casa"],
-    "tags": ["costela", "bolinho", "frito", "carne bovina", "artesanal", "compartilhar"],
+    "ingredientesPrincipais": [
+      "costela bovina",
+      "massa de bolinho",
+      "temperos da casa"
+    ],
+    "tags": [
+      "costela",
+      "bolinho",
+      "frito",
+      "carne bovina",
+      "artesanal",
+      "compartilhar"
+    ],
     "nivelHarmonizacao": "alto",
-    "melhoresCategorias": ["Malbec Argentino", "Cabernet Sauvignon Chileno", "Syrah Australiano"],
-    "melhoresRotulos": ["Catena Zapata Malbec Argentino", "Montes Alpha Cabernet Sauvignon", "Penfolds Grange"],
-    "acompanha": ["Molho Chimichurri", "Molho de Pimenta"],
+    "melhoresCategorias": [
+      "Malbec Argentino",
+      "Cabernet Sauvignon Chileno",
+      "Syrah Australiano"
+    ],
+    "melhoresRotulos": [
+      "Catena Zapata Malbec Argentino",
+      "Montes Alpha Cabernet Sauvignon",
+      "Penfolds Grange"
+    ],
+    "acompanha": [
+      "Molho Chimichurri",
+      "Molho de Pimenta"
+    ],
     "status": "ativo"
   },
   {
@@ -66,12 +154,34 @@
     "subcategoria": "Camarão",
     "serve": "Compartilhável",
     "descricao": "Camarões frescos empanados em mistura especial e fritos até ficarem dourados e crocantes.",
-    "ingredientesPrincipais": ["camarão", "farinha de rosca", "ovos", "temperos"],
-    "tags": ["camarão", "empanado", "frutos do mar", "crocante", "compartilhar"],
+    "ingredientesPrincipais": [
+      "camarão",
+      "farinha de rosca",
+      "ovos",
+      "temperos"
+    ],
+    "tags": [
+      "camarão",
+      "empanado",
+      "frutos do mar",
+      "crocante",
+      "compartilhar"
+    ],
     "nivelHarmonizacao": "alto",
-    "melhoresCategorias": ["Chardonnay Barricado", "Espumante Brut", "Sauvignon Blanc Neozelandês"],
-    "melhoresRotulos": ["Casa Valduga 130 Chardonnay", "Chandon Brut", "Cloudy Bay Sauvignon Blanc"],
-    "acompanha": ["Molho de Pimenta", "Vinagrete de Manga"],
+    "melhoresCategorias": [
+      "Chardonnay Barricado",
+      "Espumante Brut",
+      "Sauvignon Blanc Neozelandês"
+    ],
+    "melhoresRotulos": [
+      "Casa Valduga 130 Chardonnay",
+      "Chandon Brut",
+      "Cloudy Bay Sauvignon Blanc"
+    ],
+    "acompanha": [
+      "Molho de Pimenta",
+      "Vinagrete de Manga"
+    ],
     "status": "ativo"
   },
   {
@@ -81,12 +191,34 @@
     "subcategoria": "Tilápia",
     "serve": "Compartilhável",
     "descricao": "Iscas de tilápia fresca empanadas e fritas, servidas crocantes e douradas.",
-    "ingredientesPrincipais": ["tilápia", "farinha de trigo", "ovos", "temperos"],
-    "tags": ["tilápia", "peixe", "empanado", "frito", "compartilhar"],
+    "ingredientesPrincipais": [
+      "tilápia",
+      "farinha de trigo",
+      "ovos",
+      "temperos"
+    ],
+    "tags": [
+      "tilápia",
+      "peixe",
+      "empanado",
+      "frito",
+      "compartilhar"
+    ],
     "nivelHarmonizacao": "medio",
-    "melhoresCategorias": ["Sauvignon Blanc Chileno", "Chardonnay Brasileiro", "Torrontés Argentino"],
-    "melhoresRotulos": ["Montes Alpha Sauvignon Blanc", "Miolo Terroir Chardonnay", "Salton Brut"],
-    "acompanha": ["Molho de Pimenta", "Vinagrete de Manga"],
+    "melhoresCategorias": [
+      "Sauvignon Blanc Chileno",
+      "Chardonnay Brasileiro",
+      "Torrontés Argentino"
+    ],
+    "melhoresRotulos": [
+      "Montes Alpha Sauvignon Blanc",
+      "Miolo Terroir Chardonnay",
+      "Salton Brut"
+    ],
+    "acompanha": [
+      "Molho de Pimenta",
+      "Vinagrete de Manga"
+    ],
     "status": "ativo"
   },
   {
@@ -96,12 +228,35 @@
     "subcategoria": "Carnes Bovinas",
     "serve": "Compartilhável",
     "descricao": "Corações de frango temperados com especiarias da roça e grelhados no ponto perfeito.",
-    "ingredientesPrincipais": ["coração de frango", "temperos da roça", "azeite"],
-    "tags": ["coração", "frango", "grelhado", "espetinho", "compartilhar", "roça"],
+    "ingredientesPrincipais": [
+      "coração de frango",
+      "temperos da roça",
+      "azeite"
+    ],
+    "tags": [
+      "coração",
+      "frango",
+      "grelhado",
+      "espetinho",
+      "compartilhar",
+      "roça"
+    ],
     "nivelHarmonizacao": "alto",
-    "melhoresCategorias": ["Malbec Argentino", "Tempranillo Espanhol", "Syrah Australiano"],
-    "melhoresRotulos": ["Trapiche Vineyards Malbec", "Marqués de Riscal Gran Reserva", "Penfolds Grange"],
-    "acompanha": ["Molho Chimichurri", "Farofa de Carne Seca", "Vinagrete de Manga"],
+    "melhoresCategorias": [
+      "Malbec Argentino",
+      "Tempranillo Espanhol",
+      "Syrah Australiano"
+    ],
+    "melhoresRotulos": [
+      "Trapiche Vineyards Malbec",
+      "Marqués de Riscal Gran Reserva",
+      "Penfolds Grange"
+    ],
+    "acompanha": [
+      "Molho Chimichurri",
+      "Farofa de Carne Seca",
+      "Vinagrete de Manga"
+    ],
     "status": "ativo"
   },
   {
@@ -111,12 +266,34 @@
     "subcategoria": "Costela",
     "serve": "Compartilhável",
     "descricao": "Seis mini pastéis de massa crocante recheados com costela desfiada temperada.",
-    "ingredientesPrincipais": ["costela bovina", "massa de pastel", "temperos"],
-    "tags": ["costela", "pastel", "frito", "crocante", "compartilhar", "brasileiro"],
+    "ingredientesPrincipais": [
+      "costela bovina",
+      "massa de pastel",
+      "temperos"
+    ],
+    "tags": [
+      "costela",
+      "pastel",
+      "frito",
+      "crocante",
+      "compartilhar",
+      "brasileiro"
+    ],
     "nivelHarmonizacao": "alto",
-    "melhoresCategorias": ["Malbec Argentino", "Cabernet Sauvignon Chileno", "Tannat Uruguaio"],
-    "melhoresRotulos": ["Luigi Bosca Malbec DOC", "Marqués de Casa Concha Cabernet Sauvignon", "Bodega Garzón Single Vineyard Tannat"],
-    "acompanha": ["Molho de Pimenta", "Vinagrete de Manga"],
+    "melhoresCategorias": [
+      "Malbec Argentino",
+      "Cabernet Sauvignon Chileno",
+      "Tannat Uruguaio"
+    ],
+    "melhoresRotulos": [
+      "Luigi Bosca Malbec DOC",
+      "Marqués de Casa Concha Cabernet Sauvignon",
+      "Bodega Garzón Single Vineyard Tannat"
+    ],
+    "acompanha": [
+      "Molho de Pimenta",
+      "Vinagrete de Manga"
+    ],
     "status": "ativo"
   },
   {
@@ -126,12 +303,34 @@
     "subcategoria": "Cupim",
     "serve": "Compartilhável",
     "descricao": "Bolinhos artesanais recheados com cupim desfiado e temperado, fritos até dourar.",
-    "ingredientesPrincipais": ["cupim", "massa de bolinho", "temperos da casa"],
-    "tags": ["cupim", "bolinho", "frito", "carne bovina", "artesanal", "compartilhar"],
+    "ingredientesPrincipais": [
+      "cupim",
+      "massa de bolinho",
+      "temperos da casa"
+    ],
+    "tags": [
+      "cupim",
+      "bolinho",
+      "frito",
+      "carne bovina",
+      "artesanal",
+      "compartilhar"
+    ],
     "nivelHarmonizacao": "alto",
-    "melhoresCategorias": ["Malbec Argentino", "Tannat Uruguaio", "Cabernet Sauvignon Chileno"],
-    "melhoresRotulos": ["Norton Reserva Malbec", "Bouza Tannat", "Santa Rita Medalla Real Carmenère"],
-    "acompanha": ["Molho Chimichurri", "Molho de Pimenta"],
+    "melhoresCategorias": [
+      "Malbec Argentino",
+      "Tannat Uruguaio",
+      "Cabernet Sauvignon Chileno"
+    ],
+    "melhoresRotulos": [
+      "Norton Reserva Malbec",
+      "Bouza Tannat",
+      "Santa Rita Medalla Real Carmenère"
+    ],
+    "acompanha": [
+      "Molho Chimichurri",
+      "Molho de Pimenta"
+    ],
     "status": "ativo"
   },
   {
@@ -141,12 +340,34 @@
     "subcategoria": "Carnes Bovinas",
     "serve": "Compartilhável",
     "descricao": "Dez espetinhos estilo lollypop de carne bovina nobre, grelhados com temperos exclusivos da fazenda.",
-    "ingredientesPrincipais": ["carne bovina", "temperos da fazenda", "azeite"],
-    "tags": ["lollypop", "espetinho", "grelhado", "carne bovina", "especialidade", "compartilhar"],
+    "ingredientesPrincipais": [
+      "carne bovina",
+      "temperos da fazenda",
+      "azeite"
+    ],
+    "tags": [
+      "lollypop",
+      "espetinho",
+      "grelhado",
+      "carne bovina",
+      "especialidade",
+      "compartilhar"
+    ],
     "nivelHarmonizacao": "alto",
-    "melhoresCategorias": ["Malbec Argentino", "Syrah Australiano", "Carmenère Chileno"],
-    "melhoresRotulos": ["Alamos Malbec", "Henschke Hill of Grace", "Santa Rita Medalla Real Carmenère"],
-    "acompanha": ["Molho Chimichurri", "Farofa de Carne Seca"],
+    "melhoresCategorias": [
+      "Malbec Argentino",
+      "Syrah Australiano",
+      "Carmenère Chileno"
+    ],
+    "melhoresRotulos": [
+      "Alamos Malbec",
+      "Henschke Hill of Grace",
+      "Santa Rita Medalla Real Carmenère"
+    ],
+    "acompanha": [
+      "Molho Chimichurri",
+      "Farofa de Carne Seca"
+    ],
     "status": "ativo"
   },
   {
@@ -156,12 +377,36 @@
     "subcategoria": "Linguiça",
     "serve": "Individual",
     "descricao": "Linguiça artesanal grelhada servida no pão com chimichurri e vinagrete da casa.",
-    "ingredientesPrincipais": ["linguiça artesanal", "pão", "chimichurri", "vinagrete"],
-    "tags": ["choripán", "linguiça", "pão", "argentino", "grelhado", "roça"],
+    "ingredientesPrincipais": [
+      "linguiça artesanal",
+      "pão",
+      "chimichurri",
+      "vinagrete"
+    ],
+    "tags": [
+      "choripán",
+      "linguiça",
+      "pão",
+      "argentino",
+      "grelhado",
+      "roça"
+    ],
     "nivelHarmonizacao": "alto",
-    "melhoresCategorias": ["Carmenère Chileno", "Malbec Argentino", "Tannat Uruguaio"],
-    "melhoresRotulos": ["Santa Rita Medalla Real Carmenère", "Trapiche Vineyards Malbec", "Bodega Garzón Single Vineyard Tannat"],
-    "acompanha": ["Molho Chimichurri", "Vinagrete de Manga", "Molho de Pimenta"],
+    "melhoresCategorias": [
+      "Carmenère Chileno",
+      "Malbec Argentino",
+      "Tannat Uruguaio"
+    ],
+    "melhoresRotulos": [
+      "Santa Rita Medalla Real Carmenère",
+      "Trapiche Vineyards Malbec",
+      "Bodega Garzón Single Vineyard Tannat"
+    ],
+    "acompanha": [
+      "Molho Chimichurri",
+      "Vinagrete de Manga",
+      "Molho de Pimenta"
+    ],
     "status": "ativo"
   },
   {
@@ -171,12 +416,35 @@
     "subcategoria": "Linguiça",
     "serve": "Compartilhável",
     "descricao": "Linguiça suína artesanal grelhada e servida com cebolas caramelizadas.",
-    "ingredientesPrincipais": ["linguiça suína", "cebola", "temperos"],
-    "tags": ["linguiça", "suína", "cebola", "caramelizada", "grelhado", "compartilhar"],
+    "ingredientesPrincipais": [
+      "linguiça suína",
+      "cebola",
+      "temperos"
+    ],
+    "tags": [
+      "linguiça",
+      "suína",
+      "cebola",
+      "caramelizada",
+      "grelhado",
+      "compartilhar"
+    ],
     "nivelHarmonizacao": "alto",
-    "melhoresCategorias": ["Carmenère Chileno", "Malbec Argentino", "Espumante Brut"],
-    "melhoresRotulos": ["Santa Rita Medalla Real Carmenère", "Catena Zapata Malbec Argentino", "Chandon Brut"],
-    "acompanha": ["Farofa de Banana", "Molho de Pimenta", "Vinagrete de Manga"],
+    "melhoresCategorias": [
+      "Carmenère Chileno",
+      "Malbec Argentino",
+      "Espumante Brut"
+    ],
+    "melhoresRotulos": [
+      "Santa Rita Medalla Real Carmenère",
+      "Catena Zapata Malbec Argentino",
+      "Chandon Brut"
+    ],
+    "acompanha": [
+      "Farofa de Banana",
+      "Molho de Pimenta",
+      "Vinagrete de Manga"
+    ],
     "status": "ativo"
   },
   {
@@ -186,12 +454,34 @@
     "subcategoria": "Suínos",
     "serve": "Compartilhável",
     "descricao": "Rolos de pancetta temperada e grelhada, fatiados e servidos crocantes.",
-    "ingredientesPrincipais": ["pancetta", "temperos italianos", "ervas"],
-    "tags": ["pancetta", "suína", "italiano", "grelhado", "crocante", "compartilhar"],
+    "ingredientesPrincipais": [
+      "pancetta",
+      "temperos italianos",
+      "ervas"
+    ],
+    "tags": [
+      "pancetta",
+      "suína",
+      "italiano",
+      "grelhado",
+      "crocante",
+      "compartilhar"
+    ],
     "nivelHarmonizacao": "alto",
-    "melhoresCategorias": ["Tannat Uruguaio", "Malbec Argentino", "Syrah Australiano"],
-    "melhoresRotulos": ["Bodega Garzón Single Vineyard Tannat", "DV Catena Malbec", "Penfolds Grange"],
-    "acompanha": ["Molho Chimichurri", "Escabeche de Berinjela"],
+    "melhoresCategorias": [
+      "Tannat Uruguaio",
+      "Malbec Argentino",
+      "Syrah Australiano"
+    ],
+    "melhoresRotulos": [
+      "Bodega Garzón Single Vineyard Tannat",
+      "DV Catena Malbec",
+      "Penfolds Grange"
+    ],
+    "acompanha": [
+      "Molho Chimichurri",
+      "Escabeche de Berinjela"
+    ],
     "status": "ativo"
   },
   {
@@ -201,12 +491,34 @@
     "subcategoria": "Tubérculos",
     "serve": "Compartilhável",
     "descricao": "Clássicas batatas fritas douradas e crocantes, temperadas com sal e ervas.",
-    "ingredientesPrincipais": ["batata", "óleo", "sal", "ervas"],
-    "tags": ["batata", "frito", "crocante", "clássico", "compartilhar"],
+    "ingredientesPrincipais": [
+      "batata",
+      "óleo",
+      "sal",
+      "ervas"
+    ],
+    "tags": [
+      "batata",
+      "frito",
+      "crocante",
+      "clássico",
+      "compartilhar"
+    ],
     "nivelHarmonizacao": "baixo",
-    "melhoresCategorias": ["Espumante Brut", "Chardonnay Brasileiro", "Prosecco Italiano"],
-    "melhoresRotulos": ["Chandon Brut", "Salton Chardonnay", "Mionetto Prosecco Brut"],
-    "acompanha": ["Molho de Pimenta", "Ketchup"],
+    "melhoresCategorias": [
+      "Espumante Brut",
+      "Chardonnay Brasileiro",
+      "Prosecco Italiano"
+    ],
+    "melhoresRotulos": [
+      "Chandon Brut",
+      "Salton Chardonnay",
+      "Mionetto Prosecco Brut"
+    ],
+    "acompanha": [
+      "Molho de Pimenta",
+      "Ketchup"
+    ],
     "status": "ativo"
   },
   {
@@ -216,12 +528,34 @@
     "subcategoria": "Tubérculos",
     "serve": "Compartilhável",
     "descricao": "Batatas fritas cobertas com requeijão cremoso e bacon crocante.",
-    "ingredientesPrincipais": ["batata", "requeijão", "bacon", "cebolinha"],
-    "tags": ["batata", "requeijão", "bacon", "crocante", "cremoso", "compartilhar"],
+    "ingredientesPrincipais": [
+      "batata",
+      "requeijão",
+      "bacon",
+      "cebolinha"
+    ],
+    "tags": [
+      "batata",
+      "requeijão",
+      "bacon",
+      "crocante",
+      "cremoso",
+      "compartilhar"
+    ],
     "nivelHarmonizacao": "medio",
-    "melhoresCategorias": ["Syrah Australiano", "Malbec Argentino", "Espumante Brut"],
-    "melhoresRotulos": ["Henschke Hill of Grace", "Trapiche Vineyards Malbec", "Casa Valduga Arte Brut"],
-    "acompanha": ["Molho de Pimenta"],
+    "melhoresCategorias": [
+      "Syrah Australiano",
+      "Malbec Argentino",
+      "Espumante Brut"
+    ],
+    "melhoresRotulos": [
+      "Henschke Hill of Grace",
+      "Trapiche Vineyards Malbec",
+      "Casa Valduga Arte Brut"
+    ],
+    "acompanha": [
+      "Molho de Pimenta"
+    ],
     "status": "ativo"
   },
   {
@@ -231,12 +565,37 @@
     "subcategoria": "Degustação",
     "serve": "Compartilhável",
     "descricao": "Seleção especial das melhores entradas da casa, ideal para dividir e experimentar os sabores da fazenda.",
-    "ingredientesPrincipais": ["bolinhos", "empanados", "queijos", "linguiças", "seleção da casa"],
-    "tags": ["degustação", "variedades", "especialidade", "compartilhar", "experiência", "seleção"],
+    "ingredientesPrincipais": [
+      "bolinhos",
+      "empanados",
+      "queijos",
+      "linguiças",
+      "seleção da casa"
+    ],
+    "tags": [
+      "degustação",
+      "variedades",
+      "especialidade",
+      "compartilhar",
+      "experiência",
+      "seleção"
+    ],
     "nivelHarmonizacao": "premium",
-    "melhoresCategorias": ["Espumante Brut", "Champagne Brut", "Chardonnay Barricado"],
-    "melhoresRotulos": ["Casa Valduga Arte Brut", "Moët & Chandon Impérial Brut", "Miolo Terroir Chardonnay"],
-    "acompanha": ["Molho Chimichurri", "Molho de Pimenta", "Vinagrete de Manga"],
+    "melhoresCategorias": [
+      "Espumante Brut",
+      "Champagne Brut",
+      "Chardonnay Barricado"
+    ],
+    "melhoresRotulos": [
+      "Casa Valduga Arte Brut",
+      "Moët & Chandon Impérial Brut",
+      "Miolo Terroir Chardonnay"
+    ],
+    "acompanha": [
+      "Molho Chimichurri",
+      "Molho de Pimenta",
+      "Vinagrete de Manga"
+    ],
     "status": "ativo"
   },
   {
@@ -246,12 +605,35 @@
     "subcategoria": "Vegetariano",
     "serve": "Compartilhável",
     "descricao": "Abóbora assada recheada com carne seca desfiada e requeijão Scala, gratinada com ervas.",
-    "ingredientesPrincipais": ["abóbora", "carne seca", "requeijão Scala", "ervas"],
-    "tags": ["abóbora", "carne seca", "recheada", "gratinada", "especialidade", "serve 3"],
+    "ingredientesPrincipais": [
+      "abóbora",
+      "carne seca",
+      "requeijão Scala",
+      "ervas"
+    ],
+    "tags": [
+      "abóbora",
+      "carne seca",
+      "recheada",
+      "gratinada",
+      "especialidade",
+      "serve 3"
+    ],
     "nivelHarmonizacao": "alto",
-    "melhoresCategorias": ["Chardonnay Barricado", "Espumante Brut", "Sauvignon Blanc Chileno"],
-    "melhoresRotulos": ["Casa Valduga 130 Chardonnay", "Chandon Brut", "Montes Alpha Sauvignon Blanc"],
-    "acompanha": ["Arroz Biro Biro", "Farofa de Banana"],
+    "melhoresCategorias": [
+      "Chardonnay Barricado",
+      "Espumante Brut",
+      "Sauvignon Blanc Chileno"
+    ],
+    "melhoresRotulos": [
+      "Casa Valduga 130 Chardonnay",
+      "Chandon Brut",
+      "Montes Alpha Sauvignon Blanc"
+    ],
+    "acompanha": [
+      "Arroz Biro Biro",
+      "Farofa de Banana"
+    ],
     "status": "ativo"
   },
   {
@@ -261,12 +643,34 @@
     "subcategoria": "Fraldinha",
     "serve": "Compartilhável",
     "descricao": "Arroz caldoso preparado com fraldinha desfiada, temperos da casa e finalizado com cebolinha.",
-    "ingredientesPrincipais": ["arroz", "fraldinha", "temperos", "cebolinha"],
-    "tags": ["arroz", "fraldinha", "caldoso", "conforto", "serve 2"],
+    "ingredientesPrincipais": [
+      "arroz",
+      "fraldinha",
+      "temperos",
+      "cebolinha"
+    ],
+    "tags": [
+      "arroz",
+      "fraldinha",
+      "caldoso",
+      "conforto",
+      "serve 2"
+    ],
     "nivelHarmonizacao": "alto",
-    "melhoresCategorias": ["Cabernet Sauvignon Chileno", "Malbec Argentino", "Syrah Australiano"],
-    "melhoresRotulos": ["Marqués de Casa Concha Cabernet Sauvignon", "Norton Reserva Malbec", "Penfolds Grange"],
-    "acompanha": ["Farofa de Carne Seca", "Vinagrete de Manga"],
+    "melhoresCategorias": [
+      "Cabernet Sauvignon Chileno",
+      "Malbec Argentino",
+      "Syrah Australiano"
+    ],
+    "melhoresRotulos": [
+      "Marqués de Casa Concha Cabernet Sauvignon",
+      "Norton Reserva Malbec",
+      "Penfolds Grange"
+    ],
+    "acompanha": [
+      "Farofa de Carne Seca",
+      "Vinagrete de Manga"
+    ],
     "status": "ativo"
   },
   {
@@ -276,12 +680,34 @@
     "subcategoria": "Arroz Especial",
     "serve": "Individual",
     "descricao": "Tradicional arroz carreteiro gaúcho com carne seca desfiada, preparado na panela de ferro.",
-    "ingredientesPrincipais": ["arroz", "carne seca", "cebola", "temperos gaúchos"],
-    "tags": ["arroz carreteiro", "carne seca", "gaúcho", "tradicional", "individual"],
+    "ingredientesPrincipais": [
+      "arroz",
+      "carne seca",
+      "cebola",
+      "temperos gaúchos"
+    ],
+    "tags": [
+      "arroz carreteiro",
+      "carne seca",
+      "gaúcho",
+      "tradicional",
+      "individual"
+    ],
     "nivelHarmonizacao": "alto",
-    "melhoresCategorias": ["Cabernet Sauvignon Chileno", "Malbec Argentino", "Tannat Uruguaio"],
-    "melhoresRotulos": ["Santa Rita 120 Cabernet Sauvignon", "Luigi Bosca Malbec DOC", "Bouza Tannat"],
-    "acompanha": ["Farofa de Carne Seca", "Cumbuca de Feijão"],
+    "melhoresCategorias": [
+      "Cabernet Sauvignon Chileno",
+      "Malbec Argentino",
+      "Tannat Uruguaio"
+    ],
+    "melhoresRotulos": [
+      "Santa Rita 120 Cabernet Sauvignon",
+      "Luigi Bosca Malbec DOC",
+      "Bouza Tannat"
+    ],
+    "acompanha": [
+      "Farofa de Carne Seca",
+      "Cumbuca de Feijão"
+    ],
     "status": "ativo"
   },
   {
@@ -291,12 +717,34 @@
     "subcategoria": "Arroz Especial",
     "serve": "Compartilhável",
     "descricao": "Tradicional arroz carreteiro gaúcho em porção generosa para duas pessoas, com carne seca desfiada.",
-    "ingredientesPrincipais": ["arroz", "carne seca", "cebola", "temperos gaúchos"],
-    "tags": ["arroz carreteiro", "carne seca", "gaúcho", "tradicional", "serve 2"],
+    "ingredientesPrincipais": [
+      "arroz",
+      "carne seca",
+      "cebola",
+      "temperos gaúchos"
+    ],
+    "tags": [
+      "arroz carreteiro",
+      "carne seca",
+      "gaúcho",
+      "tradicional",
+      "serve 2"
+    ],
     "nivelHarmonizacao": "alto",
-    "melhoresCategorias": ["Cabernet Sauvignon Chileno", "Malbec Argentino", "Tannat Uruguaio"],
-    "melhoresRotulos": ["Montes Alpha Cabernet Sauvignon", "Catena Zapata Malbec Argentino", "Bodega Garzón Single Vineyard Tannat"],
-    "acompanha": ["Farofa de Carne Seca", "Cumbuca de Feijão"],
+    "melhoresCategorias": [
+      "Cabernet Sauvignon Chileno",
+      "Malbec Argentino",
+      "Tannat Uruguaio"
+    ],
+    "melhoresRotulos": [
+      "Montes Alpha Cabernet Sauvignon",
+      "Catena Zapata Malbec Argentino",
+      "Bodega Garzón Single Vineyard Tannat"
+    ],
+    "acompanha": [
+      "Farofa de Carne Seca",
+      "Cumbuca de Feijão"
+    ],
     "status": "ativo"
   },
   {
@@ -306,12 +754,36 @@
     "subcategoria": "Camarão",
     "serve": "Compartilhável",
     "descricao": "Cremoso bobó de camarão com leite de coco, dendê, mandioca e temperos baianos.",
-    "ingredientesPrincipais": ["camarão", "leite de coco", "dendê", "mandioca", "temperos"],
-    "tags": ["bobó", "camarão", "baiano", "cremoso", "dendê", "serve até 2"],
+    "ingredientesPrincipais": [
+      "camarão",
+      "leite de coco",
+      "dendê",
+      "mandioca",
+      "temperos"
+    ],
+    "tags": [
+      "bobó",
+      "camarão",
+      "baiano",
+      "cremoso",
+      "dendê",
+      "serve até 2"
+    ],
     "nivelHarmonizacao": "premium",
-    "melhoresCategorias": ["Chardonnay Barricado", "Espumante Moscatel", "Sauvignon Blanc Chileno"],
-    "melhoresRotulos": ["Catena Zapata White Stones Chardonnay", "Miolo Terroir Chardonnay", "Leyda Lot 11 Sauvignon Blanc"],
-    "acompanha": ["Arroz Branco", "Farofa de Banana"],
+    "melhoresCategorias": [
+      "Chardonnay Barricado",
+      "Espumante Moscatel",
+      "Sauvignon Blanc Chileno"
+    ],
+    "melhoresRotulos": [
+      "Catena Zapata White Stones Chardonnay",
+      "Miolo Terroir Chardonnay",
+      "Leyda Lot 11 Sauvignon Blanc"
+    ],
+    "acompanha": [
+      "Arroz Branco",
+      "Farofa de Banana"
+    ],
     "status": "ativo"
   },
   {
@@ -321,12 +793,35 @@
     "subcategoria": "Costela",
     "serve": "Compartilhável",
     "descricao": "Especialidade da casa: costela lentamente cozida, modelada em formato de bombom e empanada.",
-    "ingredientesPrincipais": ["costela bovina", "massa empanada", "temperos secretos da casa"],
-    "tags": ["costela", "bombom", "especialidade", "exclusivo", "empanado", "serve até 3"],
+    "ingredientesPrincipais": [
+      "costela bovina",
+      "massa empanada",
+      "temperos secretos da casa"
+    ],
+    "tags": [
+      "costela",
+      "bombom",
+      "especialidade",
+      "exclusivo",
+      "empanado",
+      "serve até 3"
+    ],
     "nivelHarmonizacao": "premium",
-    "melhoresCategorias": ["Malbec Argentino", "Cabernet Sauvignon Chileno", "Tannat Uruguaio"],
-    "melhoresRotulos": ["DV Catena Malbec", "Montes Alpha Cabernet Sauvignon", "Bodega Garzón Single Vineyard Tannat"],
-    "acompanha": ["Molho Chimichurri", "Farofa de Carne Seca", "Vinagrete de Manga"],
+    "melhoresCategorias": [
+      "Malbec Argentino",
+      "Cabernet Sauvignon Chileno",
+      "Tannat Uruguaio"
+    ],
+    "melhoresRotulos": [
+      "DV Catena Malbec",
+      "Montes Alpha Cabernet Sauvignon",
+      "Bodega Garzón Single Vineyard Tannat"
+    ],
+    "acompanha": [
+      "Molho Chimichurri",
+      "Farofa de Carne Seca",
+      "Vinagrete de Manga"
+    ],
     "status": "ativo"
   },
   {
@@ -336,12 +831,35 @@
     "subcategoria": "Camarão",
     "serve": "Compartilhável",
     "descricao": "Camarões frescos ao cremoso molho de queijos, servidos dentro de abóbora cabotiá assada.",
-    "ingredientesPrincipais": ["camarão", "queijos", "creme de leite", "abóbora cabotiá"],
-    "tags": ["camarão", "queijos", "abóbora", "cremoso", "gourmet", "serve até 3"],
+    "ingredientesPrincipais": [
+      "camarão",
+      "queijos",
+      "creme de leite",
+      "abóbora cabotiá"
+    ],
+    "tags": [
+      "camarão",
+      "queijos",
+      "abóbora",
+      "cremoso",
+      "gourmet",
+      "serve até 3"
+    ],
     "nivelHarmonizacao": "premium",
-    "melhoresCategorias": ["Chardonnay Barricado", "Espumante Brut", "Sauvignon Blanc Chileno"],
-    "melhoresRotulos": ["Casa Valduga 130 Chardonnay", "Veuve Clicquot Yellow Label Brut", "Montes Alpha Sauvignon Blanc"],
-    "acompanha": ["Arroz Branco", "Farofa de Banana"],
+    "melhoresCategorias": [
+      "Chardonnay Barricado",
+      "Espumante Brut",
+      "Sauvignon Blanc Chileno"
+    ],
+    "melhoresRotulos": [
+      "Casa Valduga 130 Chardonnay",
+      "Veuve Clicquot Yellow Label Brut",
+      "Montes Alpha Sauvignon Blanc"
+    ],
+    "acompanha": [
+      "Arroz Branco",
+      "Farofa de Banana"
+    ],
     "status": "ativo"
   },
   {
@@ -351,12 +869,35 @@
     "subcategoria": "Costela",
     "serve": "Compartilhável",
     "descricao": "Camada de purê de mandioca com costela desfiada e requeijão, gratinado com queijo.",
-    "ingredientesPrincipais": ["costela bovina", "mandioca", "requeijão", "queijo gratinado"],
-    "tags": ["escondidinho", "costela", "mandioca", "requeijão", "gratinado", "conforto"],
+    "ingredientesPrincipais": [
+      "costela bovina",
+      "mandioca",
+      "requeijão",
+      "queijo gratinado"
+    ],
+    "tags": [
+      "escondidinho",
+      "costela",
+      "mandioca",
+      "requeijão",
+      "gratinado",
+      "conforto"
+    ],
     "nivelHarmonizacao": "alto",
-    "melhoresCategorias": ["Malbec Argentino", "Cabernet Sauvignon Chileno", "Tannat Uruguaio"],
-    "melhoresRotulos": ["Trapiche Vineyards Malbec", "Casillero del Diablo Cabernet Sauvignon", "Bouza Tannat"],
-    "acompanha": ["Farofa de Carne Seca", "Vinagrete de Manga"],
+    "melhoresCategorias": [
+      "Malbec Argentino",
+      "Cabernet Sauvignon Chileno",
+      "Tannat Uruguaio"
+    ],
+    "melhoresRotulos": [
+      "Trapiche Vineyards Malbec",
+      "Casillero del Diablo Cabernet Sauvignon",
+      "Bouza Tannat"
+    ],
+    "acompanha": [
+      "Farofa de Carne Seca",
+      "Vinagrete de Manga"
+    ],
     "status": "ativo"
   },
   {
@@ -366,12 +907,36 @@
     "subcategoria": "Feijoada",
     "serve": "Individual",
     "descricao": "Tradicional feijoada brasileira com feijão preto e carnes variadas, servida com acompanhamentos.",
-    "ingredientesPrincipais": ["feijão preto", "carnes suínas", "carnes defumadas", "temperos"],
-    "tags": ["feijoada", "tradicional", "brasileiro", "feijão preto", "individual"],
+    "ingredientesPrincipais": [
+      "feijão preto",
+      "carnes suínas",
+      "carnes defumadas",
+      "temperos"
+    ],
+    "tags": [
+      "feijoada",
+      "tradicional",
+      "brasileiro",
+      "feijão preto",
+      "individual"
+    ],
     "nivelHarmonizacao": "alto",
-    "melhoresCategorias": ["Malbec Argentino", "Cabernet Sauvignon Chileno", "Tempranillo Espanhol"],
-    "melhoresRotulos": ["Norton Reserva Malbec", "Santa Rita 120 Cabernet Sauvignon", "Marqués de Riscal Gran Reserva"],
-    "acompanha": ["Arroz Branco", "Farofa de Carne Seca", "Couve", "Laranja"],
+    "melhoresCategorias": [
+      "Malbec Argentino",
+      "Cabernet Sauvignon Chileno",
+      "Tempranillo Espanhol"
+    ],
+    "melhoresRotulos": [
+      "Norton Reserva Malbec",
+      "Santa Rita 120 Cabernet Sauvignon",
+      "Marqués de Riscal Gran Reserva"
+    ],
+    "acompanha": [
+      "Arroz Branco",
+      "Farofa de Carne Seca",
+      "Couve",
+      "Laranja"
+    ],
     "status": "ativo"
   },
   {
@@ -381,12 +946,36 @@
     "subcategoria": "Feijoada",
     "serve": "Compartilhável",
     "descricao": "Feijoada especial da casa com carnes selecionadas e temperos secretos, em porção generosa.",
-    "ingredientesPrincipais": ["feijão preto", "carnes nobres", "carnes defumadas", "temperos da fazenda"],
-    "tags": ["feijoada", "especialidade", "fazenda", "compartilhar", "serve 2 a 3"],
+    "ingredientesPrincipais": [
+      "feijão preto",
+      "carnes nobres",
+      "carnes defumadas",
+      "temperos da fazenda"
+    ],
+    "tags": [
+      "feijoada",
+      "especialidade",
+      "fazenda",
+      "compartilhar",
+      "serve 2 a 3"
+    ],
     "nivelHarmonizacao": "premium",
-    "melhoresCategorias": ["Malbec Argentino", "Cabernet Sauvignon Chileno", "Tempranillo Espanhol"],
-    "melhoresRotulos": ["Catena Zapata Malbec Argentino", "Montes Alpha Cabernet Sauvignon", "Vega Sicilia Único"],
-    "acompanha": ["Arroz Branco", "Farofa de Carne Seca", "Couve", "Laranja"],
+    "melhoresCategorias": [
+      "Malbec Argentino",
+      "Cabernet Sauvignon Chileno",
+      "Tempranillo Espanhol"
+    ],
+    "melhoresRotulos": [
+      "Catena Zapata Malbec Argentino",
+      "Montes Alpha Cabernet Sauvignon",
+      "Vega Sicilia Único"
+    ],
+    "acompanha": [
+      "Arroz Branco",
+      "Farofa de Carne Seca",
+      "Couve",
+      "Laranja"
+    ],
     "status": "ativo"
   },
   {
@@ -396,12 +985,35 @@
     "subcategoria": "Filé Mignon",
     "serve": "Compartilhável",
     "descricao": "Medalhões de filé mignon grelhados com cremoso molho de Catupiry original.",
-    "ingredientesPrincipais": ["filé mignon", "Catupiry", "creme de leite", "temperos"],
-    "tags": ["filé mignon", "catupiry", "cremoso", "grelhado", "serve 2"],
+    "ingredientesPrincipais": [
+      "filé mignon",
+      "Catupiry",
+      "creme de leite",
+      "temperos"
+    ],
+    "tags": [
+      "filé mignon",
+      "catupiry",
+      "cremoso",
+      "grelhado",
+      "serve 2"
+    ],
     "nivelHarmonizacao": "premium",
-    "melhoresCategorias": ["Merlot Brasileiro", "Malbec Argentino", "Pinot Noir Francês"],
-    "melhoresRotulos": ["Miolo Merlot", "Alamos Malbec", "Cloudy Bay Pinot Noir"],
-    "acompanha": ["Arroz Branco", "Batata Frita", "Farofa de Banana"],
+    "melhoresCategorias": [
+      "Merlot Brasileiro",
+      "Malbec Argentino",
+      "Pinot Noir Francês"
+    ],
+    "melhoresRotulos": [
+      "Miolo Merlot",
+      "Alamos Malbec",
+      "Cloudy Bay Pinot Noir"
+    ],
+    "acompanha": [
+      "Arroz Branco",
+      "Batata Frita",
+      "Farofa de Banana"
+    ],
     "status": "ativo"
   },
   {
@@ -411,12 +1023,35 @@
     "subcategoria": "Filé Mignon",
     "serve": "Compartilhável",
     "descricao": "Medalhões de filé mignon grelhados com intenso molho de gorgonzola e creme de leite.",
-    "ingredientesPrincipais": ["filé mignon", "gorgonzola", "creme de leite", "temperos"],
-    "tags": ["filé mignon", "gorgonzola", "cremoso", "intenso", "serve 2"],
+    "ingredientesPrincipais": [
+      "filé mignon",
+      "gorgonzola",
+      "creme de leite",
+      "temperos"
+    ],
+    "tags": [
+      "filé mignon",
+      "gorgonzola",
+      "cremoso",
+      "intenso",
+      "serve 2"
+    ],
     "nivelHarmonizacao": "premium",
-    "melhoresCategorias": ["Cabernet Sauvignon Chileno", "Malbec Argentino", "Syrah Australiano"],
-    "melhoresRotulos": ["Marqués de Casa Concha Cabernet Sauvignon", "DV Catena Malbec", "Penfolds Grange"],
-    "acompanha": ["Arroz Branco", "Batata Frita", "Farofa de Banana"],
+    "melhoresCategorias": [
+      "Cabernet Sauvignon Chileno",
+      "Malbec Argentino",
+      "Syrah Australiano"
+    ],
+    "melhoresRotulos": [
+      "Marqués de Casa Concha Cabernet Sauvignon",
+      "DV Catena Malbec",
+      "Penfolds Grange"
+    ],
+    "acompanha": [
+      "Arroz Branco",
+      "Batata Frita",
+      "Farofa de Banana"
+    ],
     "status": "ativo"
   },
   {
@@ -426,12 +1061,34 @@
     "subcategoria": "Filé Mignon",
     "serve": "Compartilhável",
     "descricao": "Especialidade da casa: filé mignon grelhado no ponto, com molho secreto da fazenda.",
-    "ingredientesPrincipais": ["filé mignon", "molho secreto da fazenda", "temperos nobres"],
-    "tags": ["filé mignon", "especialidade", "fazenda", "grelhado", "exclusivo"],
+    "ingredientesPrincipais": [
+      "filé mignon",
+      "molho secreto da fazenda",
+      "temperos nobres"
+    ],
+    "tags": [
+      "filé mignon",
+      "especialidade",
+      "fazenda",
+      "grelhado",
+      "exclusivo"
+    ],
     "nivelHarmonizacao": "premium",
-    "melhoresCategorias": ["Malbec Argentino", "Cabernet Sauvignon Chileno", "Syrah Francês"],
-    "melhoresRotulos": ["Catena Zapata Malbec Argentino", "Montes Alpha Cabernet Sauvignon", "E. Guigal Côte-Rôtie La Mouline"],
-    "acompanha": ["Arroz Branco", "Batata Frita", "Farofa de Banana"],
+    "melhoresCategorias": [
+      "Malbec Argentino",
+      "Cabernet Sauvignon Chileno",
+      "Syrah Francês"
+    ],
+    "melhoresRotulos": [
+      "Catena Zapata Malbec Argentino",
+      "Montes Alpha Cabernet Sauvignon",
+      "E. Guigal Côte-Rôtie La Mouline"
+    ],
+    "acompanha": [
+      "Arroz Branco",
+      "Batata Frita",
+      "Farofa de Banana"
+    ],
     "status": "ativo"
   },
   {
@@ -441,12 +1098,35 @@
     "subcategoria": "Frango",
     "serve": "Compartilhável",
     "descricao": "Tradicional galinhada mineira com frango caipira, açafrão e temperos da roça.",
-    "ingredientesPrincipais": ["frango caipira", "arroz", "açafrão", "temperos da roça"],
-    "tags": ["galinhada", "frango", "mineiro", "açafrão", "tradicional", "500g"],
+    "ingredientesPrincipais": [
+      "frango caipira",
+      "arroz",
+      "açafrão",
+      "temperos da roça"
+    ],
+    "tags": [
+      "galinhada",
+      "frango",
+      "mineiro",
+      "açafrão",
+      "tradicional",
+      "500g"
+    ],
     "nivelHarmonizacao": "alto",
-    "melhoresCategorias": ["Chardonnay Sem Madeira", "Espumante Demi-Sec", "Torrontés Argentino"],
-    "melhoresRotulos": ["Salton Chardonnay", "Chandon Demi-Sec", "Norton Torrontés"],
-    "acompanha": ["Farofa de Banana", "Cumbuca de Feijão"],
+    "melhoresCategorias": [
+      "Chardonnay Sem Madeira",
+      "Espumante Demi-Sec",
+      "Torrontés Argentino"
+    ],
+    "melhoresRotulos": [
+      "Salton Chardonnay",
+      "Chandon Demi-Sec",
+      "Norton Torrontés"
+    ],
+    "acompanha": [
+      "Farofa de Banana",
+      "Cumbuca de Feijão"
+    ],
     "status": "ativo"
   },
   {
@@ -456,12 +1136,36 @@
     "subcategoria": "Frutos do Mar",
     "serve": "Compartilhável",
     "descricao": "Moqueca especial da casa com peixes e frutos do mar frescos, leite de coco e dendê.",
-    "ingredientesPrincipais": ["peixe", "frutos do mar", "leite de coco", "dendê", "pimentões"],
-    "tags": ["moqueca", "frutos do mar", "baiano", "cremoso", "especialidade"],
+    "ingredientesPrincipais": [
+      "peixe",
+      "frutos do mar",
+      "leite de coco",
+      "dendê",
+      "pimentões"
+    ],
+    "tags": [
+      "moqueca",
+      "frutos do mar",
+      "baiano",
+      "cremoso",
+      "especialidade"
+    ],
     "nivelHarmonizacao": "premium",
-    "melhoresCategorias": ["Sauvignon Blanc Chileno", "Espumante Brut", "Chardonnay Brasileiro"],
-    "melhoresRotulos": ["Leyda Lot 11 Sauvignon Blanc", "Casa Valduga Arte Brut", "Miolo Terroir Chardonnay"],
-    "acompanha": ["Arroz Branco", "Farofa de Banana", "Pirão"],
+    "melhoresCategorias": [
+      "Sauvignon Blanc Chileno",
+      "Espumante Brut",
+      "Chardonnay Brasileiro"
+    ],
+    "melhoresRotulos": [
+      "Leyda Lot 11 Sauvignon Blanc",
+      "Casa Valduga Arte Brut",
+      "Miolo Terroir Chardonnay"
+    ],
+    "acompanha": [
+      "Arroz Branco",
+      "Farofa de Banana",
+      "Pirão"
+    ],
     "status": "ativo"
   },
   {
@@ -471,12 +1175,36 @@
     "subcategoria": "Peixes",
     "serve": "Compartilhável",
     "descricao": "Moqueca tradicional de peixe fresco com leite de coco, dendê e vegetais.",
-    "ingredientesPrincipais": ["peixe fresco", "leite de coco", "dendê", "pimentões", "coentro"],
-    "tags": ["moqueca", "peixe", "baiano", "cremoso", "serve até 2"],
+    "ingredientesPrincipais": [
+      "peixe fresco",
+      "leite de coco",
+      "dendê",
+      "pimentões",
+      "coentro"
+    ],
+    "tags": [
+      "moqueca",
+      "peixe",
+      "baiano",
+      "cremoso",
+      "serve até 2"
+    ],
     "nivelHarmonizacao": "alto",
-    "melhoresCategorias": ["Sauvignon Blanc Chileno", "Espumante Brut", "Chardonnay Brasileiro"],
-    "melhoresRotulos": ["Casa Silva Cool Coast Sauvignon Blanc", "Chandon Brut", "Casa Valduga 130 Chardonnay"],
-    "acompanha": ["Arroz Branco", "Farofa de Banana", "Pirão"],
+    "melhoresCategorias": [
+      "Sauvignon Blanc Chileno",
+      "Espumante Brut",
+      "Chardonnay Brasileiro"
+    ],
+    "melhoresRotulos": [
+      "Casa Silva Cool Coast Sauvignon Blanc",
+      "Chandon Brut",
+      "Casa Valduga 130 Chardonnay"
+    ],
+    "acompanha": [
+      "Arroz Branco",
+      "Farofa de Banana",
+      "Pirão"
+    ],
     "status": "ativo"
   },
   {
@@ -486,12 +1214,36 @@
     "subcategoria": "Filé Mignon",
     "serve": "Compartilhável",
     "descricao": "Filé mignon empanado coberto com molho de tomate artesanal e queijo gratinado.",
-    "ingredientesPrincipais": ["filé mignon", "molho de tomate", "queijo", "farinha de rosca"],
-    "tags": ["parmegiana", "filé mignon", "empanado", "gratinado", "italiano", "serve 2"],
+    "ingredientesPrincipais": [
+      "filé mignon",
+      "molho de tomate",
+      "queijo",
+      "farinha de rosca"
+    ],
+    "tags": [
+      "parmegiana",
+      "filé mignon",
+      "empanado",
+      "gratinado",
+      "italiano",
+      "serve 2"
+    ],
     "nivelHarmonizacao": "premium",
-    "melhoresCategorias": ["Cabernet Sauvignon Chileno", "Chianti Italiano (Sangiovese)", "Malbec Argentino"],
-    "melhoresRotulos": ["Montes Alpha Cabernet Sauvignon", "Tignanello", "Luigi Bosca Malbec DOC"],
-    "acompanha": ["Arroz Branco", "Batata Frita", "Espaguete"],
+    "melhoresCategorias": [
+      "Cabernet Sauvignon Chileno",
+      "Chianti Italiano (Sangiovese)",
+      "Malbec Argentino"
+    ],
+    "melhoresRotulos": [
+      "Montes Alpha Cabernet Sauvignon",
+      "Tignanello",
+      "Luigi Bosca Malbec DOC"
+    ],
+    "acompanha": [
+      "Arroz Branco",
+      "Batata Frita",
+      "Espaguete"
+    ],
     "status": "ativo"
   },
   {
@@ -501,12 +1253,34 @@
     "subcategoria": "Massa Italiana",
     "serve": "Individual",
     "descricao": "Penne al dente com molho pesto artesanal de manjericão e mussarela de búfala fresca.",
-    "ingredientesPrincipais": ["penne", "pesto de manjericão", "mussarela de búfala", "azeite"],
-    "tags": ["penne", "pesto", "manjericão", "búfala", "italiano", "vegetariano"],
+    "ingredientesPrincipais": [
+      "penne",
+      "pesto de manjericão",
+      "mussarela de búfala",
+      "azeite"
+    ],
+    "tags": [
+      "penne",
+      "pesto",
+      "manjericão",
+      "búfala",
+      "italiano",
+      "vegetariano"
+    ],
     "nivelHarmonizacao": "alto",
-    "melhoresCategorias": ["Sauvignon Blanc Chileno", "Espumante Brut", "Pinot Grigio Italiano"],
-    "melhoresRotulos": ["Montes Alpha Sauvignon Blanc", "Chandon Brut", "Santa Margherita Pinot Grigio"],
-    "acompanha": ["Escabeche de Berinjela"],
+    "melhoresCategorias": [
+      "Sauvignon Blanc Chileno",
+      "Espumante Brut",
+      "Pinot Grigio Italiano"
+    ],
+    "melhoresRotulos": [
+      "Montes Alpha Sauvignon Blanc",
+      "Chandon Brut",
+      "Santa Margherita Pinot Grigio"
+    ],
+    "acompanha": [
+      "Escabeche de Berinjela"
+    ],
     "status": "ativo"
   },
   {
@@ -516,12 +1290,34 @@
     "subcategoria": "Massa Italiana",
     "serve": "Individual",
     "descricao": "Rigatoni servido com ragú lentamente cozido de fraldinha desfiada ao molho de tomate.",
-    "ingredientesPrincipais": ["rigatoni", "fraldinha", "molho de tomate", "vinho tinto", "temperos"],
-    "tags": ["rigatoni", "ragú", "fraldinha", "italiano", "molho vermelho"],
+    "ingredientesPrincipais": [
+      "rigatoni",
+      "fraldinha",
+      "molho de tomate",
+      "vinho tinto",
+      "temperos"
+    ],
+    "tags": [
+      "rigatoni",
+      "ragú",
+      "fraldinha",
+      "italiano",
+      "molho vermelho"
+    ],
     "nivelHarmonizacao": "alto",
-    "melhoresCategorias": ["Chianti Toscano (Sangiovese)", "Malbec Argentino", "Cabernet Sauvignon Chileno"],
-    "melhoresRotulos": ["Tignanello", "Trapiche Vineyards Malbec", "Marqués de Casa Concha Cabernet Sauvignon"],
-    "acompanha": ["Queijo Parmesão Ralado"],
+    "melhoresCategorias": [
+      "Chianti Toscano (Sangiovese)",
+      "Malbec Argentino",
+      "Cabernet Sauvignon Chileno"
+    ],
+    "melhoresRotulos": [
+      "Tignanello",
+      "Trapiche Vineyards Malbec",
+      "Marqués de Casa Concha Cabernet Sauvignon"
+    ],
+    "acompanha": [
+      "Queijo Parmesão Ralado"
+    ],
     "status": "ativo"
   },
   {
@@ -531,12 +1327,34 @@
     "subcategoria": "Picanha",
     "serve": "Compartilhável",
     "descricao": "Picanha grelhada no ponto, fatiada e servida em tábua com acompanhamentos da casa.",
-    "ingredientesPrincipais": ["picanha", "sal grosso", "temperos"],
-    "tags": ["picanha", "grelhado", "tábua", "carne bovina", "compartilhar"],
+    "ingredientesPrincipais": [
+      "picanha",
+      "sal grosso",
+      "temperos"
+    ],
+    "tags": [
+      "picanha",
+      "grelhado",
+      "tábua",
+      "carne bovina",
+      "compartilhar"
+    ],
     "nivelHarmonizacao": "premium",
-    "melhoresCategorias": ["Malbec Argentino", "Cabernet Sauvignon Chileno", "Tannat Uruguaio"],
-    "melhoresRotulos": ["DV Catena Malbec", "Montes Alpha Cabernet Sauvignon", "Bodega Garzón Single Vineyard Tannat"],
-    "acompanha": ["Farofa de Carne Seca", "Vinagrete de Manga", "Molho Chimichurri"],
+    "melhoresCategorias": [
+      "Malbec Argentino",
+      "Cabernet Sauvignon Chileno",
+      "Tannat Uruguaio"
+    ],
+    "melhoresRotulos": [
+      "DV Catena Malbec",
+      "Montes Alpha Cabernet Sauvignon",
+      "Bodega Garzón Single Vineyard Tannat"
+    ],
+    "acompanha": [
+      "Farofa de Carne Seca",
+      "Vinagrete de Manga",
+      "Molho Chimichurri"
+    ],
     "status": "ativo"
   },
   {
@@ -546,12 +1364,35 @@
     "subcategoria": "Tilápia",
     "serve": "Compartilhável",
     "descricao": "Filé de tilápia grelhado com molho especial da casa, ervas frescas e legumes.",
-    "ingredientesPrincipais": ["tilápia", "molho da casa", "ervas", "legumes"],
-    "tags": ["tilápia", "peixe", "grelhado", "molho especial", "serve 2"],
+    "ingredientesPrincipais": [
+      "tilápia",
+      "molho da casa",
+      "ervas",
+      "legumes"
+    ],
+    "tags": [
+      "tilápia",
+      "peixe",
+      "grelhado",
+      "molho especial",
+      "serve 2"
+    ],
     "nivelHarmonizacao": "alto",
-    "melhoresCategorias": ["Sauvignon Blanc Chileno", "Chardonnay Brasileiro", "Espumante Brut"],
-    "melhoresRotulos": ["Leyda Lot 11 Sauvignon Blanc", "Miolo Terroir Chardonnay", "Casa Valduga Arte Brut"],
-    "acompanha": ["Arroz Branco", "Farofa de Banana", "Legumes Grelhados"],
+    "melhoresCategorias": [
+      "Sauvignon Blanc Chileno",
+      "Chardonnay Brasileiro",
+      "Espumante Brut"
+    ],
+    "melhoresRotulos": [
+      "Leyda Lot 11 Sauvignon Blanc",
+      "Miolo Terroir Chardonnay",
+      "Casa Valduga Arte Brut"
+    ],
+    "acompanha": [
+      "Arroz Branco",
+      "Farofa de Banana",
+      "Legumes Grelhados"
+    ],
     "status": "ativo"
   },
   {
@@ -561,12 +1402,35 @@
     "subcategoria": "Tilápia",
     "serve": "Individual",
     "descricao": "Filé de tilápia grelhado com delicado molho de limão siciliano e ervas frescas.",
-    "ingredientesPrincipais": ["tilápia", "limão siciliano", "ervas frescas", "azeite"],
-    "tags": ["tilápia", "peixe", "limão siciliano", "cítrico", "leve", "individual"],
+    "ingredientesPrincipais": [
+      "tilápia",
+      "limão siciliano",
+      "ervas frescas",
+      "azeite"
+    ],
+    "tags": [
+      "tilápia",
+      "peixe",
+      "limão siciliano",
+      "cítrico",
+      "leve",
+      "individual"
+    ],
     "nivelHarmonizacao": "alto",
-    "melhoresCategorias": ["Sauvignon Blanc Chileno", "Alvarinho Português", "Espumante Brut"],
-    "melhoresRotulos": ["Montes Alpha Sauvignon Blanc", "Soalheiro Alvarinho", "Chandon Brut"],
-    "acompanha": ["Arroz Branco", "Legumes Grelhados"],
+    "melhoresCategorias": [
+      "Sauvignon Blanc Chileno",
+      "Alvarinho Português",
+      "Espumante Brut"
+    ],
+    "melhoresRotulos": [
+      "Montes Alpha Sauvignon Blanc",
+      "Soalheiro Alvarinho",
+      "Chandon Brut"
+    ],
+    "acompanha": [
+      "Arroz Branco",
+      "Legumes Grelhados"
+    ],
     "status": "ativo"
   },
   {
@@ -576,12 +1440,34 @@
     "subcategoria": "Vegetariano",
     "serve": "Individual",
     "descricao": "Prato vegetariano com legumes frescos da roça, grãos e temperos especiais.",
-    "ingredientesPrincipais": ["legumes variados", "grãos", "queijo", "ervas frescas"],
-    "tags": ["vegetariano", "roça", "saudável", "legumes", "leve"],
+    "ingredientesPrincipais": [
+      "legumes variados",
+      "grãos",
+      "queijo",
+      "ervas frescas"
+    ],
+    "tags": [
+      "vegetariano",
+      "roça",
+      "saudável",
+      "legumes",
+      "leve"
+    ],
     "nivelHarmonizacao": "medio",
-    "melhoresCategorias": ["Sauvignon Blanc Chileno", "Espumante Brut", "Chardonnay Sem Madeira"],
-    "melhoresRotulos": ["Montes Alpha Sauvignon Blanc", "Chandon Brut", "Salton Chardonnay"],
-    "acompanha": ["Arroz Branco", "Escabeche de Berinjela"],
+    "melhoresCategorias": [
+      "Sauvignon Blanc Chileno",
+      "Espumante Brut",
+      "Chardonnay Sem Madeira"
+    ],
+    "melhoresRotulos": [
+      "Montes Alpha Sauvignon Blanc",
+      "Chandon Brut",
+      "Salton Chardonnay"
+    ],
+    "acompanha": [
+      "Arroz Branco",
+      "Escabeche de Berinjela"
+    ],
     "status": "ativo"
   },
   {
@@ -591,12 +1477,34 @@
     "subcategoria": "Sobremesa",
     "serve": "Individual",
     "descricao": "Panquecas finas caramelizadas com açúcar e canela, servidas quentinhas.",
-    "ingredientesPrincipais": ["massa de panqueca", "açúcar", "canela", "manteiga"],
-    "tags": ["panqueca", "caramelizada", "doce", "canela", "sobremesa"],
+    "ingredientesPrincipais": [
+      "massa de panqueca",
+      "açúcar",
+      "canela",
+      "manteiga"
+    ],
+    "tags": [
+      "panqueca",
+      "caramelizada",
+      "doce",
+      "canela",
+      "sobremesa"
+    ],
     "nivelHarmonizacao": "alto",
-    "melhoresCategorias": ["Espumante Moscatel", "Vinho do Porto Tawny", "Espumante Demi-Sec"],
-    "melhoresRotulos": ["Miolo Moscatel", "Taylor's Tawny Port", "Chandon Demi-Sec"],
-    "acompanha": ["Sorvete de Creme", "Calda de Caramelo"],
+    "melhoresCategorias": [
+      "Espumante Moscatel",
+      "Vinho do Porto Tawny",
+      "Espumante Demi-Sec"
+    ],
+    "melhoresRotulos": [
+      "Miolo Moscatel",
+      "Taylor's Tawny Port",
+      "Chandon Demi-Sec"
+    ],
+    "acompanha": [
+      "Sorvete de Creme",
+      "Calda de Caramelo"
+    ],
     "status": "ativo"
   },
   {
@@ -606,12 +1514,36 @@
     "subcategoria": "Sobremesa",
     "serve": "Individual",
     "descricao": "Bolinho quente de chocolate com centro derretido, acompanhado de sorvete de creme.",
-    "ingredientesPrincipais": ["chocolate", "manteiga", "ovos", "farinha", "sorvete de creme"],
-    "tags": ["petit gâteau", "chocolate", "derretido", "sorvete", "sobremesa", "clássico"],
+    "ingredientesPrincipais": [
+      "chocolate",
+      "manteiga",
+      "ovos",
+      "farinha",
+      "sorvete de creme"
+    ],
+    "tags": [
+      "petit gâteau",
+      "chocolate",
+      "derretido",
+      "sorvete",
+      "sobremesa",
+      "clássico"
+    ],
     "nivelHarmonizacao": "premium",
-    "melhoresCategorias": ["Espumante Moscatel", "Vinho do Porto Late Harvest", "Espumante Demi-Sec"],
-    "melhoresRotulos": ["Miolo Moscatel", "Taylor's Late Bottled Vintage", "Casa Valduga Demi-Sec"],
-    "acompanha": ["Sorvete de Creme", "Calda de Chocolate"],
+    "melhoresCategorias": [
+      "Espumante Moscatel",
+      "Vinho do Porto Late Harvest",
+      "Espumante Demi-Sec"
+    ],
+    "melhoresRotulos": [
+      "Miolo Moscatel",
+      "Taylor's Late Bottled Vintage",
+      "Casa Valduga Demi-Sec"
+    ],
+    "acompanha": [
+      "Sorvete de Creme",
+      "Calda de Chocolate"
+    ],
     "status": "ativo"
   },
   {
@@ -621,12 +1553,35 @@
     "subcategoria": "Sobremesa",
     "serve": "Individual",
     "descricao": "Mix de frutas frescas da estação com creme especial e finalização de hortelã.",
-    "ingredientesPrincipais": ["frutas variadas", "creme", "hortelã", "açúcar"],
-    "tags": ["salada de frutas", "fresca", "leve", "creme", "sobremesa", "saudável"],
+    "ingredientesPrincipais": [
+      "frutas variadas",
+      "creme",
+      "hortelã",
+      "açúcar"
+    ],
+    "tags": [
+      "salada de frutas",
+      "fresca",
+      "leve",
+      "creme",
+      "sobremesa",
+      "saudável"
+    ],
     "nivelHarmonizacao": "medio",
-    "melhoresCategorias": ["Espumante Moscatel", "Champagne Demi-Sec", "Vinho do Porto Ruby"],
-    "melhoresRotulos": ["Miolo Moscatel", "Moët & Chandon Nectar Impérial", "Taylor's Ruby Port"],
-    "acompanha": ["Granola", "Mel"],
+    "melhoresCategorias": [
+      "Espumante Moscatel",
+      "Champagne Demi-Sec",
+      "Vinho do Porto Ruby"
+    ],
+    "melhoresRotulos": [
+      "Miolo Moscatel",
+      "Moët & Chandon Nectar Impérial",
+      "Taylor's Ruby Port"
+    ],
+    "acompanha": [
+      "Granola",
+      "Mel"
+    ],
     "status": "ativo"
   },
   {
@@ -636,11 +1591,31 @@
     "subcategoria": "Arroz Especial",
     "serve": "Compartilhável",
     "descricao": "Arroz especial com ovos mexidos, bacon crocante, cheiro-verde e temperos da casa.",
-    "ingredientesPrincipais": ["arroz", "ovos", "bacon", "cebolinha", "temperos"],
-    "tags": ["arroz biro biro", "bacon", "ovos", "acompanhamento", "compartilhar"],
+    "ingredientesPrincipais": [
+      "arroz",
+      "ovos",
+      "bacon",
+      "cebolinha",
+      "temperos"
+    ],
+    "tags": [
+      "arroz biro biro",
+      "bacon",
+      "ovos",
+      "acompanhamento",
+      "compartilhar"
+    ],
     "nivelHarmonizacao": "medio",
-    "melhoresCategorias": ["Merlot Brasileiro", "Chardonnay Brasileiro", "Malbec Argentino"],
-    "melhoresRotulos": ["Miolo Merlot", "Salton Chardonnay", "Trapiche Vineyards Malbec"],
+    "melhoresCategorias": [
+      "Merlot Brasileiro",
+      "Chardonnay Brasileiro",
+      "Malbec Argentino"
+    ],
+    "melhoresRotulos": [
+      "Miolo Merlot",
+      "Salton Chardonnay",
+      "Trapiche Vineyards Malbec"
+    ],
     "acompanha": [],
     "status": "ativo"
   },
@@ -651,12 +1626,34 @@
     "subcategoria": "Feijão",
     "serve": "Compartilhável",
     "descricao": "Feijão temperado da casa, cremoso e saboroso, servido em cumbuca artesanal.",
-    "ingredientesPrincipais": ["feijão", "temperos", "bacon", "cebola"],
-    "tags": ["feijão", "cumbuca", "cremoso", "tradicional", "acompanhamento"],
+    "ingredientesPrincipais": [
+      "feijão",
+      "temperos",
+      "bacon",
+      "cebola"
+    ],
+    "tags": [
+      "feijão",
+      "cumbuca",
+      "cremoso",
+      "tradicional",
+      "acompanhamento"
+    ],
     "nivelHarmonizacao": "medio",
-    "melhoresCategorias": ["Malbec Argentino", "Cabernet Sauvignon Chileno", "Tempranillo Espanhol"],
-    "melhoresRotulos": ["Alamos Malbec", "Casillero del Diablo Cabernet Sauvignon", "Marqués de Riscal Gran Reserva"],
-    "acompanha": ["Torresmo", "Couve Refogada"],
+    "melhoresCategorias": [
+      "Malbec Argentino",
+      "Cabernet Sauvignon Chileno",
+      "Tempranillo Espanhol"
+    ],
+    "melhoresRotulos": [
+      "Alamos Malbec",
+      "Casillero del Diablo Cabernet Sauvignon",
+      "Marqués de Riscal Gran Reserva"
+    ],
+    "acompanha": [
+      "Torresmo",
+      "Couve Refogada"
+    ],
     "status": "ativo"
   },
   {
@@ -666,11 +1663,30 @@
     "subcategoria": "Farofa",
     "serve": "Compartilhável",
     "descricao": "Farofa crocante com banana caramelizada, bacon e temperos especiais.",
-    "ingredientesPrincipais": ["farinha de mandioca", "banana", "bacon", "manteiga"],
-    "tags": ["farofa", "banana", "crocante", "caramelizada", "acompanhamento"],
+    "ingredientesPrincipais": [
+      "farinha de mandioca",
+      "banana",
+      "bacon",
+      "manteiga"
+    ],
+    "tags": [
+      "farofa",
+      "banana",
+      "crocante",
+      "caramelizada",
+      "acompanhamento"
+    ],
     "nivelHarmonizacao": "baixo",
-    "melhoresCategorias": ["Moscatel Brasileiro", "Espumante Demi-Sec", "Chardonnay Brasileiro"],
-    "melhoresRotulos": ["Miolo Moscatel", "Chandon Demi-Sec", "Casa Valduga 130 Chardonnay"],
+    "melhoresCategorias": [
+      "Moscatel Brasileiro",
+      "Espumante Demi-Sec",
+      "Chardonnay Brasileiro"
+    ],
+    "melhoresRotulos": [
+      "Miolo Moscatel",
+      "Chandon Demi-Sec",
+      "Casa Valduga 130 Chardonnay"
+    ],
     "acompanha": [],
     "status": "ativo"
   },
@@ -681,11 +1697,30 @@
     "subcategoria": "Farofa",
     "serve": "Compartilhável",
     "descricao": "Farofa especial com carne seca desfiada, cebola e temperos da roça.",
-    "ingredientesPrincipais": ["farinha de mandioca", "carne seca", "cebola", "manteiga"],
-    "tags": ["farofa", "carne seca", "crocante", "roça", "acompanhamento"],
+    "ingredientesPrincipais": [
+      "farinha de mandioca",
+      "carne seca",
+      "cebola",
+      "manteiga"
+    ],
+    "tags": [
+      "farofa",
+      "carne seca",
+      "crocante",
+      "roça",
+      "acompanhamento"
+    ],
     "nivelHarmonizacao": "medio",
-    "melhoresCategorias": ["Tannat Uruguaio", "Malbec Argentino", "Cabernet Sauvignon Chileno"],
-    "melhoresRotulos": ["Bouza Tannat", "Norton Reserva Malbec", "Montes Alpha Cabernet Sauvignon"],
+    "melhoresCategorias": [
+      "Tannat Uruguaio",
+      "Malbec Argentino",
+      "Cabernet Sauvignon Chileno"
+    ],
+    "melhoresRotulos": [
+      "Bouza Tannat",
+      "Norton Reserva Malbec",
+      "Montes Alpha Cabernet Sauvignon"
+    ],
     "acompanha": [],
     "status": "ativo"
   },
@@ -696,11 +1731,30 @@
     "subcategoria": "Farofa",
     "serve": "Compartilhável",
     "descricao": "Farofa crocante com rúcula fresca, azeite e temperos especiais.",
-    "ingredientesPrincipais": ["farinha de mandioca", "rúcula", "azeite", "temperos"],
-    "tags": ["farofa", "rúcula", "crocante", "fresco", "acompanhamento"],
+    "ingredientesPrincipais": [
+      "farinha de mandioca",
+      "rúcula",
+      "azeite",
+      "temperos"
+    ],
+    "tags": [
+      "farofa",
+      "rúcula",
+      "crocante",
+      "fresco",
+      "acompanhamento"
+    ],
     "nivelHarmonizacao": "baixo",
-    "melhoresCategorias": ["Sauvignon Blanc Chileno", "Espumante Brut", "Chardonnay Brasileiro"],
-    "melhoresRotulos": ["Montes Alpha Sauvignon Blanc", "Chandon Brut", "Miolo Terroir Chardonnay"],
+    "melhoresCategorias": [
+      "Sauvignon Blanc Chileno",
+      "Espumante Brut",
+      "Chardonnay Brasileiro"
+    ],
+    "melhoresRotulos": [
+      "Montes Alpha Sauvignon Blanc",
+      "Chandon Brut",
+      "Miolo Terroir Chardonnay"
+    ],
     "acompanha": [],
     "status": "ativo"
   },
@@ -711,11 +1765,31 @@
     "subcategoria": "Vegetariano",
     "serve": "Compartilhável",
     "descricao": "Berinjela em escabeche com pimentões, cebola roxa, azeitonas e azeite extra-virgem.",
-    "ingredientesPrincipais": ["berinjela", "pimentões", "cebola roxa", "azeitonas", "azeite"],
-    "tags": ["escabeche", "berinjela", "vegetariano", "azeite", "acompanhamento"],
+    "ingredientesPrincipais": [
+      "berinjela",
+      "pimentões",
+      "cebola roxa",
+      "azeitonas",
+      "azeite"
+    ],
+    "tags": [
+      "escabeche",
+      "berinjela",
+      "vegetariano",
+      "azeite",
+      "acompanhamento"
+    ],
     "nivelHarmonizacao": "medio",
-    "melhoresCategorias": ["Sauvignon Blanc Chileno", "Albariño Espanhol", "Espumante Brut"],
-    "melhoresRotulos": ["Leyda Lot 11 Sauvignon Blanc", "Pazo Señoráns Albariño", "Casa Valduga Arte Brut"],
+    "melhoresCategorias": [
+      "Sauvignon Blanc Chileno",
+      "Albariño Espanhol",
+      "Espumante Brut"
+    ],
+    "melhoresRotulos": [
+      "Leyda Lot 11 Sauvignon Blanc",
+      "Pazo Señoráns Albariño",
+      "Casa Valduga Arte Brut"
+    ],
     "acompanha": [],
     "status": "ativo"
   },
@@ -726,12 +1800,36 @@
     "subcategoria": "Vegetariano",
     "serve": "Compartilhável",
     "descricao": "Guacamole fresco preparado na hora com abacate maduro, limão, coentro e pimenta.",
-    "ingredientesPrincipais": ["abacate", "limão", "coentro", "pimenta", "cebola", "tomate"],
-    "tags": ["guacamole", "abacate", "mexicano", "fresco", "acompanhamento"],
+    "ingredientesPrincipais": [
+      "abacate",
+      "limão",
+      "coentro",
+      "pimenta",
+      "cebola",
+      "tomate"
+    ],
+    "tags": [
+      "guacamole",
+      "abacate",
+      "mexicano",
+      "fresco",
+      "acompanhamento"
+    ],
     "nivelHarmonizacao": "medio",
-    "melhoresCategorias": ["Albariño Espanhol", "Sauvignon Blanc Chileno", "Prosecco Italiano"],
-    "melhoresRotulos": ["Pazo Señoráns Albariño", "Casa Silva Cool Coast Sauvignon Blanc", "Mionetto Prosecco Brut"],
-    "acompanha": ["Chips de Milho", "Totopos"],
+    "melhoresCategorias": [
+      "Albariño Espanhol",
+      "Sauvignon Blanc Chileno",
+      "Prosecco Italiano"
+    ],
+    "melhoresRotulos": [
+      "Pazo Señoráns Albariño",
+      "Casa Silva Cool Coast Sauvignon Blanc",
+      "Mionetto Prosecco Brut"
+    ],
+    "acompanha": [
+      "Chips de Milho",
+      "Totopos"
+    ],
     "status": "ativo"
   },
   {
@@ -741,11 +1839,30 @@
     "subcategoria": "Vegetariano",
     "serve": "Compartilhável",
     "descricao": "Tomates frescos recheados com cremoso Catupiry e finalizados com ervas.",
-    "ingredientesPrincipais": ["tomate", "Catupiry", "ervas frescas", "azeite"],
-    "tags": ["tomate", "catupiry", "recheado", "cremoso", "acompanhamento"],
+    "ingredientesPrincipais": [
+      "tomate",
+      "Catupiry",
+      "ervas frescas",
+      "azeite"
+    ],
+    "tags": [
+      "tomate",
+      "catupiry",
+      "recheado",
+      "cremoso",
+      "acompanhamento"
+    ],
     "nivelHarmonizacao": "medio",
-    "melhoresCategorias": ["Champagne Brut", "Chardonnay Barricado", "Chianti Italiano"],
-    "melhoresRotulos": ["Moët & Chandon Impérial Brut", "Miolo Terroir Chardonnay", "Tignanello"],
+    "melhoresCategorias": [
+      "Champagne Brut",
+      "Chardonnay Barricado",
+      "Chianti Italiano"
+    ],
+    "melhoresRotulos": [
+      "Moët & Chandon Impérial Brut",
+      "Miolo Terroir Chardonnay",
+      "Tignanello"
+    ],
     "acompanha": [],
     "status": "ativo"
   },
@@ -756,11 +1873,32 @@
     "subcategoria": "Vegetariano",
     "serve": "Compartilhável",
     "descricao": "Vinagrete especial com manga fresca, tomate, cebola, coentro e pimenta.",
-    "ingredientesPrincipais": ["manga", "tomate", "cebola", "coentro", "pimenta", "limão"],
-    "tags": ["vinagrete", "manga", "fresco", "tropical", "acompanhamento"],
+    "ingredientesPrincipais": [
+      "manga",
+      "tomate",
+      "cebola",
+      "coentro",
+      "pimenta",
+      "limão"
+    ],
+    "tags": [
+      "vinagrete",
+      "manga",
+      "fresco",
+      "tropical",
+      "acompanhamento"
+    ],
     "nivelHarmonizacao": "baixo",
-    "melhoresCategorias": ["Vinho Verde Português", "Albariño Espanhol", "Espumante Brut"],
-    "melhoresRotulos": ["Aveleda Loureiro", "Pazo Señoráns Albariño", "Chandon Brut"],
+    "melhoresCategorias": [
+      "Vinho Verde Português",
+      "Albariño Espanhol",
+      "Espumante Brut"
+    ],
+    "melhoresRotulos": [
+      "Aveleda Loureiro",
+      "Pazo Señoráns Albariño",
+      "Chandon Brut"
+    ],
     "acompanha": [],
     "status": "ativo"
   },
@@ -771,11 +1909,32 @@
     "subcategoria": "Molho",
     "serve": "Compartilhável",
     "descricao": "Tradicional molho argentino com ervas frescas, alho, vinagre e azeite.",
-    "ingredientesPrincipais": ["salsinha", "orégano", "alho", "vinagre", "azeite", "pimenta"],
-    "tags": ["chimichurri", "argentino", "ervas", "molho", "acompanhamento"],
+    "ingredientesPrincipais": [
+      "salsinha",
+      "orégano",
+      "alho",
+      "vinagre",
+      "azeite",
+      "pimenta"
+    ],
+    "tags": [
+      "chimichurri",
+      "argentino",
+      "ervas",
+      "molho",
+      "acompanhamento"
+    ],
     "nivelHarmonizacao": "medio",
-    "melhoresCategorias": ["Malbec Argentino", "Cabernet Sauvignon Chileno", "Tannat Uruguaio"],
-    "melhoresRotulos": ["Trapiche Vineyards Malbec", "Montes Alpha Cabernet Sauvignon", "Bodega Garzón Single Vineyard Tannat"],
+    "melhoresCategorias": [
+      "Malbec Argentino",
+      "Cabernet Sauvignon Chileno",
+      "Tannat Uruguaio"
+    ],
+    "melhoresRotulos": [
+      "Trapiche Vineyards Malbec",
+      "Montes Alpha Cabernet Sauvignon",
+      "Bodega Garzón Single Vineyard Tannat"
+    ],
     "acompanha": [],
     "status": "ativo"
   },
@@ -786,11 +1945,31 @@
     "subcategoria": "Molho",
     "serve": "Compartilhável",
     "descricao": "Molho agridoce de abacaxi com toque picante de pimenta, tropical e refrescante.",
-    "ingredientesPrincipais": ["abacaxi", "pimenta", "açúcar", "vinagre", "temperos"],
-    "tags": ["abacaxi", "pimenta", "agridoce", "tropical", "molho"],
+    "ingredientesPrincipais": [
+      "abacaxi",
+      "pimenta",
+      "açúcar",
+      "vinagre",
+      "temperos"
+    ],
+    "tags": [
+      "abacaxi",
+      "pimenta",
+      "agridoce",
+      "tropical",
+      "molho"
+    ],
     "nivelHarmonizacao": "medio",
-    "melhoresCategorias": ["Riesling Alemão", "Espumante Demi-Sec", "Moscatel Brasileiro"],
-    "melhoresRotulos": ["Dr. Loosen Riesling Kabinett", "Chandon Demi-Sec", "Miolo Moscatel"],
+    "melhoresCategorias": [
+      "Riesling Alemão",
+      "Espumante Demi-Sec",
+      "Moscatel Brasileiro"
+    ],
+    "melhoresRotulos": [
+      "Dr. Loosen Riesling Kabinett",
+      "Chandon Demi-Sec",
+      "Miolo Moscatel"
+    ],
     "acompanha": [],
     "status": "ativo"
   },
@@ -801,11 +1980,30 @@
     "subcategoria": "Molho",
     "serve": "Compartilhável",
     "descricao": "Molho de pimenta artesanal, picante e aromático, preparado com pimentas selecionadas.",
-    "ingredientesPrincipais": ["pimentas variadas", "vinagre", "alho", "temperos"],
-    "tags": ["pimenta", "picante", "artesanal", "molho", "acompanhamento"],
+    "ingredientesPrincipais": [
+      "pimentas variadas",
+      "vinagre",
+      "alho",
+      "temperos"
+    ],
+    "tags": [
+      "pimenta",
+      "picante",
+      "artesanal",
+      "molho",
+      "acompanhamento"
+    ],
     "nivelHarmonizacao": "medio",
-    "melhoresCategorias": ["Riesling Alemão", "Espumante Demi-Sec", "Gewürztraminer"],
-    "melhoresRotulos": ["Dr. Loosen Riesling Kabinett", "Chandon Demi-Sec", "Domaine Zind-Humboldt Riesling"],
+    "melhoresCategorias": [
+      "Riesling Alemão",
+      "Espumante Demi-Sec",
+      "Gewürztraminer"
+    ],
+    "melhoresRotulos": [
+      "Dr. Loosen Riesling Kabinett",
+      "Chandon Demi-Sec",
+      "Domaine Zind-Humboldt Riesling"
+    ],
     "acompanha": [],
     "status": "ativo"
   },
@@ -816,11 +2014,30 @@
     "subcategoria": "Molho",
     "serve": "Compartilhável",
     "descricao": "Molho agridoce de goiabada com pimenta, inspirado no clássicoromeu-e-julieta com toque picante.",
-    "ingredientesPrincipais": ["goiabada", "pimenta", "vinagre", "temperos"],
-    "tags": ["goiabada", "pimenta", "agridoce", "brasileiro", "molho"],
+    "ingredientesPrincipais": [
+      "goiabada",
+      "pimenta",
+      "vinagre",
+      "temperos"
+    ],
+    "tags": [
+      "goiabada",
+      "pimenta",
+      "agridoce",
+      "brasileiro",
+      "molho"
+    ],
     "nivelHarmonizacao": "medio",
-    "melhoresCategorias": ["Espumante Demi-Sec", "Malbec Suave", "Vinho do Porto Ruby"],
-    "melhoresRotulos": ["Chandon Demi-Sec", "Miolo Merlot", "Taylor's Ruby Port"],
+    "melhoresCategorias": [
+      "Espumante Demi-Sec",
+      "Malbec Suave",
+      "Vinho do Porto Ruby"
+    ],
+    "melhoresRotulos": [
+      "Chandon Demi-Sec",
+      "Miolo Merlot",
+      "Taylor's Ruby Port"
+    ],
     "acompanha": [],
     "status": "ativo"
   }
