@@ -5,19 +5,23 @@ import ManagerDashboard from './views/Manager/ManagerDashboard';
 import SommelierView from './views/Sommelier/SommelierView';
 
 function App() {
-  const { userRole, isAuthenticated } = useContext(AppContext);
+  const context = useContext(AppContext);
+  
+  // Verifica se o contexto está disponível
+  if (!context) {
+    return <div>Erro: Contexto não disponível</div>;
+  }
 
-  // Não autenticado → Login
+  const { userRole, isAuthenticated } = context;
+
   if (!isAuthenticated) {
     return <Login />;
   }
 
-  // Gerente → Dashboard completo
   if (userRole === 'manager') {
     return <ManagerDashboard />;
   }
 
-  // Garçom/Cliente → Visão do sommelier
   if (userRole === 'sommelier') {
     return <SommelierView />;
   }

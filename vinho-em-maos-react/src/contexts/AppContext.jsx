@@ -44,6 +44,7 @@ export function AppProvider({ children }) {
       }
       return false;
     } catch (err) {
+      console.error('Erro no login:', err);
       return false;
     }
   };
@@ -58,6 +59,7 @@ export function AppProvider({ children }) {
       }
       return false;
     } catch (err) {
+      console.error('Erro na validação do PIN:', err);
       return false;
     }
   };
@@ -76,6 +78,7 @@ export function AppProvider({ children }) {
       return true;
     } catch (err) {
       setError('Falha ao atualizar item');
+      console.error(err);
       return false;
     }
   };
@@ -94,5 +97,9 @@ export function AppProvider({ children }) {
     loadInitialData
   };
 
-  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider value={value}>
+      {children}
+    </AppContext.Provider>
+  );
 }
