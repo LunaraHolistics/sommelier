@@ -15,5 +15,7 @@
     "code": "4402",
     "expiresAt": "2026-06-19T02:59:59.999Z"
   },
-  "adminPassword": "sommelier2026"
+  "adminPassword": "sommelier2026",
+  "customDishes": [],
+  "dishModifications": {}
 }

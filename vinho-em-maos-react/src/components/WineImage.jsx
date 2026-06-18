@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { useImageCache } from '../hooks/useImageCache';
-import ImageZoomModal from './ImageZoomModal';
 import './WineImage.css';
 
-function WineImage({ wine, className = '' }) {
+function WineImage({ wine, className = '', onClick }) {
+  const [imgError, setImgError] = useState(false);
   const [showZoom, setShowZoom] = useState(false);
-  const { cachedUrl, isLoading, hasError } = useImageCache(wine.imagemUrl);
 
+  // Cores baseadas no tipo de vinho
   const getGradient = (tipo) => {
     const gradients = {
       'Tinto': 'linear-gradient(135deg, #722f37 0%, #5a252c 100%)',
@@ -18,6 +17,7 @@ function WineImage({ wine, className = '' }) {
     return gradients[tipo] || gradients['Tinto'];
   };
 
+  // Gerar iniciais do vinho
   const getInitials = (nome) => {
     if (!nome) return '🍷';
     const words = nome.split(' ');
@@ -28,24 +28,19 @@ function WineImage({ wine, className = '' }) {
   };
 
   const handleClick = () => {
-    if (cachedUrl && !hasError) {
+    if (wine.imagemUrl && !imgError) {
       setShowZoom(true);
     }
+    if (onClick) onClick(wine);
   };
 
   return (
     <>
       <div 
-        className={`wine-image-container ${className} ${cachedUrl ? 'clickable' : ''}`}
+        className={`wine-image-container ${className} ${wine.imagemUrl && !imgError ? 'clickable' : ''}`}
         onClick={handleClick}
       >
-        {isLoading && (
-          <div className="wine-image-loading">
-            <div className="spinner-small"></div>
-          </div>
-        )}
-
-        {hasError || !cachedUrl ? (
+        {!wine.imagemUrl || imgError ? (
           <div 
             className="wine-image-placeholder"
             style={{ background: getGradient(wine.tipo) }}
@@ -60,14 +55,15 @@ function WineImage({ wine, className = '' }) {
           </div>
         ) : (
           <img 
-            src={cachedUrl} 
+            src={wine.imagemUrl}
             alt={wine.nome}
             className="wine-image"
+            onError={() => setImgError(true)}
             loading="lazy"
           />
         )}
 
-        {cachedUrl && !hasError && (
+        {wine.imagemUrl && !imgError && (
           <div className="wine-image-zoom-hint">
             🔍
           </div>
@@ -75,11 +71,18 @@ function WineImage({ wine, className = '' }) {
       </div>
 
       {showZoom && (
-        <ImageZoomModal
-          imageUrl={cachedUrl}
-          alt={wine.nome}
-          onClose={() => setShowZoom(false)}
-        />
+        <div className="image-zoom-overlay" onClick={() => setShowZoom(false)}>
+          <div className="image-zoom-container" onClick={(e) => e.stopPropagation()}>
+            <button className="image-zoom-close" onClick={() => setShowZoom(false)}>
+              ×
+            </button>
+            <img 
+              src={wine.imagemUrl}
+              alt={wine.nome}
+              className="image-zoom-img"
+            />
+          </div>
+        </div>
       )}
     </>
   );

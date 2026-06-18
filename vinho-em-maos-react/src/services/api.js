@@ -1,28 +1,28 @@
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 
 class ApiService {
   constructor() {
-    this.adminToken = localStorage.getItem('adminToken') || '';
+    this.adminToken = localStorage.getItem("adminToken") || "";
   }
 
   setAdminToken(token) {
     this.adminToken = token;
-    localStorage.setItem('adminToken', token);
+    localStorage.setItem("adminToken", token);
   }
 
   clearAdminToken() {
-    this.adminToken = '';
-    localStorage.removeItem('adminToken');
+    this.adminToken = "";
+    localStorage.removeItem("adminToken");
   }
 
   async request(endpoint, options = {}) {
     const url = `${API_BASE}${endpoint}`;
     const config = {
       headers: {
-        'Content-Type': 'application/json',
-        ...(this.adminToken && { 'x-admin-token': this.adminToken })
+        "Content-Type": "application/json",
+        ...(this.adminToken && { "x-admin-token": this.adminToken }),
       },
-      ...options
+      ...options,
     };
 
     try {
@@ -30,7 +30,7 @@ class ApiService {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Erro na requisição');
+        throw new Error(data.error || "Erro na requisição");
       }
 
       return data;
@@ -43,7 +43,7 @@ class ApiService {
   async getCatalogo(filters = {}) {
     const params = new URLSearchParams();
     Object.entries(filters).forEach(([key, value]) => {
-      if (value !== undefined && value !== null && value !== '') {
+      if (value !== undefined && value !== null && value !== "") {
         params.append(key, value);
       }
     });
@@ -56,30 +56,30 @@ class ApiService {
 
   async updateCatalogoItem(id, data) {
     return this.request(`/catalogo/${id}`, {
-      method: 'PATCH',
-      body: JSON.stringify(data)
+      method: "PATCH",
+      body: JSON.stringify(data),
     });
   }
 
   async generatePin() {
-    return this.request('/pin', { method: 'POST' });
+    return this.request("/pin", { method: "POST" });
   }
 
   async getPin() {
-    return this.request('/pin');
+    return this.request("/pin");
   }
 
   async validatePin(code) {
-    return this.request('/pin/validate', {
-      method: 'POST',
-      body: JSON.stringify({ code })
+    return this.request("/pin/validate", {
+      method: "POST",
+      body: JSON.stringify({ code }),
     });
   }
 
   async loginManager(password) {
-    const response = await this.request('/auth/manager', {
-      method: 'POST',
-      body: JSON.stringify({ password })
+    const response = await this.request("/auth/manager", {
+      method: "POST",
+      body: JSON.stringify({ password }),
     });
     if (response.ok) {
       this.setAdminToken(password);
@@ -96,25 +96,60 @@ class ApiService {
   }
 
   async harmonize(pratoId) {
-    return this.request('/harmonize', {
-      method: 'POST',
-      body: JSON.stringify({ pratoId })
+    return this.request("/harmonize", {
+      method: "POST",
+      body: JSON.stringify({ pratoId }),
     });
   }
 
   async harmonizeByTags(tags) {
-    return this.request('/harmonize', {
-      method: 'POST',
-      body: JSON.stringify({ tags })
+    return this.request("/harmonize", {
+      method: "POST",
+      body: JSON.stringify({ tags }),
     });
   }
 
   async getStats() {
-    return this.request('/stats');
+    return this.request("/stats");
   }
 
   async getStatus() {
-    return this.request('/status');
+    return this.request("/status");
+  }
+  // ==================== API: PRATOS ============================
+  async getCardapio(filters = {}) {
+    const params = new URLSearchParams();
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value) params.append(key, value);
+    });
+    return this.request(`/cardapio?${params.toString()}`);
+  }
+
+  async createDish(dishData) {
+    return this.request("/cardapio", {
+      method: "POST",
+      body: JSON.stringify(dishData),
+    });
+  }
+
+  async updateDish(id, dishData) {
+    return this.request(`/cardapio/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(dishData),
+    });
+  }
+
+  async updateDishStatus(id, status) {
+    return this.request(`/cardapio/${id}/status`, {
+      method: "PATCH",
+      body: JSON.stringify({ status }),
+    });
+  }
+
+  async deleteDish(id) {
+    return this.request(`/cardapio/${id}`, {
+      method: "DELETE",
+    });
   }
 }
 

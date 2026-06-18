@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { AppContext } from '../../contexts/AppContext';
 import StockCatalog from './StockCatalog';
+import DishManager from './DishManager';
 import api from '../../services/api';
 import './ManagerDashboard.css';
 
@@ -74,16 +75,20 @@ function ManagerDashboard() {
       {stats && (
         <div className="stats-grid">
           <div className="stat-card">
-            <div className="stat-value">{stats.total}</div>
-            <div className="stat-label">Total de Itens</div>
+            <div className="stat-value">{stats.totalBebidas}</div>
+            <div className="stat-label">Total de Bebidas</div>
           </div>
           <div className="stat-card">
-            <div className="stat-value">{stats.ativos}</div>
-            <div className="stat-label">Ativos no Cardápio</div>
+            <div className="stat-value">{stats.bebidasAtivas}</div>
+            <div className="stat-label">Bebidas Ativas</div>
           </div>
           <div className="stat-card warning">
-            <div className="stat-value">{stats.semEstoque}</div>
+            <div className="stat-value">{stats.bebidasSemEstoque}</div>
             <div className="stat-label">Sem Estoque</div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-value">{stats.totalPratos}</div>
+            <div className="stat-label">Pratos no Cardápio</div>
           </div>
         </div>
       )}
@@ -95,10 +100,17 @@ function ManagerDashboard() {
         >
           Catálogo & Estoque
         </button>
+        <button
+          className={activeTab === 'dishes' ? 'active' : ''}
+          onClick={() => setActiveTab('dishes')}
+        >
+          Gestão de Pratos
+        </button>
       </div>
 
       <div className="dashboard-content">
         {activeTab === 'catalog' && <StockCatalog />}
+        {activeTab === 'dishes' && <DishManager />}
       </div>
     </div>
   );
