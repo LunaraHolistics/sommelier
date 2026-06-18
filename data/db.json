@@ -1,5 +1,16 @@
 {
-  "inventory": {},
+  "inventory": {
+    "VIN0001": {
+      "price": 45,
+      "stock": 1,
+      "active": true
+    },
+    "VIN0002": {
+      "price": 120,
+      "stock": 1,
+      "active": true
+    }
+  },
   "pin": {
     "code": "4402",
     "expiresAt": "2026-06-19T02:59:59.999Z"
