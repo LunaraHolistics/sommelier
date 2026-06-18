@@ -4,14 +4,13 @@ import api from '../services/api';
 export const AppContext = createContext();
 
 export function AppProvider({ children }) {
-  const [userRole, setUserRole] = useState(null); // 'manager' | 'sommelier' | null
+  const [userRole, setUserRole] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [catalogo, setCatalogo] = useState([]);
   const [cardapio, setCardapio] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Carrega dados iniciais
   useEffect(() => {
     if (isAuthenticated) {
       loadInitialData();
@@ -72,7 +71,6 @@ export function AppProvider({ children }) {
   const updateCatalogoItem = async (id, data) => {
     try {
       await api.updateCatalogoItem(id, data);
-      // Recarrega catálogo
       const catalogoRes = await api.getCatalogo();
       setCatalogo(catalogoRes.items || []);
       return true;

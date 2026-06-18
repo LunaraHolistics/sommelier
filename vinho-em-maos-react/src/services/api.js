@@ -40,7 +40,6 @@ class ApiService {
     }
   }
 
-  // ─── Catálogo ───────────────────────────────────────────
   async getCatalogo(filters = {}) {
     const params = new URLSearchParams();
     Object.entries(filters).forEach(([key, value]) => {
@@ -62,7 +61,6 @@ class ApiService {
     });
   }
 
-  // ─── PIN ─────────────────────────────────────────────────
   async generatePin() {
     return this.request('/pin', { method: 'POST' });
   }
@@ -78,7 +76,6 @@ class ApiService {
     });
   }
 
-  // ─── Auth ────────────────────────────────────────────────
   async loginManager(password) {
     const response = await this.request('/auth/manager', {
       method: 'POST',
@@ -90,7 +87,6 @@ class ApiService {
     return response;
   }
 
-  // ─── Cardápio ────────────────────────────────────────────
   async getCardapio(filters = {}) {
     const params = new URLSearchParams();
     Object.entries(filters).forEach(([key, value]) => {
@@ -99,7 +95,6 @@ class ApiService {
     return this.request(`/cardapio?${params.toString()}`);
   }
 
-  // ─── Harmonização ────────────────────────────────────────
   async harmonize(pratoId) {
     return this.request('/harmonize', {
       method: 'POST',
@@ -114,7 +109,6 @@ class ApiService {
     });
   }
 
-  // ─── Stats ───────────────────────────────────────────────
   async getStats() {
     return this.request('/stats');
   }
