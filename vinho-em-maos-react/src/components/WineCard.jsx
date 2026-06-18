@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 import WineImage from './WineImage';
 import WineDetailModal from './WineDetailModal';
 import './WineCard.css';
@@ -6,16 +6,24 @@ import './WineCard.css';
 function WineCard({ wine, userRole }) {
   const [showModal, setShowModal] = useState(false);
 
-  const formatPrice = (price) => {
+  const formatPrice = useCallback((price) => {
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',
       currency: 'BRL'
     }).format(price || 0);
-  };
+  }, []);
+
+  const handleOpenModal = useCallback(() => {
+    setShowModal(true);
+  }, []);
+
+  const handleCloseModal = useCallback(() => {
+    setShowModal(false);
+  }, []);
 
   return (
     <>
-      <div className="wine-card" onClick={() => setShowModal(true)}>
+      <div className="wine-card" onClick={handleOpenModal}>
         <WineImage wine={wine} />
         
         <div className="wine-info">
@@ -53,10 +61,10 @@ function WineCard({ wine, userRole }) {
       </div>
 
       {showModal && (
-        <WineDetailModal wine={wine} onClose={() => setShowModal(false)} />
+        <WineDetailModal wine={wine} onClose={handleCloseModal} />
       )}
     </>
   );
 }
 
-export default WineCard;
+export default memo(WineCard);

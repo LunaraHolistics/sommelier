@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import { AppContext } from '../../contexts/AppContext';
 import WineCard from '../../components/WineCard';
 import DishCard from '../../components/DishCard';
@@ -8,11 +8,16 @@ import './SommelierView.css';
 
 function SommelierView() {
   const { catalogo, cardapio, logout } = useContext(AppContext);
-  const [view, setView] = useState('drinks'); // 'drinks' | 'dishes' | 'harmonize'
+  const [view, setView] = useState('drinks');
   const [selectedDish, setSelectedDish] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
 
-  const handleDishSelect = async (dish) => {
+  const handleDishSelect = useCallback(async (dish) => {
+    if (!dish || !dish.id) {
+      console.error('Prato inválido:', dish);
+      return;
+    }
+
     setSelectedDish(dish);
     setView('harmonize');
     
@@ -23,7 +28,7 @@ function SommelierView() {
       console.error('Falha ao buscar harmonizações:', err);
       setSuggestions([]);
     }
-  };
+  }, []);
 
   const activeWines = catalogo.filter(w => w.active && w.stock > 0);
 

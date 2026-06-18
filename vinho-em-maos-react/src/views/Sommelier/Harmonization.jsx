@@ -2,7 +2,19 @@ import React from 'react';
 import WineCard from '../../components/WineCard';
 import './Harmonization.css';
 
-function Harmonization({ prato, suggestions, onBack }) {
+function Harmonization({ dish, suggestions, onBack }) {
+  // Validação de segurança
+  if (!dish) {
+    return (
+      <div className="harmonization-view">
+        <div className="error-message">
+          <p>Erro: Prato não selecionado</p>
+          <button onClick={onBack} className="btn-back">Voltar</button>
+        </div>
+      </div>
+    );
+  }
+
   const getScoreLevel = (score) => {
     if (score >= 10) return 'Excelente';
     if (score >= 7) return 'Muito Bom';
@@ -24,27 +36,27 @@ function Harmonization({ prato, suggestions, onBack }) {
           ← Voltar
         </button>
         <div className="dish-info">
-          <h2>{prato.nome}</h2>
-          <p>{prato.descricao}</p>
-          {prato.nivelHarmonizacao && (
+          <h2>{dish.nome}</h2>
+          <p>{dish.descricao}</p>
+          {dish.nivelHarmonizacao && (
             <span className="dish-level">
-              Nível de Harmonização: <strong>{prato.nivelHarmonizacao.toUpperCase()}</strong>
+              Nível de Harmonização: <strong>{dish.nivelHarmonizacao.toUpperCase()}</strong>
             </span>
           )}
         </div>
       </div>
 
-      {prato.dicaSommelier && (
+      {dish.dicaSommelier && (
         <div className="sommelier-tip">
           <h4>💡 Dica do Sommelier</h4>
-          <p>{prato.dicaSommelier}</p>
+          <p>{dish.dicaSommelier}</p>
         </div>
       )}
 
       <div className="suggestions-section">
-        <h3>🍷 Vinhos Recomendados ({suggestions.length})</h3>
+        <h3>🍷 Vinhos Recomendados ({suggestions?.length || 0})</h3>
         
-        {suggestions.length === 0 ? (
+        {!suggestions || suggestions.length === 0 ? (
           <p className="no-suggestions">
             Nenhuma sugestão de harmonização encontrada para este prato.
             <br />
@@ -53,7 +65,7 @@ function Harmonization({ prato, suggestions, onBack }) {
         ) : (
           <div className="suggestions-grid">
             {suggestions.map((wine, index) => (
-              <div key={wine.id} className="suggestion-card">
+              <div key={wine.id || index} className="suggestion-card">
                 <WineCard wine={wine} />
                 {wine.score > 0 && (
                   <div className="match-score">
@@ -84,11 +96,11 @@ function Harmonization({ prato, suggestions, onBack }) {
         )}
       </div>
 
-      {prato.melhoresRotulos && prato.melhoresRotulos.length > 0 && (
+      {dish.melhoresRotulos && dish.melhoresRotulos.length > 0 && (
         <div className="sommelier-tip">
           <h4>🏆 Rótulos Ideais para este Prato</h4>
           <div className="tags-list" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '10px' }}>
-            {prato.melhoresRotulos.map((rotulo, i) => (
+            {dish.melhoresRotulos.map((rotulo, i) => (
               <span key={i} style={{
                 background: '#d4af37',
                 color: '#333',
