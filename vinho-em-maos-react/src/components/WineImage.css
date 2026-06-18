@@ -93,7 +93,6 @@
   opacity: 1;
 }
 
-/* Responsivo */
 @media (max-width: 768px) {
   .wine-image-container {
     height: 180px;

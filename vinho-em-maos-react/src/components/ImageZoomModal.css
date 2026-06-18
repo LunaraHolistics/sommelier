@@ -98,7 +98,6 @@
   text-align: center;
 }
 
-/* Responsivo */
 @media (max-width: 768px) {
   .image-zoom-overlay {
     padding: 10px;

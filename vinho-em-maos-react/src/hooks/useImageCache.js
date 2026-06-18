@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 
-// Cache em memória para sessões
 const imageCache = new Map();
 const failedImages = new Set();
 
@@ -16,14 +15,12 @@ export function useImageCache(imageUrl) {
       return;
     }
 
-    // Verifica se já está em cache
     if (imageCache.has(imageUrl)) {
       setCachedUrl(imageCache.get(imageUrl));
       setIsLoading(false);
       return;
     }
 
-    // Verifica se já falhou antes
     if (failedImages.has(imageUrl)) {
       setIsLoading(false);
       setHasError(true);
@@ -58,7 +55,6 @@ export function useImageCache(imageUrl) {
   return { cachedUrl, isLoading, hasError };
 }
 
-// Função para limpar cache (útil para desenvolvimento)
 export function clearImageCache() {
   imageCache.clear();
   failedImages.clear();

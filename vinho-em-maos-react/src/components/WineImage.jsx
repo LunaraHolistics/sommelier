@@ -51,7 +51,7 @@ function WineImage({ wine, className = '' }) {
             style={{ background: getGradient(wine.tipo) }}
           >
             <span className="placeholder-icon">
-              {wine.tipo === 'Espumante' ? '' : 
+              {wine.tipo === 'Espumante' ? '🍾' : 
                wine.tipo === 'Branco' ? '🥂' : 
                wine.tipo === 'Rosé' ? '🌸' : '🍷'}
             </span>

@@ -25,7 +25,6 @@ function ImageZoomModal({ imageUrl, alt, onClose }) {
     };
   }, [imageUrl]);
 
-  // Fechar com ESC
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === 'Escape') onClose();
@@ -52,7 +51,7 @@ function ImageZoomModal({ imageUrl, alt, onClose }) {
 
         {hasError && (
           <div className="image-zoom-error">
-            <span style={{ fontSize: '4rem' }}></span>
+            <span style={{ fontSize: '4rem' }}>🍷</span>
             <p>Não foi possível carregar a imagem</p>
           </div>
         )}
