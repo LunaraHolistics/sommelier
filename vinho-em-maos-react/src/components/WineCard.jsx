@@ -35,7 +35,6 @@ function WineCard({ wine, onClick, userRole }) {
           )}
         </div>
 
-        {/* Badge de disponibilidade apenas para gerente */}
         {userRole === 'manager' && (
           <div className="stock-badge-container">
             <span className={`stock-badge ${wine.stock > 0 ? 'in-stock' : 'out-of-stock'}`}>

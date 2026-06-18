@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useImageCache } from '../hooks/useImageCache';
+import ImageZoomModal from './ImageZoomModal';
+import './WineImage.css';
 
 function WineImage({ wine, className = '' }) {
-  const [imgError, setImgError] = useState(false);
+  const [showZoom, setShowZoom] = useState(false);
+  const { cachedUrl, isLoading, hasError } = useImageCache(wine.imagemUrl);
 
-  // Cores baseadas no tipo de vinho
   const getGradient = (tipo) => {
     const gradients = {
       'Tinto': 'linear-gradient(135deg, #722f37 0%, #5a252c 100%)',
@@ -15,7 +18,6 @@ function WineImage({ wine, className = '' }) {
     return gradients[tipo] || gradients['Tinto'];
   };
 
-  // Gerar iniciais do vinho
   const getInitials = (nome) => {
     if (!nome) return '🍷';
     const words = nome.split(' ');
@@ -25,57 +27,61 @@ function WineImage({ wine, className = '' }) {
     return words[0].substring(0, 2).toUpperCase();
   };
 
-  // Se não há imagem ou deu erro, mostra placeholder
-  if (!wine.imagemUrl || imgError) {
-    return (
-      <div 
-        className={`wine-image-placeholder ${className}`}
-        style={{ 
-          background: getGradient(wine.tipo),
-          width: '100%',
-          height: '200px',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          borderRadius: '8px',
-          color: 'white',
-          fontSize: '2rem',
-          fontWeight: 'bold',
-          textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
-        }}
-      >
-        <span style={{ fontSize: '3rem', marginBottom: '10px' }}>
-          {wine.tipo === 'Espumante' ? '🍾' : 
-           wine.tipo === 'Branco' ? '🥂' : 
-           wine.tipo === 'Rosé' ? '' : '🍷'}
-        </span>
-        <span style={{ fontSize: '1.5rem' }}>
-          {getInitials(wine.nome)}
-        </span>
-        <span style={{ fontSize: '0.9rem', marginTop: '5px', opacity: 0.9 }}>
-          {wine.vinicola || wine.nome}
-        </span>
-      </div>
-    );
-  }
+  const handleClick = () => {
+    if (cachedUrl && !hasError) {
+      setShowZoom(true);
+    }
+  };
 
-  // Tenta carregar imagem externa
   return (
-    <div className={`wine-image-container ${className}`}>
-      <img
-        src={wine.imagemUrl}
-        alt={wine.nome}
-        onError={() => setImgError(true)}
-        style={{
-          width: '100%',
-          height: '200px',
-          objectFit: 'contain',
-          borderRadius: '8px',
-          background: '#f5f5f5'
-        }}
-      />
-    </div>
+    <>
+      <div 
+        className={`wine-image-container ${className} ${cachedUrl ? 'clickable' : ''}`}
+        onClick={handleClick}
+      >
+        {isLoading && (
+          <div className="wine-image-loading">
+            <div className="spinner-small"></div>
+          </div>
+        )}
+
+        {hasError || !cachedUrl ? (
+          <div 
+            className="wine-image-placeholder"
+            style={{ background: getGradient(wine.tipo) }}
+          >
+            <span className="placeholder-icon">
+              {wine.tipo === 'Espumante' ? '' : 
+               wine.tipo === 'Branco' ? '🥂' : 
+               wine.tipo === 'Rosé' ? '🌸' : '🍷'}
+            </span>
+            <span className="placeholder-initials">{getInitials(wine.nome)}</span>
+            <span className="placeholder-name">{wine.vinicola || wine.nome}</span>
+          </div>
+        ) : (
+          <img 
+            src={cachedUrl} 
+            alt={wine.nome}
+            className="wine-image"
+            loading="lazy"
+          />
+        )}
+
+        {cachedUrl && !hasError && (
+          <div className="wine-image-zoom-hint">
+            🔍
+          </div>
+        )}
+      </div>
+
+      {showZoom && (
+        <ImageZoomModal
+          imageUrl={cachedUrl}
+          alt={wine.nome}
+          onClose={() => setShowZoom(false)}
+        />
+      )}
+    </>
   );
 }
 
