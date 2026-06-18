@@ -1,32 +1,25 @@
 {
-  "name": "Sommelier na Fazenda",
-  "version": "1.0.0",
-  "description": "Sistema de gerenciamento de vinhos e harmonização para o Sommelier na Fazenda",
+  "name": "vinho-em-maos",
+  "version": "1.5.0",
+  "description": "Sistema profissional de sommelier e gestão para restaurantes",
   "main": "server.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "migrate": "node migrate-db.js",
+    "client": "cd vinho-em-maos-react && npm run dev",
+    "build:client": "cd vinho-em-maos-react && npm run build"
   },
   "engines": {
     "node": ">=18.0.0"
   },
-  "keywords": [
-    "vinho",
-    "harmonização",
-    "cardápio",
-    "express",
-    "api"
-  ],
+  "keywords": ["vinho", "sommelier", "harmonização", "cardápio", "express"],
   "author": "ClBiffe",
   "license": "ISC",
   "dependencies": {
-    "compression": "^1.8.1",
     "cors": "^2.8.6",
-    "crypto-random-string": "^5.0.0",
-    "dotenv": "^17.4.2",
-    "express": "^4.18.2",
-    "express-rate-limit": "^8.5.2",
-    "helmet": "^8.2.0",
-    "lowdb": "^1.0.0"
+    "express": "^4.21.0",
+    "lowdb": "^7.0.1"
   }
 }
