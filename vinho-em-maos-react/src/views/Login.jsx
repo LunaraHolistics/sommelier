@@ -1,7 +1,3 @@
-cd D:\Sommelier\vinho-em-maos-react\src\views
-
-# Reescrever Login.jsx completamente
-@"
 import React, { useState, useContext } from 'react';
 import { AppContext } from '../contexts/AppContext';
 import './Login.css';
@@ -105,6 +101,3 @@ function Login() {
 }
 
 export default Login;
-"@ | Set-Content -Path ".\Login.jsx" -Encoding UTF8
-
-Write-Host "✅ Login.jsx reescrito com sucesso!" -ForegroundColor Green
