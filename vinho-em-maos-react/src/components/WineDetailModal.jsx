@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import './WineDetailModal.css';
 
 function WineDetailModal({ wine, onClose }) {
   if (!wine) return null;
 
-  return (
+  // Bloqueia scroll do body quando modal está aberto
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
+  const modalContent = (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close" onClick={onClose}>×</button>
@@ -12,7 +21,9 @@ function WineDetailModal({ wine, onClose }) {
         <div className="modal-header">
           {wine.imagemUrl && (
             <div className="modal-image">
-              <img src={wine.imagemUrl} alt={wine.nome} />
+              <img src={wine.imagemUrl} alt={wine.nome} onError={(e) => {
+                e.target.style.display = 'none';
+              }} />
             </div>
           )}
           <div className="modal-title">
@@ -59,7 +70,7 @@ function WineDetailModal({ wine, onClose }) {
 
           {wine.harmonizacaoPrincipal && wine.harmonizacaoPrincipal.length > 0 && (
             <div className="modal-section">
-              <h3>🍽️ Harmonizações Recomendadas</h3>
+              <h3>️ Harmonizações Recomendadas</h3>
               <div className="tags-list">
                 {wine.harmonizacaoPrincipal.map((h, i) => (
                   <span key={i} className="harmonia-tag">{h}</span>
@@ -81,7 +92,7 @@ function WineDetailModal({ wine, onClose }) {
 
           {wine.premiacoes && wine.premiacoes.length > 0 && (
             <div className="modal-section">
-              <h3>🏆 Premiações</h3>
+              <h3> Premiações</h3>
               <ul>
                 {wine.premiacoes.map((p, i) => (
                   <li key={i}>{p}</li>
@@ -93,6 +104,9 @@ function WineDetailModal({ wine, onClose }) {
       </div>
     </div>
   );
+
+  // Renderiza o modal no document.body via Portal
+  return ReactDOM.createPortal(modalContent, document.body);
 }
 
 export default WineDetailModal;
