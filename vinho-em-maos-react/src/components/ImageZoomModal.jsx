@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ImageZoomModal from './ImageZoomModal';
 import './ImageZoomModal.css';
 
 function ImageZoomModal({ imageUrl, alt, onClose }) {
