@@ -36,14 +36,31 @@ let tagsRaw = {};
 
 try {
   catalogoRaw = JSON.parse(fs.readFileSync(catalogoPath, 'utf-8'));
-  cardapioRaw = JSON.parse(fs.readFileSync(cardapioPath, 'utf-8'));
-  tagsRaw = JSON.parse(fs.readFileSync(tagsPath, 'utf-8'));
   console.log(`✅ Catálogo: ${catalogoRaw.length} itens`);
+} catch (err) {
+  console.error('❌ Erro ao carregar catalogo.json:', err.message);
+}
+
+try {
+  // cardapio.json está na raiz ainda
+  const cardapioRaiz = path.join(__dirname, 'cardapio.json');
+  cardapioRaw = JSON.parse(fs.readFileSync(cardapioRaiz, 'utf-8'));
   console.log(`✅ Cardápio: ${cardapioRaw.length} pratos`);
+} catch (err) {
+  console.log('⚠️ cardapio.json não encontrado na raiz, tentando em data/');
+  try {
+    cardapioRaw = JSON.parse(fs.readFileSync(cardapioPath, 'utf-8'));
+    console.log(`✅ Cardápio: ${cardapioRaw.length} pratos`);
+  } catch (err2) {
+    console.error('❌ Erro ao carregar cardapio.json:', err2.message);
+  }
+}
+
+try {
+  tagsRaw = JSON.parse(fs.readFileSync(tagsPath, 'utf-8'));
   console.log(`✅ Tags: ${Object.keys(tagsRaw.tags || {}).length} categorias`);
 } catch (err) {
-  console.error('❌ Erro ao carregar JSONs:', err.message);
-  process.exit(1);
+  console.error('❌ Erro ao carregar tags.json:', err.message);
 }
 
 // ─── Cache em Memória (Merge precomputado) ────────────────────
@@ -208,34 +225,29 @@ app.get('/api/tags', (req, res) => {
 app.post('/api/harmonize', (req, res) => {
   const { pratoId, tags } = req.body;
   
-  // Se veio pratoId, usa dados diretos do cardápio
   if (pratoId) {
     const prato = cardapioRaw.find(p => p.id === pratoId);
     if (!prato) return res.status(404).json({ error: 'Prato não encontrado' });
     
     const activeItems = mergedCatalog.filter(i => i.active && i.stock > 0);
     
-    // Score baseado em melhoresCategorias e harmonizacaoInteligente
     const scored = activeItems.map(item => {
       let score = 0;
       const reasons = [];
       
-      // Match direto com melhoresCategorias do prato
       if (prato.melhoresCategorias) {
         for (const cat of prato.melhoresCategorias) {
           if (item.nome?.toLowerCase().includes(cat.toLowerCase()) ||
               item.tipo?.toLowerCase() === cat.toLowerCase()) {
             score += 5;
-            reasons.push(`Categoria recomendada: ${cat}`);
+            reasons.push(`Categoria: ${cat}`);
           }
         }
       }
       
-      // Match com harmonizacaoInteligente do vinho
       if (item.harmonizacaoInteligente) {
         const hi = item.harmonizacaoInteligente;
         
-        // Match por proteína
         if (prato.proteinas && hi.proteinas) {
           for (const prot of prato.proteinas) {
             if (hi.proteinas.some(hp => hp.toLowerCase().includes(prot.toLowerCase()))) {
@@ -245,7 +257,6 @@ app.post('/api/harmonize', (req, res) => {
           }
         }
         
-        // Match por técnica de preparo
         if (prato.tecnicasPreparo && hi.tecnicasPreparo) {
           for (const tec of prato.tecnicasPreparo) {
             if (hi.tecnicasPreparo.some(ht => ht.toLowerCase().includes(tec.toLowerCase()))) {
@@ -255,7 +266,6 @@ app.post('/api/harmonize', (req, res) => {
           }
         }
         
-        // Match por sabores dominantes
         if (prato.saboresDominantes && hi.saboresPrato) {
           for (const sabor of prato.saboresDominantes) {
             if (hi.saboresPrato.some(hs => hs.toLowerCase().includes(sabor.toLowerCase()))) {
@@ -266,10 +276,9 @@ app.post('/api/harmonize', (req, res) => {
         }
       }
       
-      // Bônus se o prato está na harmonizacaoPrincipal do vinho
       if (item.harmonizacaoPrincipal?.some(h => h.toLowerCase().includes(prato.nome.toLowerCase()))) {
         score += 4;
-        reasons.push('Harmonização principal declarada');
+        reasons.push('Harmonização principal');
       }
       
       return { ...item, score, reasons: [...new Set(reasons)] };
@@ -280,7 +289,6 @@ app.post('/api/harmonize', (req, res) => {
     return res.json({ prato, suggestions: scored.slice(0, 12) });
   }
   
-  // Se veio tags, usa algoritmo genérico
   if (tags && Array.isArray(tags)) {
     const activeItems = mergedCatalog.filter(i => i.active && i.stock > 0);
     

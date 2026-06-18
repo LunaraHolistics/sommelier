@@ -1,20 +1,5 @@
-{
-  "inventory": {
-    "1": {
-      "price": 190,
-      "stock": 1,
-      "active": true
-    },
-    "2": {
-      "price": 79.9,
-      "stock": 2,
-      "active": true
-    }
-  },
-  "pin": {
-    "code": "6053",
-    "expiresAt": "2026-06-16T23:59:59.000Z",
-    "generatedAt": "2026-06-15T10:00:00.000Z"
-  },
+﻿{
+  "inventory": {},
+  "pin": null,
   "adminPassword": "sommelier2026"
 }
