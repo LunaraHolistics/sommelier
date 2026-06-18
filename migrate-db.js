@@ -1,17 +1,23 @@
-// migrate-db.js - Converte db.json antigo para nova estrutura híbrida
+// migrate-db.js - Converte db.json antigo para nova estrutura
 const fs = require('fs');
 const path = require('path');
 
-const oldDbPath = path.join(__dirname, 'db.json');
+const dbPath = path.join(__dirname, 'db.json');
 const newDbPath = path.join(__dirname, 'data', 'db.json');
 
-// Cria pasta data se não existir
-if (!fs.existsSync(path.join(__dirname, 'data'))) {
-  fs.mkdirSync(path.join(__dirname, 'data'));
+if (!fs.existsSync(dbPath)) {
+  console.log('⚠️  db.json não encontrado. Criando novo...');
+  const newDb = {
+    inventory: {},
+    pin: null,
+    adminPassword: 'sommelier2026'
+  };
+  fs.writeFileSync(newDbPath, JSON.stringify(newDb, null, 2));
+  console.log('✅ Novo db.json criado em data/db.json');
+  process.exit(0);
 }
 
-// Lê db antigo
-const oldDb = JSON.parse(fs.readFileSync(oldDbPath, 'utf-8'));
+const oldDb = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));
 
 // Converte array "bebidas" para mapa "inventory"
 const inventory = {};
@@ -36,13 +42,7 @@ const newDb = {
   adminPassword: process.env.ADMIN_PASSWORD || 'sommelier2026'
 };
 
-// Salva novo db
 fs.writeFileSync(newDbPath, JSON.stringify(newDb, null, 2));
-
 console.log('✅ Migração concluída!');
 console.log(`📦 Itens migrados: ${Object.keys(inventory).length}`);
-console.log(`📍 Novo db.json em: ${newDbPath}`);
-console.log('\n⚠️  Próximos passos:');
-console.log('1. Mova catalogo.json, cardapio.json e tags.json para /data/');
-console.log('2. Delete o db.json antigo da raiz');
-console.log('3. Execute: npm start');
+console.log(` Novo db.json em: ${newDbPath}`);

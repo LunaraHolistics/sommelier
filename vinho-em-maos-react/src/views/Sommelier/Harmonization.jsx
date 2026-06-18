@@ -2,12 +2,19 @@ import React from 'react';
 import WineCard from '../../components/WineCard';
 import './Harmonization.css';
 
-function Harmonization({ dish, suggestions, onBack }) {
+function Harmonization({ prato, suggestions, onBack }) {
   const getScoreLevel = (score) => {
     if (score >= 10) return 'Excelente';
     if (score >= 7) return 'Muito Bom';
     if (score >= 4) return 'Bom';
     return 'Sugerido';
+  };
+
+  const getScoreColor = (score) => {
+    if (score >= 10) return '#4caf50';
+    if (score >= 7) return '#8bc34a';
+    if (score >= 4) return '#ffc107';
+    return '#ff9800';
   };
 
   return (
@@ -17,20 +24,20 @@ function Harmonization({ dish, suggestions, onBack }) {
           ← Voltar
         </button>
         <div className="dish-info">
-          <h2>{dish.nome}</h2>
-          <p>{dish.descricao}</p>
-          {dish.nivelHarmonizacao && (
+          <h2>{prato.nome}</h2>
+          <p>{prato.descricao}</p>
+          {prato.nivelHarmonizacao && (
             <span className="dish-level">
-              Nível de Harmonização: <strong>{dish.nivelHarmonizacao.toUpperCase()}</strong>
+              Nível de Harmonização: <strong>{prato.nivelHarmonizacao.toUpperCase()}</strong>
             </span>
           )}
         </div>
       </div>
 
-      {dish.dicaSommelier && (
+      {prato.dicaSommelier && (
         <div className="sommelier-tip">
           <h4>💡 Dica do Sommelier</h4>
-          <p>{dish.dicaSommelier}</p>
+          <p>{prato.dicaSommelier}</p>
         </div>
       )}
 
@@ -50,13 +57,16 @@ function Harmonization({ dish, suggestions, onBack }) {
                 <WineCard wine={wine} />
                 {wine.score > 0 && (
                   <div className="match-score">
-                    <span className="score-label">
+                    <span className="score-label" style={{ color: getScoreColor(wine.score) }}>
                       {getScoreLevel(wine.score)} ({wine.score} pts)
                     </span>
                     <div className="score-bar">
                       <div
                         className="score-fill"
-                        style={{ width: `${Math.min(wine.score * 8, 100)}%` }}
+                        style={{ 
+                          width: `${Math.min(wine.score * 8, 100)}%`,
+                          background: `linear-gradient(90deg, ${getScoreColor(wine.score)} 0%, #722f37 100%)`
+                        }}
                       />
                     </div>
                     {wine.reasons && wine.reasons.length > 0 && (
@@ -74,11 +84,11 @@ function Harmonization({ dish, suggestions, onBack }) {
         )}
       </div>
 
-      {dish.melhoresRotulos && dish.melhoresRotulos.length > 0 && (
+      {prato.melhoresRotulos && prato.melhoresRotulos.length > 0 && (
         <div className="sommelier-tip">
           <h4>🏆 Rótulos Ideais para este Prato</h4>
           <div className="tags-list" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '10px' }}>
-            {dish.melhoresRotulos.map((rotulo, i) => (
+            {prato.melhoresRotulos.map((rotulo, i) => (
               <span key={i} style={{
                 background: '#d4af37',
                 color: '#333',

@@ -1,13 +1,7 @@
 {
-  "inventory": {
-    "VIN0001": {
-      "price": 45,
-      "stock": 1,
-      "active": true
-    }
-  },
+  "inventory": {},
   "pin": {
-    "code": "5304",
+    "code": "4402",
     "expiresAt": "2026-06-19T02:59:59.999Z"
   },
   "adminPassword": "sommelier2026"

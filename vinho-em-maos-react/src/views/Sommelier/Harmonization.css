@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  padding: 20px;
 }
 
 .harmonization-header {
@@ -43,8 +44,40 @@
 
 .dish-info p {
   color: #666;
-  margin: 0;
+  margin: 0 0 12px 0;
   line-height: 1.5;
+}
+
+.dish-level {
+  display: inline-block;
+  background: #f0f0f0;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.sommelier-tip {
+  background: linear-gradient(135deg, #fff9e6 0%, #fff 100%);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid #d4af37;
+}
+
+.sommelier-tip h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.1rem;
+  color: #722f37;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sommelier-tip p {
+  margin: 0;
+  line-height: 1.6;
+  color: #555;
 }
 
 .suggestions-section {
@@ -98,11 +131,11 @@
 
 .score-label {
   display: block;
-  font-size: 0.8rem;
-  color: #666;
-  margin-bottom: 6px;
+  font-size: 0.85rem;
+  margin-bottom: 8px;
   text-transform: uppercase;
   letter-spacing: 1px;
+  font-weight: 600;
 }
 
 .score-bar {
@@ -110,12 +143,11 @@
   background: #e0e0e0;
   border-radius: 4px;
   overflow: hidden;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .score-fill {
   height: 100%;
-  background: linear-gradient(90deg, #d4af37 0%, #722f37 100%);
   transition: width 0.5s;
 }
 
@@ -128,30 +160,19 @@
 .reason-tag {
   background: #722f37;
   color: white;
-  padding: 3px 8px;
+  padding: 4px 10px;
   border-radius: 10px;
   font-size: 0.7rem;
   font-weight: 500;
 }
 
-.sommelier-tip {
-  background: linear-gradient(135deg, #d4af37 0%, #c9a22e 100%);
-  color: #333;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.sommelier-tip h4 {
-  margin: 0 0 10px 0;
-  font-size: 1.1rem;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.sommelier-tip p {
-  margin: 0;
-  line-height: 1.5;
-  font-style: italic;
+/* Responsivo */
+@media (max-width: 768px) {
+  .harmonization-header {
+    flex-direction: column;
+  }
+  
+  .suggestions-grid {
+    grid-template-columns: 1fr;
+  }
 }

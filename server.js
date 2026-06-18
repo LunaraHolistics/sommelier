@@ -42,18 +42,10 @@ try {
 }
 
 try {
-  // cardapio.json está na raiz ainda
-  const cardapioRaiz = path.join(__dirname, 'cardapio.json');
-  cardapioRaw = JSON.parse(fs.readFileSync(cardapioRaiz, 'utf-8'));
+  cardapioRaw = JSON.parse(fs.readFileSync(cardapioPath, 'utf-8'));
   console.log(`✅ Cardápio: ${cardapioRaw.length} pratos`);
 } catch (err) {
-  console.log('⚠️ cardapio.json não encontrado na raiz, tentando em data/');
-  try {
-    cardapioRaw = JSON.parse(fs.readFileSync(cardapioPath, 'utf-8'));
-    console.log(`✅ Cardápio: ${cardapioRaw.length} pratos`);
-  } catch (err2) {
-    console.error('❌ Erro ao carregar cardapio.json:', err2.message);
-  }
+  console.error('❌ Erro ao carregar cardapio.json:', err.message);
 }
 
 try {
@@ -63,7 +55,7 @@ try {
   console.error('❌ Erro ao carregar tags.json:', err.message);
 }
 
-// ─── Cache em Memória (Merge precomputado) ────────────────────
+// ─── Cache em Memória (Merge precomputado) ───────────────────
 let mergedCatalog = [];
 let catalogById = new Map();
 
@@ -91,7 +83,7 @@ function rebuildCache() {
   console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
 })();
 
-// ─── Helpers ───────────────────────────────────────────────────
+// ─── Helpers ──────────────────────────────────────────────────
 async function persistInventoryChange(itemId, patch) {
   db.data.inventory[itemId] = {
     ...(db.data.inventory[itemId] || {}),
