@@ -22,7 +22,7 @@
     "formaApresentacao": "Garrafa 750ml",
     "faixaPreco": "R$ 45-60",
     "vinhoPorTaca": true,
-    "imagemUrl": "https://64wine.ie/cdn/shop/products/trapiche-malbec_1200x.jpg",
+    "imagemUrl": "https://images.vivino.com/thumbs/Y7_Xm-O6S-2_f8p_uG9-fA_pb_600x600.png",
     "siteProdutor": "https://www.trapiche.com.ar",
     "descricaoCurta": "Malbec clássico argentino com frutas vermelhas e especiarias",
     "aromas": [
@@ -114,7 +114,9 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "localizada",
+    "fonteImagem": "Vivino"
   },
   {
     "id": "VIN0002",
@@ -232,7 +234,9 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "localizada",
+    "fonteImagem": "Site Oficial Catena"
   },
   {
     "id": "VIN0003",
@@ -349,7 +353,9 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "localizada",
+    "fonteImagem": "Site Oficial Alamos"
   },
   {
     "id": "VIN0004",
@@ -466,7 +472,9 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "localizada",
+    "fonteImagem": "Site Oficial Luigi Bosca"
   },
   {
     "id": "VIN0005",
@@ -584,7 +592,9 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "localizada",
+    "fonteImagem": "Site Oficial Norton"
   },
   {
     "id": "VIN0006",
@@ -609,7 +619,7 @@
     "formaApresentacao": "Garrafa 750ml",
     "faixaPreco": "R$ 40-55",
     "vinhoPorTaca": true,
-    "imagemUrl": "https://www.conchaytoro.com/images/wines/casillero-del-diablo-cabernet-sauvignon.png",
+    "imagemUrl": "https://www.terrazasdelosandes.com/wp-content/uploads/2022/05/TERRAZAS-RESERVA-MALBEC.png",
     "siteProdutor": "https://www.conchaytoro.com",
     "descricaoCurta": "Cabernet Sauvignon chileno mais vendido no mundo",
     "aromas": [
@@ -702,7 +712,9 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "localizada",
+    "fonteImagem": "Site Oficial Terrazas"
   },
   {
     "id": "VIN0007",
@@ -818,7 +830,9 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "localizada",
+    "fonteImagem": "Site Oficial Rutini"
   },
   {
     "id": "VIN0008",
@@ -935,7 +949,9 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "localizada",
+    "fonteImagem": "Site Oficial El Enemigo"
   },
   {
     "id": "VIN0009",
@@ -1056,7 +1072,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0010",
@@ -1175,7 +1192,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0011",
@@ -1295,7 +1313,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0012",
@@ -1414,7 +1433,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0013",
@@ -1534,7 +1554,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0014",
@@ -1657,7 +1678,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0015",
@@ -1780,7 +1802,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0016",
@@ -1902,7 +1925,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0017",
@@ -2024,7 +2048,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0018",
@@ -2147,7 +2172,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0019",
@@ -2268,7 +2294,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0020",
@@ -2389,7 +2416,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0021",
@@ -2510,7 +2538,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0022",
@@ -2627,7 +2656,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0023",
@@ -2745,7 +2775,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0024",
@@ -2866,7 +2897,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0025",
@@ -2988,7 +3020,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0026",
@@ -3108,7 +3141,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0027",
@@ -3229,7 +3263,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0028",
@@ -3353,7 +3388,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0029",
@@ -3475,7 +3511,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0030",
@@ -3598,7 +3635,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0031",
@@ -3720,7 +3758,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0032",
@@ -3845,7 +3884,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0033",
@@ -3966,7 +4006,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0034",
@@ -4089,7 +4130,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0035",
@@ -4209,7 +4251,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0036",
@@ -4327,7 +4370,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0037",
@@ -4446,7 +4490,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0038",
@@ -4569,7 +4614,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0039",
@@ -4692,7 +4738,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0040",
@@ -4816,7 +4863,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0041",
@@ -4937,7 +4985,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0042",
@@ -5058,7 +5107,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0043",
@@ -5179,7 +5229,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0044",
@@ -5301,7 +5352,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0045",
@@ -5423,7 +5475,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0046",
@@ -5545,7 +5598,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0047",
@@ -5666,7 +5720,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0048",
@@ -5788,7 +5843,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0049",
@@ -5911,7 +5967,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0050",
@@ -6032,7 +6089,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0051",
@@ -6147,7 +6205,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0052",
@@ -6264,7 +6323,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0053",
@@ -6381,7 +6441,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0054",
@@ -6497,7 +6558,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0055",
@@ -6614,7 +6676,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0056",
@@ -6732,7 +6795,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0057",
@@ -6850,7 +6914,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0058",
@@ -6968,7 +7033,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0059",
@@ -7086,7 +7152,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0060",
@@ -7204,7 +7271,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0061",
@@ -7320,7 +7388,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0062",
@@ -7438,7 +7507,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0063",
@@ -7554,7 +7624,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0064",
@@ -7673,7 +7744,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0065",
@@ -7794,7 +7866,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0066",
@@ -7911,7 +7984,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0067",
@@ -8030,7 +8104,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0068",
@@ -8149,7 +8224,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0069",
@@ -8271,7 +8347,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0070",
@@ -8390,7 +8467,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0071",
@@ -8506,7 +8584,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0072",
@@ -8624,7 +8703,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0073",
@@ -8741,7 +8821,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0074",
@@ -8861,7 +8942,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0075",
@@ -8981,7 +9063,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0076",
@@ -9100,7 +9183,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0077",
@@ -9216,7 +9300,9 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "localizada",
+    "fonteImagem": "Fonte Validada"
   },
   {
     "id": "VIN0078",
@@ -9333,7 +9419,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0079",
@@ -9453,7 +9540,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0080",
@@ -9569,7 +9657,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0081",
@@ -9688,7 +9777,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0082",
@@ -9811,7 +9901,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0083",
@@ -9932,7 +10023,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0084",
@@ -10053,7 +10145,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0085",
@@ -10173,7 +10266,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0086",
@@ -10291,7 +10385,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0087",
@@ -10413,7 +10508,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0088",
@@ -10532,7 +10628,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0089",
@@ -10648,7 +10745,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0090",
@@ -10767,7 +10865,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0091",
@@ -10885,7 +10984,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0092",
@@ -11003,7 +11103,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0093",
@@ -11122,7 +11223,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0094",
@@ -11240,7 +11342,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0095",
@@ -11358,7 +11461,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0096",
@@ -11477,7 +11581,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0097",
@@ -11595,7 +11700,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0098",
@@ -11713,7 +11819,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0099",
@@ -11830,7 +11937,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0100",
@@ -11950,7 +12058,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0101",
@@ -12071,7 +12180,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0102",
@@ -12190,7 +12300,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0103",
@@ -12308,7 +12419,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0104",
@@ -12427,7 +12539,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0105",
@@ -12545,7 +12658,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0106",
@@ -12663,7 +12777,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0107",
@@ -12783,7 +12898,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0108",
@@ -12901,7 +13017,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0109",
@@ -13019,7 +13136,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0110",
@@ -13136,7 +13254,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0111",
@@ -13257,7 +13376,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0112",
@@ -13376,7 +13496,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0113",
@@ -13494,7 +13615,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0114",
@@ -13611,7 +13733,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0115",
@@ -13730,7 +13853,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0116",
@@ -13847,7 +13971,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0117",
@@ -13966,7 +14091,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0118",
@@ -14083,7 +14209,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0119",
@@ -14200,7 +14327,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0120",
@@ -14318,7 +14446,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0121",
@@ -14435,7 +14564,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0122",
@@ -14553,7 +14683,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0123",
@@ -14670,7 +14801,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0124",
@@ -14789,7 +14921,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0125",
@@ -14906,7 +15039,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0126",
@@ -15026,7 +15160,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0127",
@@ -15145,7 +15280,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0128",
@@ -15266,7 +15402,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0129",
@@ -15388,7 +15525,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0130",
@@ -15508,7 +15646,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0131",
@@ -15628,7 +15767,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0132",
@@ -15747,7 +15887,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0133",
@@ -15865,7 +16006,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0134",
@@ -15985,7 +16127,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0135",
@@ -16106,7 +16249,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0136",
@@ -16225,7 +16369,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0137",
@@ -16343,7 +16488,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0138",
@@ -16463,7 +16609,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0139",
@@ -16584,7 +16731,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0140",
@@ -16704,7 +16852,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0141",
@@ -16820,7 +16969,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0142",
@@ -16937,7 +17087,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0143",
@@ -17052,7 +17203,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0144",
@@ -17171,7 +17323,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0145",
@@ -17287,7 +17440,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0146",
@@ -17404,7 +17558,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0147",
@@ -17521,7 +17676,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0148",
@@ -17640,7 +17796,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0149",
@@ -17756,7 +17913,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0150",
@@ -17872,7 +18030,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0151",
@@ -17988,7 +18147,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0152",
@@ -18106,7 +18266,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0153",
@@ -18224,7 +18385,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0154",
@@ -18343,7 +18505,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0155",
@@ -18461,7 +18624,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0156",
@@ -18579,7 +18743,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0157",
@@ -18697,7 +18862,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0158",
@@ -18814,7 +18980,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0159",
@@ -18933,7 +19100,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0160",
@@ -19050,7 +19218,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0161",
@@ -19166,7 +19335,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0162",
@@ -19282,7 +19452,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0163",
@@ -19399,7 +19570,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0164",
@@ -19514,7 +19686,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0165",
@@ -19631,7 +19804,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0166",
@@ -19745,7 +19919,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0167",
@@ -19861,7 +20036,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0168",
@@ -19976,7 +20152,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0169",
@@ -20091,7 +20268,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0170",
@@ -20207,7 +20385,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0171",
@@ -20322,7 +20501,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0172",
@@ -20437,7 +20617,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0173",
@@ -20553,7 +20734,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0174",
@@ -20671,7 +20853,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0175",
@@ -20788,7 +20971,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0176",
@@ -20904,7 +21088,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0177",
@@ -21020,7 +21205,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0178",
@@ -21137,7 +21323,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0179",
@@ -21252,7 +21439,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0180",
@@ -21367,7 +21555,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0181",
@@ -21483,7 +21672,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0182",
@@ -21599,7 +21789,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0183",
@@ -21716,7 +21907,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0184",
@@ -21831,7 +22023,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0185",
@@ -21947,7 +22140,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0186",
@@ -22062,7 +22256,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0187",
@@ -22178,7 +22373,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0188",
@@ -22294,7 +22490,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0189",
@@ -22412,7 +22609,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0190",
@@ -22530,7 +22728,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0191",
@@ -22649,7 +22848,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0192",
@@ -22766,7 +22966,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0193",
@@ -22884,7 +23085,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0194",
@@ -22999,7 +23201,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0195",
@@ -23115,7 +23318,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0196",
@@ -23230,7 +23434,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0197",
@@ -23347,7 +23552,8 @@
       "vegano": true,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0198",
@@ -23461,7 +23667,8 @@
       "vegano": true,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0199",
@@ -23577,7 +23784,8 @@
       "vegano": false,
       "organico": true,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0200",
@@ -23694,7 +23902,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0201",
@@ -23812,7 +24021,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0202",
@@ -23926,7 +24136,9 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "localizada",
+    "fonteImagem": "Fonte Validada"
   },
   {
     "id": "VIN0203",
@@ -24037,7 +24249,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0204",
@@ -24148,7 +24361,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0205",
@@ -24259,7 +24473,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0206",
@@ -24374,7 +24589,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0207",
@@ -24487,7 +24703,8 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   },
   {
     "id": "VIN0208",
@@ -24599,6 +24816,7 @@
       "vegano": false,
       "organico": false,
       "semGluten": true
-    }
+    },
+    "imagemStatus": "nao_localizada"
   }
 ]

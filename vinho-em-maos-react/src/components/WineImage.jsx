@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import './WineImage.css';
 
-function WineImage({ wine, className = '', onClick }) {
+function WineImage({ wine, className = '', onImageClick }) {
   const [imgError, setImgError] = useState(false);
-  const [showZoom, setShowZoom] = useState(false);
 
   // Cores baseadas no tipo de vinho
   const getGradient = (tipo) => {
@@ -27,64 +26,37 @@ function WineImage({ wine, className = '', onClick }) {
     return words[0].substring(0, 2).toUpperCase();
   };
 
-  const handleClick = () => {
-    if (wine.imagemUrl && !imgError) {
-      setShowZoom(true);
-    }
-    if (onClick) onClick(wine);
-  };
+  // Se não há imagem ou deu erro, mostra placeholder
+  const showPlaceholder = !wine.imagemUrl || imgError;
 
   return (
-    <>
-      <div 
-        className={`wine-image-container ${className} ${wine.imagemUrl && !imgError ? 'clickable' : ''}`}
-        onClick={handleClick}
-      >
-        {!wine.imagemUrl || imgError ? (
-          <div 
-            className="wine-image-placeholder"
-            style={{ background: getGradient(wine.tipo) }}
-          >
-            <span className="placeholder-icon">
-              {wine.tipo === 'Espumante' ? '🍾' : 
-               wine.tipo === 'Branco' ? '🥂' : 
-               wine.tipo === 'Rosé' ? '🌸' : '🍷'}
-            </span>
-            <span className="placeholder-initials">{getInitials(wine.nome)}</span>
-            <span className="placeholder-name">{wine.vinicola || wine.nome}</span>
-          </div>
-        ) : (
-          <img 
-            src={wine.imagemUrl}
-            alt={wine.nome}
-            className="wine-image"
-            onError={() => setImgError(true)}
-            loading="lazy"
-          />
-        )}
-
-        {wine.imagemUrl && !imgError && (
-          <div className="wine-image-zoom-hint">
-            🔍
-          </div>
-        )}
-      </div>
-
-      {showZoom && (
-        <div className="image-zoom-overlay" onClick={() => setShowZoom(false)}>
-          <div className="image-zoom-container" onClick={(e) => e.stopPropagation()}>
-            <button className="image-zoom-close" onClick={() => setShowZoom(false)}>
-              ×
-            </button>
-            <img 
-              src={wine.imagemUrl}
-              alt={wine.nome}
-              className="image-zoom-img"
-            />
-          </div>
+    <div 
+      className={`wine-image-container ${className} ${!showPlaceholder ? 'clickable' : ''}`}
+      onClick={() => !showPlaceholder && onImageClick && onImageClick()}
+    >
+      {showPlaceholder ? (
+        <div 
+          className="wine-image-placeholder"
+          style={{ background: getGradient(wine.tipo) }}
+        >
+          <span className="placeholder-icon">
+            {wine.tipo === 'Espumante' ? '🍾' : 
+             wine.tipo === 'Branco' ? '🥂' : 
+             wine.tipo === 'Rosé' ? '🌸' : '🍷'}
+          </span>
+          <span className="placeholder-initials">{getInitials(wine.nome)}</span>
+          <span className="placeholder-name">{wine.vinicola || wine.nome}</span>
         </div>
+      ) : (
+        <img 
+          src={wine.imagemUrl}
+          alt={wine.nome}
+          className="wine-image"
+          onError={() => setImgError(true)}
+          loading="lazy"
+        />
       )}
-    </>
+    </div>
   );
 }
 
