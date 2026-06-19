@@ -2,7 +2,7 @@ services:
   - type: web
     name: sommelier-na-fazenda
     env: node
-    buildCommand: cd vinho-em-maos-react && rm -rf node_modules package-lock.json && npm install && npm run build
+    buildCommand: npm install && rm -rf vinho-em-maos-react/node_modules && cd vinho-em-maos-react && npm install --force && npm run build
     startCommand: cd .. && node server.js
     envVars:
       - key: NODE_ENV
