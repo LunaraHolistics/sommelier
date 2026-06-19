@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import WineImage from './WineImage';
 import WineDetailModal from './WineDetailModal';
 import './WineCard.css';
 
-function WineCard({ wine, mode = 'client', isExpanded = false, onToggle, onZoomToggle }) {
-  const [showModal, setShowModal] = useState(false);
-
+function WineCard({ wine, mode = 'client', onOpenModal }) {
   const formatPrice = (price) => {
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',
@@ -15,83 +13,24 @@ function WineCard({ wine, mode = 'client', isExpanded = false, onToggle, onZoomT
 
   const isAvailable = wine.active && wine.stock > 0;
 
-  // Bloquear scroll quando modal estiver aberto
-  useEffect(() => {
-    if (showModal || isExpanded) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => { document.body.style.overflow = 'unset'; };
-  }, [showModal, isExpanded]);
-
-  // Fechar com ESC
-  useEffect(() => {
-    if (!showModal && !isExpanded) return;
-    const handleEsc = (e) => {
-      if (e.key === 'Escape') {
-        if (showModal) setShowModal(false);
-        if (isExpanded) onToggle?.(wine.id);
-      }
-    };
-    window.addEventListener('keydown', handleEsc);
-    return () => window.removeEventListener('keydown', handleEsc);
-  }, [showModal, isExpanded, onToggle, wine.id]);
-
-  const handleCardClick = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    // Só expande se não for para abrir o modal
-    if (onToggle) {
-      onToggle(wine.id);
-    }
-  };
-
-  const handleImageClick = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    onZoomToggle?.(wine);
-  };
-
-  const handleCloseExpanded = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    onToggle?.(wine.id);
-  };
-
-  const handleModalOpen = (e) => {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    setShowModal(true);
-  };
-
-  const handleModalClose = () => {
-    setShowModal(false);
-  };
-
-  const handleOverlayClick = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    onToggle?.(wine.id);
+  const handleClick = () => {
+    onOpenModal?.(wine);
   };
 
   return (
     <>
-      {/* Card no Grid (sempre visível) */}
       <article
-        className={`wine-card ${!isAvailable ? 'unavailable' : ''} ${isExpanded ? 'expanded' : ''}`}
-        onClick={handleCardClick}
+        className={`wine-card ${!isAvailable ? 'unavailable' : ''}`}
+        onClick={handleClick}
         role="button"
         tabIndex={0}
         onKeyDown={(e) => { 
           if (e.key === 'Enter' || e.key === ' ') { 
             e.preventDefault(); 
-            handleCardClick(e); 
+            handleClick(); 
           } 
         }}
-        aria-expanded={isExpanded}
+        aria-label={`Ver detalhes de ${wine.nome}`}
       >
         <div className="wine-preview">
           <div className="wine-thumb" aria-hidden="true">
@@ -106,9 +45,6 @@ function WineCard({ wine, mode = 'client', isExpanded = false, onToggle, onZoomT
               {wine.safra && <span className="tag vintage">{wine.safra}</span>}
             </div>
           </div>
-          <span className="toggle-indicator" aria-hidden="true">
-            ▼
-          </span>
         </div>
 
         {!isAvailable && (
@@ -116,97 +52,13 @@ function WineCard({ wine, mode = 'client', isExpanded = false, onToggle, onZoomT
             ❌ Indisponível
           </div>
         )}
+
+        {mode === 'sommelier' && wine.price && (
+          <div className="wine-price-tag">
+            {formatPrice(wine.price)}
+          </div>
+        )}
       </article>
-
-      {/* Overlay + Painel Expandido (MODAL FIXO) */}
-      {isExpanded && (
-        <>
-          <div className="expanded-overlay" onClick={handleOverlayClick} />
-          <aside className="expanded-modal" onClick={(e) => e.stopPropagation()}>
-            <button
-              className="close-details-btn"
-              onClick={handleCloseExpanded}
-              aria-label="Fechar detalhes"
-            >
-              ✕
-            </button>
-
-            <div className="details-layout">
-              <figure className="details-figure" onClick={handleImageClick}>
-                <img
-                  src={wine.imagemUrl || '/placeholder-wine.png'}
-                  alt={`${wine.nome} - Garrafa completa`}
-                  className="detail-large-img"
-                  onError={(e) => { e.target.src = '/placeholder-wine.png'; }}
-                />
-                <span className="zoom-hint">🔍 Clique para ampliar</span>
-              </figure>
-
-              <div className="details-content">
-                <header className="detail-header">
-                  <h2 className="detail-title">{wine.nome}</h2>
-                  <p className="detail-subtitle">
-                    {wine.vinicola} • {wine.regiao}, {wine.pais}
-                  </p>
-                </header>
-
-                <div className="info-grid">
-                  <div><strong>Tipo:</strong> {wine.tipo}</div>
-                  <div><strong>Uva(s):</strong> {wine.uva?.join(', ')}</div>
-                  <div><strong>Safra:</strong> {wine.safra}</div>
-                  <div><strong>Teor:</strong> {wine.teorAlcoolico}</div>
-                  <div><strong>Corpo:</strong> {wine.corpo}</div>
-                  <div><strong>Acidez:</strong> {wine.acidez}</div>
-                  <div><strong>Taninos:</strong> {wine.taninos}</div>
-                  <div><strong>Serviço:</strong> {wine.temperaturaServico}</div>
-                </div>
-
-                {wine.descricaoCurta && (
-                  <p className="description-text">{wine.descricaoCurta}</p>
-                )}
-
-                {wine.fraseVenda && (
-                  <blockquote className="frase-venda">
-                    "{wine.fraseVenda}"
-                  </blockquote>
-                )}
-
-                {mode === 'sommelier' && (
-                  <footer className="stock-badges">
-                    <span className={`badge stock-badge ${wine.stock > 0 ? 'in-stock' : 'out-of-stock'}`}>
-                      Estoque: {wine.stock}
-                    </span>
-                    <span className={`badge active-badge ${wine.active ? 'active' : 'inactive'}`}>
-                      {wine.active ? 'Ativo' : 'Inativo'}
-                    </span>
-                    {wine.price && (
-                      <span className="badge price-badge">
-                        {formatPrice(wine.price)}
-                      </span>
-                    )}
-                  </footer>
-                )}
-
-                <button
-                  className="open-modal-btn"
-                  onClick={handleModalOpen}
-                >
-                  📋 Ver detalhes completos
-                </button>
-              </div>
-            </div>
-          </aside>
-        </>
-      )}
-
-      {/* Modal de Detalhes Completo */}
-      {showModal && (
-        <WineDetailModal
-          wine={wine}
-          onClose={handleModalClose}
-          mode={mode}
-        />
-      )}
     </>
   );
 }
