@@ -326,4 +326,61 @@
   .suggestions-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  
+  /* Categorias filtráveis */
+.filter-hint {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: #888;
+  margin-left: 8px;
+}
+
+.tip-tag {
+  background: rgba(114, 47, 55, 0.1);
+  color: #722f37;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid rgba(114, 47, 55, 0.3);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.tip-tag:hover {
+  background: rgba(114, 47, 55, 0.2);
+  border-color: #722f37;
+  transform: translateY(-2px);
+}
+
+.tip-tag.active {
+  background: #722f37;
+  color: white;
+  border-color: #722f37;
+  box-shadow: 0 4px 12px rgba(114, 47, 55, 0.3);
+}
+
+.clear-filter-btn {
+  margin-top: 12px;
+  padding: 6px 16px;
+  background: transparent;
+  border: 1px solid #722f37;
+  color: #722f37;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.clear-filter-btn:hover {
+  background: #722f37;
+  color: white;
+}
+
+/* Match reasons no card expandido */
+.suggestion-card.expanded .match-score {
+  display: none;
+}
 }

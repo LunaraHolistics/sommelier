@@ -84,7 +84,9 @@ const getScoreColor = (score) => {
 function Harmonization({ dish, suggestions, onBack, mode }) {
   const [filterTipo, setFilterTipo] = useState('all');
   const [filterDisponivel, setFilterDisponivel] = useState('all');
-  const [expandedReasons, setExpandedReasons] = useState({});
+  const [filterCategoria, setFilterCategoria] = useState(null);
+  const [expandedCardId, setExpandedCardId] = useState(null);
+  const [zoomedBebida, setZoomedBebida] = useState(null);
 
   // Enriquece sugestões com score calculado
   const enrichedSuggestions = useMemo(() => {
@@ -98,7 +100,26 @@ function Harmonization({ dish, suggestions, onBack, mode }) {
     });
   }, [suggestions, dish]);
 
-  const filteredSuggestions = enrichedSuggestions.filter(wine => {
+  // Filtra por categoria ideal (se selecionada)
+  const filteredByCategory = useMemo(() => {
+    if (!filterCategoria) return enrichedSuggestions;
+    
+    return enrichedSuggestions.filter(wine => {
+      const tipoWine = wine.tipo?.toLowerCase() || '';
+      const subtipoWine = wine.subtipo?.toLowerCase() || '';
+      const categoria = filterCategoria.toLowerCase();
+      
+      // Verifica se o tipo/subtipo do vinho corresponde à categoria filtrada
+      return tipoWine.includes(categoria) || 
+             subtipoWine.includes(categoria) ||
+             (categoria.includes('brut') && subtipoWine.includes('brut')) ||
+             (categoria.includes('espumante') && tipoWine.includes('espumante')) ||
+             (categoria.includes('torrontés') && wine.uva?.some(u => u.toLowerCase().includes('torrontes'))) ||
+             (categoria.includes('sauvignon') && wine.uva?.some(u => u.toLowerCase().includes('sauvignon')));
+    });
+  }, [enrichedSuggestions, filterCategoria]);
+
+  const filteredSuggestions = filteredByCategory.filter(wine => {
     const matchTipo = filterTipo === 'all' || wine.tipo?.toLowerCase() === filterTipo.toLowerCase();
     const isAvailable = wine.active && wine.stock > 0;
     const matchDisponivel =
@@ -116,8 +137,13 @@ function Harmonization({ dish, suggestions, onBack, mode }) {
     return b.score - a.score;
   });
 
-  const toggleReasons = (id) => {
-    setExpandedReasons(prev => ({ ...prev, [id]: !prev[id] }));
+  const toggleExpand = (id) => {
+    setExpandedCardId((prev) => (prev === id ? null : id));
+    setZoomedBebida(null);
+  };
+
+  const toggleZoom = (bebida) => {
+    setZoomedBebida((prev) => (prev?.id === bebida.id ? null : bebida));
   };
 
   const tiposVinho = ['all', 'Tinto', 'Branco', 'Rosé', 'Espumante', 'Prosecco', 'Cidra'];
@@ -144,21 +170,39 @@ function Harmonization({ dish, suggestions, onBack, mode }) {
         </div>
       </div>
 
-      {/* Melhores Categorias */}
+      {/* Categorias de Vinho Ideais - FILTRÁVEIS */}
       {dish.melhoresCategorias && dish.melhoresCategorias.length > 0 && (
         <div className="sommelier-tip">
-          <h4>💡 Categorias de Vinho Ideais</h4>
+          <h4>💡 Categorias de Vinho Ideais <span className="filter-hint">(clique para filtrar)</span></h4>
           <div className="tip-tags">
-            {dish.melhoresCategorias.map((cat, i) => (
-              <span key={i} className="tip-tag">{cat}</span>
-            ))}
+            {dish.melhoresCategorias.map((cat, i) => {
+              const isActive = filterCategoria === cat;
+              return (
+                <button
+                  key={i}
+                  className={`tip-tag ${isActive ? 'active' : ''}`}
+                  onClick={() => setFilterCategoria(isActive ? null : cat)}
+                  title={isActive ? 'Limpar filtro' : `Filtrar por ${cat}`}
+                >
+                  {isActive ? '✕ ' : ''}{cat}
+                </button>
+              );
+            })}
           </div>
+          {filterCategoria && (
+            <button 
+              className="clear-filter-btn"
+              onClick={() => setFilterCategoria(null)}
+            >
+              Limpar filtro
+            </button>
+          )}
         </div>
       )}
 
       <div className="suggestions-section">
         <div className="suggestions-header">
-          <h3>🍷 Vinhos Recomendados ({filteredSuggestions.length})</h3>
+          <h3>🍷 Vinhos Recomendados ({filteredSuggestions.length}){filterCategoria && ` - ${filterCategoria}`}</h3>
 
           <div className="filters-container">
             <div className="filter-group">
@@ -201,21 +245,26 @@ function Harmonization({ dish, suggestions, onBack, mode }) {
           <div className="suggestions-grid">
             {sortedSuggestions.map((wine) => {
               const isAvailable = wine.active && wine.stock > 0;
-              const isExpanded = expandedReasons[wine.id];
-              const displayedReasons = isExpanded ? wine.reasons : wine.reasons.slice(0, 3);
+              const isExpanded = expandedCardId === wine.id;
 
               return (
                 <div
                   key={wine.id}
                   className={`suggestion-card ${!isAvailable ? 'unavailable' : ''}`}
                 >
-                  <WineCard wine={wine} mode={mode} />
+                  <WineCard 
+                    wine={wine} 
+                    mode={mode}
+                    isExpanded={isExpanded}
+                    onToggle={toggleExpand}
+                    onZoomToggle={toggleZoom}
+                  />
 
                   {!isAvailable && (
                     <div className="unavailable-badge">❌ Indisponível</div>
                   )}
 
-                  {wine.score > 0 && (
+                  {wine.score > 0 && !isExpanded && (
                     <div className="match-score">
                       <span
                         className="score-label"
@@ -234,20 +283,9 @@ function Harmonization({ dish, suggestions, onBack, mode }) {
                       </div>
                       {wine.reasons && wine.reasons.length > 0 && (
                         <div className="match-reasons">
-                          {displayedReasons.map((reason, i) => (
+                          {wine.reasons.slice(0, 3).map((reason, i) => (
                             <span key={i} className="reason-tag">{reason}</span>
                           ))}
-                          {wine.reasons.length > 3 && (
-                            <button
-                              className="toggle-reasons-btn"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                toggleReasons(wine.id);
-                              }}
-                            >
-                              {isExpanded ? 'Ver menos' : `+${wine.reasons.length - 3} mais`}
-                            </button>
-                          )}
                         </div>
                       )}
                     </div>
@@ -267,6 +305,33 @@ function Harmonization({ dish, suggestions, onBack, mode }) {
             {dish.melhoresRotulos.map((rotulo, i) => (
               <span key={i} className="tip-tag gold">{rotulo}</span>
             ))}
+          </div>
+        </div>
+      )}
+
+      {/* Zoom */}
+      {zoomedBebida && (
+        <div
+          className="zoom-overlay"
+          onClick={() => setZoomedBebida(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Ampliação da imagem"
+        >
+          <div className="zoom-container" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="close-zoom-btn"
+              onClick={() => setZoomedBebida(null)}
+              aria-label="Fechar zoom"
+            >
+              ×
+            </button>
+            <img
+              src={zoomedBebida.imagemUrl || '/placeholder-wine.png'}
+              alt={zoomedBebida.nome}
+              className="zoomed-image"
+              onError={(e) => { e.target.src = '/placeholder-wine.png'; }}
+            />
           </div>
         </div>
       )}
