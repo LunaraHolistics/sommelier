@@ -1,19 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import WineCard from '../../components/WineCard';
 import './Harmonization.css';
 
-function Harmonization({ dish, suggestions, onBack }) {
-  // Validação de segurança
-  if (!dish) {
-    return (
-      <div className="harmonization-view">
-        <div className="error-message">
-          <p>Erro: Prato não selecionado</p>
-          <button onClick={onBack} className="btn-back">Voltar</button>
-        </div>
-      </div>
-    );
-  }
+function Harmonization({ dish, suggestions, onBack, mode }) {
+  const [filterTipo, setFilterTipo] = useState('all');
+  const [filterDisponivel, setFilterDisponivel] = useState('all');
 
   const getScoreLevel = (score) => {
     if (score >= 10) return 'Excelente';
@@ -28,6 +19,27 @@ function Harmonization({ dish, suggestions, onBack }) {
     if (score >= 4) return '#ffc107';
     return '#ff9800';
   };
+
+  // Filtrar sugestões
+  const filteredSuggestions = suggestions.filter(wine => {
+    const matchTipo = filterTipo === 'all' || wine.tipo?.toLowerCase() === filterTipo.toLowerCase();
+    const matchDisponivel = filterDisponivel === 'all' || 
+      (filterDisponivel === 'disponivel' ? (wine.active && wine.stock > 0) : (!wine.active || wine.stock <= 0));
+    return matchTipo && matchDisponivel;
+  });
+
+  // Ordenar: disponíveis primeiro, depois por score
+  const sortedSuggestions = [...filteredSuggestions].sort((a, b) => {
+    const aDisponivel = a.active && a.stock > 0;
+    const bDisponivel = b.active && b.stock > 0;
+    
+    if (aDisponivel && !bDisponivel) return -1;
+    if (!aDisponivel && bDisponivel) return 1;
+    
+    return b.score - a.score;
+  });
+
+  const tiposVinho = ['all', 'Tinto', 'Branco', 'Rosé', 'Espumante', 'Destilado'];
 
   return (
     <div className="harmonization-view">
@@ -54,44 +66,90 @@ function Harmonization({ dish, suggestions, onBack }) {
       )}
 
       <div className="suggestions-section">
-        <h3>🍷 Vinhos Recomendados ({suggestions?.length || 0})</h3>
+        <div className="suggestions-header">
+          <h3>🍷 Vinhos Recomendados ({filteredSuggestions.length})</h3>
+          
+          <div className="filters-container">
+            <div className="filter-group">
+              <label>Tipo:</label>
+              <select 
+                value={filterTipo} 
+                onChange={(e) => setFilterTipo(e.target.value)}
+                className="filter-select"
+              >
+                {tiposVinho.map(tipo => (
+                  <option key={tipo} value={tipo}>
+                    {tipo === 'all' ? 'Todos' : tipo}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="filter-group">
+              <label>Disponibilidade:</label>
+              <select 
+                value={filterDisponivel} 
+                onChange={(e) => setFilterDisponivel(e.target.value)}
+                className="filter-select"
+              >
+                <option value="all">Todos</option>
+                <option value="disponivel">✅ Disponíveis</option>
+                <option value="indisponivel">❌ Indisponíveis</option>
+              </select>
+            </div>
+          </div>
+        </div>
         
-        {!suggestions || suggestions.length === 0 ? (
+        {sortedSuggestions.length === 0 ? (
           <p className="no-suggestions">
-            Nenhuma sugestão de harmonização encontrada para este prato.
+            Nenhum vinho encontrado com estes filtros.
             <br />
-            <small>Tente outro prato ou ajuste os filtros.</small>
+            <small>Tente ajustar os filtros ou selecione outro prato.</small>
           </p>
         ) : (
           <div className="suggestions-grid">
-            {suggestions.map((wine, index) => (
-              <div key={wine.id || index} className="suggestion-card">
-                <WineCard wine={wine} />
-                {wine.score > 0 && (
-                  <div className="match-score">
-                    <span className="score-label" style={{ color: getScoreColor(wine.score) }}>
-                      {getScoreLevel(wine.score)} ({wine.score} pts)
-                    </span>
-                    <div className="score-bar">
-                      <div
-                        className="score-fill"
-                        style={{ 
-                          width: `${Math.min(wine.score * 8, 100)}%`,
-                          background: `linear-gradient(90deg, ${getScoreColor(wine.score)} 0%, #722f37 100%)`
-                        }}
-                      />
+            {sortedSuggestions.map((wine, index) => {
+              const isAvailable = wine.active && wine.stock > 0;
+              
+              return (
+                <div 
+                  key={wine.id} 
+                  className={`suggestion-card ${!isAvailable ? 'unavailable' : ''}`}
+                >
+                  <WineCard wine={wine} mode={mode} />
+                  
+                  {!isAvailable && (
+                    <div className="unavailable-badge">
+                      ❌ Indisponível
                     </div>
-                    {wine.reasons && wine.reasons.length > 0 && (
-                      <div className="match-reasons">
-                        {wine.reasons.slice(0, 3).map((reason, i) => (
-                          <span key={i} className="reason-tag">{reason}</span>
-                        ))}
+                  )}
+                  
+                  {wine.score > 0 && (
+                    <div className="match-score">
+                      <span className="score-label" style={{ color: getScoreColor(wine.score) }}>
+                        {getScoreLevel(wine.score)} ({wine.score} pts)
+                      </span>
+                      <div className="score-bar">
+                        <div
+                          className="score-fill"
+                          style={{ 
+                            width: `${Math.min(wine.score * 8, 100)}%`,
+                            background: `linear-gradient(90deg, ${getScoreColor(wine.score)} 0%, #722f37 100%)`
+                          }}
+                        />
                       </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            ))}
+                      {wine.reasons && wine.reasons.length > 0 && (
+                        <div className="match-reasons">
+                          {wine.reasons.slice(0, 3).map((reason, i) => (
+                            <span key={i} className="reason-tag">{reason}</span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         )}
       </div>

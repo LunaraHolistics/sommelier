@@ -1,10 +1,9 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import WineImage from './WineImage';
 import './WineDetailModal.css';
 
-function WineDetailModal({ wine, onClose, userRole }) {
+function WineDetailModal({ wine, onClose, mode = 'client' }) {
   const [showImageZoom, setShowImageZoom] = useState(false);
-  const [activeTab, setActiveTab] = useState('overview');
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -13,35 +12,20 @@ function WineDetailModal({ wine, onClose, userRole }) {
     };
   }, []);
 
-  const handleClose = useCallback(() => {
-    onClose();
-  }, [onClose]);
-
-  const handleImageClick = useCallback(() => {
-    setShowImageZoom(true);
-  }, []);
-
-  const handleCloseZoom = useCallback(() => {
-    setShowImageZoom(false);
-  }, []);
-
   if (!wine) return null;
 
-  const isSommelier = userRole === 'sommelier' || userRole === 'manager';
+  const isSommelier = mode === 'sommelier';
 
   return (
     <>
-      <div className="modal-overlay" onClick={handleClose}>
+      <div className="modal-overlay" onClick={onClose}>
         <div className="modal-content modal-content-large" onClick={(e) => e.stopPropagation()}>
-          <button className="modal-close" onClick={handleClose}>×</button>
+          <button className="modal-close" onClick={onClose}>×</button>
           
-          {/* Header com Imagem e Informações Principais */}
           <div className="modal-header-full">
-            <div className="modal-image-section" onClick={handleImageClick}>
+            <div className="modal-image-section" onClick={() => setShowImageZoom(true)}>
               <WineImage wine={wine} />
-              {wine.imagemUrl && (
-                <div className="image-zoom-indicator">🔍 Clique para ampliar</div>
-              )}
+              <div className="image-zoom-indicator">🔍 Clique para ampliar</div>
             </div>
             
             <div className="modal-title-section">
@@ -97,285 +81,246 @@ function WineDetailModal({ wine, onClose, userRole }) {
             </div>
           </div>
 
-          {/* Tabs de Navegação (apenas para sommelier) */}
+          {/* Tabs apenas no modo sommelier */}
           {isSommelier && (
             <div className="modal-tabs">
-              <button 
-                className={`tab-btn ${activeTab === 'overview' ? 'active' : ''}`}
-                onClick={() => setActiveTab('overview')}
-              >
-                📋 Visão Geral
-              </button>
-              <button 
-                className={`tab-btn ${activeTab === 'tasting' ? 'active' : ''}`}
-                onClick={() => setActiveTab('tasting')}
-              >
-                👃 Prova e Aromas
-              </button>
-              <button 
-                className={`tab-btn ${activeTab === 'pairing' ? 'active' : ''}`}
-                onClick={() => setActiveTab('pairing')}
-              >
-                🍽️ Harmonização
-              </button>
-              <button 
-                className={`tab-btn ${activeTab === 'service' ? 'active' : ''}`}
-                onClick={() => setActiveTab('service')}
-              >
-                💡 Dicas de Serviço
-              </button>
+              <button className="tab-btn active">📋 Visão Geral</button>
+              <button className="tab-btn">👃 Prova e Aromas</button>
+              <button className="tab-btn">🍽️ Harmonização</button>
+              <button className="tab-btn">💡 Dicas de Serviço</button>
             </div>
           )}
 
-          {/* Conteúdo do Modal */}
           <div className="modal-body-full">
-            {/* Seção: Visão Geral */}
-            {(activeTab === 'overview' || !isSommelier) && (
-              <>
-                <div className="modal-section">
-                  <h3 className="section-title">📋 Informações Técnicas</h3>
-                  <div className="info-grid-detailed">
-                    <div className="info-row">
-                      <span className="info-label">Tipo</span>
-                      <span className="info-value">{wine.tipo}</span>
+            {/* Informações Técnicas */}
+            <div className="modal-section">
+              <h3 className="section-title">📋 Informações</h3>
+              <div className="info-grid-detailed">
+                <div className="info-row">
+                  <span className="info-label">Tipo</span>
+                  <span className="info-value">{wine.tipo}</span>
+                </div>
+                <div className="info-row">
+                  <span className="info-label">Subtipo</span>
+                  <span className="info-value">{wine.subtipo}</span>
+                </div>
+                <div className="info-row">
+                  <span className="info-label">País</span>
+                  <span className="info-value">{wine.pais}</span>
+                </div>
+                <div className="info-row">
+                  <span className="info-label">Região</span>
+                  <span className="info-value">{wine.regiao}</span>
+                </div>
+                <div className="info-row">
+                  <span className="info-label">Vinícola</span>
+                  <span className="info-value">{wine.vinicola}</span>
+                </div>
+                <div className="info-row">
+                  <span className="info-label">Uva(s)</span>
+                  <span className="info-value">{wine.uva?.join(', ')}</span>
+                </div>
+                <div className="info-row">
+                  <span className="info-label">Safra</span>
+                  <span className="info-value">{wine.safra}</span>
+                </div>
+                <div className="info-row">
+                  <span className="info-label">Teor Alcoólico</span>
+                  <span className="info-value">{wine.teorAlcoolico}</span>
+                </div>
+                <div className="info-row">
+                  <span className="info-label">Nível de Doçura</span>
+                  <span className="info-value">{wine.nivelDoce}</span>
+                </div>
+                <div className="info-row">
+                  <span className="info-label">Corpo</span>
+                  <span className="info-value">{wine.corpo}</span>
+                </div>
+                <div className="info-row">
+                  <span className="info-label">Acidez</span>
+                  <span className="info-value">{wine.acidez}</span>
+                </div>
+                <div className="info-row">
+                  <span className="info-label">Taninos</span>
+                  <span className="info-value">{wine.taninos}</span>
+                </div>
+                <div className="info-row">
+                  <span className="info-label">Amadurecimento</span>
+                  <span className="info-value">{wine.amadurecimento}</span>
+                </div>
+                <div className="info-row">
+                  <span className="info-label">Temperatura de Serviço</span>
+                  <span className="info-value">{wine.temperaturaServico}</span>
+                </div>
+                <div className="info-row">
+                  <span className="info-label">Temperatura de Armazenamento</span>
+                  <span className="info-value">{wine.temperaturaArmazenamento}</span>
+                </div>
+                <div className="info-row">
+                  <span className="info-label">Apresentação</span>
+                  <span className="info-value">{wine.formaApresentacao}</span>
+                </div>
+              </div>
+            </div>
+
+            {wine.descricaoCurta && (
+              <div className="modal-section">
+                <h3 className="section-title">📝 Descrição</h3>
+                <p className="wine-description-full">{wine.descricaoCurta}</p>
+              </div>
+            )}
+
+            {/* Notas e Aromas - Apenas no modo sommelier */}
+            {isSommelier && wine.notasDominantes && wine.notasDominantes.length > 0 && (
+              <div className="modal-section">
+                <h3 className="section-title">👃 Notas Dominantes</h3>
+                <div className="tags-list-large">
+                  {wine.notasDominantes.map((nota, i) => (
+                    <span key={i} className="nota-tag-large">{nota}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {isSommelier && wine.aromas && wine.aromas.length > 0 && (
+              <div className="modal-section">
+                <h3 className="section-title">🌸 Aromas</h3>
+                <div className="aromas-grid">
+                  {wine.aromas.map((aroma, i) => (
+                    <div key={i} className="aroma-item">
+                      <span className="aroma-icon">🌺</span>
+                      <span>{aroma}</span>
                     </div>
-                    <div className="info-row">
-                      <span className="info-label">Subtipo</span>
-                      <span className="info-value">{wine.subtipo}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {isSommelier && wine.perfilGustativo && (
+              <div className="modal-section">
+                <h3 className="section-title">📊 Perfil Gustativo</h3>
+                <div className="tasting-profile">
+                  <div className="profile-item">
+                    <span className="profile-label">Corpo</span>
+                    <div className="profile-bar">
+                      <div className="profile-fill" style={{ width: '66%' }}></div>
                     </div>
-                    <div className="info-row">
-                      <span className="info-label">País</span>
-                      <span className="info-value">{wine.pais}</span>
+                    <span className="profile-value">{wine.perfilGustativo.corpo}</span>
+                  </div>
+                  <div className="profile-item">
+                    <span className="profile-label">Acidez</span>
+                    <div className="profile-bar">
+                      <div className="profile-fill" style={{ width: '83%' }}></div>
                     </div>
-                    <div className="info-row">
-                      <span className="info-label">Região</span>
-                      <span className="info-value">{wine.regiao}</span>
+                    <span className="profile-value">{wine.perfilGustativo.acidez}</span>
+                  </div>
+                  <div className="profile-item">
+                    <span className="profile-label">Taninos</span>
+                    <div className="profile-bar">
+                      <div className="profile-fill" style={{ width: '50%' }}></div>
                     </div>
-                    <div className="info-row">
-                      <span className="info-label">Vinícola</span>
-                      <span className="info-value">{wine.vinicola}</span>
-                    </div>
-                    <div className="info-row">
-                      <span className="info-label">Uva(s)</span>
-                      <span className="info-value">{wine.uva?.join(', ')}</span>
-                    </div>
-                    <div className="info-row">
-                      <span className="info-label">Safra</span>
-                      <span className="info-value">{wine.safra}</span>
-                    </div>
-                    <div className="info-row">
-                      <span className="info-label">Teor Alcoólico</span>
-                      <span className="info-value">{wine.teorAlcoolico}</span>
-                    </div>
-                    <div className="info-row">
-                      <span className="info-label">Nível de Doçura</span>
-                      <span className="info-value">{wine.nivelDoce}</span>
-                    </div>
-                    <div className="info-row">
-                      <span className="info-label">Corpo</span>
-                      <span className="info-value">{wine.corpo}</span>
-                    </div>
-                    <div className="info-row">
-                      <span className="info-label">Acidez</span>
-                      <span className="info-value">{wine.acidez}</span>
-                    </div>
-                    <div className="info-row">
-                      <span className="info-label">Taninos</span>
-                      <span className="info-value">{wine.taninos}</span>
-                    </div>
-                    <div className="info-row">
-                      <span className="info-label">Amadurecimento</span>
-                      <span className="info-value">{wine.amadurecimento}</span>
-                    </div>
-                    <div className="info-row">
-                      <span className="info-label">Temperatura de Serviço</span>
-                      <span className="info-value">{wine.temperaturaServico}</span>
-                    </div>
-                    <div className="info-row">
-                      <span className="info-label">Temperatura de Armazenamento</span>
-                      <span className="info-value">{wine.temperaturaArmazenamento}</span>
-                    </div>
-                    <div className="info-row">
-                      <span className="info-label">Apresentação</span>
-                      <span className="info-value">{wine.formaApresentacao}</span>
-                    </div>
+                    <span className="profile-value">{wine.perfilGustativo.taninos}</span>
                   </div>
                 </div>
-
-                {wine.descricaoCurta && (
-                  <div className="modal-section">
-                    <h3 className="section-title">📝 Descrição</h3>
-                    <p className="wine-description-full">{wine.descricaoCurta}</p>
-                  </div>
-                )}
-
-                {wine.publicoAlvo && (
-                  <div className="modal-section">
-                    <h3 className="section-title">👥 Público-Alvo</h3>
-                    <p>{wine.publicoAlvo}</p>
-                  </div>
-                )}
-              </>
+              </div>
             )}
 
-            {/* Seção: Prova e Aromas */}
-            {(activeTab === 'tasting' || !isSommelier) && (
-              <>
-                {wine.notasDominantes && wine.notasDominantes.length > 0 && (
-                  <div className="modal-section">
-                    <h3 className="section-title">👃 Notas Dominantes</h3>
-                    <div className="tags-list-large">
-                      {wine.notasDominantes.map((nota, i) => (
-                        <span key={i} className="nota-tag-large">{nota}</span>
-                      ))}
+            {/* Harmonização */}
+            {wine.harmonizacaoPrincipal && wine.harmonizacaoPrincipal.length > 0 && (
+              <div className="modal-section">
+                <h3 className="section-title">🍽️ Harmonização Principal</h3>
+                <div className="pairing-list">
+                  {wine.harmonizacaoPrincipal.map((h, i) => (
+                    <div key={i} className="pairing-item primary">
+                      <span className="pairing-icon">⭐</span>
+                      <span>{h}</span>
                     </div>
-                  </div>
-                )}
-
-                {wine.aromas && wine.aromas.length > 0 && (
-                  <div className="modal-section">
-                    <h3 className="section-title">🌸 Aromas</h3>
-                    <div className="aromas-grid">
-                      {wine.aromas.map((aroma, i) => (
-                        <div key={i} className="aroma-item">
-                          <span className="aroma-icon">🌺</span>
-                          <span>{aroma}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {wine.perfilGustativo && (
-                  <div className="modal-section">
-                    <h3 className="section-title">📊 Perfil Gustativo</h3>
-                    <div className="tasting-profile">
-                      <div className="profile-item">
-                        <span className="profile-label">Corpo</span>
-                        <div className="profile-bar">
-                          <div className="profile-fill" style={{ width: getProfileWidth(wine.perfilGustativo.corpo) }}></div>
-                        </div>
-                        <span className="profile-value">{wine.perfilGustativo.corpo}</span>
-                      </div>
-                      <div className="profile-item">
-                        <span className="profile-label">Acidez</span>
-                        <div className="profile-bar">
-                          <div className="profile-fill" style={{ width: getProfileWidth(wine.perfilGustativo.acidez) }}></div>
-                        </div>
-                        <span className="profile-value">{wine.perfilGustativo.acidez}</span>
-                      </div>
-                      <div className="profile-item">
-                        <span className="profile-label">Taninos</span>
-                        <div className="profile-bar">
-                          <div className="profile-fill" style={{ width: getProfileWidth(wine.perfilGustativo.taninos) }}></div>
-                        </div>
-                        <span className="profile-value">{wine.perfilGustativo.taninos}</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </>
+                  ))}
+                </div>
+              </div>
             )}
 
-            {/* Seção: Harmonização */}
-            {(activeTab === 'pairing' || !isSommelier) && (
-              <>
-                {wine.harmonizacaoPrincipal && wine.harmonizacaoPrincipal.length > 0 && (
-                  <div className="modal-section">
-                    <h3 className="section-title">🍽️ Harmonização Principal</h3>
-                    <div className="pairing-list">
-                      {wine.harmonizacaoPrincipal.map((h, i) => (
-                        <div key={i} className="pairing-item primary">
-                          <span className="pairing-icon">⭐</span>
-                          <span>{h}</span>
-                        </div>
-                      ))}
+            {wine.harmonizacaoSecundaria && wine.harmonizacaoSecundaria.length > 0 && (
+              <div className="modal-section">
+                <h3 className="section-title">🍴 Harmonização Secundária</h3>
+                <div className="pairing-list">
+                  {wine.harmonizacaoSecundaria.map((h, i) => (
+                    <div key={i} className="pairing-item secondary">
+                      <span className="pairing-icon">🔸</span>
+                      <span>{h}</span>
                     </div>
-                  </div>
-                )}
-
-                {wine.harmonizacaoSecundaria && wine.harmonizacaoSecundaria.length > 0 && (
-                  <div className="modal-section">
-                    <h3 className="section-title">🍴 Harmonização Secundária</h3>
-                    <div className="pairing-list">
-                      {wine.harmonizacaoSecundaria.map((h, i) => (
-                        <div key={i} className="pairing-item secondary">
-                          <span className="pairing-icon">🔸</span>
-                          <span>{h}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {wine.harmonizacaoInteligente && (
-                  <div className="modal-section">
-                    <h3 className="section-title">🎯 Harmonização Inteligente</h3>
-                    <div className="smart-pairing-grid">
-                      {wine.harmonizacaoInteligente.categoriasPrato && (
-                        <div className="smart-category">
-                          <h4>Categorias de Prato</h4>
-                          <div className="smart-tags">
-                            {wine.harmonizacaoInteligente.categoriasPrato.map((cat, i) => (
-                              <span key={i} className="smart-tag">{cat}</span>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                      {wine.harmonizacaoInteligente.proteinas && (
-                        <div className="smart-category">
-                          <h4>Proteínas</h4>
-                          <div className="smart-tags">
-                            {wine.harmonizacaoInteligente.proteinas.map((prot, i) => (
-                              <span key={i} className="smart-tag">{prot}</span>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                      {wine.harmonizacaoInteligente.molhos && (
-                        <div className="smart-category">
-                          <h4>Molhos</h4>
-                          <div className="smart-tags">
-                            {wine.harmonizacaoInteligente.molhos.map((molho, i) => (
-                              <span key={i} className="smart-tag">{molho}</span>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                      {wine.harmonizacaoInteligente.tecnicasPreparo && (
-                        <div className="smart-category">
-                          <h4>Técnicas de Preparo</h4>
-                          <div className="smart-tags">
-                            {wine.harmonizacaoInteligente.tecnicasPreparo.map((tec, i) => (
-                              <span key={i} className="smart-tag">{tec}</span>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                      {wine.harmonizacaoInteligente.saboresPrato && (
-                        <div className="smart-category">
-                          <h4>Sabores do Prato</h4>
-                          <div className="smart-tags">
-                            {wine.harmonizacaoInteligente.saboresPrato.map((sabor, i) => (
-                              <span key={i} className="smart-tag">{sabor}</span>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                      {wine.harmonizacaoInteligente.intensidadeMatch && (
-                        <div className="smart-category">
-                          <h4>Intensidade de Match</h4>
-                          <span className="match-intensity">{wine.harmonizacaoInteligente.intensidadeMatch}</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-              </>
+                  ))}
+                </div>
+              </div>
             )}
 
-            {/* Seção: Dicas de Serviço (apenas sommelier) */}
-            {isSommelier && activeTab === 'service' && wine.dicasGarcom && (
+            {/* Harmonização Inteligente - Apenas no modo sommelier */}
+            {isSommelier && wine.harmonizacaoInteligente && (
+              <div className="modal-section">
+                <h3 className="section-title">🎯 Harmonização Inteligente</h3>
+                <div className="smart-pairing-grid">
+                  {wine.harmonizacaoInteligente.categoriasPrato && (
+                    <div className="smart-category">
+                      <h4>Categorias de Prato</h4>
+                      <div className="smart-tags">
+                        {wine.harmonizacaoInteligente.categoriasPrato.map((cat, i) => (
+                          <span key={i} className="smart-tag">{cat}</span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {wine.harmonizacaoInteligente.proteinas && (
+                    <div className="smart-category">
+                      <h4>Proteínas</h4>
+                      <div className="smart-tags">
+                        {wine.harmonizacaoInteligente.proteinas.map((prot, i) => (
+                          <span key={i} className="smart-tag">{prot}</span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {wine.harmonizacaoInteligente.molhos && (
+                    <div className="smart-category">
+                      <h4>Molhos</h4>
+                      <div className="smart-tags">
+                        {wine.harmonizacaoInteligente.molhos.map((molho, i) => (
+                          <span key={i} className="smart-tag">{molho}</span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {wine.harmonizacaoInteligente.tecnicasPreparo && (
+                    <div className="smart-category">
+                      <h4>Técnicas de Preparo</h4>
+                      <div className="smart-tags">
+                        {wine.harmonizacaoInteligente.tecnicasPreparo.map((tec, i) => (
+                          <span key={i} className="smart-tag">{tec}</span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {wine.harmonizacaoInteligente.saboresPrato && (
+                    <div className="smart-category">
+                      <h4>Sabores do Prato</h4>
+                      <div className="smart-tags">
+                        {wine.harmonizacaoInteligente.saboresPrato.map((sabor, i) => (
+                          <span key={i} className="smart-tag">{sabor}</span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {wine.harmonizacaoInteligente.intensidadeMatch && (
+                    <div className="smart-category">
+                      <h4>Intensidade de Match</h4>
+                      <span className="match-intensity">{wine.harmonizacaoInteligente.intensidadeMatch}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Dicas do Garçom - Apenas no modo sommelier */}
+            {isSommelier && wine.dicasGarcom && (
               <>
                 <div className="modal-section sommelier-section">
                   <h3 className="section-title">💡 Como Servir</h3>
@@ -420,36 +365,15 @@ function WineDetailModal({ wine, onClose, userRole }) {
       </div>
 
       {showImageZoom && wine.imagemUrl && (
-        <div className="image-zoom-overlay" onClick={handleCloseZoom}>
+        <div className="image-zoom-overlay" onClick={() => setShowImageZoom(false)}>
           <div className="image-zoom-container" onClick={(e) => e.stopPropagation()}>
-            <button className="image-zoom-close" onClick={handleCloseZoom}>×</button>
+            <button className="image-zoom-close" onClick={() => setShowImageZoom(false)}>×</button>
             <img src={wine.imagemUrl} alt={wine.nome} className="image-zoom-img" />
           </div>
         </div>
       )}
     </>
   );
-}
-
-// Helper function para calcular largura da barra de perfil
-function getProfileWidth(value) {
-  const levels = {
-    'Leve': '33%',
-    'Médio': '50%',
-    'Médio-Encorpado': '66%',
-    'Encorpado': '83%',
-    'Full-bodied': '100%',
-    'Baixa': '33%',
-    'Média': '50%',
-    'Média-Alta': '66%',
-    'Alta': '83%',
-    'Muito Alta': '100%',
-    'Macios': '33%',
-    'Médios': '50%',
-    'Firmes': '75%',
-    'Poderosos': '100%'
-  };
-  return levels[value] || '50%';
 }
 
 export default WineDetailModal;

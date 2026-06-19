@@ -11,6 +11,7 @@ function SommelierView() {
   const [view, setView] = useState('drinks');
   const [selectedDish, setSelectedDish] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
+  const [mode, setMode] = useState('client'); // 'client' ou 'sommelier'
 
   const handleDishSelect = useCallback(async (dish) => {
     if (!dish || !dish.id) {
@@ -30,15 +31,33 @@ function SommelierView() {
     }
   }, []);
 
+  // Mostra todos os vinhos (disponíveis e indisponíveis) na harmonização
+  const allWines = catalogo;
   const activeWines = catalogo.filter(w => w.active && w.stock > 0);
 
   return (
     <div className="sommelier-view">
       <header className="sommelier-header">
         <h1>🍷 Vinho em Mãos</h1>
-        <button onClick={logout} className="btn-logout">
-          Sair
-        </button>
+        <div className="header-actions">
+          <div className="mode-toggle">
+            <button
+              className={`mode-btn ${mode === 'client' ? 'active' : ''}`}
+              onClick={() => setMode('client')}
+            >
+              👤 Cliente
+            </button>
+            <button
+              className={`mode-btn ${mode === 'sommelier' ? 'active' : ''}`}
+              onClick={() => setMode('sommelier')}
+            >
+              🎓 Sommelier
+            </button>
+          </div>
+          <button onClick={logout} className="btn-logout">
+            Sair
+          </button>
+        </div>
       </header>
 
       <div className="view-tabs">
@@ -67,8 +86,8 @@ function SommelierView() {
       <div className="view-content">
         {view === 'drinks' && (
           <div className="drinks-grid">
-            {activeWines.map(wine => (
-              <WineCard key={wine.id} wine={wine} />
+            {(mode === 'sommelier' ? allWines : activeWines).map(wine => (
+              <WineCard key={wine.id} wine={wine} mode={mode} />
             ))}
           </div>
         )}
@@ -90,6 +109,7 @@ function SommelierView() {
             dish={selectedDish}
             suggestions={suggestions}
             onBack={() => setView('dishes')}
+            mode={mode}
           />
         )}
       </div>

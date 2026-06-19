@@ -1,30 +1,30 @@
-import React, { useState, useCallback, memo } from 'react';
+import React, { useState } from 'react';
 import WineImage from './WineImage';
 import WineDetailModal from './WineDetailModal';
 import './WineCard.css';
 
-function WineCard({ wine, userRole }) {
+function WineCard({ wine, mode = 'client' }) {
   const [showModal, setShowModal] = useState(false);
 
-  const formatPrice = useCallback((price) => {
+  const formatPrice = (price) => {
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',
       currency: 'BRL'
     }).format(price || 0);
-  }, []);
+  };
 
-  const handleOpenModal = useCallback(() => {
-    setShowModal(true);
-  }, []);
-
-  const handleCloseModal = useCallback(() => {
-    setShowModal(false);
-  }, []);
+  const isAvailable = wine.active && wine.stock > 0;
 
   return (
     <>
-      <div className="wine-card" onClick={handleOpenModal}>
+      <div className={`wine-card ${!isAvailable ? 'unavailable' : ''}`} onClick={() => setShowModal(true)}>
         <WineImage wine={wine} />
+        
+        {!isAvailable && (
+          <div className="unavailable-overlay">
+            <span className="unavailable-text">❌ Indisponível</span>
+          </div>
+        )}
         
         <div className="wine-info">
           <h3 className="wine-name">{wine.nome}</h3>
@@ -47,7 +47,8 @@ function WineCard({ wine, userRole }) {
             )}
           </div>
 
-          {userRole === 'manager' && (
+          {/* Badges de estoque apenas no modo sommelier */}
+          {mode === 'sommelier' && (
             <div className="stock-badge-container">
               <span className={`stock-badge ${wine.stock > 0 ? 'in-stock' : 'out-of-stock'}`}>
                 {wine.stock > 0 ? `Estoque: ${wine.stock}` : 'Sem estoque'}
@@ -61,10 +62,10 @@ function WineCard({ wine, userRole }) {
       </div>
 
       {showModal && (
-        <WineDetailModal wine={wine} onClose={handleCloseModal} />
+        <WineDetailModal wine={wine} onClose={() => setShowModal(false)} mode={mode} />
       )}
     </>
   );
 }
 
-export default memo(WineCard);
+export default WineCard;
