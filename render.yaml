@@ -1,12 +1,11 @@
 services:
   - type: web
-    name: vinho-em-maos
+    name: sommelier-na-fazenda
     env: node
-    plan: free
-    buildCommand: npm install
-    startCommand: npm start
+    buildCommand: cd vinho-em-maos-react && rm -rf node_modules package-lock.json && npm install && npm run build
+    startCommand: cd .. && node server.js
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: 10000
+      - key: ADMIN_PASSWORD
+        value: sommelier2026
