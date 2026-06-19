@@ -1,4 +1,4 @@
-import React, { useState, useContext, useCallback } from 'react';
+import React, { useState, useContext } from 'react';
 import { AppContext } from '../../contexts/AppContext';
 import WineCard from '../../components/WineCard';
 import DishCard from '../../components/DishCard';
@@ -11,14 +11,15 @@ function SommelierView() {
   const [view, setView] = useState('drinks');
   const [selectedDish, setSelectedDish] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
-  const [mode, setMode] = useState('client'); // 'client' ou 'sommelier'
+  const [mode, setMode] = useState('client');
+  
+  // Estados para expansão e zoom
+  const [expandedCardId, setExpandedCardId] = useState(null);
+  const [zoomedBebida, setZoomedBebida] = useState(null);
 
-  const handleDishSelect = useCallback(async (dish) => {
-    if (!dish || !dish.id) {
-      console.error('Prato inválido:', dish);
-      return;
-    }
-
+  const handleDishSelect = async (dish) => {
+    if (!dish || !dish.id) return;
+    
     setSelectedDish(dish);
     setView('harmonize');
     
@@ -29,71 +30,99 @@ function SommelierView() {
       console.error('Falha ao buscar harmonizações:', err);
       setSuggestions([]);
     }
-  }, []);
+  };
 
-  // Mostra todos os vinhos (disponíveis e indisponíveis) na harmonização
+  // Expande ou fecha o card - mantém apenas um expandido por vez
+  const toggleExpand = (id) => {
+    setExpandedCardId((prev) => (prev === id ? null : id));
+    setZoomedBebida(null); // Fecha zoom ao trocar de card
+  };
+
+  // Abre ou fecha o zoom de imagem
+  const toggleZoom = (bebida) => {
+    setZoomedBebida((prev) => (prev?.id === bebida.id ? null : bebida));
+  };
+
   const allWines = catalogo;
   const activeWines = catalogo.filter(w => w.active && w.stock > 0);
 
   return (
     <div className="sommelier-view">
+      {/* Header */}
       <header className="sommelier-header">
-        <h1>🍷 Sommelier</h1>
+        <h1>🍷 Vinho em Mãos</h1>
         <div className="header-actions">
           <div className="mode-toggle">
             <button
               className={`mode-btn ${mode === 'client' ? 'active' : ''}`}
               onClick={() => setMode('client')}
+              aria-label="Modo Cliente"
             >
               👤 Cliente
             </button>
             <button
               className={`mode-btn ${mode === 'sommelier' ? 'active' : ''}`}
               onClick={() => setMode('sommelier')}
+              aria-label="Modo Sommelier"
             >
               🎓 Sommelier
             </button>
           </div>
-          <button onClick={logout} className="btn-logout">
+          <button onClick={logout} className="btn-logout" aria-label="Sair">
             Sair
           </button>
         </div>
       </header>
 
-      <div className="view-tabs">
+      {/* Tabs de Navegação */}
+      <nav className="view-tabs" role="tablist">
         <button
-          className={view === 'drinks' ? 'active' : ''}
+          className={`tab-btn ${view === 'drinks' ? 'active' : ''}`}
           onClick={() => setView('drinks')}
+          role="tab"
+          aria-selected={view === 'drinks'}
         >
           Bebidas
         </button>
         <button
-          className={view === 'dishes' ? 'active' : ''}
+          className={`tab-btn ${view === 'dishes' ? 'active' : ''}`}
           onClick={() => setView('dishes')}
+          role="tab"
+          aria-selected={view === 'dishes'}
         >
           Pratos
         </button>
         {selectedDish && (
           <button
-            className={view === 'harmonize' ? 'active' : ''}
+            className={`tab-btn ${view === 'harmonize' ? 'active' : ''}`}
             onClick={() => setView('harmonize')}
+            role="tab"
+            aria-selected={view === 'harmonize'}
           >
             Harmonização
           </button>
         )}
-      </div>
+      </nav>
 
-      <div className="view-content">
+      {/* Conteúdo Principal */}
+      <main className="view-content">
         {view === 'drinks' && (
-          <div className="drinks-grid">
+          <section className="drinks-grid" aria-label="Lista de bebidas">
             {(mode === 'sommelier' ? allWines : activeWines).map(wine => (
-              <WineCard key={wine.id} wine={wine} mode={mode} />
+              <WineCard
+                key={wine.id}
+                wine={wine}
+                mode={mode}
+                isExpanded={expandedCardId === wine.id}
+                onToggle={toggleExpand}
+                onZoomToggle={toggleZoom}
+              />
             ))}
-          </div>
+          </section>
         )}
 
         {view === 'dishes' && (
-          <div className="dishes-grid">
+          <section className="dishes-grid" aria-label="Lista de pratos">
             {cardapio.map(dish => (
               <DishCard
                 key={dish.id}
@@ -101,18 +130,52 @@ function SommelierView() {
                 onSelect={() => handleDishSelect(dish)}
               />
             ))}
-          </div>
+          </section>
         )}
 
         {view === 'harmonize' && selectedDish && (
-          <Harmonization
-            dish={selectedDish}
-            suggestions={suggestions}
-            onBack={() => setView('dishes')}
-            mode={mode}
-          />
+          <section className="harmonization-section">
+            <button 
+              className="back-button" 
+              onClick={() => setView('dishes')}
+              aria-label="Voltar para Pratos"
+            >
+              ← Voltar
+            </button>
+            <Harmonization
+              dish={selectedDish}
+              suggestions={suggestions}
+              mode={mode}
+            />
+          </section>
         )}
-      </div>
+      </main>
+
+      {/* Overlay de Zoom */}
+      {zoomedBebida && (
+        <div 
+          className="zoom-overlay" 
+          onClick={() => setZoomedBebida(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Ampliação da imagem"
+        >
+          <div className="zoom-container" onClick={(e) => e.stopPropagation()}>
+            <button 
+              className="close-zoom-btn" 
+              onClick={() => setZoomedBebida(null)}
+              aria-label="Fechar zoom"
+            >
+              ×
+            </button>
+            <img 
+              src={zoomedBebida.imagemUrl || '/placeholder-wine.png'} 
+              alt={zoomedBebida.nome} 
+              className="zoomed-image"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

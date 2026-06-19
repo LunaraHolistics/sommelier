@@ -1,14 +1,15 @@
+/* Variáveis do Componente */
 .wine-card {
   background: white;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  height: 100%;
   position: relative;
+  height: auto;
 }
 
 .wine-card:hover {
@@ -16,10 +17,82 @@
   box-shadow: 0 8px 24px rgba(114, 47, 55, 0.2);
 }
 
-.wine-card.unavailable {
-  opacity: 0.6;
+.wine-card.expanded {
+  box-shadow: 0 8px 32px rgba(114, 47, 55, 0.25);
+  border: 2px solid var(--gold-color, #d4af37);
 }
 
+/* Preview do Card */
+.wine-preview {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+}
+
+.wine-thumb {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #f5f5f5;
+}
+
+.wine-preview-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.wine-name {
+  font-size: 1.1rem;
+  color: var(--text-primary, #333);
+  margin: 0 0 4px 0;
+  line-height: 1.3;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wine-winery {
+  color: var(--color-secondary, #722f37);
+  font-size: 0.9rem;
+  margin: 0 0 10px 0;
+  font-weight: 500;
+}
+
+.quick-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  background: #f0f0f0;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.tag.vintage {
+  background: var(--gold-color, #d4af37);
+  color: white;
+}
+
+.toggle-indicator {
+  font-size: 1.2rem;
+  color: #888;
+  transition: transform 0.3s ease;
+}
+
+.toggle-indicator.rotated {
+  transform: rotate(180deg);
+}
+
+/* Indicação de Indisponível */
 .unavailable-overlay {
   position: absolute;
   top: 10px;
@@ -38,123 +111,97 @@
   display: block;
 }
 
-.wine-info {
-  padding: 16px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+.wine-card.unavailable {
+  opacity: 0.6;
 }
 
-.wine-name {
-  font-size: 1.1rem;
-  color: #333;
-  margin: 0 0 4px 0;
-  line-height: 1.3;
-  font-weight: 600;
-}
-
-.wine-winery {
-  color: #722f37;
-  font-size: 0.9rem;
-  margin: 0 0 10px 0;
-  font-weight: 500;
-}
-
-.wine-details {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 10px;
-}
-
-.wine-type,
-.wine-country,
-.wine-vintage {
-  background: #f0f0f0;
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  color: #555;
-  font-weight: 500;
-}
-
-.wine-description {
-  color: #666;
-  font-size: 0.85rem;
-  line-height: 1.4;
-  margin: 0 0 12px 0;
-  flex: 1;
-}
-
-.wine-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 12px;
+/* Painel de Detalhes Expandidos */
+.wine-details-panel {
+  padding: 20px;
   border-top: 1px solid #eee;
-  margin-top: auto;
+  background: #fafafa;
+  position: relative;
 }
 
-.wine-price {
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: #722f37;
+.wine-card.expanded .wine-details-panel {
+  animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.wine-grape {
-  background: #722f37;
-  color: white;
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 600;
-}
-
-.stock-badge-container {
-  display: flex;
-  gap: 8px;
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid #eee;
-}
-
-.stock-badge {
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 0.7rem;
-  font-weight: 600;
-}
-
-.stock-badge.in-stock {
-  background: #d4edda;
-  color: #155724;
-}
-
-.stock-badge.out-of-stock {
-  background: #f8d7da;
-  color: #721c24;
-}
-
-.active-badge {
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 0.7rem;
-  font-weight: 600;
-}
-
-.active-badge.active {
-  background: #d1ecf1;
-  color: #0c5460;
-}
-
-.active-badge.inactive {
-  background: #f8d7da;
-  color: #721c24;
-}
-
-/* Responsivo */
-@media (max-width: 768px) {
-  .wine-card {
-    margin-bottom: 16px;
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
   }
+  to {
+    opacity: 1;
+    max-height: 1200px;
+  }
+}
+
+.close-details-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: white;
+  border: 1px solid #ddd;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-details-btn:hover {
+  background: #fee2e2;
+  color: #dc3545;
+  border-color: #fecaca;
+  transform: rotate(90deg);
+}
+
+/* Layout Interno do Card Expandido */
+.details-layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 24px;
+}
+
+/* Figura de Imagem Grande */
+.details-figure {
+  cursor: pointer;
+  position: relative;
+}
+
+.detail-large-img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.detail-large-img:hover {
+  transform: scale(1.05);
+}
+
+.zoom-hint {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  
+  /* Melhoria sugerida */
+  pointer-events: none; /* evita que o hint bloqueie cliques */
+  white-space: nowrap; /* evita quebra de linha indesejada */
+  z-index: 10; /* garante que fique acima de outros elementos */
 }
