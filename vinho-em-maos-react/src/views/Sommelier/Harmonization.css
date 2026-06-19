@@ -232,7 +232,7 @@
   .harmonization-header {
     flex-direction: column;
   }
-  
+
   .suggestions-grid {
     grid-template-columns: 1fr;
   }
@@ -250,5 +250,54 @@
 
   .filter-select {
     width: 100%;
+  }
+  /* ===== DISH META (proteínas, nível) ===== */
+  .dish-meta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+
+  /* ===== TIP TAGS (categorias ideais + rótulos) ===== */
+  .tip-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .tip-tag {
+    background: rgba(114, 47, 55, 0.15);
+    color: #722f37;
+    padding: 6px 14px;
+    border-radius: 16px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid rgba(114, 47, 55, 0.3);
+  }
+  .tip-tag.gold {
+    background: #d4af37;
+    color: #1a1a1a;
+    border-color: #b8941f;
+  }
+
+  /* ===== MATCH REASONS melhorados ===== */
+  .match-reasons {
+    margin-top: 8px;
+  }
+  .reason-tag {
+    background: linear-gradient(135deg, #722f37 0%, #5a252c 100%);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+  }
+
+  /* ===== SCORE LABEL melhorado ===== */
+  .score-label {
+    font-weight: 700;
+    letter-spacing: 0.5px;
   }
 }

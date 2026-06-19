@@ -1,79 +1,166 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import WineCard from '../../components/WineCard';
 import './Harmonization.css';
+
+/**
+ * Calcula um score de match (0-15) entre prato e vinho
+ * usando os dados de harmonizacaoInteligente do vinho
+ * e os metadados do prato (proteinas, tecnicasPreparo, saboresDominantes).
+ */
+const calculateMatch = (wine, dish) => {
+  let score = 0;
+  const reasons = [];
+  const hi = wine.harmonizacaoInteligente || {};
+
+  // Match por proteína
+  if (hi.proteinas && dish.proteinas) {
+    const match = hi.proteinas.some(p => dish.proteinas.includes(p));
+    if (match) {
+      score += 4;
+      reasons.push(`Proteína: ${hi.proteinas.find(p => dish.proteinas.includes(p))}`);
+    }
+  }
+
+  // Match por técnica de preparo
+  if (hi.tecnicasPreparo && dish.tecnicasPreparo) {
+    const match = hi.tecnicasPreparo.some(t => dish.tecnicasPreparo.includes(t));
+    if (match) {
+      score += 3;
+      reasons.push(`Técnica: ${hi.tecnicasPreparo.find(t => dish.tecnicasPreparo.includes(t))}`);
+    }
+  }
+
+  // Match por sabor dominante
+  if (hi.saboresPrato && dish.saboresDominantes) {
+    const match = hi.saboresPrato.some(s => dish.saboresDominantes.includes(s));
+    if (match) {
+      score += 3;
+      reasons.push(`Sabor: ${hi.saboresPrato.find(s => dish.saboresDominantes.includes(s))}`);
+    }
+  }
+
+  // Match por categoria
+  if (hi.categoriasPrato && dish.categoria) {
+    const match = hi.categoriasPrato.some(c =>
+      dish.categoria.toLowerCase().includes(c.toLowerCase()) ||
+      c.toLowerCase().includes(dish.categoria.toLowerCase())
+    );
+    if (match) {
+      score += 2;
+      reasons.push('Categoria compatível');
+    }
+  }
+
+  // Bônus se o prato está nas harmonizações principais do vinho
+  if (wine.harmonizacaoPrincipal?.some(h =>
+    h.toLowerCase().includes(dish.nome.toLowerCase().split(' ')[0]) ||
+    dish.nome.toLowerCase().includes(h.toLowerCase().split(' ')[0])
+  )) {
+    score += 3;
+    reasons.push('Recomendação do sommelier');
+  }
+
+  // Bônus por intensidade match
+  if (hi.intensidadeMatch === 'Alta') score += 1;
+
+  return { score, reasons };
+};
+
+const getScoreLevel = (score) => {
+  if (score >= 10) return 'Excelente';
+  if (score >= 7) return 'Muito Bom';
+  if (score >= 4) return 'Bom';
+  if (score >= 1) return 'Sugerido';
+  return 'Alternativa';
+};
+
+const getScoreColor = (score) => {
+  if (score >= 10) return '#4caf50';
+  if (score >= 7) return '#8bc34a';
+  if (score >= 4) return '#ffc107';
+  if (score >= 1) return '#ff9800';
+  return '#9e9e9e';
+};
 
 function Harmonization({ dish, suggestions, onBack, mode }) {
   const [filterTipo, setFilterTipo] = useState('all');
   const [filterDisponivel, setFilterDisponivel] = useState('all');
 
-  const getScoreLevel = (score) => {
-    if (score >= 10) return 'Excelente';
-    if (score >= 7) return 'Muito Bom';
-    if (score >= 4) return 'Bom';
-    return 'Sugerido';
-  };
+  // Enriquece as sugestões vindas do backend com score calculado no frontend
+  const enrichedSuggestions = useMemo(() => {
+    return suggestions.map(wine => {
+      const match = calculateMatch(wine, dish);
+      return {
+        ...wine,
+        score: match.score || wine.score || 0,
+        reasons: match.reasons.length > 0 ? match.reasons : (wine.reasons || []),
+      };
+    });
+  }, [suggestions, dish]);
 
-  const getScoreColor = (score) => {
-    if (score >= 10) return '#4caf50';
-    if (score >= 7) return '#8bc34a';
-    if (score >= 4) return '#ffc107';
-    return '#ff9800';
-  };
-
-  // Filtrar sugestões
-  const filteredSuggestions = suggestions.filter(wine => {
+  const filteredSuggestions = enrichedSuggestions.filter(wine => {
     const matchTipo = filterTipo === 'all' || wine.tipo?.toLowerCase() === filterTipo.toLowerCase();
-    const matchDisponivel = filterDisponivel === 'all' || 
-      (filterDisponivel === 'disponivel' ? (wine.active && wine.stock > 0) : (!wine.active || wine.stock <= 0));
+    const isAvailable = wine.active && wine.stock > 0;
+    const matchDisponivel =
+      filterDisponivel === 'all' ||
+      (filterDisponivel === 'disponivel' && isAvailable) ||
+      (filterDisponivel === 'indisponivel' && !isAvailable);
     return matchTipo && matchDisponivel;
   });
 
-  // Ordenar: disponíveis primeiro, depois por score
   const sortedSuggestions = [...filteredSuggestions].sort((a, b) => {
-    const aDisponivel = a.active && a.stock > 0;
-    const bDisponivel = b.active && b.stock > 0;
-    
-    if (aDisponivel && !bDisponivel) return -1;
-    if (!aDisponivel && bDisponivel) return 1;
-    
+    const aDisp = a.active && a.stock > 0;
+    const bDisp = b.active && b.stock > 0;
+    if (aDisp && !bDisp) return -1;
+    if (!aDisp && bDisp) return 1;
     return b.score - a.score;
   });
 
-  const tiposVinho = ['all', 'Tinto', 'Branco', 'Rosé', 'Espumante', 'Destilado'];
+  const tiposVinho = ['all', 'Tinto', 'Branco', 'Rosé', 'Espumante', 'Prosecco', 'Cidra'];
 
   return (
     <div className="harmonization-view">
       <div className="harmonization-header">
-        <button onClick={onBack} className="btn-back">
-          ← Voltar
-        </button>
+        <button onClick={onBack} className="btn-back">← Voltar</button>
         <div className="dish-info">
           <h2>{dish.nome}</h2>
           <p>{dish.descricao}</p>
-          {dish.nivelHarmonizacao && (
-            <span className="dish-level">
-              Nível de Harmonização: <strong>{dish.nivelHarmonizacao.toUpperCase()}</strong>
-            </span>
-          )}
+          <div className="dish-meta">
+            {dish.nivelHarmonizacao && (
+              <span className="dish-level">
+                Nível: <strong>{dish.nivelHarmonizacao.toUpperCase()}</strong>
+              </span>
+            )}
+            {dish.proteinas && dish.proteinas.length > 0 && (
+              <span className="dish-level">
+                🥩 {dish.proteinas.join(', ')}
+              </span>
+            )}
+          </div>
         </div>
       </div>
 
-      {dish.dicaSommelier && (
+      {/* Melhores Categorias */}
+      {dish.melhoresCategorias && dish.melhoresCategorias.length > 0 && (
         <div className="sommelier-tip">
-          <h4>💡 Dica do Sommelier</h4>
-          <p>{dish.dicaSommelier}</p>
+          <h4>💡 Categorias de Vinho Ideais</h4>
+          <div className="tip-tags">
+            {dish.melhoresCategorias.map((cat, i) => (
+              <span key={i} className="tip-tag">{cat}</span>
+            ))}
+          </div>
         </div>
       )}
 
       <div className="suggestions-section">
         <div className="suggestions-header">
           <h3>🍷 Vinhos Recomendados ({filteredSuggestions.length})</h3>
-          
+
           <div className="filters-container">
             <div className="filter-group">
               <label>Tipo:</label>
-              <select 
-                value={filterTipo} 
+              <select
+                value={filterTipo}
                 onChange={(e) => setFilterTipo(e.target.value)}
                 className="filter-select"
               >
@@ -87,8 +174,8 @@ function Harmonization({ dish, suggestions, onBack, mode }) {
 
             <div className="filter-group">
               <label>Disponibilidade:</label>
-              <select 
-                value={filterDisponivel} 
+              <select
+                value={filterDisponivel}
                 onChange={(e) => setFilterDisponivel(e.target.value)}
                 className="filter-select"
               >
@@ -99,7 +186,7 @@ function Harmonization({ dish, suggestions, onBack, mode }) {
             </div>
           </div>
         </div>
-        
+
         {sortedSuggestions.length === 0 ? (
           <p className="no-suggestions">
             Nenhum vinho encontrado com estes filtros.
@@ -108,39 +195,39 @@ function Harmonization({ dish, suggestions, onBack, mode }) {
           </p>
         ) : (
           <div className="suggestions-grid">
-            {sortedSuggestions.map((wine, index) => {
+            {sortedSuggestions.map((wine) => {
               const isAvailable = wine.active && wine.stock > 0;
-              
               return (
-                <div 
-                  key={wine.id} 
+                <div
+                  key={wine.id}
                   className={`suggestion-card ${!isAvailable ? 'unavailable' : ''}`}
                 >
                   <WineCard wine={wine} mode={mode} />
-                  
+
                   {!isAvailable && (
-                    <div className="unavailable-badge">
-                      ❌ Indisponível
-                    </div>
+                    <div className="unavailable-badge">❌ Indisponível</div>
                   )}
-                  
+
                   {wine.score > 0 && (
                     <div className="match-score">
-                      <span className="score-label" style={{ color: getScoreColor(wine.score) }}>
+                      <span
+                        className="score-label"
+                        style={{ color: getScoreColor(wine.score) }}
+                      >
                         {getScoreLevel(wine.score)} ({wine.score} pts)
                       </span>
                       <div className="score-bar">
                         <div
                           className="score-fill"
-                          style={{ 
-                            width: `${Math.min(wine.score * 8, 100)}%`,
-                            background: `linear-gradient(90deg, ${getScoreColor(wine.score)} 0%, #722f37 100%)`
+                          style={{
+                            width: `${Math.min((wine.score / 15) * 100, 100)}%`,
+                            background: `linear-gradient(90deg, ${getScoreColor(wine.score)} 0%, #722f37 100%)`,
                           }}
                         />
                       </div>
                       {wine.reasons && wine.reasons.length > 0 && (
                         <div className="match-reasons">
-                          {wine.reasons.slice(0, 3).map((reason, i) => (
+                          {wine.reasons.slice(0, 4).map((reason, i) => (
                             <span key={i} className="reason-tag">{reason}</span>
                           ))}
                         </div>
@@ -154,21 +241,13 @@ function Harmonization({ dish, suggestions, onBack, mode }) {
         )}
       </div>
 
+      {/* Melhores Rótulos específicos */}
       {dish.melhoresRotulos && dish.melhoresRotulos.length > 0 && (
         <div className="sommelier-tip">
           <h4>🏆 Rótulos Ideais para este Prato</h4>
-          <div className="tags-list" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '10px' }}>
+          <div className="tip-tags">
             {dish.melhoresRotulos.map((rotulo, i) => (
-              <span key={i} style={{
-                background: '#d4af37',
-                color: '#333',
-                padding: '6px 12px',
-                borderRadius: '16px',
-                fontSize: '0.85rem',
-                fontWeight: '600'
-              }}>
-                {rotulo}
-              </span>
+              <span key={i} className="tip-tag gold">{rotulo}</span>
             ))}
           </div>
         </div>

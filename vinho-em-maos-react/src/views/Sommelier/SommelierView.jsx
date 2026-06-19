@@ -12,17 +12,15 @@ function SommelierView() {
   const [selectedDish, setSelectedDish] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
   const [mode, setMode] = useState('client');
-  
-  // Estados para expansão e zoom
+
   const [expandedCardId, setExpandedCardId] = useState(null);
   const [zoomedBebida, setZoomedBebida] = useState(null);
 
   const handleDishSelect = async (dish) => {
     if (!dish || !dish.id) return;
-    
     setSelectedDish(dish);
     setView('harmonize');
-    
+
     try {
       const response = await api.harmonize(dish.id);
       setSuggestions(response.suggestions || []);
@@ -32,13 +30,11 @@ function SommelierView() {
     }
   };
 
-  // Expande ou fecha o card - mantém apenas um expandido por vez
   const toggleExpand = (id) => {
     setExpandedCardId((prev) => (prev === id ? null : id));
-    setZoomedBebida(null); // Fecha zoom ao trocar de card
+    setZoomedBebida(null);
   };
 
-  // Abre ou fecha o zoom de imagem
   const toggleZoom = (bebida) => {
     setZoomedBebida((prev) => (prev?.id === bebida.id ? null : bebida));
   };
@@ -52,7 +48,7 @@ function SommelierView() {
       <header className="sommelier-header">
         <h1>🍷 Vinho em Mãos</h1>
         <div className="header-actions">
-          <div className="mode-toggle">
+          <div className="mode-toggle" role="tablist" aria-label="Modo de visualização">
             <button
               className={`mode-btn ${mode === 'client' ? 'active' : ''}`}
               onClick={() => setMode('client')}
@@ -74,7 +70,7 @@ function SommelierView() {
         </div>
       </header>
 
-      {/* Tabs de Navegação */}
+      {/* Tabs */}
       <nav className="view-tabs" role="tablist">
         <button
           className={`tab-btn ${view === 'drinks' ? 'active' : ''}`}
@@ -104,7 +100,7 @@ function SommelierView() {
         )}
       </nav>
 
-      {/* Conteúdo Principal */}
+      {/* Conteúdo */}
       <main className="view-content">
         {view === 'drinks' && (
           <section className="drinks-grid" aria-label="Lista de bebidas">
@@ -135,8 +131,8 @@ function SommelierView() {
 
         {view === 'harmonize' && selectedDish && (
           <section className="harmonization-section">
-            <button 
-              className="back-button" 
+            <button
+              className="back-button"
               onClick={() => setView('dishes')}
               aria-label="Voltar para Pratos"
             >
@@ -151,27 +147,28 @@ function SommelierView() {
         )}
       </main>
 
-      {/* Overlay de Zoom */}
+      {/* Zoom */}
       {zoomedBebida && (
-        <div 
-          className="zoom-overlay" 
+        <div
+          className="zoom-overlay"
           onClick={() => setZoomedBebida(null)}
           role="dialog"
           aria-modal="true"
           aria-label="Ampliação da imagem"
         >
           <div className="zoom-container" onClick={(e) => e.stopPropagation()}>
-            <button 
-              className="close-zoom-btn" 
+            <button
+              className="close-zoom-btn"
               onClick={() => setZoomedBebida(null)}
               aria-label="Fechar zoom"
             >
               ×
             </button>
-            <img 
-              src={zoomedBebida.imagemUrl || '/placeholder-wine.png'} 
-              alt={zoomedBebida.nome} 
+            <img
+              src={zoomedBebida.imagemUrl || '/placeholder-wine.png'}
+              alt={zoomedBebida.nome}
               className="zoomed-image"
+              onError={(e) => { e.target.src = '/placeholder-wine.png'; }}
             />
           </div>
         </div>

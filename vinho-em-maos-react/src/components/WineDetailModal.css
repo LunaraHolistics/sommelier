@@ -662,4 +662,165 @@
     font-size: 0.85rem;
     padding: 12px;
   }
+  /* ===== NOVOS BADGES (vegano, orgânico, sem glúten) ===== */
+.badge-vegan,
+.badge-organic,
+.badge-gluten {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.badge-vegan {
+  background: rgba(76, 175, 80, 0.2);
+  color: #81c784;
+  border: 1px solid rgba(76, 175, 80, 0.5);
+}
+.badge-organic {
+  background: rgba(139, 195, 74, 0.2);
+  color: #aed581;
+  border: 1px solid rgba(139, 195, 74, 0.5);
+}
+.badge-gluten {
+  background: rgba(33, 150, 243, 0.2);
+  color: #64b5f6;
+  border: 1px solid rgba(33, 150, 243, 0.5);
+}
+
+/* ===== RATING + PREÇO ===== */
+.wine-rating-price {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 12px 0;
+}
+.rating-block {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.rating-stars {
+  color: #d4af37;
+  font-size: 1.3rem;
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+}
+.rating-number {
+  color: #d4af37;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.price-block {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 16px;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 8px;
+}
+.price-label {
+  font-size: 0.75rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.price-value {
+  color: #d4af37;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* ===== INTENSITY BANNER ===== */
+.intensity-banner {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(114, 47, 55, 0.1) 100%);
+  border-radius: 10px;
+  border-left: 4px solid #d4af37;
+  color: #e0e0e0;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+/* ===== KNOWLEDGE BADGE ===== */
+.knowledge-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #722f37 0%, #5a252c 100%);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+/* ===== FAQ ACCORDION ===== */
+.faq-item {
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.faq-item:hover {
+  border-color: rgba(212, 175, 55, 0.5);
+  background: rgba(26, 26, 26, 0.7);
+}
+.faq-question {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+  width: 100%;
+}
+.faq-question strong {
+  flex: 1;
+  color: #d4af37;
+}
+.faq-toggle {
+  color: #d4af37;
+  font-size: 1.5rem;
+  font-weight: 700;
+  min-width: 24px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+.faq-item.open .faq-toggle {
+  transform: rotate(90deg);
+}
+.faq-answer {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #b8b8b8;
+  line-height: 1.6;
+  animation: fadeIn 0.3s ease;
+}
+
+/* ===== SMART CATEGORY ÍCONES ===== */
+.smart-category h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ===== RESPONSIVIDADE ADICIONAL ===== */
+@media (max-width: 600px) {
+  .wine-rating-price {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .rating-stars {
+    font-size: 1.1rem;
+  }
+
+  .price-block {
+    width: 100%;
+    text-align: center;
+  }
+}
 }
