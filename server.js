@@ -10,13 +10,18 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // ─── Middlewares ───────────────────────────────────────────────
+// No topo do server.js, ajuste o CORS:
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:3000"],
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:3000",
+      "https://sommelier-na-fazenda.vercel.app", // <- URL da Vercel (vai criar)
+      /\.vercel\.app$/ // Permite qualquer preview da Vercel
+    ],
     credentials: true,
-  }),
-);
-app.use(express.json({ limit: "2mb" }));
+  })
+); app.use(express.json({ limit: "2mb" }));
 
 // ─── LowDB (dados dinâmicos) ──────────────────────────────────
 const dbFile = path.join(__dirname, "data", "db.json");

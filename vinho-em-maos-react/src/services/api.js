@@ -3,6 +3,7 @@ const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
 class ApiService {
   constructor() {
     this.adminToken = localStorage.getItem('adminToken') || '';
+    this.timeout = 30000; // 30 segundos
   }
 
   setAdminToken(token) {
@@ -25,16 +26,51 @@ class ApiService {
       ...options
     };
 
+    // Criar AbortController para timeout
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), this.timeout);
+    config.signal = controller.signal;
+
     try {
       const response = await fetch(url, config);
-      const data = await response.json();
+      clearTimeout(timeoutId);
+
+      // Verificar se a resposta é JSON
+      const contentType = response.headers.get('content-type');
+      let data;
+      
+      if (contentType && contentType.includes('application/json')) {
+        data = await response.json();
+      } else {
+        const text = await response.text();
+        throw new Error(`Resposta inválida do servidor: ${text.substring(0, 100)}`);
+      }
 
       if (!response.ok) {
-        throw new Error(data.error || 'Erro na requisição');
+        // Erros específicos de autenticação
+        if (response.status === 401) {
+          this.clearAdminToken();
+          throw new Error('Sessão expirada. Faça login novamente.');
+        }
+        
+        throw new Error(data.error || `Erro ${response.status}: ${response.statusText}`);
       }
 
       return data;
     } catch (error) {
+      clearTimeout(timeoutId);
+      
+      // Tratamento específico para diferentes tipos de erro
+      if (error.name === 'AbortError') {
+        console.error(`Timeout [${endpoint}]: Requisição demorou mais de ${this.timeout/1000}s`);
+        throw new Error('Tempo de resposta excedido. Tente novamente.');
+      }
+      
+      if (error.name === 'TypeError' && error.message.includes('fetch')) {
+        console.error(`Network Error [${endpoint}]:`, error);
+        throw new Error('Erro de conexão. Verifique sua internet e tente novamente.');
+      }
+
       console.error(`API Error [${endpoint}]:`, error);
       throw error;
     }
@@ -115,6 +151,42 @@ class ApiService {
 
   async getStatus() {
     return this.request('/status');
+  }
+
+  // Método para criar cardápio (CRUD)
+  async createCardapio(dishData) {
+    return this.request('/cardapio', {
+      method: 'POST',
+      body: JSON.stringify(dishData)
+    });
+  }
+
+  // Método para atualizar cardápio (CRUD)
+  async updateCardapio(id, dishData) {
+    return this.request(`/cardapio/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(dishData)
+    });
+  }
+
+  // Método para deletar cardápio (CRUD)
+  async deleteCardapio(id) {
+    return this.request(`/cardapio/${id}`, {
+      method: 'DELETE'
+    });
+  }
+
+  // Método para atualizar status do cardápio
+  async updateCardapioStatus(id, status) {
+    return this.request(`/cardapio/${id}/status`, {
+      method: 'PATCH',
+      body: JSON.stringify({ status })
+    });
+  }
+
+  // Método para obter tags
+  async getTags() {
+    return this.request('/tags');
   }
 }
 
