@@ -64,7 +64,7 @@ function WineCard({ wine, mode = 'client', isExpanded = false, onToggle, onZoomT
 
   return (
     <>
-      {/* Card no Grid (sempre visível) */}
+      {/* Card no Grid */}
       <article
         className={`wine-card ${!isAvailable ? 'unavailable' : ''}`}
         onClick={handleCardClick}
@@ -85,9 +85,7 @@ function WineCard({ wine, mode = 'client', isExpanded = false, onToggle, onZoomT
               {wine.safra && <span className="tag vintage">{wine.safra}</span>}
             </div>
           </div>
-          <span className="toggle-indicator" aria-hidden="true">
-            ▼
-          </span>
+          <span className="toggle-indicator" aria-hidden="true">▼</span>
         </div>
 
         {!isAvailable && (
@@ -97,7 +95,7 @@ function WineCard({ wine, mode = 'client', isExpanded = false, onToggle, onZoomT
         )}
       </article>
 
-      {/* Overlay + Painel Expandido (MODAL FIXO) */}
+      {/* Modal Expandido (position: fixed) */}
       {isExpanded && (
         <>
           <div className="expanded-overlay" onClick={handleOverlayClick} />

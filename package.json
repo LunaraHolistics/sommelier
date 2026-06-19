@@ -1,6 +1,6 @@
 {
   "name": "vinho-em-maos",
-  "version": "1.5.0",
+  "version": "1.5.5",
   "description": "Sistema profissional de sommelier e gestão para restaurantes",
   "main": "server.js",
   "type": "commonjs",

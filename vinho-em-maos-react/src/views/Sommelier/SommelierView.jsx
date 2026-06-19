@@ -12,21 +12,33 @@ function SommelierView() {
   const [selectedDish, setSelectedDish] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
   const [mode, setMode] = useState('client');
-
   const [expandedCardId, setExpandedCardId] = useState(null);
   const [zoomedBebida, setZoomedBebida] = useState(null);
+  const [loadingHarmonization, setLoadingHarmonization] = useState(false);
+  const [harmonizationError, setHarmonizationError] = useState(null);
 
   const handleDishSelect = async (dish) => {
     if (!dish || !dish.id) return;
+    
     setSelectedDish(dish);
     setView('harmonize');
+    setLoadingHarmonization(true);
+    setHarmonizationError(null);
+    setSuggestions([]);
 
     try {
       const response = await api.harmonize(dish.id);
       setSuggestions(response.suggestions || []);
+      
+      if (!response.suggestions || response.suggestions.length === 0) {
+        setHarmonizationError('Nenhuma harmonização encontrada para este prato.');
+      }
     } catch (err) {
       console.error('Falha ao buscar harmonizações:', err);
+      setHarmonizationError('Erro ao carregar harmonizações. Tente novamente.');
       setSuggestions([]);
+    } finally {
+      setLoadingHarmonization(false);
     }
   };
 
@@ -37,6 +49,13 @@ function SommelierView() {
 
   const toggleZoom = (bebida) => {
     setZoomedBebida((prev) => (prev?.id === bebida.id ? null : bebida));
+  };
+
+  const handleBackToDishes = () => {
+    setView('dishes');
+    setSelectedDish(null);
+    setSuggestions([]);
+    setHarmonizationError(null);
   };
 
   const allWines = catalogo;
@@ -53,6 +72,7 @@ function SommelierView() {
               className={`mode-btn ${mode === 'client' ? 'active' : ''}`}
               onClick={() => setMode('client')}
               aria-label="Modo Cliente"
+              aria-selected={mode === 'client'}
             >
               👤 Cliente
             </button>
@@ -60,6 +80,7 @@ function SommelierView() {
               className={`mode-btn ${mode === 'sommelier' ? 'active' : ''}`}
               onClick={() => setMode('sommelier')}
               aria-label="Modo Sommelier"
+              aria-selected={mode === 'sommelier'}
             >
               🎓 Sommelier
             </button>
@@ -78,7 +99,7 @@ function SommelierView() {
           role="tab"
           aria-selected={view === 'drinks'}
         >
-          Bebidas
+          🍷 Bebidas
         </button>
         <button
           className={`tab-btn ${view === 'dishes' ? 'active' : ''}`}
@@ -86,7 +107,7 @@ function SommelierView() {
           role="tab"
           aria-selected={view === 'dishes'}
         >
-          Pratos
+          ️ Pratos
         </button>
         {selectedDish && (
           <button
@@ -95,7 +116,7 @@ function SommelierView() {
             role="tab"
             aria-selected={view === 'harmonize'}
           >
-            Harmonização
+            🎯 Harmonização
           </button>
         )}
       </nav>
@@ -114,6 +135,11 @@ function SommelierView() {
                 onZoomToggle={toggleZoom}
               />
             ))}
+            {(mode === 'sommelier' ? allWines : activeWines).length === 0 && (
+              <div className="empty-state">
+                <p>Nenhuma bebida disponível no momento.</p>
+              </div>
+            )}
           </section>
         )}
 
@@ -126,6 +152,11 @@ function SommelierView() {
                 onSelect={() => handleDishSelect(dish)}
               />
             ))}
+            {cardapio.length === 0 && (
+              <div className="empty-state">
+                <p>Nenhum prato disponível no momento.</p>
+              </div>
+            )}
           </section>
         )}
 
@@ -133,16 +164,35 @@ function SommelierView() {
           <section className="harmonization-section">
             <button
               className="back-button"
-              onClick={() => setView('dishes')}
+              onClick={handleBackToDishes}
               aria-label="Voltar para Pratos"
             >
-              ← Voltar
+              ← Voltar para Pratos
             </button>
-            <Harmonization
-              dish={selectedDish}
-              suggestions={suggestions}
-              mode={mode}
-            />
+
+            {loadingHarmonization && (
+              <div className="loading-state" role="status" aria-live="polite">
+                <div className="spinner"></div>
+                <p>Buscando harmonizações perfeitas para {selectedDish.nome}...</p>
+              </div>
+            )}
+
+            {harmonizationError && !loadingHarmonization && (
+              <div className="error-state" role="alert">
+                <p>⚠️ {harmonizationError}</p>
+                <button onClick={() => handleDishSelect(selectedDish)} className="retry-btn">
+                  Tentar novamente
+                </button>
+              </div>
+            )}
+
+            {!loadingHarmonization && !harmonizationError && (
+              <Harmonization
+                dish={selectedDish}
+                suggestions={suggestions}
+                mode={mode}
+              />
+            )}
           </section>
         )}
       </main>

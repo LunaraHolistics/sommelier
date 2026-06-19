@@ -50,7 +50,7 @@
   line-height: 1.5;
 }
 
-/* Meta do prato (nível + proteínas) */
+/* Meta do prato */
 .dish-meta {
   display: flex;
   gap: 10px;
@@ -108,12 +108,52 @@
   font-weight: 600;
   border: 1px solid rgba(114, 47, 55, 0.3);
   white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.tip-tag:hover {
+  background: rgba(114, 47, 55, 0.2);
+  border-color: #722f37;
+  transform: translateY(-2px);
+}
+
+.tip-tag.active {
+  background: #722f37;
+  color: white;
+  border-color: #722f37;
+  box-shadow: 0 4px 12px rgba(114, 47, 55, 0.3);
 }
 
 .tip-tag.gold {
   background: #d4af37;
   color: #1a1a1a;
   border-color: #b8941f;
+}
+
+.filter-hint {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: #888;
+  margin-left: 8px;
+}
+
+.clear-filter-btn {
+  margin-top: 12px;
+  padding: 6px 16px;
+  background: transparent;
+  border: 1px solid #722f37;
+  color: #722f37;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.clear-filter-btn:hover {
+  background: #722f37;
+  color: white;
 }
 
 /* Seção de Sugestões */
@@ -137,7 +177,7 @@
   gap: 10px;
 }
 
-/* Filtros com contraste adequado */
+/* Filtros */
 .filters-container {
   display: flex;
   gap: 20px;
@@ -181,7 +221,7 @@
   border-color: #722f37;
 }
 
-/* Grid de Sugestões - cards mais largos */
+/* Grid de Sugestões */
 .suggestions-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -251,7 +291,6 @@
   transition: width 0.5s;
 }
 
-/* Reasons expansíveis */
 .match-reasons {
   display: flex;
   flex-wrap: wrap;
@@ -268,23 +307,6 @@
   font-weight: 500;
 }
 
-.toggle-reasons-btn {
-  background: transparent;
-  border: 1px solid #722f37;
-  color: #722f37;
-  padding: 3px 8px;
-  border-radius: 10px;
-  font-size: 0.7rem;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.2s;
-}
-
-.toggle-reasons-btn:hover {
-  background: #722f37;
-  color: white;
-}
-
 .no-suggestions {
   text-align: center;
   color: #666;
@@ -292,31 +314,78 @@
   font-style: italic;
 }
 
+/* Zoom Overlay */
+.zoom-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  cursor: pointer;
+}
+
+.zoom-container {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.close-zoom-btn {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.close-zoom-btn:hover {
+  background: white;
+  color: #1a1a1a;
+  transform: rotate(90deg);
+}
+
+.zoomed-image {
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
 /* ===== RESPONSIVIDADE ===== */
 @media (max-width: 768px) {
   .harmonization-header {
     flex-direction: column;
   }
-
+  
   .suggestions-grid {
     grid-template-columns: 1fr;
   }
-
+  
   .filters-container {
     flex-direction: column;
     gap: 12px;
   }
-
+  
   .filter-group {
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
   }
-
+  
   .filter-select {
     width: 100%;
   }
-
+  
   .dish-info h2 {
     font-size: 1.4rem;
   }
@@ -326,61 +395,4 @@
   .suggestions-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
-  /* Categorias filtráveis */
-.filter-hint {
-  font-size: 0.85rem;
-  font-weight: 400;
-  color: #888;
-  margin-left: 8px;
-}
-
-.tip-tag {
-  background: rgba(114, 47, 55, 0.1);
-  color: #722f37;
-  padding: 6px 14px;
-  border-radius: 16px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  border: 1px solid rgba(114, 47, 55, 0.3);
-  white-space: nowrap;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.tip-tag:hover {
-  background: rgba(114, 47, 55, 0.2);
-  border-color: #722f37;
-  transform: translateY(-2px);
-}
-
-.tip-tag.active {
-  background: #722f37;
-  color: white;
-  border-color: #722f37;
-  box-shadow: 0 4px 12px rgba(114, 47, 55, 0.3);
-}
-
-.clear-filter-btn {
-  margin-top: 12px;
-  padding: 6px 16px;
-  background: transparent;
-  border: 1px solid #722f37;
-  color: #722f37;
-  border-radius: 16px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.clear-filter-btn:hover {
-  background: #722f37;
-  color: white;
-}
-
-/* Match reasons no card expandido */
-.suggestion-card.expanded .match-score {
-  display: none;
-}
 }
