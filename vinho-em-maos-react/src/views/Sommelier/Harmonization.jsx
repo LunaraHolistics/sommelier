@@ -3,9 +3,8 @@ import WineCard from '../../components/WineCard';
 import './Harmonization.css';
 
 /**
- * Calcula um score de match (0-15) entre prato e vinho
- * usando os dados de harmonizacaoInteligente do vinho
- * e os metadados do prato (proteinas, tecnicasPreparo, saboresDominantes).
+ * Calcula score de match (0-15) entre prato e vinho
+ * usando harmonizacaoInteligente do vinho + metadados do prato
  */
 const calculateMatch = (wine, dish) => {
   let score = 0;
@@ -51,7 +50,7 @@ const calculateMatch = (wine, dish) => {
     }
   }
 
-  // Bônus se o prato está nas harmonizações principais do vinho
+  // Bônus se o prato está nas harmonizações principais
   if (wine.harmonizacaoPrincipal?.some(h =>
     h.toLowerCase().includes(dish.nome.toLowerCase().split(' ')[0]) ||
     dish.nome.toLowerCase().includes(h.toLowerCase().split(' ')[0])
@@ -85,8 +84,9 @@ const getScoreColor = (score) => {
 function Harmonization({ dish, suggestions, onBack, mode }) {
   const [filterTipo, setFilterTipo] = useState('all');
   const [filterDisponivel, setFilterDisponivel] = useState('all');
+  const [expandedReasons, setExpandedReasons] = useState({});
 
-  // Enriquece as sugestões vindas do backend com score calculado no frontend
+  // Enriquece sugestões com score calculado
   const enrichedSuggestions = useMemo(() => {
     return suggestions.map(wine => {
       const match = calculateMatch(wine, dish);
@@ -115,6 +115,10 @@ function Harmonization({ dish, suggestions, onBack, mode }) {
     if (!aDisp && bDisp) return 1;
     return b.score - a.score;
   });
+
+  const toggleReasons = (id) => {
+    setExpandedReasons(prev => ({ ...prev, [id]: !prev[id] }));
+  };
 
   const tiposVinho = ['all', 'Tinto', 'Branco', 'Rosé', 'Espumante', 'Prosecco', 'Cidra'];
 
@@ -197,6 +201,9 @@ function Harmonization({ dish, suggestions, onBack, mode }) {
           <div className="suggestions-grid">
             {sortedSuggestions.map((wine) => {
               const isAvailable = wine.active && wine.stock > 0;
+              const isExpanded = expandedReasons[wine.id];
+              const displayedReasons = isExpanded ? wine.reasons : wine.reasons.slice(0, 3);
+
               return (
                 <div
                   key={wine.id}
@@ -227,9 +234,20 @@ function Harmonization({ dish, suggestions, onBack, mode }) {
                       </div>
                       {wine.reasons && wine.reasons.length > 0 && (
                         <div className="match-reasons">
-                          {wine.reasons.slice(0, 4).map((reason, i) => (
+                          {displayedReasons.map((reason, i) => (
                             <span key={i} className="reason-tag">{reason}</span>
                           ))}
+                          {wine.reasons.length > 3 && (
+                            <button
+                              className="toggle-reasons-btn"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                toggleReasons(wine.id);
+                              }}
+                            >
+                              {isExpanded ? 'Ver menos' : `+${wine.reasons.length - 3} mais`}
+                            </button>
+                          )}
                         </div>
                       )}
                     </div>
@@ -241,7 +259,7 @@ function Harmonization({ dish, suggestions, onBack, mode }) {
         )}
       </div>
 
-      {/* Melhores Rótulos específicos */}
+      {/* Melhores Rótulos */}
       {dish.melhoresRotulos && dish.melhoresRotulos.length > 0 && (
         <div className="sommelier-tip">
           <h4>🏆 Rótulos Ideais para este Prato</h4>

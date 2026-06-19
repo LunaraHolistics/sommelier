@@ -3,6 +3,8 @@
   flex-direction: column;
   gap: 24px;
   padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .harmonization-header {
@@ -48,6 +50,14 @@
   line-height: 1.5;
 }
 
+/* Meta do prato (nível + proteínas) */
+.dish-meta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
 .dish-level {
   display: inline-block;
   background: #f0f0f0;
@@ -57,6 +67,7 @@
   color: #555;
 }
 
+/* Dica do Sommelier */
 .sommelier-tip {
   background: linear-gradient(135deg, #fff9e6 0%, #fff 100%);
   padding: 20px;
@@ -66,7 +77,7 @@
 }
 
 .sommelier-tip h4 {
-  margin: 0 0 10px 0;
+  margin: 0 0 12px 0;
   font-size: 1.1rem;
   color: #722f37;
   display: flex;
@@ -80,6 +91,32 @@
   color: #555;
 }
 
+/* Tags com quebra de linha */
+.tip-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.tip-tag {
+  background: rgba(114, 47, 55, 0.1);
+  color: #722f37;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid rgba(114, 47, 55, 0.3);
+  white-space: nowrap;
+}
+
+.tip-tag.gold {
+  background: #d4af37;
+  color: #1a1a1a;
+  border-color: #b8941f;
+}
+
+/* Seção de Sugestões */
 .suggestions-section {
   background: white;
   padding: 24px;
@@ -100,34 +137,41 @@
   gap: 10px;
 }
 
+/* Filtros com contraste adequado */
 .filters-container {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
   margin-bottom: 20px;
-  padding: 15px;
+  padding: 16px;
   background: #f8f9fa;
   border-radius: 8px;
+  border: 1px solid #e0e0e0;
 }
 
 .filter-group {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex: 1;
+  min-width: 200px;
 }
 
 .filter-group label {
   font-weight: 600;
-  color: #555;
+  color: #333;
   font-size: 0.9rem;
+  white-space: nowrap;
 }
 
 .filter-select {
-  padding: 8px 12px;
+  flex: 1;
+  padding: 10px 12px;
   border: 2px solid #ddd;
   border-radius: 6px;
   font-size: 0.9rem;
   background: white;
+  color: #333;
   cursor: pointer;
   transition: border-color 0.3s;
 }
@@ -137,16 +181,10 @@
   border-color: #722f37;
 }
 
-.no-suggestions {
-  text-align: center;
-  color: #666;
-  padding: 40px;
-  font-style: italic;
-}
-
+/* Grid de Sugestões - cards mais largos */
 .suggestions-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 20px;
 }
 
@@ -184,8 +222,9 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Match Score */
 .match-score {
-  padding: 12px 16px;
+  padding: 14px 16px;
   background: white;
   border-top: 2px solid #d4af37;
 }
@@ -196,7 +235,7 @@
   margin-bottom: 8px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .score-bar {
@@ -212,10 +251,12 @@
   transition: width 0.5s;
 }
 
+/* Reasons expansíveis */
 .match-reasons {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  align-items: center;
 }
 
 .reason-tag {
@@ -223,11 +264,35 @@
   color: white;
   padding: 4px 10px;
   border-radius: 10px;
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 500;
 }
 
-/* Responsivo */
+.toggle-reasons-btn {
+  background: transparent;
+  border: 1px solid #722f37;
+  color: #722f37;
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.toggle-reasons-btn:hover {
+  background: #722f37;
+  color: white;
+}
+
+.no-suggestions {
+  text-align: center;
+  color: #666;
+  padding: 40px;
+  font-style: italic;
+}
+
+/* ===== RESPONSIVIDADE ===== */
 @media (max-width: 768px) {
   .harmonization-header {
     flex-direction: column;
@@ -239,7 +304,7 @@
 
   .filters-container {
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
   }
 
   .filter-group {
@@ -251,53 +316,14 @@
   .filter-select {
     width: 100%;
   }
-  /* ===== DISH META (proteínas, nível) ===== */
-  .dish-meta {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 12px;
-  }
 
-  /* ===== TIP TAGS (categorias ideais + rótulos) ===== */
-  .tip-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 10px;
+  .dish-info h2 {
+    font-size: 1.4rem;
   }
-  .tip-tag {
-    background: rgba(114, 47, 55, 0.15);
-    color: #722f37;
-    padding: 6px 14px;
-    border-radius: 16px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    border: 1px solid rgba(114, 47, 55, 0.3);
-  }
-  .tip-tag.gold {
-    background: #d4af37;
-    color: #1a1a1a;
-    border-color: #b8941f;
-  }
+}
 
-  /* ===== MATCH REASONS melhorados ===== */
-  .match-reasons {
-    margin-top: 8px;
-  }
-  .reason-tag {
-    background: linear-gradient(135deg, #722f37 0%, #5a252c 100%);
-    color: #fff;
-    padding: 4px 10px;
-    border-radius: 10px;
-    font-size: 0.72rem;
-    font-weight: 500;
-    border: 1px solid rgba(212, 175, 55, 0.3);
-  }
-
-  /* ===== SCORE LABEL melhorado ===== */
-  .score-label {
-    font-weight: 700;
-    letter-spacing: 0.5px;
+@media (min-width: 769px) and (max-width: 1024px) {
+  .suggestions-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
