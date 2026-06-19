@@ -779,6 +779,17 @@ app.use((err, req, res, next) => {
   });
 });
 
+// ==================== SERVE FRONTEND BUILD ====================
+const path = require('path');
+
+// Serve arquivos estáticos do React build
+app.use(express.static(path.join(__dirname, 'vinho-em-maos-react', 'dist')));
+
+// Fallback para SPA (qualquer rota não-API vai para index.html)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'vinho-em-maos-react', 'dist', 'index.html'));
+});
+
 // ─── Start ─────────────────────────────────────────────────────
 app.listen(PORT, () => {
   console.log(`🍷 Sommelier v1.6 rodando em http://localhost:${PORT}`);
