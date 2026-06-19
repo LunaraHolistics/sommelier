@@ -1,4 +1,26 @@
 node_modules/
 .env
 *.log
+.DS_Store# Dependências
+node_modules/
+*/node_modules/
+vinho-em-maos-react/node_modules/
+
+# Build
+dist/
+vinho-em-maos-react/dist/
+
+# Lock files (opcional, mas recomendado para subprojetos)
+# package-lock.json
+
+# Environment
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+
+# OS
 .DS_Store
+Thumbs.db
