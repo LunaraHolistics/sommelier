@@ -50,7 +50,7 @@ function ManagerDashboard() {
     <div className="manager-dashboard">
       <header className="dashboard-header">
         <div className="header-left">
-          <h1>🍷 Vinho em Mãos - Gerente</h1>
+          <h1>🍷 Sommelier - Gerente</h1>
         </div>
         <div className="header-right">
           <div className="pin-display">

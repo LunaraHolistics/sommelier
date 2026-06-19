@@ -15,7 +15,7 @@ function Header({ userRole, onLogout, onModeChange, currentMode }) {
       <div className="header-left">
         <div className="logo">
           <span className="logo-icon">🍷</span>
-          <span className="logo-text">Vinho em Mãos</span>
+          <span className="logo-text">Sommelier</span>
         </div>
       </div>
 

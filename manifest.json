@@ -1,6 +1,6 @@
 {
-  "name": "Vinho em Mãos - Gestão de Cartas",
-  "short_name": "Vinho em Mãos",
+  "name": "Sommelier - Gestão de Cartas",
+  "short_name": "Sommelier",
   "description": "Sistema de gestão de cartas de vinhos para restaurantes",
   "start_url": "/",
   "scope": "/",

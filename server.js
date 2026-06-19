@@ -1,4 +1,4 @@
-// server.js - Vinho em Mãos v1.6 (CRUD Completo + Harmonização Avançada)
+// server.js - Sommelier v1.6 (CRUD Completo + Harmonização Avançada)
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
@@ -931,7 +931,7 @@ app.use((err, req, res, next) => {
 
 // ─── Start ─────────────────────────────────────────────────────
 app.listen(PORT, () => {
-  console.log(`🍷 Vinho em Mãos v1.6 rodando em http://localhost:${PORT}`);
+  console.log(`🍷 Sommelier v1.6 rodando em http://localhost:${PORT}`);
 });
 
 module.exports = app;

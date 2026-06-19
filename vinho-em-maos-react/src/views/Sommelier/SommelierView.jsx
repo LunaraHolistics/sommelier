@@ -38,7 +38,7 @@ function SommelierView() {
   return (
     <div className="sommelier-view">
       <header className="sommelier-header">
-        <h1>🍷 Vinho em Mãos</h1>
+        <h1>🍷 Sommelier</h1>
         <div className="header-actions">
           <div className="mode-toggle">
             <button

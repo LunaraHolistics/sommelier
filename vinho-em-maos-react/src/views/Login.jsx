@@ -39,7 +39,7 @@ function Login() {
     <div className="login-container">
       <div className="login-card">
         <div className="login-header">
-          <h1>🍷 Vinho em Mãos</h1>
+          <h1>🍷 Sommelier</h1>
           <p>Sistema Profissional de Sommelier</p>
         </div>
 
