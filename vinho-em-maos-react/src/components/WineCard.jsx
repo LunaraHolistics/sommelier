@@ -3,7 +3,14 @@ import WineImage from './WineImage';
 import WineDetailModal from './WineDetailModal';
 import './WineCard.css';
 
-function WineCard({ wine, mode = 'client', isExpanded = false, onToggle, onZoomToggle }) {
+function WineCard({ 
+  wine, 
+  mode = 'client', 
+  isExpanded = false, 
+  onToggle, 
+  onZoomToggle,
+  onClick // ← NOVA PROP OPCIONAL
+}) {
   const [showModal, setShowModal] = useState(false);
 
   const formatPrice = (price) => {
@@ -39,7 +46,14 @@ function WineCard({ wine, mode = 'client', isExpanded = false, onToggle, onZoomT
 
   const handleCardClick = (e) => {
     e.stopPropagation();
-    onToggle?.(wine.id);
+    
+    // Se onClick foi passado, usar ele (Harmonization)
+    // Senão, usar onToggle (SommelierView - página de bebidas)
+    if (onClick) {
+      onClick(wine);
+    } else {
+      onToggle?.(wine.id);
+    }
   };
 
   const handleImageClick = (e) => {
@@ -64,7 +78,7 @@ function WineCard({ wine, mode = 'client', isExpanded = false, onToggle, onZoomT
 
   return (
     <>
-      {/* Card no Grid */}
+      {/* Card no Grid (sempre visível) */}
       <article
         className={`wine-card ${!isAvailable ? 'unavailable' : ''}`}
         onClick={handleCardClick}
@@ -85,7 +99,9 @@ function WineCard({ wine, mode = 'client', isExpanded = false, onToggle, onZoomT
               {wine.safra && <span className="tag vintage">{wine.safra}</span>}
             </div>
           </div>
-          <span className="toggle-indicator" aria-hidden="true">▼</span>
+          <span className="toggle-indicator" aria-hidden="true">
+            ▼
+          </span>
         </div>
 
         {!isAvailable && (
@@ -95,7 +111,7 @@ function WineCard({ wine, mode = 'client', isExpanded = false, onToggle, onZoomT
         )}
       </article>
 
-      {/* Modal Expandido (position: fixed) */}
+      {/* Overlay + Painel Expandido (MODAL FIXO) */}
       {isExpanded && (
         <>
           <div className="expanded-overlay" onClick={handleOverlayClick} />
