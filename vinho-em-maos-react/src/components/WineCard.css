@@ -23,45 +23,11 @@
   outline-offset: 2px;
 }
 
-/* ===== CARD EXPANDIDO (Modal-like) ===== */
-.wine-card.expanded {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  max-width: 720px;
-  max-height: 90vh;
-  overflow-y: auto;
-  z-index: 1000;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-  border: 2px solid var(--gold-color, #d4af37);
-  animation: expandIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes expandIn {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.85);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
-}
-
-/* Overlay escuro atrás do card expandido */
-.expanded-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.7);
-  z-index: 999;
-  animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+/* Card quando está com modal aberto (fica escurecido no grid) */
+.wine-card.expanded-trigger {
+  opacity: 0.3;
+  pointer-events: none;
+  transform: scale(0.95);
 }
 
 /* Preview do Card */
@@ -155,14 +121,49 @@
   opacity: 0.6;
 }
 
-/* Painel de Detalhes Expandidos */
-.wine-details-panel {
-  padding: 24px;
-  background: #fafafa;
-  position: relative;
-  border-top: 1px solid #eee;
+/* ===== MODAL EXPANDIDO (separado do card) ===== */
+.expanded-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+  animation: fadeIn 0.3s ease;
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.expanded-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 720px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  animation: modalSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid var(--gold-color, #d4af37);
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Botão Fechar */
 .close-details-btn {
   position: absolute;
   top: 12px;
@@ -189,11 +190,12 @@
   transform: rotate(90deg);
 }
 
-/* Layout Interno do Card Expandido */
+/* Layout Interno do Modal */
 .details-layout {
   display: grid;
   grid-template-columns: 200px 1fr;
   gap: 24px;
+  padding: 24px;
   align-items: start;
 }
 
@@ -353,7 +355,7 @@
 
 /* ===== RESPONSIVIDADE ===== */
 @media (max-width: 768px) {
-  .wine-card.expanded {
+  .expanded-modal {
     width: 95%;
     max-height: 95vh;
   }
@@ -361,6 +363,7 @@
   .details-layout {
     grid-template-columns: 1fr;
     gap: 16px;
+    padding: 16px;
   }
 
   .details-figure {
@@ -378,7 +381,7 @@
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-  .wine-card.expanded {
+  .expanded-modal {
     width: 85%;
     max-width: 650px;
   }

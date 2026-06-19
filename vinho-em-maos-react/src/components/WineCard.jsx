@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import WineImage from './WineImage';
 import WineDetailModal from './WineDetailModal';
 import './WineCard.css';
 
 function WineCard({ wine, mode = 'client', isExpanded = false, onToggle, onZoomToggle }) {
   const [showModal, setShowModal] = useState(false);
+  const [showExpanded, setShowExpanded] = useState(false);
+  const cardRef = useRef(null);
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('pt-BR', {
@@ -15,17 +17,20 @@ function WineCard({ wine, mode = 'client', isExpanded = false, onToggle, onZoomT
 
   const isAvailable = wine.active && wine.stock > 0;
 
-  // Fechar com ESC quando expandido
+  // Fechar com ESC
   useEffect(() => {
     if (!isExpanded) return;
     const handleEsc = (e) => {
-      if (e.key === 'Escape') onToggle?.(wine.id);
+      if (e.key === 'Escape') {
+        setShowExpanded(false);
+        onToggle?.(wine.id);
+      }
     };
     window.addEventListener('keydown', handleEsc);
     return () => window.removeEventListener('keydown', handleEsc);
   }, [isExpanded, onToggle, wine.id]);
 
-  // Bloquear scroll do body quando expandido
+  // Bloquear scroll quando expandido
   useEffect(() => {
     if (isExpanded) {
       document.body.style.overflow = 'hidden';
@@ -33,6 +38,17 @@ function WineCard({ wine, mode = 'client', isExpanded = false, onToggle, onZoomT
       document.body.style.overflow = 'unset';
     }
     return () => { document.body.style.overflow = 'unset'; };
+  }, [isExpanded]);
+
+  // Sincronizar estado local com prop
+  useEffect(() => {
+    if (isExpanded) {
+      // Pequeno delay para permitir que o modal apareça suavemente
+      const timer = setTimeout(() => setShowExpanded(true), 50);
+      return () => clearTimeout(timer);
+    } else {
+      setShowExpanded(false);
+    }
   }, [isExpanded]);
 
   const handleClick = (e) => {
@@ -47,7 +63,8 @@ function WineCard({ wine, mode = 'client', isExpanded = false, onToggle, onZoomT
 
   const handleClose = (e) => {
     e.stopPropagation();
-    onToggle?.(wine.id);
+    setShowExpanded(false);
+    setTimeout(() => onToggle?.(wine.id), 300); // Aguarda animação
   };
 
   const handleModalOpen = (e) => {
@@ -57,8 +74,10 @@ function WineCard({ wine, mode = 'client', isExpanded = false, onToggle, onZoomT
 
   return (
     <>
+      {/* Card no Grid (sempre visível) */}
       <article
-        className={`wine-card ${isExpanded ? 'expanded' : ''} ${!isAvailable ? 'unavailable' : ''}`}
+        ref={cardRef}
+        className={`wine-card ${isExpanded ? 'expanded-trigger' : ''} ${!isAvailable ? 'unavailable' : ''}`}
         onClick={handleClick}
         aria-expanded={isExpanded}
         role="button"
@@ -79,7 +98,7 @@ function WineCard({ wine, mode = 'client', isExpanded = false, onToggle, onZoomT
               {wine.safra && <span className="tag vintage">{wine.safra}</span>}
             </div>
           </div>
-          <span className={`toggle-indicator ${isExpanded ? 'rotated' : ''}`} aria-hidden="true">
+          <span className="toggle-indicator" aria-hidden="true">
             {isExpanded ? '✕' : '▼'}
           </span>
         </div>
@@ -87,13 +106,19 @@ function WineCard({ wine, mode = 'client', isExpanded = false, onToggle, onZoomT
         {/* Badge de Indisponível */}
         {!isAvailable && !isExpanded && (
           <div className="unavailable-overlay" aria-label="Produto indisponível">
-            ❌ Indisponível
+             Indisponível
           </div>
         )}
+      </article>
 
-        {/* Painel de Detalhes Expandidos */}
-        {isExpanded && (
-          <aside className="wine-details-panel" onClick={(e) => e.stopPropagation()}>
+      {/* Modal de Detalhes Expandidos (separado do card) */}
+      {showExpanded && (
+        <>
+          {/* Overlay escuro */}
+          <div className="expanded-overlay" onClick={handleClose} aria-hidden="true" />
+          
+          {/* Modal de detalhes */}
+          <aside className="expanded-modal" onClick={(e) => e.stopPropagation()}>
             <button
               className="close-details-btn"
               onClick={handleClose}
@@ -111,7 +136,7 @@ function WineCard({ wine, mode = 'client', isExpanded = false, onToggle, onZoomT
                   className="detail-large-img"
                   onError={(e) => { e.target.src = '/placeholder-wine.png'; }}
                 />
-                <span className="zoom-hint"> Clique para ampliar</span>
+                <span className="zoom-hint">🔍 Clique para ampliar</span>
               </figure>
 
               {/* Informações Detalhadas */}
@@ -171,15 +196,10 @@ function WineCard({ wine, mode = 'client', isExpanded = false, onToggle, onZoomT
               </div>
             </div>
           </aside>
-        )}
-      </article>
-
-      {/* Overlay escuro quando expandido */}
-      {isExpanded && (
-        <div className="expanded-overlay" onClick={handleClose} aria-hidden="true" />
+        </>
       )}
 
-      {/* Modal de Detalhes Completo */}
+      {/* Modal de Detalhes Completo (WineDetailModal) */}
       {showModal && (
         <WineDetailModal
           wine={wine}
