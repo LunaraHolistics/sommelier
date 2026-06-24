@@ -2,7 +2,6 @@ import React, { useState, useContext, useMemo } from 'react';
 import { AppContext } from '../../contexts/AppContext';
 import WineCard from '../../components/WineCard';
 import DishCard from '../../components/DishCard';
-import SearchBar from '../../components/SearchBar';
 import Harmonization from './Harmonization';
 import api from '../../services/api';
 import './SommelierView.css';
@@ -15,13 +14,13 @@ function SommelierView() {
   const [mode, setMode] = useState('client');
   const [expandedCardId, setExpandedCardId] = useState(null);
   const [zoomedBebida, setZoomedBebida] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(''); // ← NOVO: Estado para busca
 
   const handleDishSelect = async (dish) => {
     if (!dish || !dish.id) return;
     setSelectedDish(dish);
     setView('harmonize');
-    setSearchTerm('');
+    setSearchTerm(''); // Limpa busca ao entrar em harmonização
     try {
       const response = await api.harmonize(dish.id);
       setSuggestions(response.suggestions || []);
@@ -43,7 +42,7 @@ function SommelierView() {
   const allWines = catalogo;
   const activeWines = catalogo.filter(w => w.active && w.stock > 0);
 
-  // Filtra bebidas por busca
+  // NOVO: Filtrar bebidas por busca
   const filteredWines = useMemo(() => {
     const baseList = mode === 'sommelier' ? allWines : activeWines;
     
@@ -59,20 +58,7 @@ function SommelierView() {
     );
   }, [searchTerm, allWines, activeWines, mode]);
 
-  // Ordena: disponíveis primeiro (alfabética), depois indisponíveis (alfabética)
-  const sortedWines = useMemo(() => {
-    const available = filteredWines
-      .filter(w => w.active && w.stock > 0)
-      .sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
-    
-    const unavailable = filteredWines
-      .filter(w => !w.active || w.stock <= 0)
-      .sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
-    
-    return [...available, ...unavailable];
-  }, [filteredWines]);
-
-  // Filtra pratos por busca
+  // NOVO: Filtrar pratos por busca
   const filteredDishes = useMemo(() => {
     if (!searchTerm.trim()) return cardapio;
     
@@ -84,20 +70,6 @@ function SommelierView() {
       dish.tags?.some(t => t.toLowerCase().includes(term))
     );
   }, [searchTerm, cardapio]);
-
-  // Ordena pratos: ativos primeiro (alfabética)
-  const sortedDishes = useMemo(() => {
-    return [...filteredDishes].sort((a, b) => {
-      const aActive = a.status === 'ativo';
-      const bActive = b.status === 'ativo';
-      if (aActive && !bActive) return -1;
-      if (!aActive && bActive) return 1;
-      return a.nome.localeCompare(b.nome, 'pt-BR');
-    });
-  }, [filteredDishes]);
-
-  const displayList = mode === 'sommelier' ? allWines : activeWines;
-  const availableCount = displayList.filter(w => w.active && w.stock > 0).length;
 
   return (
     <div className="sommelier-view">
@@ -111,14 +83,14 @@ function SommelierView() {
               onClick={() => setMode('client')}
               aria-label="Modo Cliente"
             >
-              👤 Cliente
+              👤 Garçom
             </button>
             <button
               className={`mode-btn ${mode === 'sommelier' ? 'active' : ''}`}
               onClick={() => setMode('sommelier')}
               aria-label="Modo Sommelier"
             >
-              🎓 Sommelier
+               Sommelier
             </button>
           </div>
           <button onClick={logout} className="btn-logout" aria-label="Sair">
@@ -161,35 +133,41 @@ function SommelierView() {
       <main className="view-content">
         {view === 'drinks' && (
           <section aria-label="Lista de bebidas">
-            {/* Barra de busca */}
+            {/* NOVO: Barra de pesquisa */}
             <div className="search-section">
-              <SearchBar
-                value={searchTerm}
-                onChange={setSearchTerm}
-                placeholder="Buscar por nome, vinícola, uva, país..."
-              />
-              {!searchTerm && (
-                <div className="results-summary">
-                  <span className="available-count">
-                    ✅ <strong>{availableCount}</strong> disponíveis
-                  </span>
-                  {mode === 'sommelier' && (
-                    <span className="total-count">
-                      📦 Total: <strong>{allWines.length}</strong>
-                    </span>
+              <div className="search-bar">
+                <span className="search-icon" aria-hidden="true">🔍</span>
+                <input
+                  type="text"
+                  className="search-input"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder="Buscar por nome, vinícola, uva, país..."
+                  aria-label="Buscar bebidas"
+                />
+                {searchTerm && (
+                  <button
+                    className="search-clear"
+                    onClick={() => setSearchTerm('')}
+                    aria-label="Limpar busca"
+                    type="button"
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
+              <div className="results-summary">
+                <span className="results-count">
+                  {searchTerm ? (
+                    <>🔎 <strong>{filteredWines.length}</strong> resultado(s) encontrado(s)</>
+                  ) : (
+                    <> <strong>{filteredWines.length}</strong> bebidas disponíveis</>
                   )}
-                </div>
-              )}
-              {searchTerm && (
-                <div className="results-summary">
-                  <span className="results-count">
-                    🔎 <strong>{sortedWines.length}</strong> resultado(s) encontrado(s)
-                  </span>
-                </div>
-              )}
+                </span>
+              </div>
             </div>
 
-            {sortedWines.length === 0 ? (
+            {filteredWines.length === 0 ? (
               <div className="empty-state">
                 <p>😕 Nenhum vinho encontrado para "{searchTerm}"</p>
                 <button 
@@ -201,7 +179,7 @@ function SommelierView() {
               </div>
             ) : (
               <div className="drinks-grid">
-                {sortedWines.map(wine => (
+                {filteredWines.map(wine => (
                   <WineCard
                     key={wine.id}
                     wine={wine}
@@ -218,30 +196,41 @@ function SommelierView() {
 
         {view === 'dishes' && (
           <section aria-label="Lista de pratos">
-            {/* Barra de busca */}
+            {/* NOVO: Barra de pesquisa */}
             <div className="search-section">
-              <SearchBar
-                value={searchTerm}
-                onChange={setSearchTerm}
-                placeholder="Buscar por nome, categoria, ingrediente..."
-              />
-              {!searchTerm && (
-                <div className="results-summary">
-                  <span className="total-count">
-                    🍽️ <strong>{cardapio.length}</strong> pratos no cardápio
-                  </span>
-                </div>
-              )}
-              {searchTerm && (
-                <div className="results-summary">
-                  <span className="results-count">
-                    🔎 <strong>{sortedDishes.length}</strong> resultado(s) encontrado(s)
-                  </span>
-                </div>
-              )}
+              <div className="search-bar">
+                <span className="search-icon" aria-hidden="true">🔍</span>
+                <input
+                  type="text"
+                  className="search-input"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder="Buscar por nome, categoria, ingrediente..."
+                  aria-label="Buscar pratos"
+                />
+                {searchTerm && (
+                  <button
+                    className="search-clear"
+                    onClick={() => setSearchTerm('')}
+                    aria-label="Limpar busca"
+                    type="button"
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
+              <div className="results-summary">
+                <span className="results-count">
+                  {searchTerm ? (
+                    <>🔎 <strong>{filteredDishes.length}</strong> resultado(s) encontrado(s)</>
+                  ) : (
+                    <>🍽️ <strong>{filteredDishes.length}</strong> pratos no cardápio</>
+                  )}
+                </span>
+              </div>
             </div>
 
-            {sortedDishes.length === 0 ? (
+            {filteredDishes.length === 0 ? (
               <div className="empty-state">
                 <p>😕 Nenhum prato encontrado para "{searchTerm}"</p>
                 <button 
@@ -253,7 +242,7 @@ function SommelierView() {
               </div>
             ) : (
               <div className="dishes-grid">
-                {sortedDishes.map(dish => (
+                {filteredDishes.map(dish => (
                   <DishCard
                     key={dish.id}
                     dish={dish}
