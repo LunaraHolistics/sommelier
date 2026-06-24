@@ -4,12 +4,11 @@
   "description": "Sistema profissional de sommelier e gestão para restaurantes",
   "main": "server.js",
   "type": "commonjs",
-  "workspaces": [],
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
     "migrate": "node migrate-db.js",
-    "build:frontend": "cd vinho-em-maos-react && npm install && npm run build"
+    "build:frontend": "npm --prefix vinho-em-maos-react install && npm --prefix vinho-em-maos-react run build"
   },
   "engines": {
     "node": ">=18.0.0 <21.0.0"

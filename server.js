@@ -12,7 +12,12 @@ const PORT = process.env.PORT || 3000;
 // ─── Middlewares ───────────────────────────────────────────────
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:3000"],
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:3000",
+      "https://sommelier-ruddy.vercel.app",
+      /\.vercel\.app$/,
+    ],
     credentials: true,
   }),
 );
@@ -77,7 +82,6 @@ let mergedCardapio = [];
 let cardapioById = new Map();
 
 function rebuildCache() {
-  // Rebuild catálogo
   mergedCatalog = catalogoRaw.map((item) => {
     const inv = db.data.inventory[item.id] || {};
     return {
@@ -89,11 +93,9 @@ function rebuildCache() {
   });
   catalogById = new Map(mergedCatalog.map((i) => [i.id, i]));
 
-  // Rebuild cardápio (base + custom + modificações)
   const customDishes = db.data.customDishes || [];
   const modifications = db.data.dishModifications || {};
 
-  // Aplica modificações aos pratos base
   const modifiedBase = cardapioBase.map((dish) => {
     const mod = modifications[dish.id];
     if (mod) {
@@ -102,13 +104,11 @@ function rebuildCache() {
     return dish;
   });
 
-  // Filtra pratos base que foram marcados como deletados
   const activeBase = modifiedBase.filter((dish) => {
     const mod = modifications[dish.id];
     return !mod?.deleted;
   });
 
-  // Combina base + custom
   mergedCardapio = [...activeBase, ...customDishes];
   cardapioById = new Map(mergedCardapio.map((d) => [d.id, d]));
 
@@ -176,7 +176,6 @@ app.get("/api/catalogo", (req, res) => {
   } = req.query;
   let result = [...mergedCatalog];
 
-  // Se includeAll=true, não filtra por active (para harmonização)
   if (activeOnly === "true" && includeAll !== "true") {
     result = result.filter((i) => i.active);
   }
@@ -269,9 +268,6 @@ app.post("/api/auth/manager", (req, res) => {
 });
 
 // ==================== API: CARDÁPIO (CRUD COMPLETO) ============
-// USANDO SISTEMA DE CACHE MERGED (LowDB + JSON estático)
-
-// Listar cardápio com filtros
 app.get("/api/cardapio", (req, res) => {
   const { categoria, search, tags, status } = req.query;
   let result = [...mergedCardapio];
@@ -302,14 +298,12 @@ app.get("/api/cardapio", (req, res) => {
   res.json(result);
 });
 
-// Buscar prato por ID
 app.get("/api/cardapio/:id", (req, res) => {
   const dish = cardapioById.get(req.params.id);
   if (!dish) return res.status(404).json({ error: "Prato não encontrado" });
   res.json(dish);
 });
 
-// Criar novo prato
 app.post("/api/cardapio", authManager, async (req, res) => {
   try {
     const {
@@ -370,17 +364,14 @@ app.post("/api/cardapio", authManager, async (req, res) => {
   }
 });
 
-// Atualizar prato existente
 app.put("/api/cardapio/:id", authManager, async (req, res) => {
   try {
     const dishId = req.params.id;
     const updates = req.body;
 
-    // Verifica se é prato customizado
     const customIndex = db.data.customDishes.findIndex((d) => d.id === dishId);
 
     if (customIndex !== -1) {
-      // Atualiza prato customizado
       db.data.customDishes[customIndex] = {
         ...db.data.customDishes[customIndex],
         ...updates,
@@ -394,13 +385,11 @@ app.put("/api/cardapio/:id", authManager, async (req, res) => {
         dish: db.data.customDishes[customIndex],
       });
     } else {
-      // Verifica se é prato base
       const baseDish = cardapioBase.find((d) => d.id === dishId);
       if (!baseDish) {
         return res.status(404).json({ error: "Prato não encontrado" });
       }
 
-      // Salva modificação
       db.data.dishModifications[dishId] = {
         ...(db.data.dishModifications[dishId] || {}),
         ...updates,
@@ -421,7 +410,6 @@ app.put("/api/cardapio/:id", authManager, async (req, res) => {
   }
 });
 
-// Ativar/Desativar prato (PATCH rápido)
 app.patch("/api/cardapio/:id/status", authManager, async (req, res) => {
   try {
     const { status } = req.body;
@@ -460,12 +448,10 @@ app.patch("/api/cardapio/:id/status", authManager, async (req, res) => {
   }
 });
 
-// Excluir prato
 app.delete("/api/cardapio/:id", authManager, async (req, res) => {
   try {
     const dishId = req.params.id;
 
-    // Verifica se é prato customizado
     const customIndex = db.data.customDishes.findIndex((d) => d.id === dishId);
 
     if (customIndex !== -1) {
@@ -474,7 +460,6 @@ app.delete("/api/cardapio/:id", authManager, async (req, res) => {
 
       res.json({ success: true, message: "Prato excluído com sucesso" });
     } else {
-      // Marca prato base como deletado
       const baseDish = cardapioBase.find((d) => d.id === dishId);
       if (!baseDish) {
         return res.status(404).json({ error: "Prato não encontrado" });
@@ -510,12 +495,10 @@ app.post("/api/harmonize", (req, res) => {
     const prato = cardapioById.get(pratoId);
     if (!prato) return res.status(404).json({ error: "Prato não encontrado" });
 
-    // Busca harmonização pré-definida no harmonizacao.json
     const harmonizacaoPredefinida = harmonizacaoRaw.harmonizacoes?.find(
       (h) => h.pratoId === pratoId,
     );
 
-    // Pega TODOS os vinhos (incluindo indisponíveis se solicitado)
     let allItems = includeUnavailable
       ? [...mergedCatalog]
       : mergedCatalog.filter((i) => i.active);
@@ -526,9 +509,7 @@ app.post("/api/harmonize", (req, res) => {
         const reasons = [];
         const isAvailable = item.active && item.stock > 0;
 
-        // 1. Match com harmonização pré-definida (maior peso)
         if (harmonizacaoPredefinida) {
-          // Match por categoria de bebida
           if (harmonizacaoPredefinida.categoriasBebida) {
             for (const cat of harmonizacaoPredefinida.categoriasBebida) {
               const catLower = cat.toLowerCase();
@@ -543,7 +524,6 @@ app.post("/api/harmonize", (req, res) => {
             }
           }
 
-          // Match por rótulo específico
           if (harmonizacaoPredefinida.rotulosSugeridos) {
             for (const rotulo of harmonizacaoPredefinida.rotulosSugeridos) {
               const rotuloLower = rotulo.toLowerCase();
@@ -558,7 +538,6 @@ app.post("/api/harmonize", (req, res) => {
           }
         }
 
-        // 2. Match com melhoresCategorias do prato
         if (prato.melhoresCategorias) {
           for (const cat of prato.melhoresCategorias) {
             const catLower = cat.toLowerCase();
@@ -573,7 +552,6 @@ app.post("/api/harmonize", (req, res) => {
           }
         }
 
-        // 3. Match com melhoresRotulos do prato
         if (prato.melhoresRotulos) {
           for (const rotulo of prato.melhoresRotulos) {
             const rotuloLower = rotulo.toLowerCase();
@@ -587,7 +565,6 @@ app.post("/api/harmonize", (req, res) => {
           }
         }
 
-        // 4. Match com harmonizacaoInteligente do vinho
         if (item.harmonizacaoInteligente) {
           const hi = item.harmonizacaoInteligente;
 
@@ -631,7 +608,6 @@ app.post("/api/harmonize", (req, res) => {
           }
         }
 
-        // 5. Match com harmonizacaoPrincipal do vinho
         if (
           item.harmonizacaoPrincipal?.some((h) =>
             h.toLowerCase().includes(prato.nome.toLowerCase()),
@@ -641,7 +617,6 @@ app.post("/api/harmonize", (req, res) => {
           reasons.push("Harmonização principal declarada");
         }
 
-        // 6. Match por tags do prato com notas do vinho
         if (prato.tags && item.notasDominantes) {
           for (const tag of prato.tags) {
             const tagLower = tag.toLowerCase();
@@ -673,7 +648,6 @@ app.post("/api/harmonize", (req, res) => {
       })
       .filter((i) => i.score > 0)
       .sort((a, b) => {
-        // Primeiro ordena por disponibilidade, depois por score
         if (a.isAvailable !== b.isAvailable) {
           return b.isAvailable - a.isAvailable;
         }
@@ -692,7 +666,6 @@ app.post("/api/harmonize", (req, res) => {
     });
   }
 
-  // Harmonização por tags (modo alternativo)
   if (tags && Array.isArray(tags)) {
     let allItems = includeUnavailable
       ? [...mergedCatalog]
@@ -766,11 +739,38 @@ app.get("/api/status", (req, res) => {
   });
 });
 
-// ─── Error Handlers ────────────────────────────────────────────
-app.use((req, res) => {
-  res.status(404).json({ error: "Rota não encontrada" });
-});
+// ==================== SERVE FRONTEND BUILD ====================
+const frontendPath = path.join(__dirname, "vinho-em-maos-react", "dist");
 
+// Só serve o frontend se a pasta dist existir
+if (fs.existsSync(frontendPath)) {
+  console.log(`📦 Servindo frontend de: ${frontendPath}`);
+  app.use(express.static(frontendPath));
+
+  // Fallback para SPA - qualquer rota não-API vai para index.html
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(frontendPath, "index.html"));
+  });
+} else {
+  console.log(`⚠️ Frontend não encontrado em: ${frontendPath}`);
+  console.log(`⚠️ Execute: cd vinho-em-maos-react && npm install && npm run build`);
+  
+  // Rota raiz mostra status da API
+  app.get("/", (req, res) => {
+    res.json({
+      status: "API online",
+      message: "Frontend não buildado. Execute: cd vinho-em-maos-react && npm run build",
+      endpoints: {
+        catalogo: "/api/catalogo",
+        cardapio: "/api/cardapio",
+        harmonize: "POST /api/harmonize",
+        status: "/api/status",
+      },
+    });
+  });
+}
+
+// ─── Error Handlers (DEPOIS de tudo!) ──────────────────────────
 app.use((err, req, res, next) => {
   console.error("Erro:", err);
   res.status(500).json({

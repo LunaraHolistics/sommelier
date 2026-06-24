@@ -1,4 +1,11 @@
+// Configuração base da API
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+
+// Garante que sempre termine com /api
+const getApiBase = () => {
+  const base = API_BASE.replace(/\/$/, ''); // Remove trailing slash
+  return base.endsWith('/api') ? base : `${base}/api`;
+};
 
 class ApiService {
   constructor() {
@@ -16,7 +23,7 @@ class ApiService {
   }
 
   async request(endpoint, options = {}) {
-    const url = `${API_BASE}${endpoint}`;
+    const url = `${getApiBase()}${endpoint}`;
     const config = {
       headers: {
         'Content-Type': 'application/json',
