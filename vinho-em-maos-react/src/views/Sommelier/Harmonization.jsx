@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import WineCard from '../../components/WineCard';
 import WineDetailModal from '../../components/WineDetailModal';
+import SearchBar from '../../components/SearchBar';
 import './Harmonization.css';
 
 /**
@@ -86,7 +87,8 @@ function Harmonization({ dish, suggestions, onBack, mode }) {
   const [filterTipo, setFilterTipo] = useState('all');
   const [filterDisponivel, setFilterDisponivel] = useState('all');
   const [filterCategoria, setFilterCategoria] = useState(null);
-  const [selectedWine, setSelectedWine] = useState(null); // ← NOVO ESTADO
+  const [searchTerm, setSearchTerm] = useState(''); // ← NOVO: Estado para busca
+  const [selectedWine, setSelectedWine] = useState(null);
 
   // Enriquece sugestões com score calculado
   const enrichedSuggestions = useMemo(() => {
@@ -118,7 +120,21 @@ function Harmonization({ dish, suggestions, onBack, mode }) {
     });
   }, [enrichedSuggestions, filterCategoria]);
 
-  const filteredSuggestions = filteredByCategory.filter(wine => {
+  // NOVO: Aplica filtro de busca por nome, vinícola, uva ou país
+  const filteredBySearch = useMemo(() => {
+    if (!searchTerm.trim()) return filteredByCategory;
+    
+    const term = searchTerm.toLowerCase().trim();
+    return filteredByCategory.filter(wine =>
+      wine.nome?.toLowerCase().includes(term) ||
+      wine.vinicola?.toLowerCase().includes(term) ||
+      wine.tipo?.toLowerCase().includes(term) ||
+      wine.pais?.toLowerCase().includes(term) ||
+      wine.uva?.some(u => u.toLowerCase().includes(term))
+    );
+  }, [filteredByCategory, searchTerm]);
+
+  const filteredSuggestions = filteredBySearch.filter(wine => {
     const matchTipo = filterTipo === 'all' || wine.tipo?.toLowerCase() === filterTipo.toLowerCase();
     const isAvailable = wine.active && wine.stock > 0;
     const matchDisponivel =
@@ -128,12 +144,20 @@ function Harmonization({ dish, suggestions, onBack, mode }) {
     return matchTipo && matchDisponivel;
   });
 
+  // MELHORADO: Ordena por disponibilidade, depois score, depois alfabeticamente
   const sortedSuggestions = [...filteredSuggestions].sort((a, b) => {
     const aDisp = a.active && a.stock > 0;
     const bDisp = b.active && b.stock > 0;
+    
+    // 1º: Disponíveis primeiro
     if (aDisp && !bDisp) return -1;
     if (!aDisp && bDisp) return 1;
-    return b.score - a.score;
+    
+    // 2º: Maior score primeiro
+    if (b.score !== a.score) return b.score - a.score;
+    
+    // 3º: Ordem alfabética por nome
+    return a.nome.localeCompare(b.nome, 'pt-BR');
   });
 
   const tiposVinho = ['all', 'Tinto', 'Branco', 'Rosé', 'Espumante', 'Prosecco', 'Cidra'];
@@ -194,6 +218,22 @@ function Harmonization({ dish, suggestions, onBack, mode }) {
         <div className="suggestions-header">
           <h3>🍷 Vinhos Recomendados ({filteredSuggestions.length}){filterCategoria && ` - ${filterCategoria}`}</h3>
 
+          {/* NOVO: Barra de busca */}
+          <div className="search-section">
+            <SearchBar
+              value={searchTerm}
+              onChange={setSearchTerm}
+              placeholder="Buscar por nome, vinícola, uva, país..."
+            />
+            {searchTerm && (
+              <div className="results-summary">
+                <span className="results-count">
+                  🔎 <strong>{filteredSuggestions.length}</strong> resultado(s) encontrado(s)
+                </span>
+              </div>
+            )}
+          </div>
+
           <div className="filters-container">
             <div className="filter-group">
               <label>Tipo:</label>
@@ -226,11 +266,25 @@ function Harmonization({ dish, suggestions, onBack, mode }) {
         </div>
 
         {sortedSuggestions.length === 0 ? (
-          <p className="no-suggestions">
-            Nenhum vinho encontrado com estes filtros.
-            <br />
-            <small>Tente ajustar os filtros ou selecione outro prato.</small>
-          </p>
+          <div className="no-suggestions">
+            <p>
+              {searchTerm 
+                ? `😕 Nenhum vinho encontrado para "${searchTerm}"`
+                : 'Nenhum vinho encontrado com estes filtros.'
+              }
+            </p>
+            {searchTerm && (
+              <button 
+                className="btn-clear-search"
+                onClick={() => setSearchTerm('')}
+              >
+                Limpar busca
+              </button>
+            )}
+            {!searchTerm && (
+              <small>Tente ajustar os filtros ou selecione outro prato.</small>
+            )}
+          </div>
         ) : (
           <div className="suggestions-grid">
             {sortedSuggestions.map((wine) => {
@@ -245,7 +299,7 @@ function Harmonization({ dish, suggestions, onBack, mode }) {
                   <WineCard 
                     wine={wine} 
                     mode={mode}
-                    onClick={() => setSelectedWine(wine)} // ← USA onClick
+                    onClick={() => setSelectedWine(wine)}
                   />
 
                   {!isAvailable && (
